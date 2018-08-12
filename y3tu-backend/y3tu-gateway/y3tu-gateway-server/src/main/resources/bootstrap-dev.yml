@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: dev
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${dev.eureka.hostname}:${dev.eureka.server.port}/eureka/
+server:
+  port: 5555

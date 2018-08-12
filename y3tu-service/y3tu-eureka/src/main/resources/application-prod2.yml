@@ -1,0 +1,21 @@
+server:
+  port: ${prod2.eureka.server.port}    # 指定该Eureka实例的端⼝
+
+eureka:
+  environment: prod
+  datacenter: linux
+  server:
+    enable-self-preservation: false  # 关闭自我保护
+  instance:
+    status-page-url-path: ${management.context-path}/info
+    health-check-url-path: ${management.context-path}/health
+    #    prefer-ip-address: true   # 这个设置成true后， unavailable-replicas '异常'
+    hostname: ${prod2.eureka.hostname}    # 指定该Eureka实例的主机名
+    metadata-map:
+      management.context-path: ${management.context-path}
+
+  client:
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://${prod1.eureka.hostname}:${prod1.eureka.server.port}/eureka/
+      #defaultZone: http://192.168.0.103:8501/eureka/

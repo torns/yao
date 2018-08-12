@@ -1,0 +1,43 @@
+prod1:
+  eureka:
+    server:
+      port: 8501
+    hostname: y3tu1
+prod2:
+  eureka:
+    server:
+      port: 8502
+    hostname: y3tu2
+dev:
+  eureka:
+    server:
+      port: 8501
+    hostname: www.y3tu.com
+
+
+logging:
+  path: ./logs/y3tu-eureka
+  file: ${logging.path}/y3tu-eureka.log
+  common-pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS}:[%5p] [%t:%r] [%C{1}:%M:%L] --> %m%n'
+  level:
+    console: INFO
+
+# 公共配置
+spring:
+  profiles:
+    active: dev
+  application:
+    name: y3tu-eureka
+
+management:
+  context-path: /actuator
+
+
+info:
+  artifact: y3tu-eureka
+  name: '@project.name@'
+  description: '@project.description@'
+  version: '@project.version@'
+  spring-boot-version: '@spring.boot.version@'
+  spring-cloud-version: '@spring.cloud.version@'
+
