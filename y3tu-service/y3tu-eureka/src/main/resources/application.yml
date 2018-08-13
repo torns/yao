@@ -2,7 +2,7 @@ prod1:
   eureka:
     server:
       port: 8501
-    hostname: y3tu1
+    hostname: 132.232.11.210
 prod2:
   eureka:
     server:
@@ -12,7 +12,7 @@ dev:
   eureka:
     server:
       port: 8501
-    hostname: www.y3tu.com
+    hostname: localhost
 
 
 logging:
