@@ -28,7 +28,7 @@ import java.io.PrintWriter;
  * 手机号登录成功，返回oauth token
  */
 @Slf4j
-//@Component
+@Component
 public class MobileLoginSuccessHandler implements AuthenticationSuccessHandler {
     public static final String BASIC_ = "Basic ";
     @Autowired

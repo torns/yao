@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @date 2018/1/9
  * 手机号登录配置入口
  */
-//@Component
+@Component
 public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
     @Autowired
     private AuthenticationSuccessHandler mobileLoginSuccessHandler;
