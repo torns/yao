@@ -20,8 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping("/authentication")
 public class AuthenticationController {
-    @Autowired
-    @Qualifier("consumerTokenServices")
+//    @Autowired
+//    @Qualifier("consumerTokenServices")
     private ConsumerTokenServices consumerTokenServices;
 
     /**
