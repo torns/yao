@@ -5,7 +5,7 @@
 
     <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -30,14 +30,9 @@
         <maven.compile.target>1.8</maven.compile.target>
         <spring-cloud.version>Finchley.M8</spring-cloud.version>
         <spring-boot.version>2.0.3.RELEASE</spring-boot.version>
+        <lombok-version>1.16.18</lombok-version>
+        <jasypt-version>1.16</jasypt-version>
     </properties>
-
-    <developers>
-        <developer>
-            <name>y3tu</name>
-            <email>14643092@qq.com</email>
-        </developer>
-    </developers>
 
     <dependencies>
         <dependency>
@@ -45,17 +40,23 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <!--监控-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!--java简写工具 https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <!--注册中心-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <!--java简写工具 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.18</version>
+            <version>${lombok-version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -63,41 +64,10 @@
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot-starter</artifactId>
-            <version>1.16</version>
+            <version>${jasypt-version}</version>
         </dependency>
 
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/libs-milestone</url>
-        </repository>
-        <repository>
-            <id>oss</id>
-            <name>oss</name>
-            <url>https://oss.sonatype.org/content/groups/public</url>
-        </repository>
-        <repository>
-            <id>aliyun</id>
-            <name>aliyun</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>repo.spring.io</id>
-            <name>Spring Release Repository</name>
-            <url>https://repo.spring.io/libs-release-local</url>
-        </repository>
-        <snapshotRepository>
-            <id>repo.spring.io</id>
-            <name>Spring Snapshot Repository</name>
-            <url>https://repo.spring.io/libs-snapshot-local</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <!--引入spring cloud依赖-->
     <dependencyManagement>
@@ -111,5 +81,12 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <developers>
+        <developer>
+            <name>y3tu</name>
+            <email>14643092@qq.com</email>
+        </developer>
+    </developers>
 
 </project>
