@@ -14,4 +14,5 @@ public interface UserFeignClient {
 
     @RequestMapping(value = "/user/{id}",method = RequestMethod.GET)
     public User findById(@PathVariable("id") Long id);
+
 }

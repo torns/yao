@@ -12,7 +12,7 @@ dev:
   eureka:
     server:
       port: 8501
-    hostname: www.y3tu.com
+    hostname: 132.232.11.210
 
 #日志配置
 logging:
