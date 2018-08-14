@@ -35,9 +35,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
     UserRoleService userRoleService;
 
     @Override
-    public User findByUsernameAndStatus(String username) {
+    public User findUserByUsername(String username) {
 
-        List<User> list = this.selectList(new EntityWrapper<User>().eq("username", username).eq("status", "1"));
+        List<User> list = this.selectList(new EntityWrapper<User>().eq("username", username).eq("status", "0"));
         //selectAll();
 
         if (list != null && list.size() > 0) {
@@ -50,11 +50,5 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
         }
         return null;
     }
-
-    @Override
-    public List<User> selectAll() {
-        return this.baseMapper.selectAll();
-    }
-
 
 }

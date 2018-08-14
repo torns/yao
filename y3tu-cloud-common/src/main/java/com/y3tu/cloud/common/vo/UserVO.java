@@ -15,53 +15,81 @@ public class UserVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键ID
+     * 主键
      */
-    private Integer userId;
+    private String id;
     /**
-     * 用户名
+     * 创建人
      */
-    private String username;
-    /**
-     * 密码
-     */
-    private String password;
-    /**
-     * 随机盐
-     */
-    private String salt;
+    private String createBy;
     /**
      * 创建时间
      */
     private Date createTime;
     /**
-     * 修改时间
+     * 更新人
+     */
+    private String updateBy;
+    /**
+     * 更新时间
      */
     private Date updateTime;
     /**
-     * 0-正常，1-删除
+     * 地址
      */
-    private String delFlag;
-    /**
-     * 简介
-     */
-    private String phone;
+    private String address;
     /**
      * 头像
      */
     private String avatar;
+    /**
+     * 简介
+     */
+    private String description;
+    /**
+     * 邮箱
+     */
+    private String email;
+    /**
+     * 手机
+     */
+    private String mobile;
+    /**
+     * 昵称
+     */
+    private String nickName;
+    /**
+     * 密码
+     */
+    private String password;
+    /**
+     * 性别
+     */
+    private Integer sex;
+    /**
+     * 状态
+     */
+    private Integer status;
+    /**
+     * 类型
+     */
+    private Integer type;
+    /**
+     * 用户名
+     */
+    private String username;
+    /**
+     * 是否删除 0:否;1:是
+     */
+    private Integer delFlag;
 
     /**
-     * 部门ID
+     * 用户拥有角色
      */
-    private Integer deptId;
-    /**
-     * 部门名称
-     */
-    private String deptName;
+    private List<RoleVO> roles;
 
     /**
-     * 角色列表
+     * 用户拥有的权限
      */
-    private List<SysRole> roleList;
+    private List<PermissionVO> permissions;
 }

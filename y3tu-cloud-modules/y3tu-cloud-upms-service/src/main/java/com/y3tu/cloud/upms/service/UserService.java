@@ -14,7 +14,6 @@ import java.util.List;
  * @since 2018-08-05
  */
 public interface UserService extends BaseService<User> {
-	User findByUsernameAndStatus(String username);
-	List<User> selectAll();
+	User findUserByUsername(String username);
 
 }

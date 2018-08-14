@@ -53,7 +53,7 @@ import java.util.Map;
  */
 
 @Configuration
-@Order(Integer.MIN_VALUE)
+//@Order(Integer.MIN_VALUE)
 @EnableAuthorizationServer
 public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
