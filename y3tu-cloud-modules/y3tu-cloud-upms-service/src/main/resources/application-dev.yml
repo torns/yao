@@ -31,15 +31,3 @@ spring:
         wall:
           config:
             multi-statement-allow: true
-
-#
-#spring:
-#  # 数据源
-#  datasource:
-#    url: jdbc:mysql://cdb-d5ge3ujs.cd.tencentcdb.com:10003/y3tu-admin??allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-#    username: root
-#    # Jasypt加密 可到common-utils中找到JasyptUtil加解密工具类生成加密结果 格式为ENC(加密结果)
-#    password: y3tu46262966
-#    type: com.alibaba.druid.pool.DruidDataSource
-#    driverClassName: com.mysql.jdbc.Driver
-#logSlowSql: true
