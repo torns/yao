@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.y3tu.cloud.upms.dao.UserDao">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_by AS createBy, create_time AS createTime, update_by AS updateBy, update_time AS updateTime, address, avatar, description, email, mobile, nick_name AS nickName, password, sex, status, type, username, del_flag AS delFlag
+    </sql>
+
+	<select id="queryPage" resultType="com.y3tu.cloud.upms.entity.User">
+		select <include refid="Base_Column_List"/>
+		from user
+	</select>
+
+    <select id="selectAll" resultType="com.y3tu.cloud.upms.entity.User">
+        select <include refid="Base_Column_List"/>
+		from user
+    </select>
+</mapper>

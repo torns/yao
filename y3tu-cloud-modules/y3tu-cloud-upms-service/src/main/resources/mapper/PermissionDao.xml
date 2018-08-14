@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.y3tu.cloud.upms.dao.PermissionDao">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_by AS createBy, create_time AS createTime, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime, description, name, parent_id AS parentId, type, sort_order AS sortOrder, component, path, title, icon, level, button_type AS buttonType, status
+    </sql>
+
+	<select id="queryPage" resultType="com.y3tu.cloud.upms.entity.Permission">
+		select <include refid="Base_Column_List"/>
+		from permission
+	</select>
+
+    <select id="findByUserId" resultType="com.y3tu.cloud.upms.entity.Permission">
+      SELECT DISTINCT p.id, p.name, p.title, p.path, p.icon, p.type, p.component, p.level, p.button_type, p.parent_id, p.sort_order, p.description, p.status
+      FROM user u
+      LEFT JOIN user_role ur ON u.id = ur.user_id
+      LEFT JOIN role_permission rp ON ur.role_id = rp.role_id
+      LEFT JOIN permission p ON p.id = rp.permission_id
+      WHERE u.id = #{userId} AND p.status = 0
+      ORDER BY p.sort_order ASC
+    </select>
+</mapper>

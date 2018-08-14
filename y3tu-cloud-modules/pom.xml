@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.y3tu</groupId>
+	<artifactId>y3tu-cloud-modules</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+
+	<name>y3tu-cloud-modules</name>
+	<description>服务集合</description>
+
+	<parent>
+		<groupId>com.y3tu</groupId>
+		<artifactId>y3tu-cloud</artifactId>
+		<version>1.0</version>
+	</parent>
+
+    <modules>
+        <module>y3tu-cloud-upms-service</module>
+    </modules>
+
+</project>
