@@ -1,0 +1,42 @@
+
+
+# datasoure默认使用JDBC
+spring:
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    username: root
+#    password: y3tu46262966
+#    url: jdbc:mysql://cdb-d5ge3ujs.cd.tencentcdb.com:10003/y3tu-admin??allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+#redis配置
+  redis:
+    database: 0
+    host: 132.232.11.210
+    port: 6379
+    password: yxy727      # 密码（默认为空）
+    timeout: 6000ms  # 连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10      # 连接池中的最大空闲连接
+        min-idle: 5       # 连接池中的最小空闲连接
+
+ignore:
+  urls:
+    - /authentication/**
+    - /**/*.css
+    - /social
+    - /signin
+    - /signup
+    - /info
+    - /health
+    - /metrics/**
+    - /loggers/**
+    - /mobile/token
+
+#y3tu-tool配置
+y3tu-tool:
+  #redis配置
+  redis:
+    enable: true #开启redis功能 默认关闭
+    open: true #启用redis读写
