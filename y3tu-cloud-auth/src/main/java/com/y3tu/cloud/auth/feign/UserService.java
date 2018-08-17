@@ -29,8 +29,8 @@ public interface UserService {
      * @param mobile 手机号
      * @return UserVo
      */
-    @GetMapping("/user/findUserByMobile/{mobile}")
-    UserVO findUserByMobile(@PathVariable("mobile") String mobile);
+    @GetMapping("/upms/user/findUserByMobile")
+    UserVO findUserByMobile(@RequestParam("mobile") String mobile);
 
     /**
      * 根据OpenId查询用户信息

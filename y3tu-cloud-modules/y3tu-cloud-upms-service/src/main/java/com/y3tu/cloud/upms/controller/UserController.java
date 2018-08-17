@@ -27,4 +27,9 @@ public class UserController extends BaseController<UserService, User> {
     public Object findUserByUsername(@RequestParam String username){
         return userService.findUserByUsername(username);
     }
+
+    @GetMapping("/findUserByMobile")
+    public Object findUserByMobile(@RequestParam String mobile){
+        return userService.findUserByMobile(mobile);
+    }
 }

@@ -33,8 +33,7 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry =
-                http.formLogin().loginPage("/authentication/require")
-                        .loginProcessingUrl("/authentication/form")
+                http.formLogin().and().httpBasic()
                         .and()
                         .authorizeRequests();
         filterIgnorePropertiesConfig.getUrls().forEach(url -> registry.antMatchers(url).permitAll());

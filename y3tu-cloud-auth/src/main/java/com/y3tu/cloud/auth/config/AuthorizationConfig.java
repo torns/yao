@@ -52,9 +52,9 @@ import java.util.Map;
  * 认证服务器逻辑实现
  */
 
-@Configuration
+//@Configuration
 //@Order(Integer.MIN_VALUE)
-@EnableAuthorizationServer
+//@EnableAuthorizationServer
 public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private DataSource dataSource;

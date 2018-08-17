@@ -19,6 +19,8 @@ import org.springframework.stereotype.Component;
 public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
     @Autowired
     private AuthenticationSuccessHandler mobileLoginSuccessHandler;
+
+
     @Autowired
     private UserService userService;
 

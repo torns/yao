@@ -20,9 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping("/authentication")
 public class AuthenticationController {
-    @Autowired
-    @Qualifier("consumerTokenServices")
-    private ConsumerTokenServices consumerTokenServices;
+//    @Autowired
+//    @Qualifier("consumerTokenServices")
+//    private ConsumerTokenServices consumerTokenServices;
 
     /**
      * 认证页面
@@ -43,15 +43,15 @@ public class AuthenticationController {
         return authentication.getPrincipal();
     }
 
-    /**
-     * 清除Redis中 accesstoken refreshtoken
-     *
-     * @param accesstoken  accesstoken
-     * @return true/false
-     */
-    @PostMapping("/removeToken")
-    @CacheEvict(value = SecurityConstants.TOKEN_USER_DETAIL, key = "#accesstoken")
-    public R removeToken(String accesstoken) {
-        return R.ok(consumerTokenServices.revokeToken(accesstoken));
-    }
+//    /**
+//     * 清除Redis中 accesstoken refreshtoken
+//     *
+//     * @param accesstoken  accesstoken
+//     * @return true/false
+//     */
+//    @PostMapping("/removeToken")
+//    @CacheEvict(value = SecurityConstants.TOKEN_USER_DETAIL, key = "#accesstoken")
+//    public R removeToken(String accesstoken) {
+//        return R.ok(consumerTokenServices.revokeToken(accesstoken));
+//    }
 }

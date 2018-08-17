@@ -36,19 +36,34 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
 
     @Override
     public User findUserByUsername(String username) {
-
         List<User> list = this.selectList(new EntityWrapper<User>().eq("username", username).eq("status", "0"));
-        //selectAll();
-
         if (list != null && list.size() > 0) {
             User user = list.get(0);
-            List<Role> roleList = userRoleService.findByUserId(user.getId());
-            user.setRoles(roleList);
-            List<Permission> permissionList = permissionService.findByUserId(user.getId());
-            user.setPermissions(permissionList);
-            return user;
+            return buildUserRoleAndPermission(user);
         }
         return null;
     }
 
+    @Override
+    public User findUserByMobile(String mobile) {
+        List<User> list = this.selectList(new EntityWrapper<User>().eq("mobile", mobile).eq("status", "0"));
+        if (list != null && list.size() > 0) {
+            User user = list.get(0);
+            return buildUserRoleAndPermission(user);
+        }
+        return null;
+    }
+
+    /**
+     * 给user封装其对应的角色和权限
+     * @param user
+     * @return
+     */
+    private User buildUserRoleAndPermission(User user) {
+        List<Role> roleList = userRoleService.findByUserId(user.getId());
+        user.setRoles(roleList);
+        List<Permission> permissionList = permissionService.findByUserId(user.getId());
+        user.setPermissions(permissionList);
+        return user;
+    }
 }

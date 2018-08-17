@@ -46,6 +46,12 @@
             <artifactId>spring-boot-starter-redis</artifactId>
             <version>${redis-version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.y3tu</groupId>
+            <artifactId>y3tu-cloud-common</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

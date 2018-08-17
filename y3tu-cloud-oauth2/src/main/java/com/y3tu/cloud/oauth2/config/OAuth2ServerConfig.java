@@ -19,12 +19,12 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 
 import java.util.Arrays;
 
-@Configuration
+//@Configuration
 public class OAuth2ServerConfig {
 
     private static final String DEMO_RESOURCE_ID = "order";
 
-    @Configuration
+   // @Configuration
     @EnableResourceServer
     @Order(Integer.MIN_VALUE)
     protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
@@ -49,7 +49,7 @@ public class OAuth2ServerConfig {
         }
     }
 
-    @Configuration
+    //@Configuration
     @EnableAuthorizationServer
     protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
