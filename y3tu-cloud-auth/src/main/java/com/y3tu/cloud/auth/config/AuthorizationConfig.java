@@ -1,20 +1,3 @@
-/*
- *    Copyright (c) 2018-2025, lengleng All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
- * Neither the name of the pig4cloud.com developer nor the names of its
- * contributors may be used to endorse or promote products derived from
- * this software without specific prior written permission.
- * Author: lengleng (wangiegie@gmail.com)
- */
-
 package com.y3tu.cloud.auth.config;
 
 import com.y3tu.cloud.auth.util.UserDetailsImpl;
@@ -27,8 +10,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -52,9 +33,9 @@ import java.util.Map;
  * 认证服务器逻辑实现
  */
 
-//@Configuration
-//@Order(Integer.MIN_VALUE)
-//@EnableAuthorizationServer
+@Configuration
+@Order(Integer.MIN_VALUE)
+@EnableAuthorizationServer
 public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
@@ -74,6 +55,21 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
         clientDetailsService.setSelectClientDetailsSql(SecurityConstants.DEFAULT_SELECT_STATEMENT);
         clientDetailsService.setFindClientDetailsSql(SecurityConstants.DEFAULT_FIND_STATEMENT);
         clients.withClientDetails(clientDetailsService);
+        //配置两个客户端,一个用于password认证一个用于client认证
+//        clients.inMemory()
+//                .withClient("client_1")
+//                .resourceIds("order")
+//                .authorizedGrantTypes("client_credentials", "refresh_token")
+//                .scopes("select")
+//                .authorities("client")
+//                .secret("$2a$10$LPNcntYGxcWSngwZJj08D.A2biv.k2sQUsGrxLc2HkvL9DA1LbLaO")
+//                .and()
+//                .withClient("client_2")
+//                .resourceIds("order")
+//                .authorizedGrantTypes("password", "refresh_token")
+//                .scopes("select")
+//                .authorities("client")
+//                .secret("$2a$10$LPNcntYGxcWSngwZJj08D.A2biv.k2sQUsGrxLc2HkvL9DA1LbLaO");
     }
 
     @Override
@@ -94,15 +90,11 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
-                .allowFormAuthenticationForClients()
-                .tokenKeyAccess("isAuthenticated()")
-                .checkTokenAccess("permitAll()");
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("permitAll()").allowFormAuthenticationForClients();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
 
     @Bean
     public org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter jwtAccessTokenConverter() {

@@ -48,6 +48,7 @@ ignore:
     - /metrics/**
     - /loggers/**
     - /mobile/token
+    - /oauth/token
 
 #y3tu-tool配置
 y3tu-tool:

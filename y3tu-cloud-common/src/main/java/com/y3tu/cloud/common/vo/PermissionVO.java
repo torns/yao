@@ -2,11 +2,12 @@ package com.y3tu.cloud.common.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class PermissionVO {
+public class PermissionVO implements Serializable {
 
     /**
      * 主键

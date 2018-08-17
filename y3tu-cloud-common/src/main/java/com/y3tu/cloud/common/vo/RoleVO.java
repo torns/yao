@@ -2,10 +2,11 @@ package com.y3tu.cloud.common.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class RoleVO {
+public class RoleVO implements Serializable {
     /**
      * 主键
      */
