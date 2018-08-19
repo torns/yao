@@ -55,21 +55,6 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
         clientDetailsService.setSelectClientDetailsSql(SecurityConstants.DEFAULT_SELECT_STATEMENT);
         clientDetailsService.setFindClientDetailsSql(SecurityConstants.DEFAULT_FIND_STATEMENT);
         clients.withClientDetails(clientDetailsService);
-        //配置两个客户端,一个用于password认证一个用于client认证
-//        clients.inMemory()
-//                .withClient("client_1")
-//                .resourceIds("order")
-//                .authorizedGrantTypes("client_credentials", "refresh_token")
-//                .scopes("select")
-//                .authorities("client")
-//                .secret("$2a$10$LPNcntYGxcWSngwZJj08D.A2biv.k2sQUsGrxLc2HkvL9DA1LbLaO")
-//                .and()
-//                .withClient("client_2")
-//                .resourceIds("order")
-//                .authorizedGrantTypes("password", "refresh_token")
-//                .scopes("select")
-//                .authorities("client")
-//                .secret("$2a$10$LPNcntYGxcWSngwZJj08D.A2biv.k2sQUsGrxLc2HkvL9DA1LbLaO");
     }
 
     @Override
