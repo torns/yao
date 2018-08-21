@@ -18,16 +18,16 @@ zuul:
   host:
     connect-timeout-millis: 10000
     socket-timeout-millis: 10000
-#  ratelimit:
-#    key-prefix: pig-ratelimite
-#    enabled: true
-#    repository: REDIS
-#    behind-proxy: true
-#    policies:
-#      pig-upms-service:
-#        limit: 100
-#        quota: 100
-#        refresh-interval: 3
+  ratelimit:
+    key-prefix: pig-ratelimite
+    enabled: true
+    repository: REDIS
+    behind-proxy: true
+    policies:
+      pig-upms-service:
+        limit: 100
+        quota: 100
+        refresh-interval: 3
 
 security:
   encode:
@@ -35,27 +35,27 @@ security:
   validate:
     code: true
     preview: false
-  sessions: stateless
   oauth2:
     client:
       client-id: pig
       client-secret: pig
     resource:
       jwt:
-         key-uri: ${security.auth.server}/oauth/token_key #解析jwt令牌所需要密钥的地址
+        key-uri: ${security.auth.server}/oauth/token_key #解析jwt令牌所需要密钥的地址
+
 
 ignore:
   urls:
-    - /mobile/**
-    - /auth/**
-    - /admin/code/*
-    - /admin/smsCode/*
-    - /admin/user/info
-    - /admin/menu/userMenu
-    - /swagger-resources/**
-    - /swagger-ui.html
-    - /*/v2/api-docs
-    - /swagger/api-docs
-    - /webjars/**
+  - /mobile/**
+  - /auth/**
+  - /admin/code/*
+  - /admin/smsCode/*
+  - /admin/user/info
+  - /admin/menu/userMenu
+  - /swagger-resources/**
+  - /swagger-ui.html
+  - /*/v2/api-docs
+  - /swagger/api-docs
+  - /webjars/**
   clients:
-    - app
+  - app
