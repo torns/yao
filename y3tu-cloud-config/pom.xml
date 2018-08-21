@@ -5,16 +5,16 @@
 
     <parent>
         <groupId>com.y3tu</groupId>
-        <artifactId>y3tu-service</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <artifactId>y3tu-cloud</artifactId>
+        <version>1.0</version>
     </parent>
 
     <groupId>com.y3tu</groupId>
-    <artifactId>y3tu-config</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>y3tu-cloud-config</artifactId>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>y3tu-config</name>
+    <name>y3tu-cloud-config</name>
     <description>配置服务中心</description>
 
 

@@ -9,11 +9,12 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>y3tu-service</module>
         <module>y3tu-cloud-auth</module>
         <module>y3tu-cloud-common</module>
         <module>y3tu-cloud-modules</module>
         <module>y3tu-cloud-gateway</module>
+        <module>y3tu-cloud-eureka</module>
+        <module>y3tu-cloud-config</module>
     </modules>
 
     <name>y3tu-cloud</name>

@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
+        <artifactId>y3tu-cloud</artifactId>
         <groupId>com.y3tu</groupId>
-        <artifactId>y3tu-service</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
+
     <groupId>com.y3tu</groupId>
-    <artifactId>y3tu-zuul</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>y3tu-cloud-eureka</artifactId>
+    <name>y3tu-cloud-eureka</name>
     <packaging>jar</packaging>
-
-    <name>y3tu-zuul</name>
-    <description>y3tu 网关</description>
-
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-    </properties>
+    <description>eureka服务注册中心</description>
 
     <dependencies>
         <!-- springCloud注测中心服务 -->
@@ -29,14 +22,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -44,6 +33,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
