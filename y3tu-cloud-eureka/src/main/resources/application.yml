@@ -15,13 +15,6 @@ dev:
     hostname: localhost
 
 
-logging:
-  path: ./logs/y3tu-eureka
-  file: ${logging.path}/y3tu-eureka.log
-  common-pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS}:[%5p] [%t:%r] [%C{1}:%M:%L] --> %m%n'
-  level:
-    console: INFO
-
 # 公共配置
 spring:
   profiles:
