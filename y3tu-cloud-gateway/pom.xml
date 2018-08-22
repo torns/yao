@@ -60,6 +60,12 @@
             <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.y3tu</groupId>
+            <artifactId>y3tu-cloud-common</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
