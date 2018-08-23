@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
@@ -19,6 +20,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableDiscoveryClient
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+@ComponentScan(basePackages = {"com.y3tu.cloud.common", "com.y3tu.cloud.gateway"})
 public class GatewayApplication {
 
     public static void main(String[] args) {
@@ -26,8 +28,8 @@ public class GatewayApplication {
     }
 
     @Bean
-    ServerCodecConfigurer serverCodecConfigurer(){
-        return  ServerCodecConfigurer.create();
+    ServerCodecConfigurer serverCodecConfigurer() {
+        return ServerCodecConfigurer.create();
     }
 
 }

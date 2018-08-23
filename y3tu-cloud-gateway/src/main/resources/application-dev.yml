@@ -7,5 +7,12 @@ spring:
       discovery:
         locator:
           enabled: true
-
+      routes:
+        - id: default_path_to_http
+          uri: https://www.baidu.com
+          order: 10000
+          predicates:
+            - Path=/**
+          filters:
+            - SetPath=/
 
