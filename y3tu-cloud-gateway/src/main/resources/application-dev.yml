@@ -2,60 +2,10 @@ server:
   port: 9999
 
 spring:
-  zipkin:
-    rabbitmq:
-      queue: zipkin
-  sleuth:
-    sampler:
-      percentage: 0.2
-
-zuul:
-  ribbon:
-    eager-load:
-      enabled: true
-      clients: pig-auth,pig-upms-service,pig-demo-service
-  ignoredServices: '*'
-  host:
-    connect-timeout-millis: 10000
-    socket-timeout-millis: 10000
-  ratelimit:
-    key-prefix: pig-ratelimite
-    enabled: true
-    repository: REDIS
-    behind-proxy: true
-    policies:
-      pig-upms-service:
-        limit: 100
-        quota: 100
-        refresh-interval: 3
-
-security:
-  encode:
-    key: '1234567887654321' #必须16位
-  validate:
-    code: true
-    preview: false
-  oauth2:
-    client:
-      client-id: pig
-      client-secret: pig
-    resource:
-      jwt:
-        key-uri: ${security.auth.server}/oauth/token_key #解析jwt令牌所需要密钥的地址
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
 
 
-ignore:
-  urls:
-  - /mobile/**
-  - /auth/**
-  - /admin/code/*
-  - /admin/smsCode/*
-  - /admin/user/info
-  - /admin/menu/userMenu
-  - /swagger-resources/**
-  - /swagger-ui.html
-  - /*/v2/api-docs
-  - /swagger/api-docs
-  - /webjars/**
-  clients:
-  - app

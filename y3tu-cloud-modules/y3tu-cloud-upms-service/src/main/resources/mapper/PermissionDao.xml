@@ -7,10 +7,11 @@
         id, create_by AS createBy, create_time AS createTime, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime, description, name, parent_id AS parentId, type, sort_order AS sortOrder, component, path, title, icon, level, button_type AS buttonType, status
     </sql>
 
-	<select id="queryPage" resultType="com.y3tu.cloud.upms.entity.Permission">
-		select <include refid="Base_Column_List"/>
-		from permission
-	</select>
+    <select id="queryPage" resultType="com.y3tu.cloud.upms.entity.Permission">
+        select
+        <include refid="Base_Column_List"/>
+        from permission
+    </select>
 
     <select id="findByUserId" resultType="com.y3tu.cloud.upms.entity.Permission">
       SELECT DISTINCT p.id, p.name, p.title, p.path, p.icon, p.type, p.component, p.level, p.button_type, p.parent_id, p.sort_order, p.description, p.status
@@ -20,5 +21,13 @@
       LEFT JOIN permission p ON p.id = rp.permission_id
       WHERE u.id = #{userId} AND p.status = 0
       ORDER BY p.sort_order ASC
+    </select>
+
+    <select id="findByRoleName" resultType="com.y3tu.cloud.upms.entity.Permission">
+        SELECT DISTINCT p.id, p.name, p.title, p.path, p.icon, p.type, p.component, p.level, p.button_type, p.parent_id, p.sort_order, p.description, p.status
+        FROM permission p
+        LEFT JOIN role_permission rp ON p.id = rp.permission_id
+        LEFT JOIN role r ON r.id = rp.role_id
+        WHERE r.name = #{roleName}
     </select>
 </mapper>

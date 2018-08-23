@@ -5,10 +5,13 @@ import com.y3tu.cloud.upms.entity.Permission;
 import com.y3tu.cloud.upms.service.PermissionService;
 import com.y3tu.tool.web.base.controller.BaseController;
 import com.y3tu.tool.web.base.pojo.R;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 /**
@@ -23,6 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/upms/permission")
 public class PermissionController extends BaseController<PermissionService, Permission> {
 
+    @Autowired
+    PermissionService permissionService;
     /**
      * 根据角色获取角色的权限
      * @param role
@@ -30,7 +35,7 @@ public class PermissionController extends BaseController<PermissionService, Perm
      */
     @GetMapping("/findPermissionByRole/{role}")
     public R findPermissionByRole(@PathVariable String role) {
-
-        return R.ok();
+        List<Permission> permissionList = permissionService.findByRoleName(role);
+        return R.ok(permissionList);
     }
 }

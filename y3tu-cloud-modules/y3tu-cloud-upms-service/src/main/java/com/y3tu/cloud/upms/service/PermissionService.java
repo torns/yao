@@ -17,8 +17,16 @@ import java.util.List;
 public interface PermissionService extends BaseService<Permission> {
     /**
      * 根据用户Id获取这个用户所具有的权限
-     * @param id
+     * @param userId
      * @return
      */
-    List<Permission> findByUserId(String id);
+    List<Permission> findByUserId(String userId);
+
+    /**
+     * 根据角色名称获取这个角色所具有的权限
+     *
+     * @param roleName
+     * @return
+     */
+    List<Permission> findByRoleName(String roleName);
 }

@@ -24,4 +24,10 @@ public class PermissionServiceImpl extends BaseServiceImpl<PermissionDao, Permis
     public List<Permission> findByUserId(String id) {
         return baseMapper.findByUserId(id);
     }
+
+    @Override
+    public List<Permission> findByRoleName(String roleName) {
+        return baseMapper.findByRoleName(roleName);
+    }
+
 }

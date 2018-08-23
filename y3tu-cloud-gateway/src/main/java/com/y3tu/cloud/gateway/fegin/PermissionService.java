@@ -1,12 +1,11 @@
 package com.y3tu.cloud.gateway.fegin;
 
-import com.y3tu.cloud.common.vo.PermissionVO;
 import com.y3tu.cloud.gateway.fegin.fallback.PermissionServiceFallbackImpl;
+import com.y3tu.tool.web.base.pojo.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.Set;
 
 /**
  * 角色权限服务相关
@@ -24,5 +23,5 @@ public interface PermissionService {
      * @return 权限列表
      */
     @GetMapping(value = "/upms/permission/findPermissionByRole/{role}")
-    Set<PermissionVO> findPermissionByRole(@PathVariable String role);
+    R findPermissionByRole(@PathVariable String role);
 }
