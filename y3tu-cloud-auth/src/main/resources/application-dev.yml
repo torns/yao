@@ -7,8 +7,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: y3tu46262966
-    url: jdbc:mysql://cdb-d5ge3ujs.cd.tencentcdb.com:10003/y3tu-admin??allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-#redis配置
+    url: jdbc:mysql://cdb-d5ge3ujs.cd.tencentcdb.com:10003/yredis配置3tu-admin??allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+#
   redis:
     database: 0
     host: 132.232.11.210

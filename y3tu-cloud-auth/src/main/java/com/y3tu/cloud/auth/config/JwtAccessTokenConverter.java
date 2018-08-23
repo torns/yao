@@ -7,8 +7,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import java.util.Map;
 
 /**
- * @author lengleng
- * @date 2018/4/7
+ * @author y3tu
  * token 声明版权
  */
 public class JwtAccessTokenConverter extends org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter {

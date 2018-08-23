@@ -28,8 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author lengleng
- * @date 2017/10/27
+ * @author y3tu
  * 认证服务器逻辑实现
  */
 
