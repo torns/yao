@@ -4,28 +4,29 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.y3tu</groupId>
-    <artifactId>y3tu-cloud-gateway</artifactId>
+    <artifactId>y3tu-cloud-gateway-zuul</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <name>y3tu-cloud-gateway</name>
-    <description>服务网关</description>
+    <name>y3tu-cloud-gateway-zuul</name>
+    <description>基于Zuul的网关</description>
 
     <parent>
         <groupId>com.y3tu</groupId>
-        <artifactId>y3tu-cloud</artifactId>
+        <artifactId>y3tu-cloud-gateway</artifactId>
         <version>1.0</version>
     </parent>
 
-    <modules>
-        <module>y3tu-cloud-gateway-web</module>
-        <module>y3tu-cloud-gateway-zuul</module>
-    </modules>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
     </dependencies>
 
