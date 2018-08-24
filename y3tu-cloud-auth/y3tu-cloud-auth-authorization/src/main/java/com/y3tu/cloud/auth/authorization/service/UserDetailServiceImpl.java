@@ -4,7 +4,7 @@ package com.y3tu.cloud.auth.authorization.service;
 
 import com.y3tu.cloud.auth.authorization.feign.UserService;
 import com.y3tu.cloud.auth.authorization.util.UserDetailsImpl;
-import com.y3tu.cloud.common.vo.UserVO;
+import com.y3tu.cloud.common.vo.UsersVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +22,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserVO userVo = userService.findUserByUsername(username);
+        UsersVO userVo = userService.findUserByUsername(username);
         return new UserDetailsImpl(userVo);
     }
 }

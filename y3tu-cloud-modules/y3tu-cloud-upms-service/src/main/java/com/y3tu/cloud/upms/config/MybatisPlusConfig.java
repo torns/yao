@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.plugins.PerformanceInterceptor;
 import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
-import com.y3tu.tool.core.io.resource.ResourceUtil;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
@@ -18,15 +17,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.util.ResourceUtils;
-import sun.security.util.ResourcesMgr;
 
 import javax.sql.DataSource;
 
 /**
- * @author lengleng
- * @date 2017/10/29
+ * mybatis-plus配置
+ * @author y3tu
  */
 @Configuration
 @MapperScan("com.y3tu.cloud.upms.dao")

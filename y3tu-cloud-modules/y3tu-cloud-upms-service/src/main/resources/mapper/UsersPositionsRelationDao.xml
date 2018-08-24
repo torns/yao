@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.y3tu.cloud.upms.dao.UsersPositionsRelationDao">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, position_id AS positionId, created_time AS createdTime, updated_time AS updatedTime, created_by AS createdBy, updated_by AS updatedBy
+    </sql>
+
+	<select id="queryPage" resultType="com.y3tu.cloud.upms.entity.UsersPositionsRelation">
+		select <include refid="Base_Column_List"/>
+		from users_positions_relation
+	</select>
+</mapper>

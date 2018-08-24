@@ -3,8 +3,8 @@ package com.y3tu.cloud.auth.authorization.util;
 
 import com.y3tu.cloud.common.constant.CommonConstant;
 import com.y3tu.cloud.common.constant.SecurityConstants;
-import com.y3tu.cloud.common.vo.RoleVO;
-import com.y3tu.cloud.common.vo.UserVO;
+import com.y3tu.cloud.common.vo.RolesVO;
+import com.y3tu.cloud.common.vo.UsersVO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,8 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @author lengleng
- * @date 2017/10/29
+ * @author y3tu
  */
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
@@ -24,20 +23,20 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     private String password;
     private String status;
-    private List<RoleVO> roleList;
+    private List<RolesVO> roleList;
 
-    public UserDetailsImpl(UserVO userVo) {
-        this.userId = userVo.getId();
+    public UserDetailsImpl(UsersVO userVo) {
+        this.userId = userVo.getId()+"";
         this.username = userVo.getUsername();
         this.password = userVo.getPassword();
-        this.status = userVo.getDelFlag()+"";
-        roleList = userVo.getRoles();
+        this.status = userVo.getEnabled()+"";
+        roleList = userVo.getRolesList();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        for (RoleVO role : roleList) {
+        for (RolesVO role : roleList) {
             authorityList.add(new SimpleGrantedAuthority(role.getName()));
         }
         authorityList.add(new SimpleGrantedAuthority(SecurityConstants.BASE_ROLE));
@@ -82,11 +81,11 @@ public class UserDetailsImpl implements UserDetails {
         this.password = password;
     }
 
-    public List<RoleVO> getRoleList() {
+    public List<RolesVO> getRoleList() {
         return roleList;
     }
 
-    public void setRoleList(List<RoleVO> roleList) {
+    public void setRoleList(List<RolesVO> roleList) {
         this.roleList = roleList;
     }
 

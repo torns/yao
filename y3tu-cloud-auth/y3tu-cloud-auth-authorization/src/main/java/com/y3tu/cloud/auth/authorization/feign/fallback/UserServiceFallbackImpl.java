@@ -1,7 +1,7 @@
 package com.y3tu.cloud.auth.authorization.feign.fallback;
 
 import com.y3tu.cloud.auth.authorization.feign.UserService;
-import com.y3tu.cloud.common.vo.UserVO;
+import com.y3tu.cloud.common.vo.UsersVO;
 import com.y3tu.tool.web.base.pojo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ public class UserServiceFallbackImpl implements UserService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public UserVO findUserByUsername(String username) {
+    public UsersVO findUserByUsername(String username) {
         logger.error("调用{}异常:{}", "findUserByUsername", username);
         return null;
     }
@@ -30,7 +30,7 @@ public class UserServiceFallbackImpl implements UserService {
      * @return UserVo
      */
     @Override
-    public UserVO findUserByMobile(String mobile) {
+    public UsersVO findUserByMobile(String mobile) {
         logger.error("调用{}异常:{}", "通过手机号查询用户", mobile);
         return null;
     }
@@ -42,7 +42,7 @@ public class UserServiceFallbackImpl implements UserService {
      * @return UserVo
      */
     @Override
-    public UserVO findUserByOpenId(String openId) {
+    public UsersVO findUserByOpenId(String openId) {
         logger.error("调用{}异常:{}", "通过OpenId查询用户", openId);
         return null;
     }

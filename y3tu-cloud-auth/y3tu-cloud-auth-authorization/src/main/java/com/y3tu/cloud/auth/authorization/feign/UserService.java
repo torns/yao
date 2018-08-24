@@ -2,7 +2,7 @@ package com.y3tu.cloud.auth.authorization.feign;
 
 
 import com.y3tu.cloud.auth.authorization.feign.fallback.UserServiceFallbackImpl;
-import com.y3tu.cloud.common.vo.UserVO;
+import com.y3tu.cloud.common.vo.UsersVO;
 import com.y3tu.tool.web.base.pojo.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +20,8 @@ public interface UserService {
      * @param username 用户名
      * @return UserVo
      */
-    @GetMapping("/upms/user/findUserByUsername")
-    UserVO findUserByUsername(@RequestParam("username") String username);
+    @GetMapping("/upms/users/findUserByUsername")
+    UsersVO findUserByUsername(@RequestParam("username") String username);
 
     /**
      * 通过手机号查询用户、角色信息
@@ -29,16 +29,16 @@ public interface UserService {
      * @param mobile 手机号
      * @return UserVo
      */
-    @GetMapping("/upms/user/findUserByMobile")
-    UserVO findUserByMobile(@RequestParam("mobile") String mobile);
+    @GetMapping("/upms/users/findUserByMobile")
+    UsersVO findUserByMobile(@RequestParam("mobile") String mobile);
 
     /**
      * 根据OpenId查询用户信息
      * @param openId openId
      * @return UserVo
      */
-    @GetMapping("/user/findUserByOpenId/{openId}")
-    UserVO findUserByOpenId(@PathVariable("openId") String openId);
+    @GetMapping("/users/findUserByOpenId/{openId}")
+    UsersVO findUserByOpenId(@PathVariable("openId") String openId);
 
     /**
      * 通过角色名查询菜单

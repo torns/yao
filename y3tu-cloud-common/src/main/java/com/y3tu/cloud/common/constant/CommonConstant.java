@@ -1,8 +1,7 @@
 package com.y3tu.cloud.common.constant;
 
 /**
- * @author lengleng
- * @date 2017/10/29
+ * @author y3tu
  */
 public interface CommonConstant {
     /**
@@ -18,15 +17,15 @@ public interface CommonConstant {
     /**
      * jwt签名
      */
-    String SIGN_KEY = "PIG";
+    String SIGN_KEY = "Y3TU";
     /**
      * 删除
      */
-    String STATUS_DEL = "1";
+    String STATUS_DEL = "0";
     /**
      * 正常
      */
-    String STATUS_NORMAL = "0";
+    String STATUS_NORMAL = "1";
 
     /**
      * 锁定
