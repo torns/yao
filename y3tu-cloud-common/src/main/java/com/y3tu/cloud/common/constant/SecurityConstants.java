@@ -1,14 +1,13 @@
 package com.y3tu.cloud.common.constant;
 
 /**
- * @author lengleng
- * @date 2017-12-18
+ * @author y3tu
  */
 public interface SecurityConstants {
     /**
      * 前缀
      */
-    String PIG_PREFIX = "pig_";
+    String PIG_PREFIX = "y3tu_";
     /**
      * 用户信息头
      */
@@ -21,7 +20,7 @@ public interface SecurityConstants {
     /**
      * 项目的license
      */
-    String PIG_LICENSE = "made by pig";
+    String LICENSE = "made by y3tu";
     /**
      * 基础角色
      */
@@ -123,7 +122,7 @@ public interface SecurityConstants {
             + "refresh_token_validity, additional_information, autoapprove";
 
     /**
-     *JdbcClientDetailsService 查询语句
+     * JdbcClientDetailsService 查询语句
      */
     String BASE_FIND_STATEMENT = "select " + CLIENT_FIELDS
             + " from sys_oauth_client_details";

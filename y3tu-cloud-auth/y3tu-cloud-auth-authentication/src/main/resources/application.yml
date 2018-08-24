@@ -1,0 +1,73 @@
+server:
+  port: 8001
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_ZONE_HOST:132.232.11.210}:${EUREKA_ZONE_PORT:8501}/eureka/
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: authentication-server
+  rabbitmq:
+    host: ${RABBIT_MQ_HOST:132.232.11.210}
+    port: ${RABBIT_MQ_PORT:5672}
+    username: ${RABBIT_MQ_USERNAME:guest}
+    password: ${RABBIT_MQ_PASSWORD:guest}
+  #redis配置
+  redis:
+    database: 0
+    host: ${REDIS_HOST:132.232.11.210}
+    port: ${REDIS_PORT:6379}
+    password: yxy727      # 密码（默认为空）
+    timeout: 6000ms  # 连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10      # 连接池中的最大空闲连接
+        min-idle: 5       # 连接池中的最小空闲连接
+  security:
+    oauth2:
+      jwt:
+        signingKey: 123456
+
+
+#日志信息
+logging:
+  level:
+    org.springframework.web: debug
+    org.springframework.security: DEBUG
+    com.y3tu.cloud.auth: DEBUG
+    java.sql.PreparedStatement: debug
+  path: ./logs/authentication-server
+  file:
+    max-size: 1GB
+#logging:
+#  path: ./logs/authorization-server
+#  file: ${logging.path}/root.log
+#  common-pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS}:[%5p] [%t:%r] [%C{1}:%M:%L] --> %m%n'
+#  level:
+#    console: DEBUG
+
+#显示actuator的信息
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+ignore:
+  urls:
+  - /authentication/**
+  - /**/*.css
+  - /social
+  - /signin
+  - /signup
+  - /info
+  - /health
+  - /metrics/**
+  - /loggers/**
+  - /mobile/token

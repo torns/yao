@@ -6,11 +6,15 @@
     <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud-auth</artifactId>
     <version>${parent.version}</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>y3tu-cloud-auth</name>
     <description>权限控制</description>
 
+    <modules>
+        <module>y3tu-cloud-auth-authorization</module>
+        <module>y3tu-cloud-auth-authentication</module>
+    </modules>
     <parent>
         <groupId>com.y3tu</groupId>
         <artifactId>y3tu-cloud</artifactId>
@@ -35,6 +39,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -53,12 +58,14 @@
             <artifactId>spring-boot-starter-redis</artifactId>
             <version>${redis-version}</version>
         </dependency>
+
         <!--Druid数据源-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.y3tu</groupId>
             <artifactId>y3tu-cloud-common</artifactId>
