@@ -23,4 +23,13 @@ left join users u
   on u.id = ur.user_id
 where u.id = #{userId}
     </select>
+
+    <select id="findByRoleCode" resultType="com.y3tu.cloud.upms.entity.Resources">
+select r.* from resources r
+left join roles_resources_relation rr
+  on r.id = rr.resource_id
+left join roles ro
+  on ro.id = rr.role_id
+where ro.code = #{roleCode}
+    </select>
 </mapper>

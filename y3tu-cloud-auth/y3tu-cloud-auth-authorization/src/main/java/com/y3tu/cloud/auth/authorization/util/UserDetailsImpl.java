@@ -2,7 +2,6 @@ package com.y3tu.cloud.auth.authorization.util;
 
 
 import com.y3tu.cloud.common.constant.CommonConstant;
-import com.y3tu.cloud.common.constant.SecurityConstants;
 import com.y3tu.cloud.common.vo.RolesVO;
 import com.y3tu.cloud.common.vo.UsersVO;
 import org.apache.commons.lang.StringUtils;
@@ -37,9 +36,8 @@ public class UserDetailsImpl implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         for (RolesVO role : roleList) {
-            authorityList.add(new SimpleGrantedAuthority(role.getName()));
+            authorityList.add(new SimpleGrantedAuthority(role.getCode()));
         }
-        authorityList.add(new SimpleGrantedAuthority(SecurityConstants.BASE_ROLE));
         return authorityList;
     }
 

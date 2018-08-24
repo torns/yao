@@ -20,4 +20,11 @@ public interface ResourcesService extends BaseService<Resources> {
      * @return
      */
 	List<Resources> findByUserId(long userId);
+
+    /**
+     * 根据角色编码查询角色拥有的资源
+     * @param roleCode
+     * @return
+     */
+	List<Resources> findByRoleCode(String roleCode);
 }

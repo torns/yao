@@ -23,4 +23,9 @@ public class ResourcesServiceImpl extends BaseServiceImpl<ResourcesDao, Resource
     public List<Resources> findByUserId(long userId) {
         return baseMapper.findByUserId(userId);
     }
+
+    @Override
+    public List<Resources> findByRoleCode(String roleCode) {
+        return baseMapper.findByRoleCode(roleCode);
+    }
 }

@@ -21,4 +21,11 @@ public interface ResourcesDao extends BaseMapper<Resources> {
      * @return
      */
     List<Resources> findByUserId(@Param("userId") long userId);
+
+    /**
+     * 根据角色编码查询角色拥有的资源
+     * @param roleCode
+     * @return
+     */
+    List<Resources> findByRoleCode(@Param("roleCode") String roleCode);
 }
