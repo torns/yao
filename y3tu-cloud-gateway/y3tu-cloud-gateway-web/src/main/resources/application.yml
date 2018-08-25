@@ -37,6 +37,7 @@ spring:
     oauth2:
       jwt:
         signingKey: 123456
+
   cloud:
     gateway:
       discovery:
@@ -104,3 +105,4 @@ logging:
   path: logs/
   file:
     max-size: 1GB
+

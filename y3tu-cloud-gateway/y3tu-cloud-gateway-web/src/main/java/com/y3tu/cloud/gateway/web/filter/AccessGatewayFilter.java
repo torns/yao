@@ -1,11 +1,10 @@
 package com.y3tu.cloud.gateway.web.filter;
 
-import com.y3tu.cloud.auth.client.service.IAuthService;
+import com.y3tu.cloud.gateway.web.service.IAuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +22,6 @@ import reactor.core.publisher.Mono;
  */
 @Configuration
 @Slf4j
-@ComponentScan(basePackages = "com.y3tu.cloud.auth.client")
 public class AccessGatewayFilter implements GlobalFilter {
 
     private final static String X_CLIENT_TOKEN_USER = "x-client-token-user";

@@ -1,9 +1,9 @@
 package com.y3tu.cloud.upms.controller;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -33,7 +33,7 @@ public class ResourcesController extends BaseController<ResourcesService,Resourc
      * @return
      */
     @GetMapping("/findAll")
-    Object findAll(){
+    List<Resources> findAll(){
        List<Resources> resourcesList = resourcesService.selectList(null);
        return resourcesList;
     }
@@ -45,7 +45,7 @@ public class ResourcesController extends BaseController<ResourcesService,Resourc
      * @return
      */
     @GetMapping("/findByRoleCode")
-    Object findByRoleCode(String[] roleCodes){
+    List<Resources> findByRoleCode(@RequestParam("roleCodes") String[] roleCodes){
         List<Resources> resourcesList = new ArrayList<>();
         for(String roleCode:roleCodes){
             resourcesList.addAll(resourcesService.findByRoleCode(roleCode));

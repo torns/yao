@@ -1,5 +1,6 @@
 package com.y3tu.config;
 
+import com.y3tu.cloud.config.ConfigApplication;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;

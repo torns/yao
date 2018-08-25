@@ -4,6 +4,7 @@ import com.y3tu.cloud.auth.authentication.feign.fallback.ResourcesServiceFallbac
 import com.y3tu.cloud.common.vo.ResourcesVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -26,5 +27,5 @@ public interface ResourcesService {
      * @return
      */
     @GetMapping("/upms/resources/findByRoleCode")
-    List<ResourcesVO> findByRoleCode(String[] roleCodes);
+    List<ResourcesVO> findByRoleCode(@RequestParam("roleCodes")String[] roleCodes);
 }

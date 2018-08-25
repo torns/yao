@@ -6,7 +6,6 @@ import com.y3tu.cloud.auth.authentication.service.AuthenticationService;
 import com.y3tu.cloud.common.vo.ResourcesVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.core.Authentication;
@@ -98,7 +97,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList())
                 .toArray(new String[authorityRoles.size()]);
-        List<ResourcesVO> resources = resourcesService.findByRoleCode(authorityRoleCodes);
+        List<ResourcesVO> resources= resourcesService.findByRoleCode(authorityRoleCodes);
         if (log.isDebugEnabled()) {
             log.debug("用户被授予角色的资源数量是:{}, 资源集合信息为:{}", resources.size(), resources);
         }
