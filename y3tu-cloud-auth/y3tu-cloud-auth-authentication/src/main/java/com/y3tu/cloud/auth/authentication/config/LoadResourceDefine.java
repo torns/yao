@@ -4,7 +4,7 @@ import com.y3tu.cloud.auth.authentication.feign.ResourcesService;
 import com.y3tu.cloud.common.vo.ResourcesVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -21,15 +21,14 @@ import java.util.stream.Collectors;
 /**
  * 获取资源
  */
-@Component
 @Slf4j
+@Component
 public class LoadResourceDefine {
     @Autowired
     ResourcesService resourcesService;
     @Autowired
     private HandlerMappingIntrospector mvcHandlerMappingIntrospector;
 
-    @Bean
     public Map<RequestMatcher, ConfigAttribute> resourceConfigAttributes() {
         List<ResourcesVO> resources = resourcesService.findAll();
         Map<RequestMatcher, ConfigAttribute> map = resources.stream()

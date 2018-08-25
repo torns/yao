@@ -1,10 +1,12 @@
 package com.y3tu.cloud.auth.authentication.service.impl;
 
+import com.y3tu.cloud.auth.authentication.config.LoadResourceDefine;
 import com.y3tu.cloud.auth.authentication.feign.ResourcesService;
 import com.y3tu.cloud.auth.authentication.service.AuthenticationService;
 import com.y3tu.cloud.common.vo.ResourcesVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.core.Authentication;
@@ -28,20 +30,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public static final String NONEXISTENT_URL = "NONEXISTENT_URL";
     @Autowired
     private ResourcesService resourcesService;
+    @Autowired
+    private LoadResourceDefine loadResourceDefine;
     /**
      * 系统中所有权限集合
      */
     Map<RequestMatcher, ConfigAttribute> resourceConfigAttributes;
 
-    /**
-     * 从数据库中加载注入
-     *
-     * @param resourceConfigAttributes
-     */
-    @Autowired
-    public AuthenticationServiceImpl(Map<RequestMatcher, ConfigAttribute> resourceConfigAttributes) {
-        this.resourceConfigAttributes = resourceConfigAttributes;
-    }
+
 
     /**
      * @param authRequest 访问的url,method
@@ -80,6 +76,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
      * @return
      */
     public ConfigAttribute findConfigAttributesByUrl(HttpServletRequest authRequest) {
+        this.resourceConfigAttributes = loadResourceDefine.resourceConfigAttributes();
         return this.resourceConfigAttributes.keySet().stream()
                 .filter(requestMatcher -> requestMatcher.matches(authRequest))
                 .map(requestMatcher -> this.resourceConfigAttributes.get(requestMatcher))
