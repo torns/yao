@@ -1,3 +1,14 @@
 # y3tu-cloud
 
 ## 基于spring cloud的分布式应用平台
+
+通过网关登录发送用户名密码获取token:  
+```
+http://localhost:8443/authorization-server/oauth/token?grant_type=password&client_id=app&client_secret=123456&password=123456&username=admin
+```
+然后在请求头中加入
+```
+key=Authorization
+value=bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5M3R1IiwiYXVkIjpbInRlc3QiXSwidXNlcl9uYW1lIjoiYWRtaW4iLCJzY29wZSI6WyJzZXJ2ZXIiXSwiZXhwIjoxNTM1MjIxNjIyLCJ1c2VySWQiOiIxMDEiLCJhdXRob3JpdGllcyI6WyJBRE1JTiJdLCJqdGkiOiJhMzg5Mjk2Yy0wNTgxLTQwZTAtYjg3OS1kOGE1MGJlMzFiMGYiLCJjbGllbnRfaWQiOiJhcHAifQ.sR6e4JkGRQxvypWFGWqibWRVGMF0kpf8GMQk_bUtWD8
+```
+就可以通过网关访问其他服务
