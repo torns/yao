@@ -34,6 +34,10 @@ spring:
       jwt:
         signingKey: 123456
 
+feign:
+  hystrix:
+    enabled: true
+
 
 #日志信息
 logging:
@@ -59,6 +63,8 @@ management:
       exposure:
         include: '*'
 
+
+
 ignore:
   urls:
   - /authentication/**
@@ -71,3 +77,6 @@ ignore:
   - /metrics/**
   - /loggers/**
   - /mobile/token
+  - /hystrix.stream
+  - /hystrix/**
+  - /webjars/**

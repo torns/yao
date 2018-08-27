@@ -20,6 +20,7 @@ value=bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5M3
 |  center  | eureka-server             | 注册中心   |  http://localhost:8761  |      |
 |  center  | bus-server                | 消息中心   |  http://localhost:8071  |      |
 |  center  | config-server             | 配置中心   |  http://localhost:8888  |      |
+|  upms    | y3tu-cloud-upms-service   |通用用户权限服务| http://localhost:8081|     | 
 |  auth    | authorization-server      | 授权服务   |  http://localhost:8000  |    |
 |  auth    | authentication-server     | 签权服务   |  http://localhost:8001  |      |
 |  auth    | authentication-client     | 签权客户端  |  jar包引入              |      |

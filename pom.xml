@@ -55,11 +55,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <!--&lt;!&ndash;断路器&ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.cloud</groupId>-->
-            <!--<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
-        <!--</dependency>-->
         <!--&lt;!&ndash;集群监控消息队列&ndash;&gt;-->
         <!--<dependency>-->
             <!--<groupId>org.springframework.cloud</groupId>-->
