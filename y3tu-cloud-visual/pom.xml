@@ -19,7 +19,5 @@
 
 	<modules>
 		<module>y3tu-cloud-monitor</module>
-		<module>y3tu-cloud-zipkin-db</module>
-		<module>y3tu-cloud-zipkin-elk</module>
 	</modules>
 </project>
