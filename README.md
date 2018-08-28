@@ -27,9 +27,8 @@ value=bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5M3
 |  visual  | y3tu-cloud-monitor        | 可视化监控 |  http://localhost:5000 |      |
 
 y3tu-cloud-monitor 可视化监控集成了spring boot admin 2.x 和 turbine
-比如要访问y3tu-cloud-authorization的hystrix dashboard  
-地址为
-`http://localhost:8000/actuator/hystrix.stream`
+比如要访问y3tu-cloud-authorization的hystrix dashboard地址为    
+`http://localhost:8000/actuator/hystrix.stream`  
 要访问turbine,地址为  
 `http://localhost:5000/turbine.stream`
 
