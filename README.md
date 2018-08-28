@@ -32,4 +32,15 @@ y3tu-cloud-monitor 可视化监控集成了spring boot admin 2.x 和 turbine
 要访问turbine,地址为  
 `http://localhost:5000/turbine.stream`
 
+分布式链路追踪  
+因为目前版本是spring boot 2.x 官方不推荐自己搭建Zipkin Server,建议使用官方提供的jar或者docker方式开启服务
+参考：
+https://blog.csdn.net/xiaoluo033/article/details/80961807   
+https://blog.csdn.net/gavinkelland/article/details/80996787
+
+zipkin和elasticsearch一起使用  
+安装好elasticsearch后，默认端口9200  
+在启动zipkin server的jar包时配置上elasticsearch，启动命令如下：  
+`java -jar zipkin-server-2.11.3-exec.jar --STORAGE_TYPE=elasticsearch --DES_HOSTS=http://localhost:9200`
+
 

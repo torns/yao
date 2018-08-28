@@ -33,6 +33,12 @@ spring:
     oauth2:
       jwt:
         signingKey: 123456
+  # 分布式链路追踪配置
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      probability: 1 #样本采集量，默认为0.1，为了测试这里修改为1，正式环境一般使用默认值。
 
 #日志信息
 logging:
@@ -62,6 +68,7 @@ management:
 feign:
   hystrix:
     enabled: true
+
 
 ignore:
   urls:
