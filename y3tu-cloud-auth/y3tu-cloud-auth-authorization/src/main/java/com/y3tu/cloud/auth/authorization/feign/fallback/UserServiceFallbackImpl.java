@@ -4,8 +4,6 @@ import com.y3tu.cloud.auth.authorization.feign.UserService;
 import com.y3tu.cloud.common.vo.UsersVO;
 import com.y3tu.tool.web.base.pojo.R;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,11 +13,10 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class UserServiceFallbackImpl implements UserService {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public UsersVO findUserByUsername(String username) {
-        logger.error("调用{}异常:{}", "findUserByUsername", username);
+        log.error("调用{}异常:{}", "findUserByUsername", username);
         return null;
     }
 
@@ -31,7 +28,7 @@ public class UserServiceFallbackImpl implements UserService {
      */
     @Override
     public UsersVO findUserByMobile(String mobile) {
-        logger.error("调用{}异常:{}", "通过手机号查询用户", mobile);
+        log.error("调用{}异常:{}", "通过手机号查询用户", mobile);
         return null;
     }
 
@@ -43,9 +40,10 @@ public class UserServiceFallbackImpl implements UserService {
      */
     @Override
     public UsersVO findUserByOpenId(String openId) {
-        logger.error("调用{}异常:{}", "通过OpenId查询用户", openId);
+        log.error("调用{}异常:{}", "通过OpenId查询用户", openId);
         return null;
     }
+
     @Override
     public R findPermissionByRole(String role) {
         log.error("调用{}异常{}", "findPermissionByRole", role);

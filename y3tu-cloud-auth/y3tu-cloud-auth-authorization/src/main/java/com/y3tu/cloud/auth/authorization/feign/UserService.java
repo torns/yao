@@ -5,6 +5,7 @@ import com.y3tu.cloud.auth.authorization.feign.fallback.UserServiceFallbackImpl;
 import com.y3tu.cloud.common.vo.UsersVO;
 import com.y3tu.tool.web.base.pojo.R;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author y3tu
  */
+@Component
 @FeignClient(name = "y3tu-cloud-upms-service", fallback = UserServiceFallbackImpl.class)
 public interface UserService {
     /**

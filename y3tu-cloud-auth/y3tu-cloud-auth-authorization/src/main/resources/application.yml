@@ -58,6 +58,9 @@ management:
       exposure:
         include: '*'
 
+feign:
+  hystrix:
+    enabled: true
 
 ignore:
   urls:
@@ -75,3 +78,4 @@ ignore:
   - /hystrix/**
   - /webjars/**
   - /actuator/**
+  - /proxy.stream
