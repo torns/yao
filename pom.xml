@@ -15,6 +15,7 @@
         <module>y3tu-cloud-gateway</module>
         <module>y3tu-cloud-eureka</module>
         <module>y3tu-cloud-config</module>
+        <module>y3tu-cloud-visual</module>
     </modules>
 
     <name>y3tu-cloud</name>

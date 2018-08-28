@@ -52,3 +52,12 @@ swagger:
     url: http://www.y3tu.com
     email: 14643092@qq.com
 
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

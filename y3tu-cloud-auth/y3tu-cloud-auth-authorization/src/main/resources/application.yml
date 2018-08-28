@@ -58,6 +58,7 @@ management:
       exposure:
         include: '*'
 
+#Feign开始hystrix
 feign:
   hystrix:
     enabled: true
