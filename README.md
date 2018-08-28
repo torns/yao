@@ -17,14 +17,20 @@ value=bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5M3
 
 | 服务分类  | 服务名                     |   简介     |  应用地址                | 文档 |
 |----------|---------------------------|-----------|-------------------------|------|
-|  center  | eureka-server             | 注册中心   |  http://localhost:8761  |      |
-|  center  | bus-server                | 消息中心   |  http://localhost:8071  |      |
-|  center  | config-server             | 配置中心   |  http://localhost:8888  |      |
-|  upms    | y3tu-cloud-upms-service   |通用用户权限服务| http://localhost:8081|     | 
-|  auth    | authorization-server      | 授权服务   |  http://localhost:8000  |    |
-|  auth    | authentication-server     | 签权服务   |  http://localhost:8001  |      |
-|  auth    | authentication-client     | 签权客户端  |  jar包引入              |      |
-|  gateway | gateway                   | 网关       |  http://localhost:8443 |      |
-|  monitor | admin                     | 总体监控    |  http://localhost:8022 |      |
-|  monitor | hystrix-dashboard         | 性能指标展示 |  http://localhost:8021 |      |
-|  monitor | turbine                   | 性能指标收集 |  http://localhost:8031 |      |
+|  center  | y3tu-cloud-eureka         | 注册中心   |  http://localhost:8501  |      |
+|  center  | y3tu-cloud-bus            | 消息中心   |  http://localhost:8071  |      |
+|  center  | y3tu-cloud-config         | 配置中心   |  http://localhost:8888  |      |
+|  modules | y3tu-cloud-upms-service   |通用用户权限服务| http://localhost:8081|     | 
+|  auth    | y3tu-cloud-authorization  | 授权服务   |  http://localhost:8000  |    |
+|  auth    | y3tu-cloud-authentication | 签权服务   |  http://localhost:8001  |      |
+|  gateway | y3tu-cloud-gateway        | 网关       |  http://localhost:8443 |      |
+|  visual  | y3tu-cloud-monitor        | 可视化监控 |  http://localhost:5000 |      |
+
+y3tu-cloud-monitor 可视化监控集成了spring boot admin 2.x 和 turbine
+比如要访问y3tu-cloud-authorization的hystrix dashboard  
+地址为
+`http://localhost:8000/actuator/hystrix.stream`
+要访问turbine,地址为  
+`http://localhost:5000/turbine.stream`
+
+

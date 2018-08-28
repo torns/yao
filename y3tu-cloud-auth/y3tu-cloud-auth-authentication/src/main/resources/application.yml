@@ -10,7 +10,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: authentication-server
+    name: y3tu-cloud-authentication
   rabbitmq:
     host: ${RABBIT_MQ_HOST:132.232.11.210}
     port: ${RABBIT_MQ_PORT:5672}
@@ -42,11 +42,11 @@ logging:
     org.springframework.security: DEBUG
     com.y3tu.cloud.auth: DEBUG
     java.sql.PreparedStatement: debug
-  path: ./logs/authentication-server
+  path: ./logs/y3tu-cloud-authentication
   file:
     max-size: 1GB
 #logging:
-#  path: ./logs/authorization-server
+#  path: ./logs/y3tu-cloud-authentication
 #  file: ${logging.path}/root.log
 #  common-pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS}:[%5p] [%t:%r] [%C{1}:%M:%L] --> %m%n'
 #  level:

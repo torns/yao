@@ -9,3 +9,9 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
+turbine:
+  aggregator:
+    cluster-config: default
+  app-config: authorization-server
+  cluster-name-expression: new String("default")
