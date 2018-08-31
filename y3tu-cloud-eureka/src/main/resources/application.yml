@@ -20,17 +20,33 @@ spring:
   profiles:
     active: dev
   application:
-    name: y3tu-eureka
+    name: y3tu-cloud-eureka
+  security:
+    user:
+      name: y3tu
+      password: ENC(CGwCeH7IWZgQMWjafiZt4w==)
 
 management:
-  context-path: /actuator
-
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    servlet:
+      context-path: /
 
 info:
-  artifact: y3tu-eureka
+  artifact: y3tu-cloud-eureka
   name: '@project.name@'
   description: '@project.description@'
   version: '@project.version@'
-  spring-boot-version: '@spring.boot.version@'
-  spring-cloud-version: '@spring.cloud.version@'
+  spring-boot-version: '@spring-boot.version@'
+  spring-cloud-version: '@spring-cloud.version@'
 
+
+jasypt:
+  encryptor:
+    password: 123456

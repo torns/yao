@@ -2,23 +2,22 @@ prod1:
   eureka:
     server:
       port: 8501
-    hostname: www.y3tu.com
+    hostname: 132.232.11.210
 prod2:
   eureka:
     server:
       port: 8502
-    hostname: www.y3tu.com
+    hostname: 132.232.11.210
 dev:
   eureka:
     server:
       port: 8501
-    hostname: 132.232.11.210
+    hostname: localhost
 
 #日志配置
 logging:
   path: ./logs/y3tu-cloud-config
   file: ${logging.path}/root.log
-  common-pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS}:[%5p] [%t:%r] [%C{1}:%M:%L] --> %m%n'
   level:
     console: INFO
 
@@ -27,53 +26,47 @@ spring:
   profiles:
     active: dev
   application:
-    name: y3tu-config
+    name: y3tu-cloud-config
   cloud:
     config:
       server:
         git:
           uri: https://github.com/y3tu/y3tu-cloud
           username: 14643092@qq.com
-          password: ENC(dyXeseW+3pVFMpL89Xi4FHVdhpRLRJ9J)
+          password: ENC(lNPKGPdaXeoFmazawLAra85clN7/rSrO)
           search-paths: y3tu-config-repo/*/{application}
   security:
     user:
-      name: admin
-      password: admin
-
-
-
-
-#消息队列配置
-rabbitmq:
-    host: www.y3tu.com
-    port: 5672
-    password: admin
-    username: admin
+      name: y3tu
+      password: ENC(CGwCeH7IWZgQMWjafiZt4w==)
+  #消息队列配置
+  rabbitmq:
+    host: ${RABBIT_MQ_HOST:132.232.11.210}
+    port: ${RABBIT_MQ_PORT:5672}
+    username: ${RABBIT_MQ_USERNAME:guest}
+    password: ${RABBIT_MQ_PASSWORD:guest}
 
 management:
-  context-path: /actuator
+  endpoint:
+    health:
+      show-details: ALWAYS
   endpoints:
     web:
       exposure:
         include: "*" #配置actuator所有端点可访问
-
-
-
-endpoints:
-  health:
-    enabled: true
-    sensitive: true  # actuator的health接口是否需要安全保证
+  server:
+    servlet:
+      context-path: /
 
 
 #jasypt加解密方式配置
 jasypt:
   encryptor:
-    password: y3tu #根密码
+    password: 123456 #根密码
 
 
 info:
-  artifact: y3tu-config
+  artifact: y3tu-cloud-config
   name: '@project.name@'
   description: '@project.description@'
   version: '@project.version@'

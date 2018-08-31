@@ -1,16 +1,7 @@
 server:
   port: 8000
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://${EUREKA_ZONE_HOST:132.232.11.210}:${EUREKA_ZONE_PORT:8501}/eureka/
-
 spring:
-  profiles:
-    active: dev
-  application:
-    name: y3tu-cloud-authorization
   rabbitmq:
     host: ${RABBIT_MQ_HOST:132.232.11.210}
     port: ${RABBIT_MQ_PORT:5672}

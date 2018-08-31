@@ -3,15 +3,15 @@ server:
 
 eureka:
   instance:
-    status-page-url-path: ${management.context-path}/info
-    health-check-url-path: ${management.context-path}/health
-#    prefer-ip-address: true
-#    hostname: ${eureka.hostname:eureka.zuihou.com}    # 指定该Eureka实例的主机名
+    status-page-url-path: ${management.server.servlet.context-path}/actuator/info
+    health-check-url-path: ${management.server.servlet.context-path}/actuator/health
+    #    prefer-ip-address: true
+    #    hostname: ${eureka.hostname:eureka.zuihou.com}    # 指定该Eureka实例的主机名
     metadata-map:
       user.name: ${spring.security.user.name}
       user.password: ${spring.security.user.password}
-      management.context-path: ${management.context-path}
+      management.context-path: ${management.server.servlet.context-path}
   client:
     service-url:
-      defaultZone: http://${prod1.eureka.hostname}:${prod1.eureka.server.port}/eureka/,http://${prod2.eureka.hostname}:${prod2.eureka.server.port}/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${prod1.eureka.hostname}:${prod1.eureka.server.port}/eureka/,http://${spring.security.user.name}:${spring.security.user.password}@${prod2.eureka.hostname}:${prod2.eureka.server.port}/eureka/
 

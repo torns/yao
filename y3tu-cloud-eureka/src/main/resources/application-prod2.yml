@@ -7,12 +7,12 @@ eureka:
   server:
     enable-self-preservation: false  # 关闭自我保护
   instance:
-    status-page-url-path: ${management.context-path}/info
-    health-check-url-path: ${management.context-path}/health
-    #    prefer-ip-address: true   # 这个设置成true后， unavailable-replicas '异常'
+    status-page-url-path: ${management.server.servlet.context-path}/actuator/info
+    health-check-url-path: ${management.server.servlet.context-path}/actuator/health
+    #prefer-ip-address: true   # 这个设置成true后， unavailable-replicas '异常'
     hostname: ${prod2.eureka.hostname}    # 指定该Eureka实例的主机名
     metadata-map:
-      management.context-path: ${management.context-path}
+      management.context-path: ${management.server.servlet.context-path}
 
   client:
     register-with-eureka: true

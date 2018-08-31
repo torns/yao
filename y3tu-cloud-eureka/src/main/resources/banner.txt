@@ -25,6 +25,5 @@ _  _ 3_____ __ __
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        //
 //            佛祖保佑       永不宕机     永无BUG                  //
 ////////////////////////////////////////////////////////////////////
-Application Version: ${application.version}${application.formatted-version}
 Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
 ${AnsiColor.DEFAULT}
