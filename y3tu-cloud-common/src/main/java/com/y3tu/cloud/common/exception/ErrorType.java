@@ -2,6 +2,10 @@ package com.y3tu.cloud.common.exception;
 
 import lombok.Getter;
 
+/**
+ * @author y3tu
+ * 异常信息
+ */
 @Getter
 public enum ErrorType {
 
