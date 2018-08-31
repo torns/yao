@@ -16,15 +16,12 @@
         <module>y3tu-cloud-auth-authentication</module>
         <module>y3tu-cloud-auth-client</module>
     </modules>
+
     <parent>
         <groupId>com.y3tu</groupId>
         <artifactId>y3tu-cloud</artifactId>
         <version>1.0</version>
     </parent>
-
-    <properties>
-
-    </properties>
 
     <dependencies>
         <!--oauth2.0-->
