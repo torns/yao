@@ -64,7 +64,7 @@ management:
       exposure:
         include: '*'
 
-#Feign开始hystrix
+#Feign开启hystrix
 feign:
   hystrix:
     enabled: true
@@ -86,4 +86,3 @@ ignore:
   - /hystrix/**
   - /webjars/**
   - /actuator/**
-  - /proxy.stream

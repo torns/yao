@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Component
-@FeignClient(name = "authentication-server", fallback = AuthProvider.AuthProviderFallback.class)
+@FeignClient(name = "y3tu-cloud-authentication", fallback = AuthProvider.AuthProviderFallback.class)
 public interface AuthProvider {
     /**
      * 调用签权服务，判断用户是否有权限
