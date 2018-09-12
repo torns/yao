@@ -18,6 +18,7 @@ public class WebServerSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();
         registry.anyRequest().authenticated()
+                .and().authorizeRequests().antMatchers("/actuator/**").permitAll()
                 .and()
                 .httpBasic()
                 .and()

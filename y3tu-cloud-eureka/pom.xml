@@ -7,11 +7,12 @@
     <parent>
         <artifactId>y3tu-cloud</artifactId>
         <groupId>com.y3tu</groupId>
-        <version>1.0</version>
+        <version>${y3tu-cloud-version}</version>
     </parent>
 
     <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud-eureka</artifactId>
+    <version>${y3tu-cloud-version}</version>
     <name>y3tu-cloud-eureka</name>
     <packaging>jar</packaging>
     <description>eureka服务注册中心</description>
@@ -27,20 +28,43 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
         </dependency>
-
+        <!--y3tu-tool web工具包-->
         <dependency>
             <groupId>com.y3tu</groupId>
             <artifactId>y3tu-tool-web</artifactId>
-            <version>1.1</version>
+            <version>${y3tu-tool-version}</version>
         </dependency>
+
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>${project.name}</finalName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.12</version>
+                <configuration>
+                    <imageName>${project.name}:${project.version}</imageName>
+                    <dockerHost>${docker.url}</dockerHost>
+                    <!-- 指定Dockerfile所在的路径 -->
+                    <dockerDirectory>${project.basedir}</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <serverId>docker-hub</serverId>
+                    <registryUrl>https://index.docker.io/v1/</registryUrl>
+                </configuration>
             </plugin>
         </plugins>
     </build>

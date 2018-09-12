@@ -5,7 +5,7 @@
 
     <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud</artifactId>
-    <version>1.0</version>
+    <version>${y3tu-cloud-version}</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -30,14 +30,20 @@
     </parent>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compile.source>1.8</maven.compile.source>
-        <maven.compile.target>1.8</maven.compile.target>
+        <y3tu-cloud-version>1.0</y3tu-cloud-version>
         <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
         <spring-boot.version>2.0.3.RELEASE</spring-boot.version>
+
+        <y3tu-tool-version>1.1</y3tu-tool-version>
         <lombok-version>1.16.18</lombok-version>
         <jasypt-version>1.16</jasypt-version>
         <swagger.version>2.7.0</swagger.version>
+
+        <docker.url>http://192.168.0.13:4243</docker.url>
+        <registry.url>192.168.0.13:5000</registry.url>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compile.source>1.8</maven.compile.source>
+        <maven.compile.target>1.8</maven.compile.target>
     </properties>
 
     <dependencies>
@@ -51,7 +57,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!--注册中心-->
+        <!--注册中心 eureka 客户端-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
