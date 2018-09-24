@@ -10,7 +10,7 @@
 
     <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud-auth</artifactId>
-    <version>${y3tu-cloud-version}</version>
+    <version>${parent.version}</version>
     <packaging>pom</packaging>
 
     <name>y3tu-cloud-auth</name>

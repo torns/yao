@@ -14,7 +14,7 @@
     <parent>
         <groupId>com.y3tu</groupId>
         <artifactId>y3tu-cloud</artifactId>
-        <version>1.0</version>
+        <version>${y3tu-cloud-version}</version>
     </parent>
 
     <properties>

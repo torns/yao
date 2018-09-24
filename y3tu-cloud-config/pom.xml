@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.y3tu</groupId>
         <artifactId>y3tu-cloud</artifactId>
-        <version>1.0</version>
+        <version>${y3tu-cloud-version}</version>
     </parent>
 
     <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud-config</artifactId>
-    <version>1.0</version>
+    <version>${parent.version}</version>
     <packaging>jar</packaging>
 
     <name>y3tu-cloud-config</name>
