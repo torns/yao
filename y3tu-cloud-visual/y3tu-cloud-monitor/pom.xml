@@ -5,7 +5,6 @@
 
     <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud-monitor</artifactId>
-    <version>${parent.version}</version>
     <packaging>jar</packaging>
 
     <name>y3tu-cloud-monitor</name>
@@ -14,7 +13,7 @@
     <parent>
         <groupId>com.y3tu</groupId>
         <artifactId>y3tu-cloud-visual</artifactId>
-        <version>${y3tu-cloud-version}</version>
+        <version>1.1</version>
     </parent>
 
     <properties>
@@ -59,7 +58,7 @@
         <dependency>
             <groupId>com.y3tu</groupId>
             <artifactId>y3tu-cloud-common</artifactId>
-            <version>${y3tu-cloud-version}</version>
+            <version>${parent.version}</version>
         </dependency>
     </dependencies>
 

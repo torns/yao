@@ -5,7 +5,6 @@
 
     <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud-auth-authorization</artifactId>
-    <version>${parent.version}</version>
     <packaging>jar</packaging>
 
     <name>y3tu-cloud-auth-authorization</name>
@@ -14,10 +13,11 @@
     <parent>
         <groupId>com.y3tu</groupId>
         <artifactId>y3tu-cloud-auth</artifactId>
-        <version>${y3tu-cloud-version}</version>
+        <version>1.1</version>
     </parent>
 
     <properties>
+        <y3tu-tool-version>1.4</y3tu-tool-version>
         <mysql.version>5.1.38</mysql.version>
         <redis-version>1.4.7.RELEASE</redis-version>
         <druid.version>1.1.9</druid.version>

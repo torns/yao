@@ -7,12 +7,11 @@
     <parent>
         <artifactId>y3tu-cloud</artifactId>
         <groupId>com.y3tu</groupId>
-        <version>${y3tu-cloud-version}</version>
+        <version>1.1</version>
     </parent>
 
     <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud-eureka</artifactId>
-    <version>${y3tu-cloud-version}</version>
     <name>y3tu-cloud-eureka</name>
     <packaging>jar</packaging>
     <description>eureka服务注册中心</description>
@@ -27,12 +26,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
-        </dependency>
-        <!--y3tu-tool web工具包-->
-        <dependency>
-            <groupId>com.y3tu</groupId>
-            <artifactId>y3tu-tool-web</artifactId>
-            <version>${y3tu-tool-version}</version>
         </dependency>
 
     </dependencies>

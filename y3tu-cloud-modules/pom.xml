@@ -5,7 +5,6 @@
 
 	<groupId>com.y3tu</groupId>
 	<artifactId>y3tu-cloud-modules</artifactId>
-	<version>${parent.version}</version>
 	<packaging>pom</packaging>
 
 	<name>y3tu-cloud-modules</name>
@@ -14,7 +13,7 @@
 	<parent>
 		<groupId>com.y3tu</groupId>
 		<artifactId>y3tu-cloud</artifactId>
-		<version>${y3tu-cloud-version}</version>
+		<version>1.1</version>
 	</parent>
 
     <modules>

@@ -5,7 +5,6 @@
 
     <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud-common</artifactId>
-    <version>${parent.version}</version>
     <packaging>jar</packaging>
 
     <name>y3tu-cloud-common</name>
@@ -14,7 +13,7 @@
     <parent>
         <groupId>com.y3tu</groupId>
         <artifactId>y3tu-cloud</artifactId>
-        <version>${y3tu-cloud-version}</version>
+        <version>1.1</version>
     </parent>
 
     <properties>
@@ -31,25 +30,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <!--&lt;!&ndash;mybatis-plus 代码生成器需要的jar start&ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.baomidou</groupId>-->
-            <!--<artifactId>mybatis-plus-boot-starter</artifactId>-->
-            <!--<version>${mybatis-plus-version}</version>-->
-        <!--</dependency>-->
-        <!---->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.velocity</groupId>-->
-            <!--<artifactId>velocity-engine-core</artifactId>-->
-            <!--<version>${velocity-engine-version}</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>com.y3tu</groupId>-->
-            <!--<artifactId>y3tu-tool-web</artifactId>-->
-            <!--<version>1.1</version>-->
-        <!--</dependency>-->
 
     </dependencies>
 
