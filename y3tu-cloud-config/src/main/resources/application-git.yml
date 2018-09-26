@@ -1,0 +1,10 @@
+# 配置中心 git配置文件
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/y3tu/y3tu-cloud
+          username: 14643092@qq.com
+          password: ENC(lNPKGPdaXeoFmazawLAra85clN7/rSrO)
+          search-paths: y3tu-config-repo/*/{application}

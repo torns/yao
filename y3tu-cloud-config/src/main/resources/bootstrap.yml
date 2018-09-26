@@ -1,0 +1,46 @@
+server:
+  port: 4001
+
+spring:
+  application:
+    name: y3tu-cloud-config
+  profiles:
+    active: native
+  security:
+    user:
+      name: y3tu
+      password: ENC(CGwCeH7IWZgQMWjafiZt4w==)
+  #消息队列配置
+  rabbitmq:
+    host: ${RABBIT_MQ_HOST:132.232.11.210}
+    port: ${RABBIT_MQ_PORT:5672}
+    username: ${RABBIT_MQ_USERNAME:guest}
+    password: ${RABBIT_MQ_PASSWORD:guest}
+
+# 注册中心配置
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://y3tu:${EUREKA_SERVER_PWD:yxy727}@${EUREKA_SERVER_HOST:132.232.11.210}:8501/eureka/
+
+# 暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+#jasypt加解密方式配置
+jasypt:
+  encryptor:
+    password: 123456 #根密码
+
+info:
+  artifact: y3tu-cloud-config
+  name: '@project.name@'
+  description: '@project.description@'
+  version: '@project.version@'
+  spring-boot-version: '@spring-boot.version@'
+  spring-cloud-version: '@spring-cloud.version@'

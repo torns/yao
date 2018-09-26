@@ -17,6 +17,7 @@
     <description>eureka服务注册中心</description>
 
     <dependencies>
+
         <!-- springCloud注测中心服务 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
