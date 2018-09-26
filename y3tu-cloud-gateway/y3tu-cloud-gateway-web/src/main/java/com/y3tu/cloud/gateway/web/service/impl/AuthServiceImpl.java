@@ -62,7 +62,7 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public boolean hasPermission(R authResult) {
-        return Integer.valueOf(authResult.get("code").toString())==200 && (boolean) authResult.get("data");
+        return Integer.valueOf(authResult.get("code").toString()) == 200 && (boolean) authResult.get("data");
     }
 
     @Override

@@ -21,7 +21,7 @@ public class ResourcesServiceFallbackImpl implements ResourcesService {
 
     @Override
     public List<ResourcesVO> findByRoleCode(String[] roleCodes) {
-        log.error("调用{}异常:{}", "findByRoleCode",roleCodes);
+        log.error("调用{}异常:{}", "findByRoleCode", roleCodes);
         return null;
     }
 }

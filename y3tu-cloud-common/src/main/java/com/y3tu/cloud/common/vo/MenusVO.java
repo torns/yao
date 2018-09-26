@@ -11,7 +11,7 @@ import java.util.Date;
  * </p>
  *
  * @author y3tu
- * @date  2018-08-24
+ * @date 2018-08-24
  */
 @Data
 public class MenusVO implements Serializable {
@@ -21,50 +21,50 @@ public class MenusVO implements Serializable {
     /**
      * 菜单id
      */
-	private Long id;
+    private Long id;
     /**
      * 父菜单id
      */
-	private Integer parentId;
+    private Integer parentId;
     /**
      * 菜单类型
      */
-	private String type;
+    private String type;
     /**
      * 菜单路径
      */
-	private String href;
+    private String href;
     /**
      * 菜单图标
      */
-	private String icon;
+    private String icon;
     /**
      * 菜单名称
      */
-	private String name;
+    private String name;
     /**
      * 菜单简介
      */
-	private String description;
+    private String description;
     /**
      * 菜单序列
      */
-	private Integer orderNum;
+    private Integer orderNum;
     /**
      * 创建时间
      */
-	private Date createdTime;
+    private Date createdTime;
     /**
      * 更新时间
      */
-	private Date updatedTime;
+    private Date updatedTime;
     /**
      * 创建人
      */
-	private String createdBy;
+    private String createdBy;
     /**
      * 更新人
      */
-	private String updatedBy;
+    private String updatedBy;
 
 }

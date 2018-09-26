@@ -9,18 +9,16 @@ import com.y3tu.cloud.upms.service.GroupsService;
 import com.y3tu.cloud.upms.entity.Groups;
 
 
-
-
 /**
  * <p>
  * 用户组表 前端控制器
  * </p>
  *
  * @author y3tu
- * @date  2018-08-24
+ * @date 2018-08-24
  */
 @RestController
 @RequestMapping("/upms/groups")
-public class GroupsController extends BaseController<GroupsService,Groups> {
+public class GroupsController extends BaseController<GroupsService, Groups> {
 
 }

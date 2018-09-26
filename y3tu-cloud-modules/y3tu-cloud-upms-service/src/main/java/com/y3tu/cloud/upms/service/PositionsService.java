@@ -12,5 +12,5 @@ import com.y3tu.tool.web.base.service.BaseService;
  * @since 2018-08-24
  */
 public interface PositionsService extends BaseService<Positions> {
-	
+
 }

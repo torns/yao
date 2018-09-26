@@ -1,97 +1,97 @@
 version: '3'
 services:
-  redis: 
+  redis:
     image: redis:alpine
     container_name: sc-redis
     restart: always
     volumes:
-      - ./data/redis:/data
+    - ./data/redis:/data
     environment:
-      - REDIS_PASSWORD=123456
+    - REDIS_PASSWORD=123456
     #command: redis-cli config set requirepass 123456
     networks:
-      - sc-net
+    - sc-net
     ports:
-      - 6379:6379
+    - 6379:6379
 
   rabbitmq:
     image: rabbitmq:alpine
     container_name: sc-rabbitmq
     restart: always
     volumes:
-      - ./data/rabbitmq:/var/lib/rabbitmq
+    - ./data/rabbitmq:/var/lib/rabbitmq
     networks:
-      - sc-net
+    - sc-net
     ports:
-      - 5672:5672
+    - 5672:5672
 
   postgres:
     image: postgres:9.6-alpine
     container_name: sc-postgres
     restart: always
     volumes:
-      - ./data/postgres:/var/lib/postgresql
+    - ./data/postgres:/var/lib/postgresql
     networks:
-      - sc-net
+    - sc-net
     ports:
-      - 5432:5432
+    - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=postgres
+    - POSTGRES_PASSWORD=postgres
 
   zipkin-server:
     image: openzipkin/zipkin
     container_name: sc-zipkin-server
     restart: always
     volumes:
-      - ./data/zipkin-server/logs:/var/logs
+    - ./data/zipkin-server/logs:/var/logs
     networks:
-      - sc-net
+    - sc-net
     ports:
-      - 9411:9411
+    - 9411:9411
     environment:
-      - RABBIT_ADDRESSES=rabbitmq:5672
-      - RABBIT_MQ_PORT=5672
-      - RABBIT_PASSWORD=guest
-      - RABBIT_USER=guest
+    - RABBIT_ADDRESSES=rabbitmq:5672
+    - RABBIT_MQ_PORT=5672
+    - RABBIT_PASSWORD=guest
+    - RABBIT_USER=guest
     depends_on:
-      - rabbitmq
+    - rabbitmq
 
   elasticsearch:
     image: elasticsearch:alpine
     container_name: sc-elasticsearch
     restart: always
     volumes:
-      - ./data/elasticsearch/logs:/var/logs/elasticsearch
+    - ./data/elasticsearch/logs:/var/logs/elasticsearch
     networks:
-      - sc-net
+    - sc-net
     ports:
-      - 9200:9200
+    - 9200:9200
 
   kibana:
     image: kibana
     container_name: sc-kibana
     restart: always
     volumes:
-      - ./data/kibana/logs:/var/logs/kibana
+    - ./data/kibana/logs:/var/logs/kibana
     networks:
-      - sc-net
+    - sc-net
     ports:
-      - 5601:5601
+    - 5601:5601
     environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    - ELASTICSEARCH_URL=http://elasticsearch:9200
     depends_on:
-      - elasticsearch
+    - elasticsearch
 
   grafana:
     image: grafana/grafana
     container_name: sc-grafana
     restart: always
     volumes:
-      - ./data/grafana/logs:/var/logs/grafana
+    - ./data/grafana/logs:/var/logs/grafana
     networks:
-      - sc-net
+    - sc-net
     ports:
-      - 3000:3000
+    - 3000:3000
 
 networks:
   sc-net:

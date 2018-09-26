@@ -16,15 +16,17 @@ import java.util.List;
 public interface ResourcesService extends BaseService<Resources> {
     /**
      * 根据用户id查询用户拥有的资源
+     *
      * @param userId
      * @return
      */
-	List<Resources> findByUserId(long userId);
+    List<Resources> findByUserId(long userId);
 
     /**
      * 根据角色编码查询角色拥有的资源
+     *
      * @param roleCode
      * @return
      */
-	List<Resources> findByRoleCode(String roleCode);
+    List<Resources> findByRoleCode(String roleCode);
 }

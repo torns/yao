@@ -16,5 +16,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RolesMenusRelationServiceImpl extends BaseServiceImpl<RolesMenusRelationDao, RolesMenusRelation> implements RolesMenusRelationService {
-	
+
 }

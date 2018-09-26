@@ -23,7 +23,7 @@
     <property name="common-pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS}:[%5p] [%t:%r] [%C{1}:%M:%L] --> %m%n"/>
     <property name="log.level.console" value="INFO"/>
 
-    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
     <jmxConfigurator/>
 
@@ -54,7 +54,7 @@
         </encoder>
     </appender>
 
-    <root level="${log.level.console}" >
+    <root level="${log.level.console}">
         <appender-ref ref="CONSOLE_APPENDER"/>
         <appender-ref ref="ROOT_APPENDER"/>
     </root>

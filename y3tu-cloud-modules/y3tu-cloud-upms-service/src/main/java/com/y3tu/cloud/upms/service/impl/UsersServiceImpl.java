@@ -29,6 +29,7 @@ public class UsersServiceImpl extends BaseServiceImpl<UsersDao, Users> implement
     ResourcesService resourcesService;
     @Autowired
     MenusService menusService;
+
     @Override
     public Users findUserByUsername(String username) {
         List<Users> list = this.selectList(new EntityWrapper<Users>().eq("username", username).eq("enabled", "1"));
@@ -51,6 +52,7 @@ public class UsersServiceImpl extends BaseServiceImpl<UsersDao, Users> implement
 
     /**
      * 给user封装其对应的角色和权限
+     *
      * @param user
      * @return
      */

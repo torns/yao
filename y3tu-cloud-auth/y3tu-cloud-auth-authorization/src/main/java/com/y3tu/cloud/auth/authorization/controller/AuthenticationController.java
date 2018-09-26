@@ -26,6 +26,7 @@ public class AuthenticationController {
 
     /**
      * 认证页面
+     *
      * @return ModelAndView
      */
     @GetMapping("/require")
@@ -35,6 +36,7 @@ public class AuthenticationController {
 
     /**
      * 用户信息校验
+     *
      * @param authentication 信息
      * @return 用户信息
      */
@@ -46,7 +48,7 @@ public class AuthenticationController {
     /**
      * 清除Redis中 accesstoken refreshtoken
      *
-     * @param accesstoken  accesstoken
+     * @param accesstoken accesstoken
      * @return true/false
      */
     @PostMapping("/removeToken")

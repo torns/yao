@@ -37,7 +37,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     Map<RequestMatcher, ConfigAttribute> resourceConfigAttributes;
 
 
-
     /**
      * @param authRequest 访问的url,method
      * @return 有权限true, 无权限或全局资源中未找到请求url返回否
@@ -97,7 +96,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList())
                 .toArray(new String[authorityRoles.size()]);
-        List<ResourcesVO> resources= resourcesService.findByRoleCode(authorityRoleCodes);
+        List<ResourcesVO> resources = resourcesService.findByRoleCode(authorityRoleCodes);
         if (log.isDebugEnabled()) {
             log.debug("用户被授予角色的资源数量是:{}, 资源集合信息为:{}", resources.size(), resources);
         }

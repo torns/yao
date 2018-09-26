@@ -25,10 +25,10 @@ public class UserDetailsImpl implements UserDetails {
     private List<RolesVO> roleList;
 
     public UserDetailsImpl(UsersVO userVo) {
-        this.userId = userVo.getId()+"";
+        this.userId = userVo.getId() + "";
         this.username = userVo.getUsername();
         this.password = userVo.getPassword();
-        this.status = userVo.getEnabled()+"";
+        this.status = userVo.getEnabled() + "";
         roleList = userVo.getRolesList();
     }
 

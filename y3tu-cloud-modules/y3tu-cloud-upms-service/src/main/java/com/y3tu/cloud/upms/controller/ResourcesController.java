@@ -21,21 +21,23 @@ import java.util.List;
  * </p>
  *
  * @author y3tu
- * @date  2018-08-24
+ * @date 2018-08-24
  */
 @RestController
 @RequestMapping("/upms/resources")
-public class ResourcesController extends BaseController<ResourcesService,Resources> {
+public class ResourcesController extends BaseController<ResourcesService, Resources> {
     @Autowired
     ResourcesService resourcesService;
+
     /**
      * 返回所有的资源定义内容
+     *
      * @return
      */
     @GetMapping("/findAll")
-    List<Resources> findAll(){
-       List<Resources> resourcesList = resourcesService.selectList(null);
-       return resourcesList;
+    List<Resources> findAll() {
+        List<Resources> resourcesList = resourcesService.selectList(null);
+        return resourcesList;
     }
 
     /**
@@ -45,9 +47,9 @@ public class ResourcesController extends BaseController<ResourcesService,Resourc
      * @return
      */
     @GetMapping("/findByRoleCode")
-    List<Resources> findByRoleCode(@RequestParam("roleCodes") String[] roleCodes){
+    List<Resources> findByRoleCode(@RequestParam("roleCodes") String[] roleCodes) {
         List<Resources> resourcesList = new ArrayList<>();
-        for(String roleCode:roleCodes){
+        for (String roleCode : roleCodes) {
             resourcesList.addAll(resourcesService.findByRoleCode(roleCode));
         }
         return resourcesList;

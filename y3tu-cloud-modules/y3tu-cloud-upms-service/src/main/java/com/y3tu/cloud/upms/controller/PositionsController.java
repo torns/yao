@@ -9,18 +9,16 @@ import com.y3tu.cloud.upms.service.PositionsService;
 import com.y3tu.cloud.upms.entity.Positions;
 
 
-
-
 /**
  * <p>
  * 岗位表 前端控制器
  * </p>
  *
  * @author y3tu
- * @date  2018-08-24
+ * @date 2018-08-24
  */
 @RestController
 @RequestMapping("/upms/positions")
-public class PositionsController extends BaseController<PositionsService,Positions> {
+public class PositionsController extends BaseController<PositionsService, Positions> {
 
 }

@@ -7,8 +7,9 @@
         id, user_id AS userId, group_id AS groupId, created_time AS createdTime, updated_time AS updatedTime, created_by AS createdBy, updated_by AS updatedBy
     </sql>
 
-	<select id="queryPage" resultType="com.y3tu.cloud.upms.entity.UsersGroupsRelation">
-		select <include refid="Base_Column_List"/>
-		from users_groups_relation
-	</select>
+    <select id="queryPage" resultType="com.y3tu.cloud.upms.entity.UsersGroupsRelation">
+        select
+        <include refid="Base_Column_List"/>
+        from users_groups_relation
+    </select>
 </mapper>

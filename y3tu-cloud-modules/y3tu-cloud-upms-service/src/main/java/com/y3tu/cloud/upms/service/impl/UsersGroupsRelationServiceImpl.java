@@ -16,5 +16,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UsersGroupsRelationServiceImpl extends BaseServiceImpl<UsersGroupsRelationDao, UsersGroupsRelation> implements UsersGroupsRelationService {
-	
+
 }

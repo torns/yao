@@ -1,7 +1,6 @@
 package com.y3tu.cloud.auth.authorization.service;
 
 
-
 import com.y3tu.cloud.auth.authorization.feign.UserService;
 import com.y3tu.cloud.auth.authorization.util.UserDetailsImpl;
 import com.y3tu.cloud.common.vo.UsersVO;

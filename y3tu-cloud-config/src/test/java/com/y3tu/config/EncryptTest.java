@@ -23,6 +23,6 @@ public class EncryptTest {
     @Test
     public void testEnvironmentProperties() {
 
-        System.out.println("加密后的密文:"+stringEncryptor.encrypt("y3tu"));
+        System.out.println("加密后的密文:" + stringEncryptor.encrypt("y3tu"));
     }
 }

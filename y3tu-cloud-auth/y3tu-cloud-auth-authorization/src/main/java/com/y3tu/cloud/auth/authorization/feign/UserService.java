@@ -36,6 +36,7 @@ public interface UserService {
 
     /**
      * 根据OpenId查询用户信息
+     *
      * @param openId openId
      * @return UserVo
      */

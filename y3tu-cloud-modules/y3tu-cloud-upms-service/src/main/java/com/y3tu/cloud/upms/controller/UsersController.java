@@ -12,29 +12,27 @@ import com.y3tu.cloud.upms.service.UsersService;
 import com.y3tu.cloud.upms.entity.Users;
 
 
-
-
 /**
  * <p>
  * 用户表 前端控制器
  * </p>
  *
  * @author y3tu
- * @date  2018-08-24
+ * @date 2018-08-24
  */
 @RestController
 @RequestMapping("/upms/users")
-public class UsersController extends BaseController<UsersService,Users> {
+public class UsersController extends BaseController<UsersService, Users> {
     @Autowired
     UsersService usersService;
 
     @GetMapping("/findUserByUsername")
-    public Object findUserByUsername(@RequestParam String username){
+    public Object findUserByUsername(@RequestParam String username) {
         return usersService.findUserByUsername(username);
     }
 
     @GetMapping("/findUserByMobile")
-    public Object findUserByMobile(@RequestParam String mobile){
+    public Object findUserByMobile(@RequestParam String mobile) {
         return usersService.findUserByMobile(mobile);
     }
 }

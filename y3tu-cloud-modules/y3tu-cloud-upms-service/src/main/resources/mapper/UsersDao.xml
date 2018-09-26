@@ -7,8 +7,9 @@
         id, username, password, name, mobile, enabled, account_non_expired AS accountNonExpired, credentials_non_expired AS credentialsNonExpired, account_non_locked AS accountNonLocked, created_time AS createdTime, updated_time AS updatedTime, created_by AS createdBy, updated_by AS updatedBy
     </sql>
 
-	<select id="queryPage" resultType="com.y3tu.cloud.upms.entity.Users">
-		select <include refid="Base_Column_List"/>
-		from users
-	</select>
+    <select id="queryPage" resultType="com.y3tu.cloud.upms.entity.Users">
+        select
+        <include refid="Base_Column_List"/>
+        from users
+    </select>
 </mapper>

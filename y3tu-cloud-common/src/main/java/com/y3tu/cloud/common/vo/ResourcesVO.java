@@ -11,7 +11,7 @@ import java.util.Date;
  * </p>
  *
  * @author y3tu
- * @date  2018-08-24
+ * @date 2018-08-24
  */
 @Data
 public class ResourcesVO implements Serializable {
@@ -21,47 +21,47 @@ public class ResourcesVO implements Serializable {
     /**
      * 资源id
      */
-	private Long id;
+    private Long id;
     /**
      * 资源编码
      */
-	private String code;
+    private String code;
     /**
      * 资源类型
      */
-	private String type;
+    private String type;
     /**
      * 资源名称
      */
-	private String name;
+    private String name;
     /**
      * 资源路径
      */
-	private String url;
+    private String url;
     /**
      * 请求方法
      */
-	private String method;
+    private String method;
     /**
      * 资源简介
      */
-	private String description;
+    private String description;
     /**
      * 创建时间
      */
-	private Date createdTime;
+    private Date createdTime;
     /**
      * 更新时间
      */
-	private Date updatedTime;
+    private Date updatedTime;
     /**
      * 创建人
      */
-	private String createdBy;
+    private String createdBy;
     /**
      * 更新人
      */
-	private String updatedBy;
+    private String updatedBy;
 
 
 }

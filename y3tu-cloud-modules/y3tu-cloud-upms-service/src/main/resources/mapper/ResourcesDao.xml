@@ -7,29 +7,26 @@
         id, code, type, name, url, method, description, created_time AS createdTime, updated_time AS updatedTime, created_by AS createdBy, updated_by AS updatedBy
     </sql>
 
-	<select id="queryPage" resultType="com.y3tu.cloud.upms.entity.Resources">
-		select <include refid="Base_Column_List"/>
-		from resources
-	</select>
+    <select id="queryPage" resultType="com.y3tu.cloud.upms.entity.Resources">
+        select
+        <include refid="Base_Column_List"/>
+        from resources
+    </select>
 
     <select id="findByUserId" resultType="com.y3tu.cloud.upms.entity.Resources">
-    select r.id,r.code,r.type,r.name,r.method,r.url
-from resources r
-left join roles_resources_relation rr
-  on r.id = rr.resource_id
-left join users_roles_relation ur
-  on ur.role_id = rr.role_id
-left join users u
-  on u.id = ur.user_id
-where u.id = #{userId}
+        select r.id, r.code, r.type, r.name, r.method, r.url
+        from resources r
+                 left join roles_resources_relation rr on r.id = rr.resource_id
+                 left join users_roles_relation ur on ur.role_id = rr.role_id
+                 left join users u on u.id = ur.user_id
+        where u.id = #{userId}
     </select>
 
     <select id="findByRoleCode" resultType="com.y3tu.cloud.upms.entity.Resources">
-select r.* from resources r
-left join roles_resources_relation rr
-  on r.id = rr.resource_id
-left join roles ro
-  on ro.id = rr.role_id
-where ro.code = #{roleCode}
+        select r.*
+        from resources r
+                 left join roles_resources_relation rr on r.id = rr.resource_id
+                 left join roles ro on ro.id = rr.role_id
+        where ro.code = #{roleCode}
     </select>
 </mapper>

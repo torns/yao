@@ -7,20 +7,18 @@
         id, parent_id AS parentId, type, href, icon, name, description, order_num AS orderNum, created_time AS createdTime, updated_time AS updatedTime, created_by AS createdBy, updated_by AS updatedBy
     </sql>
 
-	<select id="queryPage" resultType="com.y3tu.cloud.upms.entity.Menus">
-		select <include refid="Base_Column_List"/>
-		from menus
-	</select>
+    <select id="queryPage" resultType="com.y3tu.cloud.upms.entity.Menus">
+        select
+        <include refid="Base_Column_List"/>
+        from menus
+    </select>
 
-    <select id="findByUserId"  resultType="com.y3tu.cloud.upms.entity.Menus">
-    select m.name,m.type,m.id,m.href,m.icon,m.order_num
-from menus m
-  left join roles_menus_relation rm
-    on m.id = rm.menu_id
-  left join users_roles_relation ur
-    on ur.role_id = rm.role_id
-  left join users u
-    on u.id = ur.user_id
-where u.id = #{userId}
+    <select id="findByUserId" resultType="com.y3tu.cloud.upms.entity.Menus">
+        select m.name, m.type, m.id, m.href, m.icon, m.order_num
+        from menus m
+                 left join roles_menus_relation rm on m.id = rm.menu_id
+                 left join users_roles_relation ur on ur.role_id = rm.role_id
+                 left join users u on u.id = ur.user_id
+        where u.id = #{userId}
     </select>
 </mapper>

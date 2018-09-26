@@ -8,15 +8,16 @@ import java.util.List;
 
 /**
  * <p>
-  * 角色表 Mapper 接口
+ * 角色表 Mapper 接口
  * </p>
  *
  * @author y3tu
- * @date  2018-08-24
+ * @date 2018-08-24
  */
 public interface RolesDao extends BaseMapper<Roles> {
     /**
      * 根据用户id查询用户拥有的角色
+     *
      * @param userId
      * @return
      */

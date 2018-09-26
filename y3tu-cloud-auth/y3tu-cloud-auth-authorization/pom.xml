@@ -56,14 +56,14 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>com.baomidou</groupId>-->
-            <!--<artifactId>mybatis-plus-boot-starter</artifactId>-->
-            <!--<version>${mybatis-plus-version}</version>-->
+        <!--<groupId>com.baomidou</groupId>-->
+        <!--<artifactId>mybatis-plus-boot-starter</artifactId>-->
+        <!--<version>${mybatis-plus-version}</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.apache.velocity</groupId>-->
-            <!--<artifactId>velocity-engine-core</artifactId>-->
-            <!--<version>${velocity-engine-version}</version>-->
+        <!--<groupId>org.apache.velocity</groupId>-->
+        <!--<artifactId>velocity-engine-core</artifactId>-->
+        <!--<version>${velocity-engine-version}</version>-->
         <!--</dependency>-->
         <!--Redis-->
         <dependency>

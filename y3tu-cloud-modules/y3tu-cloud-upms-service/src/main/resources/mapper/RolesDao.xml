@@ -14,10 +14,9 @@
     </select>
 
     <select id="findByUserId" resultType="com.y3tu.cloud.upms.entity.Roles">
-      SELECT r.id , r.code,r.name
-      FROM users_roles_relation ur
-      LEFT JOIN roles r
-      ON ur.role_id = r.id
-      WHERE user_id = #{userId}
+        SELECT r.id, r.code, r.name
+        FROM users_roles_relation ur
+                 LEFT JOIN roles r ON ur.role_id = r.id
+        WHERE user_id = #{userId}
     </select>
 </mapper>

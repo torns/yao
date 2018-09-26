@@ -9,18 +9,16 @@ import com.y3tu.cloud.upms.service.UsersRolesRelationService;
 import com.y3tu.cloud.upms.entity.UsersRolesRelation;
 
 
-
-
 /**
  * <p>
  * 用户和角色关系表 前端控制器
  * </p>
  *
  * @author y3tu
- * @date  2018-08-24
+ * @date 2018-08-24
  */
 @RestController
 @RequestMapping("/upms/users_roles_relation")
-public class UsersRolesRelationController extends BaseController<UsersRolesRelationService,UsersRolesRelation> {
+public class UsersRolesRelationController extends BaseController<UsersRolesRelationService, UsersRolesRelation> {
 
 }

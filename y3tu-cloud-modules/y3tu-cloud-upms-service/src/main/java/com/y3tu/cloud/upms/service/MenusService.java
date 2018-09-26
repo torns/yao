@@ -16,6 +16,7 @@ import java.util.List;
 public interface MenusService extends BaseService<Menus> {
     /**
      * 根据用户id查询用户拥有的菜单
+     *
      * @param userId
      * @return
      */

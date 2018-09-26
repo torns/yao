@@ -7,6 +7,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 
 /**
  * 配置中心
+ *
  * @author y3tu
  */
 

@@ -15,6 +15,7 @@ import java.util.List;
 public interface ResourcesService {
     /**
      * 返回所有的资源定义内容
+     *
      * @return
      */
     @GetMapping("/upms/resources/findAll")
@@ -27,5 +28,5 @@ public interface ResourcesService {
      * @return
      */
     @GetMapping("/upms/resources/findByRoleCode")
-    List<ResourcesVO> findByRoleCode(@RequestParam("roleCodes")String[] roleCodes);
+    List<ResourcesVO> findByRoleCode(@RequestParam("roleCodes") String[] roleCodes);
 }

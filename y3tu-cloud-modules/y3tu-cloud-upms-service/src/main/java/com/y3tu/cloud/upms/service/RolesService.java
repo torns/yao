@@ -16,6 +16,7 @@ import java.util.List;
 public interface RolesService extends BaseService<Roles> {
     /**
      * 根据用户id查询用户拥有的角色
+     *
      * @param userId
      * @return
      */

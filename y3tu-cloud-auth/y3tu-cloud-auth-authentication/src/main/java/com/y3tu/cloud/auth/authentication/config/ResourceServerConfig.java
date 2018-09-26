@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
  * 资源服务器
+ *
  * @author y3tu
  * @date 2018/8/24
  */

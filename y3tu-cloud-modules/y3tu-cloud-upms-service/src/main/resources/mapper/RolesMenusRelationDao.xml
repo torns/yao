@@ -7,8 +7,9 @@
         id, menu_id AS menuId, role_id AS roleId, created_time AS createdTime, updated_time AS updatedTime, created_by AS createdBy, updated_by AS updatedBy
     </sql>
 
-	<select id="queryPage" resultType="com.y3tu.cloud.upms.entity.RolesMenusRelation">
-		select <include refid="Base_Column_List"/>
-		from roles_menus_relation
-	</select>
+    <select id="queryPage" resultType="com.y3tu.cloud.upms.entity.RolesMenusRelation">
+        select
+        <include refid="Base_Column_List"/>
+        from roles_menus_relation
+    </select>
 </mapper>

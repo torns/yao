@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.y3tu</groupId>
-	<artifactId>y3tu-cloud-visual</artifactId>
-	<packaging>pom</packaging>
+    <groupId>com.y3tu</groupId>
+    <artifactId>y3tu-cloud-visual</artifactId>
+    <packaging>pom</packaging>
 
-	<name>y3tu-cloud-visual</name>
-	<description>图形化管理模块</description>
+    <name>y3tu-cloud-visual</name>
+    <description>图形化管理模块</description>
 
-	<parent>
-		<groupId>com.y3tu</groupId>
-		<artifactId>y3tu-cloud</artifactId>
-		<version>1.1</version>
-	</parent>
+    <parent>
+        <groupId>com.y3tu</groupId>
+        <artifactId>y3tu-cloud</artifactId>
+        <version>1.1</version>
+    </parent>
 
-	<modules>
-		<module>y3tu-cloud-monitor</module>
-	</modules>
+    <modules>
+        <module>y3tu-cloud-monitor</module>
+    </modules>
 </project>

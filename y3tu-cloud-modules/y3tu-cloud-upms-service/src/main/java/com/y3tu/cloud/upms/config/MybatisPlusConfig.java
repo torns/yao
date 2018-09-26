@@ -22,6 +22,7 @@ import javax.sql.DataSource;
 
 /**
  * mybatis-plus配置
+ *
  * @author y3tu
  */
 @Configuration

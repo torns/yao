@@ -21,7 +21,7 @@ public class Test {
     @org.junit.Test
     public void test() {
         List<String> list = Arrays.asList("java", "scala", "python", "shell", "ruby");
-        long num = list.parallelStream().filter(x->x.length()<5).count();
+        long num = list.parallelStream().filter(x -> x.length() < 5).count();
         print(num);
 
         new File(".").listFiles(new FileFilter() {
@@ -33,10 +33,10 @@ public class Test {
     }
 
     @org.junit.Test
-    public void test1(){
-        List<String> str = Arrays.asList("a","b","A","B");
+    public void test1() {
+        List<String> str = Arrays.asList("a", "b", "A", "B");
         str.forEach(System.out::println);
-        str.stream().filter(d->d.equalsIgnoreCase("a")).sorted(String::compareToIgnoreCase).forEach(System.out::print);
+        str.stream().filter(d -> d.equalsIgnoreCase("a")).sorted(String::compareToIgnoreCase).forEach(System.out::print);
         str.stream().collect(groupingBy(String::length));
     }
 }
