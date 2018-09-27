@@ -4,7 +4,11 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://${EUREKA_ZONE_HOST:132.232.11.210}:${EUREKA_ZONE_PORT:8501}/eureka/
+      defaultZone: http://y3tu:${EUREKA_SERVER_PWD:yxy727}@${EUREKA_SERVER_HOST:132.232.11.210}:8501/eureka/
+  #网关映射外网地址
+  instance:
+    ip-address: 132.232.11.210
+    prefer-ip-address: true
 
 spring:
   profiles:
@@ -25,7 +29,6 @@ spring:
     database: 0
     host: ${REDIS_HOST:132.232.11.210}
     port: ${REDIS_PORT:6379}
-    password: yxy727      # 密码（默认为空）
     timeout: 6000ms  # 连接超时时长（毫秒）
     jedis:
       pool:
@@ -102,7 +105,7 @@ logging:
   level:
     com.y3tu.cloud.gateway: debug
     com.jalja.org.spring: debug
-  path: logs/
+  path: logs/y3tu-cloud-gateway-web
   file:
     max-size: 1GB
 

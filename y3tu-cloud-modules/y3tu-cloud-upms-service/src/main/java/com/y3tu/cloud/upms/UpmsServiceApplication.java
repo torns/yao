@@ -6,6 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * 通用用户权限系统
+ * @author y3tu
  */
 @SpringBootApplication
 @EnableDiscoveryClient

@@ -18,8 +18,7 @@ value=bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5M3
 | 服务分类  | 服务名                     |   简介     |  应用地址                | 文档 |
 |----------|---------------------------|-----------|-------------------------|------|
 |  center  | y3tu-cloud-eureka         | 注册中心   |  http://localhost:8501  |      |
-|  center  | y3tu-cloud-bus            | 消息中心   |  http://localhost:8071  |      |
-|  center  | y3tu-cloud-config         | 配置中心   |  http://localhost:8888  |      |
+|  center  | y3tu-cloud-config         | 配置中心   |  http://localhost:4001  |      |
 |  modules | y3tu-cloud-upms-service   |通用用户权限服务| http://localhost:8081|     | 
 |  auth    | y3tu-cloud-authorization  | 授权服务   |  http://localhost:8000  |    |
 |  auth    | y3tu-cloud-authentication | 签权服务   |  http://localhost:8001  |      |

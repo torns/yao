@@ -24,12 +24,10 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
-    lease-renewal-interval-in-seconds: 5
-    lease-expiration-duration-in-seconds: 20
   client:
     serviceUrl:
-      defaultZone: http://y3tu:yxy727@${EUREKA_ZONE_HOST:localhost}:${EUREKA_ZONE_PORT:8501}/eureka
-    registry-fetch-interval-seconds: 10
+      defaultZone: http://y3tu:${EUREKA_SERVER_PWD:yxy727}@${EUREKA_SERVER_HOST:132.232.11.210}:8501/eureka/
+
 
 ---
 spring:
@@ -39,5 +37,6 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://pig:gip6666@eureka:1025/eureka
+      defaultZone: http://y3tu:${EUREKA_SERVER_PWD:yxy727}@${EUREKA_SERVER_HOST:132.232.11.210}:8501/eureka/
+
 

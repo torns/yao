@@ -37,6 +37,17 @@ jasypt:
   encryptor:
     password: 123456 #根密码
 
+#日志信息
+logging:
+  level:
+    org.springframework.web: debug
+    org.springframework.security: DEBUG
+    com.y3tu.cloud.auth: DEBUG
+    java.sql.PreparedStatement: debug
+  path: ./logs/y3tu-cloud-config
+  file:
+    max-size: 1GB
+
 info:
   artifact: y3tu-cloud-config
   name: '@project.name@'

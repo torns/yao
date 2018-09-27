@@ -12,8 +12,6 @@ spring:
   #环境 dev|test|pro
   profiles:
     active: dev
-  application:
-    name: y3tu-admin
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
@@ -28,7 +26,6 @@ spring:
     database: 0
     host: 132.232.11.210
     port: 6379
-    password: yxy727      # 密码（默认为空）
     timeout: 6000ms  # 连接超时时长（毫秒）
     jedis:
       pool:
@@ -67,3 +64,21 @@ management:
       exposure:
         include: "*"
 
+info:
+  artifact: y3tu-cloud-upms-service
+  name: '@project.name@'
+  description: '@project.description@'
+  version: '@project.version@'
+  spring-boot-version: '@spring-boot.version@'
+  spring-cloud-version: '@spring-cloud.version@'
+
+#日志信息
+logging:
+  level:
+    org.springframework.web: debug
+    org.springframework.security: DEBUG
+    com.y3tu.cloud.auth: DEBUG
+    java.sql.PreparedStatement: debug
+  path: ./logs/y3tu-cloud-upms-service
+  file:
+    max-size: 1GB

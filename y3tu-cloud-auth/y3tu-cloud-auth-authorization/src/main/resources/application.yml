@@ -12,7 +12,7 @@ spring:
     database: 0
     host: ${REDIS_HOST:132.232.11.210}
     port: ${REDIS_PORT:6379}
-    password: yxy727      # 密码（默认为空）
+#    password: yxy727      # 密码（默认为空）
     timeout: 6000ms  # 连接超时时长（毫秒）
     jedis:
       pool:
@@ -41,12 +41,7 @@ logging:
   path: ./logs/y3tu-cloud-authorization
   file:
     max-size: 1GB
-#logging:
-#  path: ./logs/y3tu-cloud-authorization
-#  file: ${logging.path}/root.log
-#  common-pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS}:[%5p] [%t:%r] [%C{1}:%M:%L] --> %m%n'
-#  level:
-#    console: DEBUG
+
 
 #显示actuator的信息
 management:

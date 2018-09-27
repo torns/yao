@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 /**
  * 权限服务
+ * @author y3tu
  */
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -19,11 +20,11 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableHystrix
 @EnableHystrixDashboard
 @ComponentScan(basePackages = {"com.y3tu.cloud.common", "com.y3tu.cloud.auth.authorization"})
+
 public class AuthServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AuthServerApplication.class, args);
     }
-
 
 }
