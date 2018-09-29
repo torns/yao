@@ -75,7 +75,7 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
         security
-                .tokenKeyAccess("isAuthenticated()")
+                .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("permitAll()")
                 // 让/oauth/token支持client_id以及client_secret作登录认证
                 .allowFormAuthenticationForClients();

@@ -6,9 +6,13 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.codec.ServerCodecConfigurer;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 /**
  * 网关
+ *
  * @author y3tu
  */
 @EnableDiscoveryClient
@@ -24,4 +28,5 @@ public class GatewayWebApplication {
     ServerCodecConfigurer serverCodecConfigurer() {
         return ServerCodecConfigurer.create();
     }
+
 }
