@@ -13,12 +13,10 @@ import java.util.List;
  * @author y3tu
  */
 @Data
-@Configuration
 @RefreshScope
 @ConditionalOnExpression("!'${ignore}'.isEmpty()")
 @ConfigurationProperties(prefix = "ignore")
 public class FilterIgnorePropertiesConfig {
     private List<String> urls = new ArrayList<>();
-
     private List<String> clients = new ArrayList<>();
 }

@@ -34,6 +34,11 @@ public class AuthenticationController {
         return new ModelAndView("ftl/login");
     }
 
+    @PostMapping("/loginSuccess")
+    public R loginSuccess(Authentication authentication) {
+        return R.ok("登录成功", authentication);
+    }
+
     /**
      * 用户信息校验
      *

@@ -18,6 +18,7 @@ spring:
       username: y3tu
       password: yxy727
 
+
 ---
 spring:
   profiles: dev

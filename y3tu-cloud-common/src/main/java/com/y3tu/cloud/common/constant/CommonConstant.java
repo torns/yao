@@ -10,6 +10,16 @@ public interface CommonConstant {
     String REQ_HEADER = "Authorization";
 
     /**
+     * 标签 header key
+     */
+    String HEADER_LABEL = "x-label";
+
+    /**
+     * 标签 header 分隔符
+     */
+    String HEADER_LABEL_SPLIT = ",";
+
+    /**
      * token分割符
      */
     String TOKEN_SPLIT = "Bearer ";

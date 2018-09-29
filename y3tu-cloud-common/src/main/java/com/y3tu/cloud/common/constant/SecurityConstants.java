@@ -7,7 +7,7 @@ public interface SecurityConstants {
     /**
      * 前缀
      */
-    String PIG_PREFIX = "y3tu_";
+    String Y3TU_PREFIX = "y3tu_";
     /**
      * 用户信息头
      */

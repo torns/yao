@@ -65,6 +65,12 @@
             <version>${redis-version}</version>
         </dependency>
 
+        <!--freemarker-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.y3tu</groupId>
             <artifactId>y3tu-tool-web</artifactId>
