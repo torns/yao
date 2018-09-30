@@ -1,6 +1,5 @@
 package com.y3tu.cloud.auth.authorization.config;
 
-import com.y3tu.cloud.common.config.FilterIgnorePropertiesConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,18 +15,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * @author y3tu
+ */
 @Configuration
 @EnableWebSecurity
 @Slf4j
-@EnableConfigurationProperties(FilterIgnorePropertiesConfig.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailsService userDetailsService;
-
-    @Autowired
-    private FilterIgnorePropertiesConfig filterIgnorePropertiesConfig;
-
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry =
@@ -36,10 +34,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .successForwardUrl("/authentication/loginSuccess")
                         .failureUrl("/authentication/require?error=true")
                         .and()
-                        .authorizeRequests();
-        filterIgnorePropertiesConfig
-                .getUrls()
-                .forEach(url -> registry.antMatchers(url).permitAll());
+                        .authorizeRequests()
+                        .antMatchers(
+                                "/actuator/**",
+                                "/oauth/removeToken",
+                                "/mobile/**").permitAll();
+
         registry.anyRequest().authenticated()
                 .and()
                 .csrf().disable();
