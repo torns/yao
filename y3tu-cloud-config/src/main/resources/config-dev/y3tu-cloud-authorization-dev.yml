@@ -7,3 +7,13 @@ spring:
     url: jdbc:mysql://cdb-d5ge3ujs.cd.tencentcdb.com:10003/y3tu-admin??allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
     #指定数据源
     type: com.alibaba.druid.pool.DruidDataSource
+
+ignore:
+  urls:
+  - /actuator/**
+  - /authentication/**
+  - /**/*.css
+  - /**/*.jpg
+  - /**/*.png
+  - /**/*.woff2
+  - /**/*.js

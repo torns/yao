@@ -1,9 +1,9 @@
 server:
-  port: 8000
+  port: 8001
 
 spring:
   application:
-    name: y3tu-cloud-authorization
+    name: y3tu-cloud-upms-service
   profiles:
     active: dev
   cloud:

@@ -1,5 +1,5 @@
 server:
-  port: 4001
+  port: 8888
 
 spring:
   application:
@@ -16,6 +16,7 @@ spring:
     port: ${RABBIT_MQ_PORT:5672}
     username: ${RABBIT_MQ_USERNAME:guest}
     password: ${RABBIT_MQ_PASSWORD:guest}
+
 
 # 注册中心配置
 eureka:
@@ -49,9 +50,12 @@ logging:
     max-size: 1GB
 
 info:
-  artifact: y3tu-cloud-config
-  name: '@project.name@'
-  description: '@project.description@'
-  version: '@project.version@'
-  spring-boot-version: '@spring-boot.version@'
-  spring-cloud-version: '@spring-cloud.version@'
+  app:
+    name: ${spring.application.name}
+    version: @project.version@
+    groupId: @project.groupId@
+    artifactId: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+  java:
+    source: @java.version@
+    target: @java.version@

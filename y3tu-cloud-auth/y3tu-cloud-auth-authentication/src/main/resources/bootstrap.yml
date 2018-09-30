@@ -1,9 +1,9 @@
 server:
-  port: 8000
+  port: 8002
 
 spring:
   application:
-    name: y3tu-cloud-authorization
+    name: y3tu-cloud-authentication
   profiles:
     active: dev
   cloud:
@@ -17,6 +17,18 @@ spring:
       username: y3tu
       password: yxy727
 
+ignore:
+  urls:
+  - /authentication/**
+  - /**/*.css
+  - /social
+  - /signin
+  - /signup
+  - /info
+  - /health
+  - /metrics/**
+  - /loggers/**
+  - /mobile/token
 
 ---
 spring:

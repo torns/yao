@@ -1,7 +1,7 @@
 package com.y3tu.cloud.gateway.web.exception;
 
 
-import com.y3tu.cloud.common.exception.ErrorType;
+import com.y3tu.tool.core.exception.DefaultError;
 import com.y3tu.tool.web.base.pojo.R;
 import io.netty.channel.ConnectTimeoutException;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * 网关异常统一处理
+ *
+ * @author y3tu
+ */
 @Slf4j
 @Component
 public class GateWayExceptionHandlerAdvice {
@@ -19,20 +24,20 @@ public class GateWayExceptionHandlerAdvice {
     @ExceptionHandler(value = {ResponseStatusException.class})
     public R handle(ResponseStatusException ex) {
         log.error("response status exception:{}", ex.getMessage());
-        return R.error(ErrorType.GATEWAY_ERROR.toString());
+        return R.error(DefaultError.GATEWAY_ERROR.toString());
     }
 
     @ExceptionHandler(value = {ConnectTimeoutException.class})
     public R handle(ConnectTimeoutException ex) {
         log.error("connect timeout exception:{}", ex.getMessage());
-        return R.error(ErrorType.GATEWAY_CONNECT_TIME_OUT.toString());
+        return R.error(DefaultError.GATEWAY_CONNECT_TIME_OUT.toString());
     }
 
     @ExceptionHandler(value = {NotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public R handle(NotFoundException ex) {
         log.error("not found exception:{}", ex.getMessage());
-        return R.error(ErrorType.GATEWAY_NOT_FOUND_SERVICE.toString());
+        return R.error(DefaultError.SERVICE_NOT_FOUND.toString());
     }
 
     @ExceptionHandler(value = {RuntimeException.class})

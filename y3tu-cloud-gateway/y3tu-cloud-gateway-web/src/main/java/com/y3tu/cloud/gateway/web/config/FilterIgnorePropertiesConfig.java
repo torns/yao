@@ -1,4 +1,4 @@
-package com.y3tu.cloud.common.config;
+package com.y3tu.cloud.gateway.web.config;
 
 import lombok.Data;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -11,8 +11,11 @@ import java.util.List;
 
 /**
  * @author y3tu
+ * @date 2018/7/22
+ * 需要忽略的URL配置
  */
 @Data
+@Configuration
 @RefreshScope
 @ConditionalOnExpression("!'${ignore}'.isEmpty()")
 @ConfigurationProperties(prefix = "ignore")
