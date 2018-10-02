@@ -1,5 +1,6 @@
 package com.y3tu.cloud.gateway.web.service.impl;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.y3tu.cloud.gateway.web.config.FilterIgnorePropertiesConfig;
 import com.y3tu.cloud.gateway.web.feign.AuthProvider;
 import com.y3tu.cloud.gateway.web.service.IAuthService;
@@ -57,8 +58,8 @@ public class AuthServiceImpl implements IAuthService {
     }
 
     @Override
-    public boolean hasPermission(R authResult) {
-        return Integer.valueOf(authResult.get("code").toString()) == 200 && (boolean) authResult.get("data");
+    public boolean hasPermission(R r) {
+        return Boolean.valueOf(r.getStatus() == R.Status.OK);
     }
 
     @Override
