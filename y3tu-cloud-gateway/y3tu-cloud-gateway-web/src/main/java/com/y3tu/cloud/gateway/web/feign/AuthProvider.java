@@ -1,5 +1,6 @@
 package com.y3tu.cloud.gateway.web.feign;
 
+import com.y3tu.tool.core.exception.DefaultError;
 import com.y3tu.tool.web.base.pojo.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpHeaders;
@@ -50,7 +51,7 @@ public interface AuthProvider {
          */
         @Override
         public R auth(String authentication, String url, String method) {
-            return R.error();
+            return R.error(DefaultError.SERVER_EXCEPTION);
         }
     }
 }

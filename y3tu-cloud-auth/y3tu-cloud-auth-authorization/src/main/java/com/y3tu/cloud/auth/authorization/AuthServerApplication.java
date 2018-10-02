@@ -1,6 +1,7 @@
 package com.y3tu.cloud.auth.authorization;
 
 import com.y3tu.cloud.auth.authorization.annotation.EnableAuthJwtTokenStore;
+import com.y3tu.tool.web.annotation.EnableDefaultExceptionAdivce;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -21,6 +22,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableCircuitBreaker
 @EnableHystrix
 @EnableHystrixDashboard
+@EnableDefaultExceptionAdivce
 public class AuthServerApplication {
 
     public static void main(String[] args) {
