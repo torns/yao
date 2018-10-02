@@ -61,6 +61,4 @@ public class ExceptionAutoConfiguration {
         exceptionHandler.setMessageReaders(this.serverCodecConfigurer.getReaders());
         return exceptionHandler;
     }
-
-
 }

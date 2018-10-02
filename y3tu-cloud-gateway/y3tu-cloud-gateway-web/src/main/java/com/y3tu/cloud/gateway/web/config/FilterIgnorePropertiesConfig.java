@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author y3tu
  * @date 2018/7/22
- * 需要忽略的URL配置
+ * 需要忽略的URL和client配置
  */
 @Data
 @Configuration

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+/**
+ * @author y3tu
+ */
 @Component
 @FeignClient(name = "y3tu-cloud-authentication", fallback = AuthProvider.AuthProviderFallback.class)
 public interface AuthProvider {

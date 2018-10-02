@@ -1,5 +1,6 @@
 package com.y3tu.cloud.gateway.web.service.impl;
 
+import com.y3tu.cloud.gateway.web.config.FilterIgnorePropertiesConfig;
 import com.y3tu.cloud.gateway.web.feign.AuthProvider;
 import com.y3tu.cloud.gateway.web.service.IAuthService;
 import com.y3tu.tool.core.text.StringUtils;
@@ -14,7 +15,6 @@ import org.springframework.security.jwt.crypto.sign.MacSigner;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.stream.Stream;
 
 /**
  * @author y3tu
@@ -38,16 +38,12 @@ public class AuthServiceImpl implements IAuthService {
     private String signingKey;
 
     /**
-     * 不需要网关签权的url配置(/oauth,/open)
-     * 默认/oauth开头是不需要的
-     */
-    @Value("${gate.ignore.authentication.startWith}")
-    private String ignoreUrls = "/oauth";
-
-    /**
      * jwt验签
      */
     private MacSigner verifier;
+
+    @Autowired
+    private FilterIgnorePropertiesConfig filterIgnorePropertiesConfig;
 
 
     @Override
@@ -57,7 +53,7 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public boolean ignoreAuthentication(String url) {
-        return Stream.of(this.ignoreUrls.split(",")).anyMatch(ignoreUrl -> url.startsWith(StringUtils.trim(ignoreUrl)));
+        return filterIgnorePropertiesConfig.getUrls().stream().anyMatch(ignoreUrl -> url.startsWith(StringUtils.trim(ignoreUrl)));
     }
 
     @Override

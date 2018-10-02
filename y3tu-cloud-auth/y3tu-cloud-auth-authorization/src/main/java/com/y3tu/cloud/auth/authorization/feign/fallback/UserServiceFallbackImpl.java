@@ -1,5 +1,6 @@
 package com.y3tu.cloud.auth.authorization.feign.fallback;
 
+import com.y3tu.cloud.auth.authorization.exception.AuthException;
 import com.y3tu.cloud.auth.authorization.feign.UserService;
 import com.y3tu.cloud.common.vo.UsersVO;
 import com.y3tu.tool.web.base.pojo.R;

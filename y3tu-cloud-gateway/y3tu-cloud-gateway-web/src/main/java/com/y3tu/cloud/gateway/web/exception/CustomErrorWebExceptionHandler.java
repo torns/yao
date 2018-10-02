@@ -1,5 +1,6 @@
 package com.y3tu.cloud.gateway.web.exception;
 
+import com.y3tu.tool.web.exception.DefaultExceptionAdvice;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class CustomErrorWebExceptionHandler extends DefaultErrorWebExceptionHandler {
 
     @Autowired
-    private GateWayExceptionHandlerAdvice gateWayExceptionHandlerAdvice;
+    private DefaultExceptionAdvice gateWayExceptionHandlerAdvice;
 
     /**
      * Create a new {@code DefaultErrorWebExceptionHandler} instance.

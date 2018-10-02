@@ -30,7 +30,7 @@ spring:
         # 验证码处理
         - ImageCodeGatewayFilter
         # 前端密码解密
-        - PasswordDecoderFilter
+        #- PasswordDecoderFilter
         - StripPrefix=1
       #UPMS 模块
       - id: y3tu-cloud-upms-service
@@ -44,28 +44,14 @@ spring:
         - name: RemoveRequestHeader
           args:
             name: from
-          # 限流配置
-        - name: RequestRateLimiter
-          args:
-            key-resolver: '#{@remoteAddrKeyResolver}'
-            redis-rate-limiter.replenishRate: 10
-            redis-rate-limiter.burstCapacity: 20
-        - StripPrefix=1
-        # 降级配置
-        - name: Hystrix
-          args:
-            name: default
-            fallbackUri: 'forward:/fallback'
 
-gate:
-  ignore:
-    authentication:
-      startWith: /oauth,/open
-
-# 不校验验证码终端
+#不需要网关签权的url配置
 ignore:
   clients:
   - test
+  urls:
+  - /oauth/token
+  - /open
 
 #请求和响应GZIP压缩支持
 feign:
