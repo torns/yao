@@ -1,0 +1,63 @@
+datasource:
+  driver-class-name: com.mysql.jdbc.Driver
+  username: root
+  password: y3tu46262966
+  url: jdbc:mysql://cdb-d5ge3ujs.cd.tencentcdb.com:10003/y3tu-admin??allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      default-filters:
+      - AddResponseHeader=X-Response-Default-Foo, Default-Bar
+      - name: RequestRateLimiter
+        args:
+          redis-rate-limiter.replenishRate: 1  #令牌桶的容积
+          redis-rate-limiter.burstCapacity: 1  #流速 每秒
+          rate-limiter: "#{@defaultRedisRateLimiter}"  #SPEL表达式去的对应的bean
+          key-resolver: "#{@remoteAddressKeyResolver}" #SPEL表达式去的对应的bean
+      routes:
+      # =====================================
+      # 认证中心
+      - id: y3tu-cloud-auth
+        uri: lb://y3tu-cloud-auth
+        predicates:
+        - Path=/auth/**
+        filters:
+        # 验证码处理
+        - ImageCodeGatewayFilter
+        # 前端密码解密
+        #- PasswordDecoderFilter
+        - StripPrefix=1
+      #UPMS 模块
+      - id: y3tu-cloud-upms-service
+        uri: lb://y3tu-cloud-upms-service
+        predicates:
+        - Path=/admin/**
+        filters:
+        # Swagger请求头处理
+        - SwaggerHeaderFilter
+        # 请求头清理避免不合法请求头
+        - name: RemoveRequestHeader
+          args:
+            name: from
+
+#不需要网关签权的url配置
+ignore:
+  clients:
+  - test
+  urls:
+  - /oauth/token
+  - /open
+
+#请求和响应GZIP压缩支持
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  hystrix:
+    enabled: true

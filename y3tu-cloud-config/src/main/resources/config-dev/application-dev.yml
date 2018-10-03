@@ -14,7 +14,7 @@ info:
 # 公共配置地址
 base:
   auth:
-    server: http://localhost:9001
+    server: http://localhost:8000
   mysql:
     url: jdbc:mysql://localhost:3306
   redis:

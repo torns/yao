@@ -37,6 +37,7 @@
         <swagger.version>2.9.2</swagger.version>
         <docker.url>http://132.232.11.210:2375</docker.url>
         <registry.url>192.168.0.13:5000</registry.url>
+        <oauth2-version>2.3.3.RELEASE</oauth2-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compile.source>1.8</maven.compile.source>
         <maven.compile.target>1.8</maven.compile.target>
