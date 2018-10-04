@@ -7,7 +7,7 @@ public interface CommonConstant {
     /**
      * token请求头名称
      */
-    String REQ_HEADER = "Authorization";
+    String TOKEN_HEADER = "Authorization";
 
     /**
      * 标签 header key
@@ -20,22 +20,29 @@ public interface CommonConstant {
     String HEADER_LABEL_SPLIT = ",";
 
     /**
-     * token分割符
+     * 标签或 名称
      */
-    String TOKEN_SPLIT = "Bearer ";
+    String LABEL_OR = "labelOr";
 
     /**
-     * jwt签名
+     * 标签且 名称
      */
-    String SIGN_KEY = "Y3TU";
+    String LABEL_AND = "labelAnd";
+
+    /**
+     * 权重key
+     */
+    String WEIGHT_KEY = "weight";
+
     /**
      * 删除
      */
-    String STATUS_DEL = "0";
+    String STATUS_DEL = "1";
+
     /**
      * 正常
      */
-    String STATUS_NORMAL = "1";
+    String STATUS_NORMAL = "0";
 
     /**
      * 锁定
@@ -63,17 +70,27 @@ public interface CommonConstant {
     String UTF8 = "UTF-8";
 
     /**
-     * JSON 资源
-     */
-    String CONTENT_TYPE = "application/json; charset=utf-8";
-
-    /**
-     * 阿里大鱼
-     */
-    String ALIYUN_SMS = "aliyun_sms";
-
-    /**
      * 路由信息Redis保存的key
      */
-    String ROUTE_KEY = "_ROUTE_KEY";
+    String ROUTE_KEY = SecurityConstants.Y3TU_PREFIX + "ROUTE_LIST";
+
+    /**
+     * 超级管理员用户名
+     */
+    String ADMIN_USER_NAME = "admin";
+
+    /**
+     * 公共日期格式
+     */
+    String MONTH_FORMAT = "yyyy-MM";
+    String DATE_FORMAT = "yyyy-MM-dd";
+    String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    String SIMPLE_MONTH_FORMAT = "yyyyMM";
+    String SIMPLE_DATE_FORMAT = "yyyyMMdd";
+    String SIMPLE_DATETIME_FORMAT = "yyyyMMddHHmmss";
+
+    /**
+     * default LINE_SEPARATOR
+     */
+    String LINE_SEPARATOR = "/";
 }

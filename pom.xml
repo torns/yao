@@ -38,6 +38,8 @@
         <docker.url>http://132.232.11.210:2375</docker.url>
         <registry.url>192.168.0.13:5000</registry.url>
         <oauth2-version>2.3.3.RELEASE</oauth2-version>
+        <y3tu-tool-version>1.4</y3tu-tool-version>
+        <mybatis-plus-version>2.2.0</mybatis-plus-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compile.source>1.8</maven.compile.source>
         <maven.compile.target>1.8</maven.compile.target>
@@ -58,6 +60,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <!--配置中心-->
         <dependency>
@@ -89,6 +96,7 @@
             <artifactId>jasypt-spring-boot-starter</artifactId>
             <version>${jasypt-version}</version>
         </dependency>
+
 
     </dependencies>
 

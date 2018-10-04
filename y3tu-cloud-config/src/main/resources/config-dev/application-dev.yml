@@ -15,12 +15,6 @@ info:
 base:
   auth:
     server: http://localhost:8000
-  mysql:
-    url: jdbc:mysql://localhost:3306
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: hyman
   zipkin:
     url: http://localhost:9411/
 

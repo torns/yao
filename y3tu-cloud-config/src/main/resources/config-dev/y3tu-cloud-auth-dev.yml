@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    #   数据源基本配置
+    username: root
+    password: ENC(cOR0AoFMGxjKtON7jQo1DVDTPC/qOvSF)
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://cdb-d5ge3ujs.cd.tencentcdb.com:10003/y3tu-admin??allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    #指定数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+
+freemarker:
+  allow-request-override: false
+  allow-session-override: false
+  cache: true
+  charset: UTF-8
+  check-template-location: true
+  content-type: text/html
+  enabled: true
+  expose-request-attributes: false
+  expose-session-attributes: false
+  expose-spring-macro-helpers: true
+  prefer-file-system-access: true
+  suffix: .ftl
+  template-loader-path: classpath:/templates/
+
+ignore:
+  urls:
+  - /authentication/**
+  - /actuator/**
+  - /oauth/**
+  - /**/*.css
+  - /**/*.jpg
+  - /**/*.png
+  - /**/*.woff2
+  - /**/*.js

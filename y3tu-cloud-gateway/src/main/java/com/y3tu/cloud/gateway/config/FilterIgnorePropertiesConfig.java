@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author y3tu
- * @date 2018/7/22
- * 需要忽略的URL和client配置
+ * @author liuht
+ * @date 2018/1/9
  */
 @Data
 @Configuration
@@ -21,5 +20,6 @@ import java.util.List;
 @ConfigurationProperties(prefix = "ignore")
 public class FilterIgnorePropertiesConfig {
     private List<String> urls = new ArrayList<>();
+
     private List<String> clients = new ArrayList<>();
 }

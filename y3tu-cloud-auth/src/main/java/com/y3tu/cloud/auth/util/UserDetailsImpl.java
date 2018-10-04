@@ -3,8 +3,8 @@ package com.y3tu.cloud.auth.util;
 
 import com.y3tu.cloud.common.constant.CommonConstant;
 import com.y3tu.cloud.common.constant.SecurityConstants;
-import com.y3tu.cloud.common.vo.RolesVO;
-import com.y3tu.cloud.common.vo.UsersVO;
+import com.y3tu.cloud.common.vo.SysRole;
+import com.y3tu.cloud.common.vo.UserVO;
 import lombok.Data;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,25 +23,27 @@ import java.util.List;
 @Data
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
-    private String userId;
+    private Integer userId;
     private String username;
     private String password;
     private String status;
-    private List<RolesVO> roleList;
+    private String label;
+    private List<SysRole> roleList;
 
-    public UserDetailsImpl(UsersVO userVo) {
-        this.userId = userVo.getId() + "";
+    public UserDetailsImpl(UserVO userVo) {
+        this.userId = userVo.getUserId();
         this.username = userVo.getUsername();
         this.password = userVo.getPassword();
-        this.status = userVo.getEnabled() + "";
-        roleList = userVo.getRolesList();
+        this.status = userVo.getDelFlag();
+        this.label = userVo.getLabel();
+        roleList = userVo.getRoleList();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        for (RolesVO role : roleList) {
-            authorityList.add(new SimpleGrantedAuthority(role.getCode()));
+        for (SysRole role : roleList) {
+            authorityList.add(new SimpleGrantedAuthority(role.getRoleCode()));
         }
         // 为每一个用户添加一个基本角色
         authorityList.add(new SimpleGrantedAuthority(SecurityConstants.BASE_ROLE));
@@ -65,7 +67,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return StringUtils.equals(CommonConstant.STATUS_LOCK, status) ? false : true;
+        return !StringUtils.equals(CommonConstant.STATUS_LOCK, status);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return StringUtils.equals(CommonConstant.STATUS_NORMAL, status) ? true : false;
+        return StringUtils.equals(CommonConstant.STATUS_NORMAL, status);
     }
 
 }

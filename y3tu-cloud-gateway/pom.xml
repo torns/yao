@@ -3,7 +3,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud-gateway</artifactId>
     <packaging>jar</packaging>
 
@@ -25,14 +24,10 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <!--网关-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
         <!--redis限流-->
@@ -49,9 +44,14 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-jwt</artifactId>
-            <version>${security-jwt-version}</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+        </dependency>
+
+        <!--oauth2.0-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
 
         <!--接口文档-->
@@ -75,9 +75,16 @@
 
         <dependency>
             <groupId>com.y3tu</groupId>
+            <artifactId>y3tu-cloud-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.y3tu</groupId>
             <artifactId>y3tu-tool-web</artifactId>
             <version>${y3tu-tool-version}</version>
         </dependency>
+
     </dependencies>
 
 </project>

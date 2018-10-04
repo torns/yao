@@ -1,9 +1,9 @@
 package com.y3tu.cloud.auth.controller;
 
+
 import com.y3tu.cloud.common.constant.SecurityConstants;
 import com.y3tu.tool.web.base.pojo.R;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * @author lengleng
+ * @author liuht
  * @date 2018年03月10日
  */
 @RestController
 @RequestMapping("/authentication")
 public class AuthenticationController {
+
     @Autowired
-    @Qualifier("consumerTokenServices")
     private ConsumerTokenServices consumerTokenServices;
 
     /**
@@ -36,7 +36,9 @@ public class AuthenticationController {
 
     @PostMapping("/loginSuccess")
     public R loginSuccess(Authentication authentication) {
-        return R.ok("登录成功", authentication);
+        R response = R.ok(authentication);
+        response.setMessage("登录成功");
+        return response;
     }
 
     /**

@@ -25,24 +25,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
+    @Autowired
+    FilterIgnorePropertiesConfig filterIgnorePropertiesConfig;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry =
-                http.formLogin().loginPage("/authentication/require")
-                        .loginProcessingUrl("/authentication/form")
-                        .successForwardUrl("/authentication/loginSuccess")
-                        .failureUrl("/authentication/require?error=true")
+                http.formLogin()
+//                        .loginPage("/authentication/require")
+//                        .loginProcessingUrl("/authentication/form")
+//                        .successForwardUrl("/authentication/loginSuccess")
+//                        .failureUrl("/authentication/require?error=true")
                         .and()
-                        .authorizeRequests()
-                        .antMatchers(
-                                "/actuator/**",
-                                "/oauth/removeToken",
-                                "/authentication/**",
-                                "/**/*.css",
-                                "/**/*.jpg",
-                                "/**/*.png",
-                                "/**/*.woff2",
-                                "/**/*.js").permitAll();
+                        .authorizeRequests();
+        filterIgnorePropertiesConfig
+                .getUrls()
+                .forEach(url -> registry.antMatchers(url).permitAll());
         registry.anyRequest().authenticated()
                 .and()
                 .csrf().disable();

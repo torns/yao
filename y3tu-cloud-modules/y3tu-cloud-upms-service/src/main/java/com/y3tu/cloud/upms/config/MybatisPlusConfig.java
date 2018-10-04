@@ -42,7 +42,7 @@ public class MybatisPlusConfig {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ResourceLoader resourceLoader, GlobalConfiguration globalConfiguration) throws Exception {
         MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
-        sqlSessionFactory.setTypeAliasesPackage("com.y3tu.cloud.upms.entity");
+        sqlSessionFactory.setTypeAliasesPackage("com.y3tu.cloud.upms.model.entity");
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         Resource[] resources = resolver.getResources("classpath:mapper/*.xml");

@@ -5,9 +5,9 @@ package com.y3tu.cloud.common.constant;
  */
 public interface SecurityConstants {
     /**
-     * 前缀
+     * 公共前缀
      */
-    String Y3TU_PREFIX = "y3tu_";
+    String Y3TU_PREFIX = "y3tu:";
     /**
      * 用户信息头
      */
@@ -17,22 +17,27 @@ public interface SecurityConstants {
      * 角色信息头
      */
     String ROLE_HEADER = "x-role-header";
+
     /**
      * 项目的license
      */
     String LICENSE = "made by y3tu";
+
     /**
      * 基础角色
      */
     String BASE_ROLE = "ROLE_USER";
+
     /**
      * 授权码模式
      */
     String AUTHORIZATION_CODE = "authorization_code";
+
     /**
      * 密码模式
      */
     String PASSWORD = "password";
+
     /**
      * 刷新token
      */
@@ -77,15 +82,17 @@ public interface SecurityConstants {
      * 默认生成图形验证码过期时间
      */
     int DEFAULT_IMAGE_EXPIRE = 60;
+
     /**
      * 边框颜色，合法值： r,g,b (and optional alpha) 或者 white,black,blue.
      */
-    String DEFAULT_COLOR_FONT = "black";
+    String DEFAULT_COLOR_FONT = "blue";
 
     /**
      * 图片边框
      */
     String DEFAULT_IMAGE_BORDER = "no";
+
     /**
      * 默认图片间隔
      */
@@ -95,6 +102,7 @@ public interface SecurityConstants {
      * 默认保存code的前缀
      */
     String DEFAULT_CODE_KEY = "DEFAULT_CODE_KEY";
+
     /**
      * 验证码文字大小
      */
@@ -104,37 +112,5 @@ public interface SecurityConstants {
      * token-uservo
      */
     String TOKEN_USER_DETAIL = "token-user-detail";
-
-    /**
-     * 默认的social的登录地址
-     */
-    String DEFAULT_SOCIAL_PROCESS_URL = "/social";
-    /**
-     * 默认的social的注册地址
-     */
-    String DEFAULT_SOCIAL_SIGNUP_URL = "/social/signup";
-
-    /**
-     * sys_oauth_client_details 表的字段，不包括client_id、client_secret
-     */
-    String CLIENT_FIELDS = "client_id, client_secret, resource_ids, scope, "
-            + "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
-            + "refresh_token_validity, additional_information, autoapprove";
-
-    /**
-     * JdbcClientDetailsService 查询语句
-     */
-    String BASE_FIND_STATEMENT = "select " + CLIENT_FIELDS
-            + " from sys_oauth_client_details";
-
-    /**
-     * 默认的查询语句
-     */
-    String DEFAULT_FIND_STATEMENT = BASE_FIND_STATEMENT + " order by client_id";
-
-    /**
-     * 按条件client_id 查询
-     */
-    String DEFAULT_SELECT_STATEMENT = BASE_FIND_STATEMENT + " where client_id = ?";
 
 }
