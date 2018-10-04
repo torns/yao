@@ -1,6 +1,7 @@
 package com.y3tu.cloud.auth.config;
 
 
+import com.y3tu.cloud.common.constant.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,10 +13,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.approval.ApprovalStore;
-import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
-import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
-import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
@@ -24,6 +23,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 
 import javax.sql.DataSource;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 认证服务器
@@ -54,44 +54,42 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
     /**
      * 令牌失效时间
      */
-    private int accessTokenValiditySeconds;
+    private int accessTokenValiditySeconds = (int) TimeUnit.MINUTES.toSeconds(30);
 
     /**
      * 刷新令牌失效时间
      */
-    private int refreshTokenValiditySeconds;
+    private int refreshTokenValiditySeconds = (int) TimeUnit.HOURS.toSeconds(1);
 
     /**
      * 是否可以重用刷新令牌
      */
-    private boolean isReuseRefreshToken;
+    private boolean isReuseRefreshToken = true;
 
     /**
      * 是否支持刷新令牌
      */
-    private boolean isSupportRefreshToken;
+    private boolean isSupportRefreshToken = true;
 
-    /**
-     * 授权服务器端点的安全配置
-     */
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) {
-        security
-                .tokenKeyAccess("permitAll()")
-                .checkTokenAccess("permitAll()")
-                // 让/oauth/token支持client_id以及client_secret作登录认证
-                .allowFormAuthenticationForClients();
+    @Bean
+    public ClientDetailsService clientDetailsService() {
+        JdbcClientDetailsService clientDetailsService = new JdbcClientDetailsService(dataSource);
+        clientDetailsService.setSelectClientDetailsSql(SecurityConstants.DEFAULT_SELECT_STATEMENT);
+        clientDetailsService.setFindClientDetailsSql(SecurityConstants.DEFAULT_FIND_STATEMENT);
+        return clientDetailsService;
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        //配置客户端信息，从数据库中读取，对应oauth_client_details表
-        clients.jdbc(dataSource);
+
+        clients.withClientDetails(clientDetailsService());
     }
 
+    /**
+     * 授权服务器端点配置，如令牌存储，令牌自定义，用户批准和授权类型，不包括端点安全配置
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        //配置token的数据源、自定义的tokenServices等信息,配置身份认证器，配置认证方式，TokenStore，TokenGranter，OAuth2RequestFactory
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setReuseRefreshToken(isReuseRefreshToken);
         defaultTokenServices.setSupportRefreshToken(isSupportRefreshToken);
@@ -106,26 +104,24 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
             defaultTokenServices.setTokenEnhancer(tokenEnhancerChain);
         }
 
+        defaultTokenServices.setClientDetailsService(clientDetailsService());
+
         endpoints
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
                 .tokenServices(defaultTokenServices);
     }
 
-    @Bean
-    public ApprovalStore approvalStore() {
-        return new JdbcApprovalStore(dataSource);
-    }
-
     /**
-     * 授权码模式持久名授权码
-     *
-     * @return
+     * 授权服务器端点的安全配置
      */
-    @Bean
-    protected AuthorizationCodeServices authorizationCodeServices() {
-        //授权码存储等处理方式类，使用jdbc，操作oauth_code表
-        return new JdbcAuthorizationCodeServices(dataSource);
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) {
+        security
+                .tokenKeyAccess("isAuthenticated()")
+                .checkTokenAccess("permitAll()")
+                // 让/oauth/token支持client_id以及client_secret作登录认证
+                .allowFormAuthenticationForClients();
     }
 
 }

@@ -20,8 +20,8 @@ security:
   sessions: stateless
   oauth2:
     client:
-      client-id: app
-      client-secret: 123456
+      client-id: taroco
+      client-secret: taroco
     resource:
       jwt:
         key-uri: ${base.auth.server}/oauth/token_key #解析jwt令牌所需要密钥的地址

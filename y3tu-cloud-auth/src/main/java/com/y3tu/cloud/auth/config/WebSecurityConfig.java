@@ -31,11 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry =
-                http.formLogin()
-//                        .loginPage("/authentication/require")
-//                        .loginProcessingUrl("/authentication/form")
-//                        .successForwardUrl("/authentication/loginSuccess")
-//                        .failureUrl("/authentication/require?error=true")
+                http.formLogin().loginPage("/authentication/require")
+                        .loginProcessingUrl("/authentication/form")
+                        .successForwardUrl("/authentication/loginSuccess")
+                        .failureUrl("/authentication/require?error=true")
                         .and()
                         .authorizeRequests();
         filterIgnorePropertiesConfig
