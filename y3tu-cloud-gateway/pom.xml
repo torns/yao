@@ -36,6 +36,7 @@
             <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
         </dependency>
 
+
         <!--mysql -->
         <dependency>
             <groupId>mysql</groupId>

@@ -17,7 +17,6 @@ import java.util.Date;
  * @since 2017-11-20
  */
 @Data
-@TableName("sys_log")
 public class SysLogVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,7 +24,6 @@ public class SysLogVO implements Serializable {
     /**
      * 编号
      */
-    @TableId(type = IdType.AUTO)
     private Long id;
     /**
      * 日志类型
