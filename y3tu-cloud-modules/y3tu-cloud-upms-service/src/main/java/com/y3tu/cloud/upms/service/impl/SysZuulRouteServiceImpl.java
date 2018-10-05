@@ -8,7 +8,6 @@ import com.y3tu.cloud.upms.model.entity.SysZuulRoute;
 import com.y3tu.cloud.upms.service.SysZuulRouteService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.y3tu.tool.core.util.JsonUtil;
-import com.y3tu.tool.web.redis.RedisRepository;
 import com.y3tu.tool.web.redis.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +22,6 @@ import java.util.List;
  */
 @Service
 public class SysZuulRouteServiceImpl extends ServiceImpl<SysZuulRouteMapper, SysZuulRoute> implements SysZuulRouteService {
-
-    @Autowired
-    private RedisRepository redisRepository;
-
     @Autowired
     private RedisUtils redisUtils;
 
@@ -40,7 +35,7 @@ public class SysZuulRouteServiceImpl extends ServiceImpl<SysZuulRouteMapper, Sys
         EntityWrapper<SysZuulRoute> wrapper = new EntityWrapper<>();
         wrapper.eq(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
         List<SysZuulRoute> routeList = selectList(wrapper);
-        redisUtils.set(CommonConstant.ROUTE_KEY, JsonUtil.toJsonString(routeList));
+        redisUtils.set(CommonConstant.ROUTE_KEY, JsonUtil.toJson(routeList));
         return Boolean.TRUE;
     }
 }
