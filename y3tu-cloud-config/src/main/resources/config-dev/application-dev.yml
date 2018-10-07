@@ -116,24 +116,24 @@ hystrix:
             timeoutInMilliseconds: 61000
 
 # ribbon配置
-ribbon:
-  eager-load:
-    enabled: true
-    clients: taroco-admin,taroco-rbac-service,taroco-authentication-server
-  # ribbon请求连接的超时时间 默认2秒 ms
-  ConnectTimeout: 5000
-  # 请求处理的超时时间 默认5秒 ms
-  ReadTimeout: 5000
-  # 对所有操作请求都进行重试,不配置这个MaxAutoRetries不起作用 默认false
-  OkToRetryOnAllOperations: true
-  # 对当前实例的重试次数 默认0
-  MaxAutoRetries: 1
-  # 切换实例的重试次数 默认1
-  MaxAutoRetriesNextServer: 2
-  # 自定义的ribbon负载均衡策略 默认com.netflix.loadbalancer.AvailabilityFilteringRule
-  NFLoadBalancerRuleClassName: cn.taroco.common.ribbon.XlabelWeightMetadataRule
-  # 从注册中心刷新servelist的时间 默认30秒 ms
-  ServerListRefreshInterval: 15000
+#ribbon:
+#  eager-load:
+#    enabled: true
+#    clients: taroco-admin,taroco-rbac-service,taroco-authentication-server
+#  # ribbon请求连接的超时时间 默认2秒 ms
+#  ConnectTimeout: 5000
+#  # 请求处理的超时时间 默认5秒 ms
+#  ReadTimeout: 5000
+#  # 对所有操作请求都进行重试,不配置这个MaxAutoRetries不起作用 默认false
+#  OkToRetryOnAllOperations: true
+#  # 对当前实例的重试次数 默认0
+#  MaxAutoRetries: 1
+#  # 切换实例的重试次数 默认1
+#  MaxAutoRetriesNextServer: 2
+#  # 自定义的ribbon负载均衡策略 默认com.netflix.loadbalancer.AvailabilityFilteringRule
+#  NFLoadBalancerRuleClassName: cn.taroco.common.ribbon.XlabelWeightMetadataRule
+#  # 从注册中心刷新servelist的时间 默认30秒 ms
+#  ServerListRefreshInterval: 15000
 
 
 feign:

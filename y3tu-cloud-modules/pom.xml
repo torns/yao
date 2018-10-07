@@ -18,6 +18,7 @@
 
     <modules>
         <module>y3tu-cloud-upms-service</module>
+        <module>y3tu-cloud-daemon</module>
     </modules>
 
 </project>

@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>y3tu-cloud-upms-service</artifactId>
+    <artifactId>y3tu-cloud-daemon</artifactId>
     <packaging>jar</packaging>
 
-    <name>y3tu-cloud-upms-service</name>
-    <description>通用用户权限服务</description>
+    <name>y3tu-cloud-daemon</name>
+    <description>后台定时批量任务</description>
 
     <parent>
         <groupId>com.y3tu</groupId>
@@ -15,18 +15,12 @@
         <version>1.1</version>
     </parent>
 
+    <properties>
+        <elastic-job-lite-version>2.1.5</elastic-job-lite-version>
+        <curator.version>2.10.0</curator.version>
+    </properties>
+
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!--redis-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
         <!--Druid数据源-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -49,22 +43,27 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity-engine-core</artifactId>
-            <version>${velocity-engine-version}</version>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-core</artifactId>
+            <version>${elastic-job-lite-version}</version>
         </dependency>
-        <!--end-->
-
+        <!-- import other module if need -->
         <dependency>
-            <groupId>com.github.axet</groupId>
-            <artifactId>kaptcha</artifactId>
-            <version>0.0.9</version>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-spring</artifactId>
+            <version>${elastic-job-lite-version}</version>
         </dependency>
 
+        <!--ZK 依赖-->
         <dependency>
-            <groupId>com.y3tu</groupId>
-            <artifactId>y3tu-cloud-common</artifactId>
-            <version>${project.parent.version}</version>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>${curator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>${curator.version}</version>
         </dependency>
 
         <dependency>
@@ -72,6 +71,8 @@
             <artifactId>y3tu-tool-web</artifactId>
             <version>${y3tu-tool-version}</version>
         </dependency>
+
     </dependencies>
+
 
 </project>
