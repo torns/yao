@@ -1,6 +1,5 @@
 package com.y3tu.cloud.gateway.config;
 
-import com.y3tu.tool.web.redis.RedisRepository;
 import com.y3tu.tool.web.redis.RedisUtils;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.cloud.client.discovery.DiscoveryClient;

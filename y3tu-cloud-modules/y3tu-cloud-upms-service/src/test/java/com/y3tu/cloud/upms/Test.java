@@ -1,9 +1,12 @@
 package com.y3tu.cloud.upms;
 
 import com.y3tu.tool.core.lang.Console;
+import com.y3tu.tool.db.ds.DsFactoryEnum;
+import com.y3tu.tool.web.codegen.util.GenUtils;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -38,5 +41,10 @@ public class Test {
         str.forEach(System.out::println);
         str.stream().filter(d -> d.equalsIgnoreCase("a")).sorted(String::compareToIgnoreCase).forEach(System.out::print);
         str.stream().collect(groupingBy(String::length));
+    }
+
+    @org.junit.Test
+    public void code() throws IOException {
+        GenUtils.startGeneratorCode("sys_user",null, DsFactoryEnum.Druid);
     }
 }

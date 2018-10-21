@@ -6,7 +6,6 @@ import com.y3tu.cloud.common.vo.SysZuulRouteVO;
 import com.y3tu.tool.core.collection.ListUtil;
 import com.y3tu.tool.core.collection.SetUtil;
 import com.y3tu.tool.core.text.StringUtils;
-import com.y3tu.tool.web.redis.RedisRepository;
 import com.y3tu.tool.web.redis.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;

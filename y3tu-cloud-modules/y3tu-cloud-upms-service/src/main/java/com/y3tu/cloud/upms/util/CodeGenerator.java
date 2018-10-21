@@ -1,8 +1,9 @@
 package com.y3tu.cloud.upms.util;
 
-import com.y3tu.tool.setting.Props;
+import com.y3tu.tool.db.ds.DsFactoryEnum;
+import com.y3tu.tool.setting.Setting;
+import com.y3tu.tool.web.codegen.util.GenUtils;
 import com.y3tu.tool.web.util.JasyptUtil;
-import com.y3tu.tool.web.util.MpGenerator;
 
 /**
  * @author y3tu
@@ -10,10 +11,9 @@ import com.y3tu.tool.web.util.MpGenerator;
  */
 public class CodeGenerator {
     public static void main(String[] args) {
-        Props props = new Props("config/generator.properties");
-        props.setProperty("password", JasyptUtil.decyptPwd("y3tu", props.getProperty("password")));
-        MpGenerator mpGenerator = new MpGenerator();
-        props.toBean(mpGenerator, MpGenerator.class);
-        mpGenerator.executeCode();
+        Setting setting = new Setting("config/generator.properties");
+        setting.set("password",JasyptUtil.decyptPwd("y3tu",setting.getStr("password")));
+
+        GenUtils.startGeneratorCode("sys_user",setting, DsFactoryEnum.Druid);
     }
 }
