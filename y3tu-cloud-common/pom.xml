@@ -5,20 +5,48 @@
     <artifactId>y3tu-cloud-common</artifactId>
     <packaging>jar</packaging>
     <name>y3tu-cloud-common</name>
-    <description>y3tu-cloud一些公用类</description>
+    <description>公共模块</description>
 
     <parent>
         <groupId>com.y3tu</groupId>
         <artifactId>y3tu-cloud</artifactId>
-        <version>1.1</version>
+        <version>1.0</version>
     </parent>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
+        <!-- MyBatisPlus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis-plus-version}</version>
-            <scope>provided</scope>
+            <version>${mybatis-plus-starter.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.y3tu</groupId>
+            <artifactId>y3tu-tool-web</artifactId>
+            <version>${y3tu-tool-version}</version>
         </dependency>
 
     </dependencies>

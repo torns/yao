@@ -5,98 +5,36 @@
 
     <groupId>com.y3tu</groupId>
     <artifactId>y3tu-cloud</artifactId>
-    <version>1.1</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>y3tu-cloud-auth</module>
         <module>y3tu-cloud-common</module>
-        <module>y3tu-cloud-modules</module>
         <module>y3tu-cloud-gateway</module>
-        <module>y3tu-cloud-eureka</module>
-        <module>y3tu-cloud-config</module>
-        <module>y3tu-cloud-visual</module>
     </modules>
 
     <name>y3tu-cloud</name>
-    <url>http://www.y3tu.com</url>
-    <description>基于spring cloud的分布式应用平台</description>
+    <url>https://github.com/y3tu/y3tu-cloud</url>
+    <description>spring cloud脚手架</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.3.RELEASE</version>
+        <version>2.0.7.RELEASE</version>
         <relativePath/>
     </parent>
 
     <properties>
-        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
-        <spring-boot.version>2.0.3.RELEASE</spring-boot.version>
-        <lombok-version>1.16.18</lombok-version>
-        <jasypt-version>1.16</jasypt-version>
-        <swagger.version>2.9.2</swagger.version>
-        <docker.url>http://132.232.11.210:2375</docker.url>
-        <registry.url>192.168.0.13:5000</registry.url>
-        <oauth2-version>2.3.3.RELEASE</oauth2-version>
-        <y3tu-tool-version>1.4</y3tu-tool-version>
-        <mybatis-plus-version>2.2.0</mybatis-plus-version>
-        <druid.version>1.1.9</druid.version>
-        <mysql.version>5.1.38</mysql.version>
-        <velocity-engine-version>2.0</velocity-engine-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compile.source>1.8</maven.compile.source>
-        <maven.compile.target>1.8</maven.compile.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <spring-cloud.version>Finchley.SR2</spring-cloud.version>
+        <mybatis-plus-starter.version>3.0.1</mybatis-plus-starter.version>
+        <mysql-connector.version>5.1.46</mysql-connector.version>
+        <swagger.version>2.9.2</swagger.version>
+        <spring-cloud-alibaba.version>0.2.1.RELEASE</spring-cloud-alibaba.version>
+        <y3tu-tool-version>2.0</y3tu-tool-version>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!--监控-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <!--注册中心 eureka 客户端-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <!--配置中心-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-        <!-- 分布式链路追踪 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
-        </dependency>
-        <!--热加载-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <!--java简写工具 -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok-version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <!--对配置文件敏感部分进行加解密-->
-        <dependency>
-            <groupId>com.github.ulisesbocchio</groupId>
-            <artifactId>jasypt-spring-boot-starter</artifactId>
-            <version>${jasypt-version}</version>
-        </dependency>
-
-
-    </dependencies>
 
     <!--引入spring cloud依赖-->
     <dependencyManagement>
@@ -104,12 +42,50 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Finchley.RELEASE</version>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!--Spring cloud alibaba-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- MyBatisPlus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-starter.version}</version>
+            </dependency>
+
+            <!-- mysql驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
         </dependencies>
+
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.y3tu</groupId>
+            <artifactId>y3tu-tool-core</artifactId>
+            <version>${y3tu-tool-version}</version>
+        </dependency>
+
+    </dependencies>
 
     <developers>
         <developer>
@@ -120,43 +96,7 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <finalName>${project.name}</finalName>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.12</version>
-                <configuration>
-                    <imageName>${project.name}:${project.version}</imageName>
-                    <dockerHost>${docker.url}</dockerHost>
-                    <!-- 指定Dockerfile所在的路径 -->
-                    <dockerDirectory>${project.basedir}</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                    <serverId>docker-hub</serverId>
-                    <registryUrl>https://index.docker.io/v1/</registryUrl>
-                </configuration>
-            </plugin>
+
         </plugins>
     </build>
 
