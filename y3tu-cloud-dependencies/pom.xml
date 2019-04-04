@@ -4,14 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.y3tu</groupId>
-    <artifactId>y3tu-cloud</artifactId>
+    <artifactId>y3tu-cloud-dependencies</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
-
-    <modules>
-        <module>y3tu-cloud-common</module>
-        <module>y3tu-cloud-gateway</module>
-    </modules>
 
     <name>y3tu-cloud</name>
     <url>https://github.com/y3tu/y3tu-cloud</url>
