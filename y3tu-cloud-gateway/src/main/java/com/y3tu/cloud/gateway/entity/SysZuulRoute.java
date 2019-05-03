@@ -7,7 +7,6 @@ import java.util.Date;
 
 @Data
 public class SysZuulRoute implements Serializable {
-    private static final long serialVersionUID = 1L;
 
     /**
      * router Id
@@ -53,7 +52,5 @@ public class SysZuulRoute implements Serializable {
      * 删除标识（0-正常,1-删除）
      */
     private String delFlag;
-
-
 
 }

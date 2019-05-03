@@ -11,12 +11,24 @@
 
     <parent>
         <groupId>com.y3tu</groupId>
-        <artifactId>y3tu-cloud-dependencies</artifactId>
+        <artifactId>y3tu-cloud</artifactId>
         <version>1.0</version>
-        <relativePath>../y3tu-cloud-dependencies/pom.xml</relativePath>
     </parent>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.y3tu</groupId>
+            <artifactId>y3tu-cloud-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.y3tu</groupId>
+            <artifactId>y3tu-tool-web</artifactId>
+            <version>${y3tu-tool-version}</version>
+        </dependency>
+
 
         <!--服务注册-->
         <dependency>
@@ -47,6 +59,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid-version}</version>
         </dependency>
 
         <!--接口文档-->
@@ -83,24 +101,27 @@
             <artifactId>spring-security-oauth2</artifactId>
             <version>2.3.3.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>2.0.4</version>
+            <version>${spring-boot-admin-version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.y3tu</groupId>
-            <artifactId>y3tu-cloud-common</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.y3tu</groupId>
-            <artifactId>y3tu-tool-web</artifactId>
-            <version>${y3tu-tool-version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
