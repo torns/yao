@@ -28,7 +28,6 @@ import java.util.List;
 @RequestMapping("/department")
 public class DepartmentController extends BaseController<DepartmentService, Department> {
 
-
     @Autowired
     private DepartmentService departmentService;
     @Autowired

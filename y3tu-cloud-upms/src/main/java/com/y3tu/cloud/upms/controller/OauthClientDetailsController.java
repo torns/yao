@@ -1,7 +1,7 @@
 package com.y3tu.cloud.upms.controller;
 
-import com.y3tu.cloud.upms.model.entity.SysOauthClientDetails;
-import com.y3tu.cloud.upms.service.SysOauthClientDetailsService;
+import com.y3tu.cloud.upms.model.entity.OauthClientDetails;
+import com.y3tu.cloud.upms.service.OauthClientDetailsService;
 import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.web.base.controller.BaseController;
 import com.y3tu.tool.web.base.pojo.PageInfo;
@@ -21,10 +21,10 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/client")
-public class OauthClientDetailsController extends BaseController {
+public class OauthClientDetailsController extends BaseController<OauthClientDetailsService, OauthClientDetails> {
 
     @Autowired
-    private SysOauthClientDetailsService sysOauthClientDetailsService;
+    private OauthClientDetailsService oauthClientDetailsService;
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -32,11 +32,11 @@ public class OauthClientDetailsController extends BaseController {
      * 通过ID查询
      *
      * @param id ID
-     * @return SysOauthClientDetails
+     * @return OauthClientDetails
      */
     @GetMapping("/{id}")
     public R get(@PathVariable Integer id) {
-        return R.success(sysOauthClientDetailsService.getById(id));
+        return R.success(oauthClientDetailsService.getById(id));
     }
 
 
@@ -49,7 +49,7 @@ public class OauthClientDetailsController extends BaseController {
     @GetMapping("/page")
     public R page(@RequestParam Map<String, Object> params) {
 
-        PageInfo<SysOauthClientDetails> pageInfo = sysOauthClientDetailsService.queryPage(PageInfo.mapToPageInfo(params), params);
+        PageInfo<OauthClientDetails> pageInfo = oauthClientDetailsService.queryPage(PageInfo.mapToPageInfo(params), params);
         return R.success(pageInfo);
     }
 
@@ -60,13 +60,13 @@ public class OauthClientDetailsController extends BaseController {
      * @return success/false
      */
     @PostMapping
-    public R add(@RequestBody SysOauthClientDetails client) {
+    public R add(@RequestBody OauthClientDetails client) {
         if (StringUtils.isEmpty(client.getAdditionalInformation())) {
             client.setAdditionalInformation(null);
         }
         final String secret = encoder.encode(client.getClientId() + ":" + client.getClientSecret());
         client.setClientSecret(secret);
-        return R.success(sysOauthClientDetailsService.save(client));
+        return R.success(oauthClientDetailsService.save(client));
     }
 
     /**
@@ -77,7 +77,7 @@ public class OauthClientDetailsController extends BaseController {
      */
     @DeleteMapping("/{id}")
     public R delete(@PathVariable String id) {
-        return R.success(sysOauthClientDetailsService.removeById(id));
+        return R.success(oauthClientDetailsService.removeById(id));
     }
 
     /**
@@ -87,12 +87,12 @@ public class OauthClientDetailsController extends BaseController {
      * @return success/false
      */
     @PutMapping
-    public R edit(@RequestBody SysOauthClientDetails client) {
+    public R edit(@RequestBody OauthClientDetails client) {
         final String pass = client.getClientId() + ":" + client.getClientSecret();
-        final SysOauthClientDetails details = sysOauthClientDetailsService.getById(client.getClientId());
+        final OauthClientDetails details = oauthClientDetailsService.getById(client.getClientId());
         if (encoder.matches(pass, details.getClientSecret())) {
             client.setClientSecret(encoder.encode(pass));
         }
-        return R.success(sysOauthClientDetailsService.updateById(client));
+        return R.success(oauthClientDetailsService.updateById(client));
     }
 }

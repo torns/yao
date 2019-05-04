@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/route")
-public class ZuulRouteController extends BaseController {
+public class ZuulRouteController extends BaseController<ZuulRouteService,ZuulRoute> {
     @Autowired
     private ZuulRouteService zuulRouteService;
 

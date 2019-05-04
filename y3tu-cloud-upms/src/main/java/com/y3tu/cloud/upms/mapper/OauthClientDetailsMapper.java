@@ -1,6 +1,6 @@
 package com.y3tu.cloud.upms.mapper;
 
-import com.y3tu.cloud.upms.model.entity.SysOauthClientDetails;
+import com.y3tu.cloud.upms.model.entity.OauthClientDetails;
 import com.y3tu.tool.web.base.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.y3tu.tool.web.base.mapper.BaseMapper;
  * @author liuht
  * @since 2018-05-15
  */
-public interface SysOauthClientDetailsMapper extends BaseMapper<SysOauthClientDetails> {
+public interface OauthClientDetailsMapper extends BaseMapper<OauthClientDetails> {
 
 }

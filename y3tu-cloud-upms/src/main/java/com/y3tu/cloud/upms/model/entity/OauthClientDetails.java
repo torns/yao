@@ -18,10 +18,10 @@ import java.io.Serializable;
  *
  * @author y3tu
  */
-@TableName("sys_oauth_client_details")
+@TableName("t_oauth_client_details")
 @Accessors(chain = true)
 @Data
-public class SysOauthClientDetails extends BaseEntity<SysOauthClientDetails> {
+public class OauthClientDetails extends BaseEntity<OauthClientDetails> {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,7 +52,7 @@ public class SysOauthClientDetails extends BaseEntity<SysOauthClientDetails> {
 
     @Override
     public String toString() {
-        return "SysOauthClientDetails{" +
+        return "OauthClientDetails{" +
                 ", clientId=" + clientId +
                 ", resourceIds=" + resourceIds +
                 ", clientSecret=" + clientSecret +
