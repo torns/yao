@@ -17,31 +17,51 @@ public interface SecurityConstants {
     String CLOUD_PREFIX = "y3tu-cloud-";
 
     /**
+     * 项目的license
+     */
+    String LICENSE = "made by y3tu";
+
+    /**
+     * 默认保存code的前缀
+     */
+    String DEFAULT_CODE_KEY = "DEFAULT_CODE_KEY";
+    /**
+     * 默认生成图形验证码过期时间
+     */
+    int DEFAULT_IMAGE_EXPIRE = 60;
+
+    /**
+     * token-uservo
+     */
+    String TOKEN_USER_DETAIL = "token-user-detail";
+
+    /**
      * jwt 加密key
      */
     String SIGN_KEY = "y3tu-cloud";
 
     /**
-     * sys_oauth_client_details 字段
+     * sys_oauth_client_details 表的字段，不包括client_id、client_secret
      */
-    String CLIENT_FIELDS = "client_id, client_secret, resources_ids, scope, authorized_grant_types,"
-            + "web_server_redirect_uri, authorities, access_token_validity,"
-            + "refresh_token_validity, addition_information, autoapprove";
+    String CLIENT_FIELDS = "client_id, client_secret, resource_ids, scope, "
+            + "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
+            + "refresh_token_validity, additional_information, autoapprove";
 
     /**
-     * jdbcClientDetailsService查询sql
+     * JdbcClientDetailsService 查询语句
      */
-    String BASE_FIND_STATEMENT = "select " + CLIENT_FIELDS + " from sys_oauth_client_details";
+    String BASE_FIND_STATEMENT = "select " + CLIENT_FIELDS
+            + " from sys_oauth_client_details";
 
     /**
-     * 默认查询语句
+     * 默认的查询语句
      */
     String DEFAULT_FIND_STATEMENT = BASE_FIND_STATEMENT + " order by client_id";
 
     /**
-     * 根据client_id查询
+     * 按条件client_id 查询
      */
-    String DEFAULT_FIND_STATEMENT_BY_CLIENT_ID = BASE_FIND_STATEMENT + " where client_id = ?";
+    String DEFAULT_SELECT_STATEMENT = BASE_FIND_STATEMENT + " where client_id = ?";
 
 
     String SPRING_SECURITY_MOBILE_KEY = "mobile";
@@ -57,4 +77,15 @@ public interface SecurityConstants {
     String REDIS_CODE_PREFIX = "y3tu-cloud-code-";
 
     Integer REDIS_CODE_EXPIRE = 60;
+
+
+    /**
+     * 基础角色
+     */
+    String BASE_ROLE = "ROLE_USER";
+
+    /**
+     * 角色信息头
+     */
+    String ROLE_HEADER = "x-role-header";
 }

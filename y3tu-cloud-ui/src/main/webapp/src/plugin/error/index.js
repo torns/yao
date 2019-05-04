@@ -1,5 +1,5 @@
 import store from '@/store'
-import util from '@/libs/util'
+import util from '@/libs/emums'
 
 export default {
   install (Vue, options) {

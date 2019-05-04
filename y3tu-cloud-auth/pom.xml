@@ -10,10 +10,10 @@
     <artifactId>y3tu-cloud-auth</artifactId>
     <version>1.0</version>
     <name>y3tu-cloud-auth</name>
-    <description>鉴权中心</description>
+    <description>授权服务</description>
 
     <properties>
-        <java.version>1.8</java.version>
+
     </properties>
 
     <dependencies>
@@ -30,6 +30,7 @@
             <version>${y3tu-tool-version}</version>
         </dependency>
 
+        <!--spring cloud通用配置-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
@@ -59,10 +60,18 @@
             <version>2.3.5.RELEASE</version>
         </dependency>
 
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector.version}</version>
+        </dependency>
+
+        <!--Druid数据源-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
         </dependency>
 
         <dependency>
@@ -71,21 +80,13 @@
             <version>${spring-boot-admin-version}</version>
         </dependency>
 
+        <!--freemarker-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>

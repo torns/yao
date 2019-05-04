@@ -1,4 +1,4 @@
-import util from '@/libs/util.js'
+import util from '@/libs/emums.js'
 import {loginByUsername, getUserInfo, logout} from '@/api/login'
 import {GetMenu} from '@/api/menu'
 import {frameInRoutes} from '@/router/routes'

@@ -1,8 +1,8 @@
 package com.y3tu.cloud.gateway.auth.security;
 
 import com.y3tu.cloud.common.enums.UserStatusEnum;
-import com.y3tu.cloud.common.vo.SysRoleVo;
-import com.y3tu.cloud.common.vo.SysUserVo;
+import com.y3tu.cloud.common.vo.SysRoleVO;
+import com.y3tu.cloud.common.vo.SysUserVO;
 import lombok.Data;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,10 +30,10 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     private String password;
     private String status;
-    private List<SysRoleVo> roleVos;
+    private List<SysRoleVO> roleVos;
 
 
-    public UserDetailsImpl(SysUserVo userVo) {
+    public UserDetailsImpl(SysUserVO userVo) {
         this.userId = userVo.getUserId();
         this.username = userVo.getUsername();
         this.password = userVo.getPassword();

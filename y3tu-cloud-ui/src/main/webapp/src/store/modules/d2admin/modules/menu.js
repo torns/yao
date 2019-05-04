@@ -1,7 +1,7 @@
 // 设置文件
 import setting from '@/setting.js'
 import {validatenull} from '@/libs/validate'
-import util from '@/libs/util.js'
+import util from '@/libs/emums.js'
 
 export default {
   namespaced: true,

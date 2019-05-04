@@ -1,7 +1,7 @@
 import {validatenull} from '@/libs/validate'
 import axios from 'axios'
 import store from '@/store'
-import util from '@/libs/util'
+import util from '@/libs/emums'
 import {Message} from 'element-ui'
 import router from '@/router'
 

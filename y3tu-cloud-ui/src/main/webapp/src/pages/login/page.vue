@@ -41,7 +41,7 @@
     require('particles.js')
     import config from './config/default'
     import {mapActions} from 'vuex'
-    import util from '@/libs/util'
+    import util from '@/libs/emums'
 
     export default {
         data() {

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: y3tu-cloud-auth-service
+    name: auth-service
   cloud:
     nacos:
       config:

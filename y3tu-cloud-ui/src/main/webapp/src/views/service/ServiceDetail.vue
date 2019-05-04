@@ -34,7 +34,7 @@ import ServiceMetrics from './components/ServiceMetrics'
 import ServiceMappings from './components/ServiceMappings'
 import ServiceEnvs from './components/ServiceEnvs'
 import ServiceTrace from './components/ServiceTrace'
-import util from '@/libs/util'
+import util from '@/libs/emums'
 
 export default {
   components: {

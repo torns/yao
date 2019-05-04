@@ -1,31 +1,31 @@
 package com.y3tu.cloud.common.enums;
 
 /**
- * @description: 用户状态枚举
+ * 用户状态枚举
  */
-public enum  UserStatusEnum {
+public enum UserStatusEnum {
 
     /**
      * 正常
      */
-    NORMAL("0", "正常"),
+    NORMAL(0, "正常"),
 
     /**
      * 锁定
      */
-    LOCK("1","锁定");
+    LOCK(1, "锁定");
 
 
-    private String code;
+    private int code;
 
     private String message;
 
-    UserStatusEnum(String code, String message) {
+    UserStatusEnum(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 

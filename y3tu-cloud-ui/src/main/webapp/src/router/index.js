@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import util from '@/libs/util.js'
+import util from '@/libs/emums.js'
 import {validatenull} from '@/libs/validate.js'
 import store from '@/store/index'
 import {GetMenu} from '@/api/menu'

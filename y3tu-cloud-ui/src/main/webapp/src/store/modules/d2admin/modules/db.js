@@ -1,5 +1,5 @@
 import db from '@/libs/db.js'
-import util from '@/libs/util.js'
+import util from '@/libs/emums.js'
 
 /**
  * @description 检查路径是否存在 不存在的话初始化

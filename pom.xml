@@ -8,11 +8,11 @@
     <artifactId>y3tu-cloud</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
-    <description>微服务平台</description>
+    <description>基于spring cloud alibaba的微服务平台</description>
     <modules>
         <module>y3tu-cloud-common</module>
         <module>y3tu-cloud-auth</module>
-        <module>y3tu-cloud-back</module>
+        <module>y3tu-cloud-upms</module>
         <module>y3tu-cloud-gateway</module>
         <module>y3tu-cloud-log</module>
         <module>y3tu-cloud-file</module>
@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.3.RELEASE</version>
+        <version>2.1.2.RELEASE</version>
         <relativePath/>
     </parent>
 
@@ -39,12 +39,11 @@
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <guava-version>20.0</guava-version>
         <jjwt-version>0.9.0</jjwt-version>
-        <druid-version>1.1.10</druid-version>
+        <druid.version>1.1.10</druid.version>
         <mybatis-plus-starter.version>3.0.1</mybatis-plus-starter.version>
         <mysql-connector.version>5.1.46</mysql-connector.version>
         <swagger.version>2.9.2</swagger.version>
         <gson.version>2.8.2</gson.version>
-        <spring.cloud.oauth2.version>2.3.3.RELEASE</spring.cloud.oauth2.version>
         <spring-cloud-alibaba.version>0.9.0.RELEASE</spring-cloud-alibaba.version>
         <spring-boot-admin-version>2.1.3</spring-boot-admin-version>
         <qcloudsms.version>1.0.5</qcloudsms.version>
@@ -97,16 +96,44 @@
 
     <!--放在依赖里，所有的子项目就直接依赖了-->
     <dependencies>
+        <!--监控-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--测试-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--热加载-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <!--java简写工具 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!--工具类-->
         <dependency>
             <groupId>com.y3tu</groupId>
             <artifactId>y3tu-tool-core</artifactId>
             <version>${y3tu-tool-version}</version>
         </dependency>
+
     </dependencies>
+
+    <developers>
+        <developer>
+            <name>y3tu</name>
+            <email>14643092@qq.com</email>
+        </developer>
+    </developers>
 
 
 </project>

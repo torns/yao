@@ -9,11 +9,10 @@ package com.y3tu.cloud.common.constants;
  */
 public interface ServiceNameConstants {
 
-    String AUTH = "Y3TU-CLOUD-AUTH";
-    String COMMON = "Y3TU-CLOUD-COMMON";
-    String CONFIG_SERVER = "Y3TU-CLOUD-CONFIG-SERVER";
-    String GATEWAY = "Y3TU-CLOUD-GATEWAY";
-    String SERVER = "Y3TU-CLOUD-SERVER";
+    String AUTH = "AUTH-SERVICE";
+    String COMMON = "COMMON-SERVICE";
+    String GATEWAY = "GATEWAY-SERVICE";
+    String UPMS_SERVICE = "UPMS-SERVICE";
     String USER_SERVICE = "Y3TU-CLOUD-USER-SERVICE";
     String LOG_SERVICE = "Y3TU-CLOUD-LOG-SERVICE";
     String GEN_SERVICE = "Y3TU-CLOUD-GEN-SERVICE";

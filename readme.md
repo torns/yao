@@ -42,3 +42,5 @@ y3tu-cloud-transcation
 y3tu-cloud-file 
 y3tu-cloud-gateway
 ```
+
+* 启动Nacos`sh startup.sh -m standalone`,然后通过浏览器输入`http://127.0.0.1:8848/nacos/`访问Nacos控制台
