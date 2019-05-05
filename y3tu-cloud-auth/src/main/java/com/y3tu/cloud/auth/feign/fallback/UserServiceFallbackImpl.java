@@ -1,7 +1,7 @@
 package com.y3tu.cloud.auth.feign.fallback;
 
 import com.y3tu.cloud.auth.feign.UserService;
-import com.y3tu.cloud.common.vo.SysUserVO;
+import com.y3tu.cloud.common.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceFallbackImpl implements UserService {
 
     @Override
-    public SysUserVO findUserByUsername(String username) {
+    public UserVO findUserByUsername(String username) {
         log.error("通过用户名查询用户异常:{}", username);
         return null;
     }
@@ -26,7 +26,7 @@ public class UserServiceFallbackImpl implements UserService {
      * @return UserVo
      */
     @Override
-    public SysUserVO findUserByMobile(String mobile) {
+    public UserVO findUserByMobile(String mobile) {
         log.error("通过手机号查询用户:{}", mobile);
         return null;
     }
@@ -38,7 +38,7 @@ public class UserServiceFallbackImpl implements UserService {
      * @return UserVo
      */
     @Override
-    public SysUserVO findUserByOpenId(String openId) {
+    public UserVO findUserByOpenId(String openId) {
         log.error("通过OpenId查询用户:{}", openId);
         return null;
     }

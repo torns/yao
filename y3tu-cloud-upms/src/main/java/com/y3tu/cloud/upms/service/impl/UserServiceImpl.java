@@ -3,6 +3,7 @@ package com.y3tu.cloud.upms.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.y3tu.cloud.common.constants.CommonConstants;
 import com.y3tu.cloud.common.enums.UserStatusEnum;
+import com.y3tu.cloud.common.vo.UserVO;
 import com.y3tu.cloud.upms.mapper.UserMapper;
 import com.y3tu.cloud.upms.model.dto.UserDTO;
 import com.y3tu.cloud.upms.model.entity.Permission;
@@ -38,6 +39,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
     PermissionService permissionService;
     @Autowired
     UserRoleService userRoleService;
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public UserDTO findByUsernameAndStatus(String username) {
@@ -85,6 +88,33 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
             userDTOList.add(userDTO);
         });
         return userDTOList;
+    }
+
+    @Override
+    public UserVO findUserByUsername(String username) {
+        return userMapper.selectUserVoByUsername(username);
+    }
+
+    /**
+     * 通过手机号查询用户信息
+     *
+     * @param mobile 手机号
+     * @return 用户信息
+     */
+    @Override
+    public UserVO findUserByMobile(String mobile) {
+        return userMapper.selectUserVoByMobile(mobile);
+    }
+
+    /**
+     * 通过openId查询用户
+     *
+     * @param openId openId
+     * @return 用户信息
+     */
+    @Override
+    public UserVO findUserByOpenId(String openId) {
+        return userMapper.selectUserVoByOpenId(openId);
     }
 
 

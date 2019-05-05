@@ -2,13 +2,12 @@ package com.y3tu.cloud.common.vo;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 
 @Data
-public class SysUserVO {
+public class UserVO {
 
     /**
      * 主键ID
@@ -64,6 +63,6 @@ public class SysUserVO {
     /**
      * 角色列表
      */
-    private List<SysRoleVO> roleList;
+    private List<RoleVO> roleList;
 
 }

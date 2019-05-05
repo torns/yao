@@ -2,6 +2,7 @@ package com.y3tu.cloud.upms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.y3tu.cloud.common.enums.UserStatusEnum;
+import com.y3tu.cloud.common.vo.UserVO;
 import com.y3tu.cloud.upms.model.dto.UserDTO;
 import com.y3tu.cloud.upms.model.entity.*;
 import com.y3tu.cloud.upms.service.*;
@@ -255,5 +256,40 @@ public class UserController extends BaseController<UserService, User> {
                 userRoleService.save(ur);
             }
         }
+    }
+
+
+    /**
+     * 通过用户名查询用户及其角色信息
+     *
+     * @param username 用户名
+     * @return UseVo 对象
+     */
+    @GetMapping("/findUserByUsername/{username}")
+    public UserVO findUserByUsername(@PathVariable String username) {
+
+        return userService.findUserByUsername(username);
+    }
+
+    /**
+     * 通过手机号查询用户及其角色信息
+     *
+     * @param mobile 手机号
+     * @return UseVo 对象
+     */
+    @GetMapping("/findUserByMobile/{mobile}")
+    public UserVO findUserByMobile(@PathVariable String mobile) {
+        return userService.findUserByMobile(mobile);
+    }
+
+    /**
+     * 通过OpenId查询
+     *
+     * @param openId openid
+     * @return 对象
+     */
+    @GetMapping("/findUserByOpenId/{openId}")
+    public UserVO findUserByOpenId(@PathVariable String openId) {
+        return userService.findUserByOpenId(openId);
     }
 }

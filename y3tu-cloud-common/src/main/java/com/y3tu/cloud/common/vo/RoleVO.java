@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @Accessors(chain = true)
-public class SysRoleVO implements Serializable {
+public class RoleVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
