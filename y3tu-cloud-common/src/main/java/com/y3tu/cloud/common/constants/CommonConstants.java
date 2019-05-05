@@ -7,7 +7,10 @@ package com.y3tu.cloud.common.constants;
  * @date 2019-05-03
  */
 public interface CommonConstants {
-
+    /**
+     * token请求头名称
+     */
+    String TOKEN_HEADER = "Authorization";
     /**
      * 树的根节点值
      */
@@ -84,5 +87,11 @@ public interface CommonConstants {
      * 路由信息Redis保存的key
      */
     String ROUTE_KEY = SecurityConstants.CLOUD_PREFIX + "ROUTE_LIST";
+
+
+    /**
+     * 标签 header key
+     */
+    String HEADER_LABEL = "x-label";
 
 }

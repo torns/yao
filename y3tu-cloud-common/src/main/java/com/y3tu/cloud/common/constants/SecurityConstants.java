@@ -17,6 +17,11 @@ public interface SecurityConstants {
     String CLOUD_PREFIX = "y3tu-cloud-";
 
     /**
+     * 用户信息头
+     */
+    String USER_HEADER = "x-user-header";
+
+    /**
      * 项目的license
      */
     String LICENSE = "made by y3tu";
@@ -88,4 +93,15 @@ public interface SecurityConstants {
      * 角色信息头
      */
     String ROLE_HEADER = "x-role-header";
+
+    /**
+     * oauth token
+     */
+    String OAUTH_TOKEN_URL = "/oauth/token";
+
+    /**
+     * 手机登录URL
+     */
+    String MOBILE_TOKEN_URL = "/mobile/token";
+
 }

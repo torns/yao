@@ -1,12 +1,21 @@
-package com.y3tu.cloud.gateway.entity;
+package com.y3tu.cloud.common.vo;
 
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * <p>
+ * 动态路由配置表
+ * </p>
+ *
+ * @author y3tu
+ */
 @Data
-public class SysZuulRoute implements Serializable {
+public class ZuulRouteVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * router Id
@@ -52,5 +61,6 @@ public class SysZuulRoute implements Serializable {
      * 删除标识（0-正常,1-删除）
      */
     private String delFlag;
+
 
 }

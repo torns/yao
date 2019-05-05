@@ -29,6 +29,12 @@
             <version>${y3tu-tool-version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.y3tu</groupId>
+            <artifactId>y3tu-tool-cache</artifactId>
+            <version>${y3tu-tool-version}</version>
+        </dependency>
+
 
         <!--服务注册-->
         <dependency>
@@ -89,28 +95,18 @@
         <dependency>
             <groupId>org.springframework.security.oauth.boot</groupId>
             <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.security.oauth</groupId>
-                    <artifactId>spring-security-oauth2</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>2.1.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>
-            <version>2.3.3.RELEASE</version>
+            <version>2.3.5.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
             <version>${spring-boot-admin-version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
     </dependencies>
