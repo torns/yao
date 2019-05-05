@@ -1,73 +1,44 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import util from '@/libs/emums.js'
-import {validatenull} from '@/libs/validate.js'
-import store from '@/store/index'
-import {GetMenu} from '@/api/menu'
-import {frameInRoutes} from '@/router/routes'
+import Router from 'vue-router'
 
-// 路由数据
-import routes from './routes'
+// in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
+// detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-// 导出路由 在 main.js 里使用
-const router = new VueRouter({
-  routes
-})
+/* Layout */
+import Layout from '../views/layout/Layout'
 
 /**
- * 路由拦截
- * 权限验证
- */
-router.beforeEach((to, from, next) => {
-  if (validatenull(store.state.d2admin.user.accessToken) && !validatenull(util.getToken())) {
-    // 登录了还没有查询菜单
-    // 查询用户菜单
-    GetMenu().then(res => {
-      // 设置用户菜单
-      store.commit('d2admin/user/SET_MENU', res.data)
-      let oRoutes = util.formatRoutes(res.data)
-      // 多页面控制: 处理路由 得到每一级的路由设置
-      store.commit('d2admin/page/init', [].concat(frameInRoutes, oRoutes))
-      // 设置侧边栏菜单
-      store.commit('d2admin/menu/asideSet', res.data)
-      // 设置顶栏菜单
-      store.commit('d2admin/menu/headerSet', res.data)
-      router.addRoutes(oRoutes)
-      next({name: 'index'})
-    }).catch(() => {
-      // 查询菜单失败 跳转到登陆界面
-      next({name: 'login'})
-    })
-  } else {
-    // 验证当前路由所有的匹配中是否需要有登陆验证的
-    if (to.matched.some(r => r.meta.requiresAuth)) {
-      const token = util.getToken()
-      if (!validatenull(token)) {
-        // token不为空,直接放行
-        next()
-      } else {
-        // 没有token 跳转到登陆界面
-        next({
-          name: 'login'
-        })
-      }
-    } else {
-      // 不需要身份校验 直接通过
-      next()
-    }
+ * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
+ * alwaysShow: true               if set true, will always show the root menu, whatever its child routes length
+ *                                if not set alwaysShow, only more than one route under the children
+ *                                it will becomes nested mode, otherwise not show the root menu
+ * redirect: noredirect           if `redirect:noredirect` will no redirct in the breadcrumb
+ * name:'router-name'             the name is used by <keep-alive> (must set!!!)
+ * meta : {
+    title: 'title'               the name show in submenu and breadcrumb (recommend set)
+    icon: 'svg-name'             the icon show in the sidebar,
   }
-})
+ **/
+export const constantRouterMap = [
+    {path: '/login', component: () => import('@/views/login/index'), hidden: true},
+    {path: '/404', component: () => import('@/views/404'), hidden: true},
 
-router.afterEach(to => {
-  // 需要的信息
-  const app = router.app
-  const {name, params, query} = to
-  // 多页控制 打开新的页面
-  app.$store.commit('d2admin/page/open', {name, params, query})
-  // 更改标题
-  util.title(to.query.title ? to.query.title : to.meta.title)
+    {
+        path: '/',
+        component: Layout,
+        redirect: '/dashboard',
+        name: 'Dashboard',
+        hidden: true,
+        children: [{
+            path: 'dashboard',
+            component: () => import('@/views/dashboard/index')
+        }]
+    },
+]
+export default new Router({
+    //  mode: 'history', //后端支持可开
+    scrollBehavior: () => ({y: 0}),
+    routes: constantRouterMap
 })
-
-export default router

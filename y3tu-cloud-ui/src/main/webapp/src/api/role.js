@@ -1,79 +1,46 @@
-import request from '@/plugin/axios'
+import request from '@/utils/request'
 
-export function roleList () {
-  return request({
-    url: '/admin/role/roleList',
-    method: 'get'
-  })
+export const fetchRolePage = (param) => {
+    return request({
+        url: '/admin/role/page',
+        method: 'get',
+        params: param
+    })
 }
 
-export function fetchList (query) {
-  return request({
-    url: '/admin/role/rolePage',
-    method: 'get',
-    params: query
-  })
+export const getRoleInfoById = (id) => {
+    return request({
+        url: '/admin/role/' + id,
+        method: 'get'
+    })
 }
 
-export function deptRoleList (deptId) {
-  return request({
-    url: '/admin/role/roleList/' + deptId,
-    method: 'get'
-  })
+export const saveRole = (role) => {
+    return request({
+        url: '/admin/role',
+        method: 'post',
+        data: role
+    })
 }
 
-export function getObj (id) {
-  return request({
-    url: '/admin/role/' + id,
-    method: 'get'
-  })
+export const updateRole = (role) => {
+    return request({
+        url: '/admin/role',
+        method: 'put',
+        data: role
+    })
+}
+export const deleteRoleInfoById = (id) => {
+    return request({
+        url: '/admin/role/' + id,
+        method: 'delete'
+    })
 }
 
-export function addObj (obj) {
-  return request({
-    url: '/admin/role/',
-    method: 'post',
-    data: obj
-  })
+export const listRoleInfo = () => {
+    return request({
+        url: '/admin/role',
+        method: 'get'
+    })
 }
 
-export function putObj (obj) {
-  return request({
-    url: '/admin/role/',
-    method: 'put',
-    data: obj
-  })
-}
-
-export function delObj (id) {
-  return request({
-    url: '/admin/role/' + id,
-    method: 'delete'
-  })
-}
-
-export function permissionUpd (roleId, menuIds) {
-  return request({
-    url: '/admin/role/roleMenuUpd',
-    method: 'put',
-    data: {
-      roleId: roleId,
-      menuIds: menuIds
-    }
-  })
-}
-
-export function fetchRoleTree (roleName) {
-  return request({
-    url: '/admin/menu/roleTree/' + roleName,
-    method: 'get'
-  })
-}
-
-export function fetchDeptTree (query) {
-  return request({
-    url: '/admin/dept/tree',
-    method: 'get',
-    params: query
-  })
-}

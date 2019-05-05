@@ -1,46 +1,45 @@
-import request from '@/plugin/axios'
+import request from '@/utils/request'
 
-export function GetMenu () {
-  return request({
-    url: '/admin/menu/userMenu',
-    method: 'get'
-  })
+export function GetMenu() {
+    return request({
+        url: '/admin/resource/menu/tree',
+        method: 'get'
+    })
 }
 
-export function fetchTree (query) {
-  return request({
-    url: '/admin/menu/allTree',
-    method: 'get',
-    params: query
-  })
+export function getAllReource() {
+    return request({
+        url: '/admin/resource/tree',
+        method: 'get'
+    })
 }
 
-export function addObj (obj) {
-  return request({
-    url: '/admin/menu/',
-    method: 'post',
-    data: obj
-  })
+export function saveReource(resource) {
+    return request({
+        url: '/admin/resource',
+        method: 'post',
+        data: resource
+    })
 }
 
-export function getObj (id) {
-  return request({
-    url: '/admin/menu/' + id,
-    method: 'get'
-  })
+export const updateReource = (resource) => {
+    return request({
+        url: '/admin/resource',
+        method: 'put',
+        data: resource
+    })
 }
 
-export function delObj (id) {
-  return request({
-    url: '/admin/menu/' + id,
-    method: 'delete'
-  })
+export const getResourceById = (id) => {
+    return request({
+        url: 'admin/resource/id/' + id,
+        method: 'get'
+    })
 }
 
-export function putObj (obj) {
-  return request({
-    url: '/admin/menu/',
-    method: 'put',
-    data: obj
-  })
+export const deleteResourceById = (id) => {
+    return request({
+        url: 'admin/resource/id/' + id,
+        method: 'delete'
+    })
 }

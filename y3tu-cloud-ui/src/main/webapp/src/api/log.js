@@ -1,39 +1,10 @@
-import request from '@/plugin/axios'
+import request from '@/utils/request'
 
-export function fetchList (query) {
-  return request({
-    url: '/admin/log/logPage',
-    method: 'get',
-    params: query
-  })
+export const fetchLogPage = (param) => {
+    return request({
+        url: '/syslog/log/page',
+        method: 'get',
+        params: param
+    })
 }
 
-export function delObj (id) {
-  return request({
-    url: '/admin/log/' + id,
-    method: 'delete'
-  })
-}
-
-export function addObj (obj) {
-  return request({
-    url: '/admin/user/',
-    method: 'post',
-    data: obj
-  })
-}
-
-export function getObj (id) {
-  return request({
-    url: '/admin/user/' + id,
-    method: 'get'
-  })
-}
-
-export function putObj (obj) {
-  return request({
-    url: '/admin/user/',
-    method: 'put',
-    data: obj
-  })
-}

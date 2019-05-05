@@ -1,46 +1,59 @@
-import request from '@/plugin/axios'
+import request from '@/utils/request'
 
-export function fetchList (query) {
-  return request({
-    url: '/admin/dict/dictPage',
-    method: 'get',
-    params: query
-  })
+export const saveDict = (data) => {
+    return request({
+        url: '/admin/dict',
+        method: 'post',
+        data: data
+    })
 }
 
-export function addObj (obj) {
-  return request({
-    url: '/admin/dict/',
-    method: 'post',
-    data: obj
-  })
+export const updateDict = (data) => {
+    return request({
+        url: '/admin/dict',
+        method: 'put',
+        data: data
+    })
 }
 
-export function getObj (id) {
-  return request({
-    url: '/admin/dict/' + id,
-    method: 'get'
-  })
+export const getTopDictList = () => {
+    return request({
+        url: '/admin/dict/top',
+        method: 'get'
+    })
+}
+export const getByParentId = (parentId) => {
+    return request({
+        url: '/admin/dict/parent/' + parentId,
+        method: 'get'
+    })
 }
 
-export function delObj (row) {
-  return request({
-    url: '/admin/dict/' + row.id + '/' + row.type,
-    method: 'delete'
-  })
+export const getById = (id) => {
+    return request({
+        url: '/admin/dict/id/' + id,
+        method: 'get'
+    })
 }
 
-export function putObj (obj) {
-  return request({
-    url: '/admin/dict/',
-    method: 'put',
-    data: obj
-  })
+export const deleteDictAndSubDict = (id) => {
+    return request({
+        url: '/admin/dict/id/parent/' + id,
+        method: 'delete'
+    })
 }
 
-export function remote (type) {
-  return request({
-    url: '/admin/dict/type/' + type,
-    method: 'get'
-  })
+export const delteById = (id) => {
+    return request({
+        url: '/admin/dict/id/' + id,
+        method: 'delete'
+    })
+}
+
+export const fetchPage = (query) => {
+    return request({
+        url: '/admin/dict/page',
+        method: 'get',
+        params: query
+    })
 }
