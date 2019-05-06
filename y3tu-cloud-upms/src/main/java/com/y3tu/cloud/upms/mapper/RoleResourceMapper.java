@@ -1,6 +1,6 @@
 package com.y3tu.cloud.upms.mapper;
 
-import com.y3tu.cloud.upms.model.entity.RolePermission;
+import com.y3tu.cloud.upms.model.entity.RoleResource;
 import com.y3tu.tool.web.base.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.y3tu.tool.web.base.mapper.BaseMapper;
  * @author y3tu
  * @date  2018-08-05
  */
-public interface RolePermissionMapper extends BaseMapper<RolePermission> {
+public interface RoleResourceMapper extends BaseMapper<RoleResource> {
 
 }

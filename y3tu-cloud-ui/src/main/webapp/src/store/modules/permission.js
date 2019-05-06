@@ -1,10 +1,5 @@
-import {
-    constantRouterMap
-} from '@/router'
-import {
-    validatenull,
-    validateURL
-} from '@/utils/validate'
+import {constantRouterMap} from '@/router'
+import {validatenull, validateURL} from '@/utils/validate'
 
 import {
     GetMenu

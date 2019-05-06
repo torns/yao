@@ -53,8 +53,8 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Fisher Service API")
-                .description("Fisher Service 接口文档说明")
+                .title("Spring Cloud Service API")
+                .description("Spring Cloud  Service 接口文档说明")
                 .contact(new Contact("y3tu", "https://github.com/y3tu/y3tu-cloud", "14643092@qq.com"))
                 .version("1.0")
                 .build();

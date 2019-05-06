@@ -1,5 +1,6 @@
 package com.y3tu.cloud.auth.config;
 
+import com.y3tu.cloud.common.config.FilterIgnorePropertiesConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

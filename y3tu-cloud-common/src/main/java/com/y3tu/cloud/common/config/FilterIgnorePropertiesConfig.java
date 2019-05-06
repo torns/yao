@@ -11,15 +11,23 @@ import java.util.List;
 
 /**
  * 忽略的url
+ *
+ * @author y3tu
  */
 @Data
 @RefreshScope
 @ConfigurationProperties(prefix = "ignore")
 @Component
-public class IgnoreUrlPropertiesConfig {
+public class FilterIgnorePropertiesConfig {
 
+    /**
+     * 忽略的url
+     */
     private List<String> urls = new ArrayList<>();
 
+    /**
+     * 忽略的客户端
+     */
     private List<String> client = new ArrayList<>();
 
 }

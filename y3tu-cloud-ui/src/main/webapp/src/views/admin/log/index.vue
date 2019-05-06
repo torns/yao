@@ -107,10 +107,10 @@
         },
         mounted() {
             this.getData()
-            this.sys_log_index_select = this.permissions['/syslog/log/index:select']
+            this.sys_log_index_select = this.resources['/syslog/log/index:select']
         },
         computed: {
-            ...mapGetters(['permissions'])
+            ...mapGetters(['resources'])
         },
         methods: {
             async getData() {

@@ -1,6 +1,6 @@
 package com.y3tu.cloud.gateway.config;
 
-import com.y3tu.cloud.common.config.IgnoreUrlPropertiesConfig;
+import com.y3tu.cloud.common.config.FilterIgnorePropertiesConfig;
 import com.y3tu.cloud.gateway.handler.AccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -27,7 +27,7 @@ import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurity
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
     @Autowired
-    private IgnoreUrlPropertiesConfig filterIgnorePropertiesConfig;
+    private FilterIgnorePropertiesConfig filterIgnorePropertiesConfig;
     @Autowired
     private OAuth2WebSecurityExpressionHandler expressionHandler;
     @Autowired
@@ -66,10 +66,11 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     /**
      * 加密方式
+     *
      * @return
      */
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

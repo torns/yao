@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.y3tu.cloud.common.constants.CommonConstants;
 import com.y3tu.tool.web.base.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,11 +12,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <p>
- * 角色表
+ * 资源表
  * </p>
  *
  * @author y3tu
@@ -25,12 +23,10 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("t_role")
+@TableName("t_resource")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role extends BaseEntity {
-
-    private static final long serialVersionUID = 1L;
+public class Resource extends BaseEntity {
 
     /**
      * 主键
@@ -45,9 +41,14 @@ public class Role extends BaseEntity {
     /**
      * 创建时间
      */
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField("create_time")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+    /**
+     * 是否删除 0:否;1:是
+     */
+    @TableField("del_flag")
+    private Integer delFlag;
     /**
      * 更新人
      */
@@ -56,46 +57,64 @@ public class Role extends BaseEntity {
     /**
      * 更新时间
      */
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField("update_time")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
     /**
-     * 角色名称
+     * 描述
+     */
+    private String description;
+    /**
+     * 权限名称
      */
     private String name;
     /**
-     * 是否删除 0:否;1:是
+     * 权限父Id
      */
-    @TableField("del_flag")
-    private Integer delFlag;
+    @TableField("parent_id")
+    private String parentId;
     /**
-     * 默认角色
+     * 权限类型
      */
-    @TableField("default_role")
-    private Boolean defaultRole;
+    private Integer type;
+    /**
+     * 排列权重顺序
+     */
+    private int sort;
+    /**
+     * 前台页面组件
+     */
+    private String component;
+    /**
+     * 菜单路径
+     */
+    private String path;
+    /**
+     * 标题
+     */
+    private String title;
+    /**
+     * 图标
+     */
+    private String icon;
+    /**
+     * 权限编码
+     */
+    private String permission;
+    /**
+     * 按钮类型
+     */
+    @TableField("button_type")
+    private String buttonType;
+    /**
+     * 状态
+     */
+    private Integer status;
+    /**
+     * 跳转url
+     */
+    private String url;
 
-    /**
-     * 数据权限类型 0全部默认 1自定义
-     */
-    @TableField("data_type")
-    private Integer dataType = CommonConstants.DATA_TYPE_ALL;
-
-    /**
-     * 备注
-     */
-    private String description;
-
-    /**
-     * 拥有权限
-     */
-    @TableField(exist = false)
-    private List<RoleResource> permissions;
-
-    /**
-     * 所属部门
-     */
-    @TableField(exist = false)
-    private List<RoleDepartment> departments;
 
     @Override
     protected Serializable pkVal() {

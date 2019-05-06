@@ -21,8 +21,8 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("t_role_permission")
-public class RolePermission extends BaseEntity {
+@TableName("t_role_resource")
+public class RoleResource extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 

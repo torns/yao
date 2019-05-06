@@ -215,15 +215,15 @@
             }
         },
         computed: {
-            ...mapGetters(['permissions'])
+            ...mapGetters(['resources'])
         },
 
         mounted() {
             this.getList()
-            this.sys_user_add = this.permissions['/admin/user:add']
-            this.sys_user_update = this.permissions['/admin/user:update']
-            this.sys_user_delete = this.permissions['/admin/user:delete']
-            this.sys_user_select = this.permissions['/admin/user:select']
+            this.sys_user_add = this.resources['/admin/user:add']
+            this.sys_user_update = this.resources['/admin/user:update']
+            this.sys_user_delete = this.resources['/admin/user:delete']
+            this.sys_user_select = this.resources['/admin/user:select']
         },
 
         methods: {

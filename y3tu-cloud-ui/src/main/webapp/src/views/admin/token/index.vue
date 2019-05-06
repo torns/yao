@@ -131,10 +131,10 @@
         },
         mounted() {
             this.getData()
-            this.sys_token_index_delete = this.permissions['/admin/token/index:delete']
+            this.sys_token_index_delete = this.resources['/admin/token/index:delete']
         },
         computed: {
-            ...mapGetters(['permissions']),
+            ...mapGetters(['resources']),
             ...mapGetters(['token'])
         },
         methods: {

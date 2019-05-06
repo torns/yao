@@ -25,7 +25,7 @@
             </el-table-column>
             <el-table-column label="资源权限" align="center">
                 <template slot-scope="scope">
-                    <span>{{scope.row.permission}}</span>
+                    <span>{{scope.row.resource}}</span>
                 </template>
             </el-table-column>
             <el-table-column label="请求url" align="center">
@@ -84,8 +84,8 @@
                     <el-form-item label="资源链接" prop="path">
                         <el-input v-model="dialog.data.path" placeholder="请输入资源链接"></el-input>
                     </el-form-item>
-                    <el-form-item label="资源权限" prop="permission">
-                        <el-input v-model="dialog.data.permission" placeholder="请输入资源权限"></el-input>
+                    <el-form-item label="资源权限" prop="resource">
+                        <el-input v-model="dialog.data.resource" placeholder="请输入资源权限"></el-input>
                     </el-form-item>
                     <el-form-item label="请求url" prop="path">
                         <el-input v-model="dialog.data.url" placeholder="请输入请求url"></el-input>
@@ -153,7 +153,7 @@
                         name: '',
                         type: null,
                         path: '',
-                        permission: '',
+                        resource: '',
                         component: '',
                         icon: '',
                         sort: 100,
@@ -205,15 +205,15 @@
                     return '添加失败'
                 }
             },
-            ...mapGetters(['permissions'])
+            ...mapGetters(['resources'])
         },
         mounted() {
             this.getData()
 
-            this.sys_resource_add = this.permissions['/admin/menu:add']
-            this.sys_resource_delete = this.permissions['/admin/menu:delete']
-            this.sys_resource_select = this.permissions['/admin/menu:select']
-            this.sys_resource_update = this.permissions['/admin/menu:update']
+            this.sys_resource_add = this.resources['/admin/menu:add']
+            this.sys_resource_delete = this.resources['/admin/menu:delete']
+            this.sys_resource_select = this.resources['/admin/menu:select']
+            this.sys_resource_update = this.resources['/admin/menu:update']
         },
         methods: {
             async getData() {
@@ -302,7 +302,7 @@
                     if (res.code === 0) {
                         this.dialog.data.parentId = res.data.id
                         this.dialog.data.component = res.data.component
-                        this.dialog.data.permission = res.data.permission
+                        this.dialog.data.resource = res.data.resource
                     } else {
                         this.$message.error('数据载入失败')
                     }
@@ -314,7 +314,7 @@
                 this.dialog.data.name = null
                 this.dialog.data.type = null
                 this.dialog.data.path = null
-                this.dialog.data.permission = null
+                this.dialog.data.resource = null
                 this.dialog.data.component = null
                 this.dialog.data.icon = null
                 this.dialog.data.sort = 1

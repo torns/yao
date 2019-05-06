@@ -135,10 +135,10 @@
         },
         mounted() {
             this.getData()
-            this.sys_role_add = this.permissions['/admin/role:add']
-            this.sys_role_update = this.permissions['/admin/role:update']
-            this.sys_role_delete = this.permissions['/admin/role:delete']
-            this.sys_role_select = this.permissions['/admin/role:select']
+            this.sys_role_add = this.resources['/admin/role:add']
+            this.sys_role_update = this.resources['/admin/role:update']
+            this.sys_role_delete = this.resources['/admin/role:delete']
+            this.sys_role_select = this.resources['/admin/role:select']
         },
         computed: {
             successMessage() {
@@ -147,7 +147,7 @@
                 }
                 return '添加角色成功！'
             },
-            ...mapGetters(['permissions'])
+            ...mapGetters(['resources'])
         },
         methods: {
             async getData() {

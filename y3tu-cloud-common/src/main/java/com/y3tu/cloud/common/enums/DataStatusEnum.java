@@ -1,24 +1,24 @@
 package com.y3tu.cloud.common.enums;
 
 /**
- * @description: 用户状态枚举
+ * 数据状态枚举
  */
 public enum DataStatusEnum {
 
-    NORMAL("0", "正常"),
-    LOCK("1","删除");
+    NORMAL(0, "正常"),
+    DELETE(1, "删除");
 
 
-    private String code;
+    private int code;
 
     private String message;
 
-    DataStatusEnum(String code, String message) {
+    DataStatusEnum(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 

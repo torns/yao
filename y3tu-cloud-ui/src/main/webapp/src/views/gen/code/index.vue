@@ -131,12 +131,12 @@
             }
         },
         computed: {
-            ...mapGetters(['permissions'])
+            ...mapGetters(['resources'])
         },
         mounted() {
             this.getData()
-            this.sys_gen_select = this.permissions['/gen/code:select']
-            this.sys_gen_download = this.permissions['/gen/code:download']
+            this.sys_gen_select = this.resources['/gen/code:select']
+            this.sys_gen_download = this.resources['/gen/code:download']
         },
         methods: {
             async getData() {

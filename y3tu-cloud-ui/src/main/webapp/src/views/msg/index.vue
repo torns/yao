@@ -150,11 +150,11 @@
             }
         },
         computed: {
-            ...mapGetters(['permissions'])
+            ...mapGetters(['resources'])
         },
         mounted() {
             this.getList()
-            this.sys_msg_select = this.permissions['/tsc/msg:select']
+            this.sys_msg_select = this.resources['/tsc/msg:select']
         },
         methods: {
             getList() {

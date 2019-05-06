@@ -92,10 +92,10 @@
         },
         mounted() {
             this.getData()
-            this.sys_log_exception_select = this.permissions['/syslog/log/exception:select']
+            this.sys_log_exception_select = this.resources['/syslog/log/exception:select']
         },
         computed: {
-            ...mapGetters(['permissions'])
+            ...mapGetters(['resources'])
         },
         methods: {
             async getData() {

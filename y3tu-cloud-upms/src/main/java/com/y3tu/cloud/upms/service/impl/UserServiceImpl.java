@@ -1,15 +1,14 @@
 package com.y3tu.cloud.upms.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.y3tu.cloud.common.constants.CommonConstants;
 import com.y3tu.cloud.common.enums.UserStatusEnum;
 import com.y3tu.cloud.common.vo.UserVO;
 import com.y3tu.cloud.upms.mapper.UserMapper;
 import com.y3tu.cloud.upms.model.dto.UserDTO;
-import com.y3tu.cloud.upms.model.entity.Permission;
+import com.y3tu.cloud.upms.model.entity.Resource;
 import com.y3tu.cloud.upms.model.entity.Role;
 import com.y3tu.cloud.upms.model.entity.User;
-import com.y3tu.cloud.upms.service.PermissionService;
+import com.y3tu.cloud.upms.service.ResourceService;
 import com.y3tu.cloud.upms.service.RoleService;
 import com.y3tu.cloud.upms.service.UserRoleService;
 import com.y3tu.cloud.upms.service.UserService;
@@ -36,7 +35,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
     @Autowired
     RoleService roleService;
     @Autowired
-    PermissionService permissionService;
+    ResourceService resourceService;
     @Autowired
     UserRoleService userRoleService;
     @Autowired
@@ -53,8 +52,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
             UserDTO userDTO = new UserDTO();
             BeanUtil.copyProperties(user, userDTO);
             userDTO.setRoles(roleList);
-            List<Permission> permissionList = permissionService.findByUserId(user.getId());
-            userDTO.setPermissions(permissionList);
+            List<Resource> resourceList = resourceService.findByUserId(user.getId());
+            userDTO.setResources(resourceList);
             return userDTO;
         }
         return null;

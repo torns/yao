@@ -3,7 +3,7 @@ package com.y3tu.cloud.gateway.filter.pre;
 import com.alibaba.fastjson.JSONObject;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.y3tu.cloud.common.config.IgnoreUrlPropertiesConfig;
+import com.y3tu.cloud.common.config.FilterIgnorePropertiesConfig;
 import com.y3tu.cloud.common.constants.SecurityConstants;
 import com.y3tu.tool.core.collection.CollectionUtil;
 import com.y3tu.tool.core.exception.BusinessException;
@@ -44,7 +44,7 @@ public class ValidateCodeFilter extends ZuulFilter {
     private RedisTemplate redisTemplate;
 
     @Autowired
-    private IgnoreUrlPropertiesConfig filterIgnorePropertiesConfig;
+    private FilterIgnorePropertiesConfig filterIgnorePropertiesConfig;
 
     @Override
     public String filterType() {

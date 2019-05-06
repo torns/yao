@@ -1,7 +1,7 @@
 package com.y3tu.cloud.gateway.feign.fallback;
 
-import com.y3tu.cloud.common.vo.MenuVO;
-import com.y3tu.cloud.gateway.feign.MenuService;
+import com.y3tu.cloud.common.vo.ResourceVO;
+import com.y3tu.cloud.gateway.feign.ResourceService;
 import com.y3tu.tool.core.collection.CollectionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,12 @@ import java.util.Set;
  */
 @Slf4j
 @Service
-public class MenuServiceFallbackImpl implements MenuService {
+public class ResourceServiceFallbackImpl implements ResourceService {
+
+
     @Override
-    public Set<MenuVO> findMenuByRole(String role) {
-        log.error("调用{}异常{}", "findMenuByRole", role);
+    public Set<ResourceVO> listResourceByRole(String roleCode) {
+        log.error("调用{}异常{}", "listResourceByRole", roleCode);
         return CollectionUtil.newHashSet();
     }
 }

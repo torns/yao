@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.y3tu.tool.web.base.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -22,8 +23,8 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("t_department")
+@Accessors(chain = true)
 public class Department extends BaseEntity<Department> {
-    private static final long serialVersionUID = 1L;
 
     /**
      *

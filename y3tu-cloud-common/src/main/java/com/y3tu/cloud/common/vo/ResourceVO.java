@@ -1,24 +1,26 @@
 package com.y3tu.cloud.common.vo;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 菜单权限表
+ * 资源(菜单和按钮)
  *
  * @author y3tu
  */
 @Data
-public class MenuVO implements Serializable {
+@Accessors(chain = true)
+public class ResourceVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 菜单ID
      */
-    private Integer menuId;
+    private Integer id;
     /**
      * 菜单名称
      */
@@ -75,7 +77,7 @@ public class MenuVO implements Serializable {
 
     @Override
     public int hashCode() {
-        return menuId.hashCode();
+        return id.hashCode();
     }
 
     /**
@@ -86,9 +88,9 @@ public class MenuVO implements Serializable {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof MenuVO) {
-            Integer targetMenuId = ((MenuVO) obj).getMenuId();
-            return menuId.equals(targetMenuId);
+        if (obj instanceof ResourceVO) {
+            Integer targetMenuId = ((ResourceVO) obj).getId();
+            return id.equals(targetMenuId);
         }
         return super.equals(obj);
     }

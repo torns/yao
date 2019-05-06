@@ -3,10 +3,10 @@ package com.y3tu.cloud.upms.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.y3tu.cloud.upms.model.entity.Role;
 import com.y3tu.cloud.upms.model.entity.RoleDepartment;
-import com.y3tu.cloud.upms.model.entity.RolePermission;
+import com.y3tu.cloud.upms.model.entity.RoleResource;
 import com.y3tu.cloud.upms.model.entity.UserRole;
 import com.y3tu.cloud.upms.service.RoleDepartmentService;
-import com.y3tu.cloud.upms.service.RolePermissionService;
+import com.y3tu.cloud.upms.service.RoleResourceService;
 import com.y3tu.cloud.upms.service.RoleService;
 import com.y3tu.cloud.upms.service.UserRoleService;
 import com.y3tu.tool.core.pojo.R;
@@ -35,7 +35,7 @@ public class RoleController extends BaseController<RoleService, Role> {
     @Autowired
     RoleService roleService;
     @Autowired
-    private RolePermissionService rolePermissionService;
+    private RoleResourceService roleResourceService;
     @Autowired
     private RoleDepartmentService roleDepartmentService;
     @Autowired
@@ -48,7 +48,7 @@ public class RoleController extends BaseController<RoleService, Role> {
         PageInfo<Role> pageInfo = service.queryPage(PageInfo.mapToPageInfo(params), params);
         for (Role role : pageInfo.getList()) {
             //角色拥有权限
-            List<RolePermission> permissions = rolePermissionService.list(new QueryWrapper<RolePermission>().eq("role_id", role.getId()));
+            List<RoleResource> permissions = roleResourceService.list(new QueryWrapper<RoleResource>().eq("role_id", role.getId()));
             //角色所属部门
             List<RoleDepartment> departments = roleDepartmentService.list(new QueryWrapper<RoleDepartment>().eq("role_id", role.getId()));
             role.setPermissions(permissions);
@@ -76,13 +76,13 @@ public class RoleController extends BaseController<RoleService, Role> {
                           @RequestParam(required = false) String[] permIds) {
 
         //删除其关联权限
-        rolePermissionService.remove(new QueryWrapper<RolePermission>().eq("role_id", roleId));
+        roleResourceService.remove(new QueryWrapper<RoleResource>().eq("role_id", roleId));
         //分配新权限
         for (String permId : permIds) {
-            RolePermission rolePermission = new RolePermission();
-            rolePermission.setRoleId(roleId);
-            rolePermission.setPermissionId(permId);
-            rolePermissionService.save(rolePermission);
+            RoleResource roleResource = new RoleResource();
+            roleResource.setRoleId(roleId);
+            roleResource.setPermissionId(permId);
+            roleResourceService.save(roleResource);
         }
         return R.success();
     }
@@ -122,7 +122,7 @@ public class RoleController extends BaseController<RoleService, Role> {
         for (String id : ids) {
             roleService.removeById(id);
             //删除关联菜单权限
-            rolePermissionService.remove(new QueryWrapper<RolePermission>().eq("role_id", id));
+            roleResourceService.remove(new QueryWrapper<RoleResource>().eq("role_id", id));
             //删除关联部门数据
             roleDepartmentService.remove(new QueryWrapper<RoleDepartment>().eq("role_id", id));
         }
