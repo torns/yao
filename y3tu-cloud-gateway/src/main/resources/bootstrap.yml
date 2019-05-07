@@ -1,11 +1,14 @@
 spring:
   application:
-    name: y3tu-cloud-gateway-service
+    name: gateway-service
   cloud:
     nacos:
       config:
-        server-addr: 127.0.0.1:8848
+        server-addr: 132.232.11.210:8848
         file-extension: yml
         group: GATE_GROUP
   profiles:
     active: dev
+
+
+

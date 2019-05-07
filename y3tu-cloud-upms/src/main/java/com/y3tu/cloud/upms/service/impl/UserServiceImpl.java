@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -52,7 +54,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
             UserDTO userDTO = new UserDTO();
             BeanUtil.copyProperties(user, userDTO);
             userDTO.setRoles(roleList);
-            List<Resource> resourceList = resourceService.findByUserId(user.getId());
+            List<Role> roles = userRoleService.findByUserId(user.getId());
+            List<String> roleStrList = roles.stream().map(role -> role.getRoleCode()).collect(Collectors.toList());
+            Set<Resource> resourceList = resourceService.getResourceRoleCodes(roleStrList);
             userDTO.setResources(resourceList);
             return userDTO;
         }

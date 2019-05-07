@@ -75,7 +75,7 @@ public class Department extends BaseEntity<Department> {
     /**
      *
      */
-    private String title;
+    private String name;
     /**
      * 是否为父节点(含子节点) 默认false
      */
@@ -86,7 +86,7 @@ public class Department extends BaseEntity<Department> {
      * 父节点名称
      */
     @TableField(exist = false)
-    private String parentTitle;
+    private String parentName;
 
     /**
      * 主键值

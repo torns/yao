@@ -23,7 +23,7 @@
             sres.*
         from
             t_role as sr
-                left join t_role_resource as srr on sr.role_id = srr.role_id
+                left join t_role_resource as srr on sr.id = srr.role_id
                 left join t_resource as sres on srr.resource_id = sres.id
         where
             sr.del_flag = 0

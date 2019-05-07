@@ -41,23 +41,21 @@
 
     <!-- userVo结果集 -->
     <resultMap id="userVoResultMap" type="com.y3tu.cloud.common.vo.UserVO">
-        <id column="user_id" property="userId"/>
+        <id column="id" property="id"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
-        <result column="salt" property="salt"/>
-        <result column="phone" property="phone" />
+        <result column="mobile" property="mobile" />
         <result column="avatar" property="avatar" />
-        <result column="label" property="label" />
         <result column="ucreate_time" property="createTime"/>
         <result column="uupdate_time" property="updateTime"/>
         <result column="udel_flag" property="delFlag"/>
-        <result column="deptId" property="deptId"/>
-        <result column="deptName" property="deptName"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="departmentName" property="departmentName"/>
         <collection property="roleList" ofType="com.y3tu.cloud.common.vo.RoleVO">
-            <id column="role_id" property="roleId" />
-            <result column="role_name" property="roleName" />
+            <id column="id" property="id" />
+            <result column="name" property="name" />
             <result column="role_code" property="roleCode" />
-            <result column="role_desc" property="roleDesc" />
+            <result column="description" property="description" />
             <result column="rcreate_time" property="createTime" />
             <result column="rupdate_time" property="updateTime" />
         </collection>
@@ -65,28 +63,25 @@
 
     <sql id="selectUserVo">
         SELECT
-            `user`.user_id,
+            `user`.id,
             `user`.username,
             `user`.`password`,
-            `user`.salt,
-            `user`.phone,
+            `user`.mobile,
             `user`.avatar,
-            `user`.label,
-            `user`.dept_id,
+            `user`.department_id,
             `user`.create_time AS ucreate_time,
             `user`.update_time AS uupdate_time,
             `user`.del_flag AS udel_flag,
-            `user`.dept_id AS deptId,
-            r.role_id,
-            r.role_name,
+            r.id,
+            r.name,
             r.role_code,
-            r.role_desc,
+            r.description,
             r.create_time AS rcreate_time,
             r.update_time AS rupdate_time
         FROM
-            sys_user AS `user`
-                LEFT JOIN sys_user_role AS ur ON ur.user_id = `user`.user_id
-                LEFT JOIN sys_role AS r ON r.role_id = ur.role_id
+            t_user AS `user`
+                LEFT JOIN t_user_role AS ur ON ur.user_id = `user`.id
+                LEFT JOIN t_role AS r ON r.id = ur.role_id
     </sql>
 
     <select id="queryPage" resultType="com.y3tu.cloud.upms.model.entity.User" parameterType="java.util.Map">

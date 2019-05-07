@@ -116,7 +116,7 @@ public class User extends BaseEntity {
      * 部门名称
      */
     @TableField(exist = false)
-    private String departmentTitle;
+    private String departmentName;
 
 
     @Override

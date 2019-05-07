@@ -1,6 +1,5 @@
-package com.y3tu.cloud.auth.util;
+package com.y3tu.cloud.auth.security;
 
-import com.y3tu.cloud.common.constants.SecurityConstants;
 import com.y3tu.cloud.common.enums.UserStatusEnum;
 import com.y3tu.cloud.common.vo.RoleVO;
 import com.y3tu.cloud.common.vo.UserVO;
@@ -15,37 +14,34 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * 扩展UserDetails信息 满足业务需求
- *
- * @author y3tu
+ * @description: security 用户对象
  */
 @Data
 public class UserDetailsImpl implements UserDetails {
-    private static final long serialVersionUID = 1L;
-    private Integer userId;
+
+    private static final long serialVersionUID = -2636609458742965698L;
+
+    private String userId;
     private String username;
     private String password;
     private String status;
-    private String label;
-    private List<RoleVO> roleList;
+    private List<RoleVO> roleVos;
+
 
     public UserDetailsImpl(UserVO userVo) {
-        this.userId = userVo.getUserId();
+        this.userId = userVo.getId();
         this.username = userVo.getUsername();
         this.password = userVo.getPassword();
-        this.status = userVo.getDelFlag();
-        this.label = userVo.getLabel();
-        roleList = userVo.getRoleList();
+        this.status = userVo.getDelFlag() + "";
+        this.roleVos = userVo.getRoleList();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        for (RoleVO role : roleList) {
-            authorityList.add(new SimpleGrantedAuthority(role.getRoleCode()));
-        }
-        // 为每一个用户添加一个基本角色
-        authorityList.add(new SimpleGrantedAuthority(SecurityConstants.BASE_ROLE));
+        roleVos.forEach(role -> {
+            authorityList.add(new SimpleGrantedAuthority(role.getName()));
+        });
         return authorityList;
     }
 
@@ -78,5 +74,4 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return StringUtils.equals(UserStatusEnum.NORMAL.getCode() + "", status);
     }
-
 }

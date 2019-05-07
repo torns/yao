@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * 网关
@@ -19,6 +20,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @EnableDefaultExceptionAdvice
 @EnableToolRedis
+@ComponentScan(basePackages = {"com.y3tu.cloud.gateway", "com.y3tu.cloud.common"})
 public class GatewayApplication {
 
     public static void main(String[] args) {

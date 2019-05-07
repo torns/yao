@@ -4,11 +4,12 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, create_by AS createBy, create_time AS createTime, update_by AS updateBy, update_time AS updateTime, name, del_flag AS delFlag, default_role AS defaultRole
+        id, role_code as roleCode,create_by AS createBy, create_time AS createTime, update_by AS updateBy, update_time AS updateTime, name, del_flag AS delFlag, default_role AS defaultRole
     </sql>
 
-	<select id="queryPage" resultType="com.y3tu.cloud.upms.model.entity.Role">
-		select <include refid="Base_Column_List"/>
-		from t_role
-	</select>
+    <select id="queryPage" resultType="com.y3tu.cloud.upms.model.entity.Role">
+        select
+        <include refid="Base_Column_List"/>
+        from t_role
+    </select>
 </mapper>

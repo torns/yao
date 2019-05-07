@@ -67,10 +67,10 @@
             <version>${mysql-connector.version}</version>
         </dependency>
 
+        <!-- jdbc -->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
         <!--接口文档-->

@@ -6,6 +6,7 @@ import com.y3tu.cloud.upms.model.entity.User;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author y3tu
@@ -21,5 +22,5 @@ public class UserDTO extends User {
     /**
      * 用户拥有的权限
      */
-    private List<Resource> resources;
+    private Set<Resource> resources;
 }

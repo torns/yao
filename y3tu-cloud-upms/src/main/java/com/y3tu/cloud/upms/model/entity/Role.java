@@ -37,6 +37,12 @@ public class Role extends BaseEntity {
      */
     @TableId
     private String id;
+
+    /**
+     * 角色编码
+     */
+    @TableField("role_code")
+    private String roleCode;
     /**
      * 创建人
      */

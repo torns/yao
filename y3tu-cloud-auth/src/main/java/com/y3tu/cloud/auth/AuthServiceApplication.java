@@ -1,6 +1,5 @@
 package com.y3tu.cloud.auth;
 
-import com.y3tu.cloud.auth.annotation.EnableAuthJwtTokenStore;
 import com.y3tu.tool.web.annotation.EnableDefaultExceptionAdvice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +14,6 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableAuthJwtTokenStore
 @EnableFeignClients
 @EnableDefaultExceptionAdvice
 @ComponentScan(basePackages = {"com.y3tu.cloud.auth", "com.y3tu.cloud.common"})

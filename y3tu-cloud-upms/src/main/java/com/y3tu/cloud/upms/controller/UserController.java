@@ -134,7 +134,7 @@ public class UserController extends BaseController<UserService, User> {
             // 关联部门
             if (StrUtil.isNotBlank(user.getDepartmentId())) {
                 Department department = departmentService.getById(user.getDepartmentId());
-                user.setDepartmentTitle(department.getTitle());
+                user.setDepartmentName(department.getName());
             }
             // 关联角色
             List<Role> list = userRoleService.findByUserId(user.getId());

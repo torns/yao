@@ -1,16 +1,13 @@
 package com.y3tu.cloud.gateway.config;
 
-import com.alibaba.fastjson.JSONArray;
-import com.y3tu.cloud.common.constants.CommonConstants;
 import com.y3tu.cloud.common.vo.ZuulRouteVO;
 import com.y3tu.tool.core.collection.CollectionUtil;
 import com.y3tu.tool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.netflix.zuul.filters.SimpleRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
-import org.springframework.cloud.netflix.zuul.filters.discovery.DiscoveryClientRouteLocator;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,17 +20,17 @@ import java.util.Set;
  * 动态路由实现
  */
 @Slf4j
-public class DynamicRouteLocator extends DiscoveryClientRouteLocator {
+public class DynamicRouteLocator extends SimpleRouteLocator {
 
     private ZuulProperties properties;
 
-    private RedisTemplate redisTemplate;
+    private JdbcTemplate jdbcTemplate;
 
-    public DynamicRouteLocator(String servletPath, DiscoveryClient discovery, ZuulProperties properties,
-                               ServiceInstance localServiceInstance, RedisTemplate redisTemplate) {
-        super(servletPath, discovery, properties, localServiceInstance);
+    public DynamicRouteLocator(String servletPath, ZuulProperties properties, JdbcTemplate jdbcTemplate) {
+        super(servletPath, properties);
         this.properties = properties;
-        this.redisTemplate = redisTemplate;
+        this.jdbcTemplate = jdbcTemplate;
+        log.info("servletPath:{}",servletPath);
     }
 
     /**
@@ -72,13 +69,9 @@ public class DynamicRouteLocator extends DiscoveryClientRouteLocator {
     private Map<String, ZuulProperties.ZuulRoute> locateRoutesFromCache() {
         Map<String, ZuulProperties.ZuulRoute> routes = new LinkedHashMap<>();
 
-        String vals = (String) redisTemplate.opsForValue().get(CommonConstants.ROUTE_KEY);
-        if (vals == null) {
-            return routes;
-        }
+        List<ZuulRouteVO> zuulRoutes = jdbcTemplate.query("select * from t_zuul_route where del_flag = 0", new BeanPropertyRowMapper<>(ZuulRouteVO.class));
 
-        List<ZuulRouteVO> results = JSONArray.parseArray(vals, ZuulRouteVO.class);
-        for (ZuulRouteVO result : results) {
+        for (ZuulRouteVO result : zuulRoutes) {
             if (StrUtil.isBlank(result.getPath()) && StrUtil.isBlank(result.getUrl())) {
                 continue;
             }

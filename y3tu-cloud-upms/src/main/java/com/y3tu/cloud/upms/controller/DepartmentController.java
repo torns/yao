@@ -118,9 +118,9 @@ public class DepartmentController extends BaseController<DepartmentService, Depa
         list.forEach(item -> {
             if (!CommonConstants.PARENT_ID.equals(item.getParentId())) {
                 Department parent = departmentService.getById(item.getParentId());
-                item.setParentTitle(parent.getTitle());
+                item.setParentName(parent.getName());
             } else {
-                item.setParentTitle("一级部门");
+                item.setParentName("一级部门");
             }
         });
         return list;
