@@ -15,9 +15,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 @EnableDefaultExceptionAdvice
 @EnableToolWeb
-public class UpmsServiceApplication {
+public class UpmsServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UpmsServiceApplication.class, args);
+        SpringApplication.run(UpmsServerApplication.class, args);
     }
 }

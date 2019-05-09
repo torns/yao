@@ -61,8 +61,8 @@
             return {
                 activeName: 'user',
                 loginForm: {
-                    username: 'fisher',
-                    password: 'abc123'
+                    username: 'yxy',
+                    password: 'admin'
                 },
                 loginRules: {
                     username: [{

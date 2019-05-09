@@ -22,7 +22,7 @@ export function login(username, password) {
 
 export function sendMobileCode(mobile) {
     return request({
-        url: '/admin/user/mobile/' + mobile,
+        url: '/upms/user/mobile/' + mobile,
         method: 'get'
     })
 }
@@ -47,7 +47,7 @@ export function mobileLogin(mobile, code) {
 
 export function getInfo(token) {
     return request({
-        url: '/admin/user/info',
+        url: '/upms/user/info',
         method: 'get',
         params: {
             'access_token': token

@@ -38,7 +38,7 @@ public class LogController extends BaseController<LogService, Log> {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ApiOperation(value = "测试日志api")
-    @SysLog(serviceId = ServiceNameConstants.UPMS_SERVICE, moduleName = MODULE_NAME, actionName = "测试")
+    @SysLog(serviceId = ServiceNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "测试")
     public void test() throws Exception {
         logService.test();
     }

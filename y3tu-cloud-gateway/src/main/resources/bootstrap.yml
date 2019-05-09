@@ -1,26 +1,26 @@
 spring:
   application:
-    name: gateway-service
+    name: gateway-server
   cloud:
     nacos:
       config:
         server-addr: 132.232.11.210:8848
         file-extension: yml
-        group: GATE_GROUP
+        group: GATEWAY_GROUP
     gateway:
       discovery:
         locator:
           enabled: true
       routes:
         - id: upms-service
-          uri: lb://upms-service
+          uri: lb://upms-server
           predicates:
             - Path=/upms/**
           filters:
             #去掉/upms/前缀
             - StripPrefix=1
         - id: auth-service
-          uri: lb://auth-service
+          uri: lb://authorization-server
           predicates:
             - Path=/auth/**
           filters:

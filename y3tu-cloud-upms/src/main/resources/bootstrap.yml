@@ -1,6 +1,6 @@
 spring:
   application:
-    name: upms-service
+    name: upms-server
   cloud:
     nacos:
       config:

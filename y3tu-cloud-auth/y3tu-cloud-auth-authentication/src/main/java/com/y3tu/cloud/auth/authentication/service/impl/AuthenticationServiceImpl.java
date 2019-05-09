@@ -2,8 +2,6 @@ package com.y3tu.cloud.auth.authentication.service.impl;
 
 import com.y3tu.cloud.auth.authentication.feign.ResourceService;
 import com.y3tu.cloud.auth.authentication.service.AuthenticationService;
-import com.y3tu.cloud.common.config.FilterIgnorePropertiesConfig;
-import com.y3tu.cloud.common.constants.SecurityConstants;
 import com.y3tu.cloud.common.vo.ResourceVO;
 import com.y3tu.tool.core.collection.CollectionUtil;
 import com.y3tu.tool.core.collection.IterUtil;
@@ -15,9 +13,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.jwt.Jwt;
-import org.springframework.security.jwt.JwtHelper;
-import org.springframework.security.jwt.crypto.sign.InvalidSignatureException;
 import org.springframework.security.jwt.crypto.sign.MacSigner;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
@@ -25,7 +20,6 @@ import org.springframework.util.AntPathMatcher;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -39,8 +33,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
     ResourceService resourceService;
-    @Autowired
-    private FilterIgnorePropertiesConfig filterIgnorePropertiesConfig;
 
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
@@ -102,42 +94,5 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             }
         }
         return hasPermission;
-    }
-
-    @Override
-    public Jwt getJwt(String authentication) {
-        return JwtHelper.decode(StrUtil.subPre(authentication, BEARER_BEGIN_INDEX));
-    }
-
-    @Override
-    public boolean invalidJwtAccessToken(String authentication) {
-        verifier = Optional.ofNullable(verifier).orElse(new MacSigner(signingKey));
-        //是否无效true表示无效
-        boolean invalid = Boolean.TRUE;
-
-        try {
-            Jwt jwt = getJwt(authentication);
-            jwt.verifySignature(verifier);
-            invalid = Boolean.FALSE;
-        } catch (InvalidSignatureException | IllegalArgumentException ex) {
-            log.warn("user token has expired or signature error ");
-        }
-        return invalid;
-    }
-
-    @Override
-    public boolean ignoreAuthentication(String url) {
-        return filterIgnorePropertiesConfig.getUrls().stream().anyMatch(ignoreUrl -> url.startsWith(StrUtil.trim(ignoreUrl)));
-    }
-
-    @Override
-    public boolean hasPermission(HttpServletRequest authRequest) {
-        String authentication = authRequest.getHeader(SecurityConstants.TOKEN_HEADER);
-        //token是否有效
-        if (invalidJwtAccessToken(authentication)) {
-            return Boolean.FALSE;
-        }
-        //从认证服务获取是否有权限
-        return decide(authRequest);
     }
 }

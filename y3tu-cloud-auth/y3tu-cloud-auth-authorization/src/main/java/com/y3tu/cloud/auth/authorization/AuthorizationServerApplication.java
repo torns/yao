@@ -18,7 +18,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableFeignClients
 @EnableDefaultExceptionAdvice
 @EnableAuthJwtTokenStore
-@ComponentScan(basePackages = {"com.y3tu.cloud.auth", "com.y3tu.cloud.common"})
+@ComponentScan(basePackages = {"com.y3tu.cloud.auth.authorization", "com.y3tu.cloud.common"})
 public class AuthorizationServerApplication {
 
     public static void main(String[] args) {

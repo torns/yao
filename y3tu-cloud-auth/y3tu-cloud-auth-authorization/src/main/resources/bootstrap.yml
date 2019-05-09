@@ -1,6 +1,6 @@
 spring:
   application:
-    name: authorization-service
+    name: authorization-server
   cloud:
     nacos:
       config:

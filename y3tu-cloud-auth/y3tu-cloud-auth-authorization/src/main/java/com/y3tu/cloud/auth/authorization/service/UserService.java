@@ -1,6 +1,7 @@
 package com.y3tu.cloud.auth.authorization.service;
 
 import com.y3tu.cloud.auth.authorization.service.fallback.UserServiceFallback;
+import com.y3tu.cloud.common.constants.ServiceNameConstants;
 import com.y3tu.cloud.common.vo.UserVO;
 import feign.Logger;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * feign 调用服务
  * </p>
  */
-@FeignClient(name = "upms-service", fallback = UserServiceFallback.class, configuration = UserService.UserFeignConfig.class)
+@FeignClient(name = ServiceNameConstants.UPMS_SERVER, fallback = UserServiceFallback.class, configuration = UserService.UserFeignConfig.class)
 public interface UserService {
 
     /**

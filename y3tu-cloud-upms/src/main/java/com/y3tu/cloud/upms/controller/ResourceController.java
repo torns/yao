@@ -51,7 +51,7 @@ public class ResourceController extends BaseController<ResourceService, Resource
      *
      * @return
      */
-    @SysLog(serviceId = ServiceNameConstants.UPMS_SERVICE, moduleName = MODULE_NAME, actionName = "根据token查询当前用户权限的菜单树")
+    @SysLog(serviceId = ServiceNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "根据token查询当前用户权限的菜单树")
     @ApiOperation(value = "获取当前用户的菜单树", notes = "根据token查询当前用户权限的菜单树", httpMethod = "GET")
     @GetMapping("/menu/tree")
     public R<List<ResourceTreeDTO>> getMenuTree() {

@@ -41,7 +41,14 @@ public class GateWayExceptionHandlerAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public R handle(RuntimeException ex) {
         log.error("runtime exception:{}", ex.getMessage());
-        return R.error();
+        return R.error(ex.getMessage());
+    }
+
+    @ExceptionHandler(value = {NoPermissionException.class})
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public R handle(NoPermissionException ex) {
+        log.error("NoPermissionException exception:{}", ex.getMessage());
+        return R.error(ex.getMessage());
     }
 
     @ExceptionHandler(value = {Exception.class})
