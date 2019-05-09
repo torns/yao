@@ -18,18 +18,21 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!--消息队列-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!--redis缓存-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -47,12 +50,14 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>${jjwt-version}</version>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
             <groupId>com.y3tu</groupId>
             <artifactId>y3tu-tool-web</artifactId>
             <version>${y3tu-tool-version}</version>
+            <optional>true</optional>
         </dependency>
 
     </dependencies>

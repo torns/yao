@@ -7,6 +7,26 @@ spring:
         server-addr: 132.232.11.210:8848
         file-extension: yml
         group: GATE_GROUP
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: upms-service
+          uri: lb://upms-service
+          predicates:
+            - Path=/upms/**
+          filters:
+            #去掉/upms/前缀
+            - StripPrefix=1
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+          filters:
+            #去掉/auth/前缀
+            - StripPrefix=1
+
   profiles:
     active: dev
 

@@ -1,14 +1,15 @@
 spring:
   application:
-    name: upms-service
+    name: authentication-server
   cloud:
     nacos:
       config:
         server-addr: 132.232.11.210:8848
         file-extension: yml
-        group: UPMS_GROUP
+        group: AUTH_GROUP
   profiles:
     active: dev
   main:
     allow-bean-definition-overriding: true
+
 

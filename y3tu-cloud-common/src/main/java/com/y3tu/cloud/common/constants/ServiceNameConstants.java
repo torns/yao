@@ -9,10 +9,28 @@ package com.y3tu.cloud.common.constants;
  */
 public interface ServiceNameConstants {
 
-    String AUTH_SERVICE = "auth-service";
-    String COMMON = "common-service";
-    String GATEWAY_SERVICE = "gateway-service";
-    String UPMS_SERVICE = "upms-service";
-    String LOG_SERVICE = "log-service";
-    String GEN_SERVICE = "gen-service";
+    /**
+     * 签权服务
+     */
+    String AUTHENTICATION_SERVER = "authentication-server";
+    /**
+     * 授权服务
+     */
+    String AUTHORIZATION_SERVER = "authorization-server";
+    /**
+     * 网关服务
+     */
+    String GATEWAY_SERVER = "gateway-server";
+    /**
+     * 通用权限服务
+     */
+    String UPMS_SERVER = "upms-server";
+    /**
+     * 日志服务
+     */
+    String LOG_SERVER = "log-server";
+    /**
+     * 代码生成服务
+     */
+    String GEN_SERVER = "gen-server";
 }
