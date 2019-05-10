@@ -4,13 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.y3tu.cloud.common.annotation.SysLog;
 import com.y3tu.cloud.common.constants.CommonConstants;
 import com.y3tu.cloud.common.constants.ServiceNameConstants;
-import com.y3tu.cloud.common.util.UserUtil;
 import com.y3tu.cloud.common.vo.ResourceVO;
 import com.y3tu.cloud.upms.model.dto.ResourceTreeDTO;
 import com.y3tu.cloud.upms.model.entity.Resource;
+import com.y3tu.cloud.upms.model.entity.Role;
 import com.y3tu.cloud.upms.model.entity.RoleResource;
 import com.y3tu.cloud.upms.service.ResourceService;
 import com.y3tu.cloud.upms.service.RoleResourceService;
+import com.y3tu.cloud.upms.service.UserRoleService;
 import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.web.base.controller.BaseController;
 import io.swagger.annotations.ApiImplicitParam;
@@ -19,10 +20,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -44,7 +45,7 @@ public class ResourceController extends BaseController<ResourceService, Resource
     @Autowired
     private RoleResourceService roleResourceService;
     @Autowired
-    private HttpServletRequest request;
+    private UserRoleService userRoleService;
 
     /**
      * 获取当前用户的菜单树
@@ -53,9 +54,11 @@ public class ResourceController extends BaseController<ResourceService, Resource
      */
     @SysLog(serviceId = ServiceNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "根据token查询当前用户权限的菜单树")
     @ApiOperation(value = "获取当前用户的菜单树", notes = "根据token查询当前用户权限的菜单树", httpMethod = "GET")
-    @GetMapping("/menu/tree")
-    public R<List<ResourceTreeDTO>> getMenuTree() {
-        List<String> roleCodes = UserUtil.getRoles(request);
+    @GetMapping("/menu/tree/{userId}")
+    public R<List<ResourceTreeDTO>> getMenuTree(@PathVariable("userId") String userId) {
+
+        List<Role> roleList = userRoleService.findByUserId(userId);
+        List<String> roleCodes = roleList.stream().map(role -> role.getRoleCode()).collect(Collectors.toList());
         List<ResourceTreeDTO> list = resourceService.getMenuTreeByRoleCodes(roleCodes);
         return R.success(list);
     }

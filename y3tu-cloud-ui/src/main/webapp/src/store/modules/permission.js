@@ -1,9 +1,7 @@
 import {constantRouterMap} from '@/router'
 import {validatenull, validateURL} from '@/utils/validate'
 
-import {
-    GetMenu
-} from '@/api/menu'
+import {GetMenu} from '@/api/menu'
 
 const permission = {
     state: {
@@ -20,21 +18,17 @@ const permission = {
         }
     },
     actions: {
-        GenerateRoutes({
-                           commit
-                       }, data) {
+        GenerateRoutes({commit}, data) {
             return new Promise(resolve => {
                 resolve()
             })
         },
         // 获取系统菜单
-        GetMenu({
-                    commit
-                }) {
+        GetMenu({commit}, userId) {
+
             return new Promise(resolve => {
-                GetMenu().then((res) => {
-                    const data = res.data
-                    // console.log(res.data)
+                GetMenu(userId).then((res) => {
+                    const data = res.data;
                     data.forEach(ele => {
                         if (ele.children) {
                             ele.children.forEach(child => {

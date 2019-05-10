@@ -25,7 +25,7 @@ public interface AuthenticationService {
      * @return <pre>
      * </pre>
      */
-    @PostMapping(value = "/auth/hasPermission")
+    @PostMapping(value = "/hasPermission")
     R hasPermission(@RequestHeader(HttpHeaders.AUTHORIZATION) String authentication, @RequestParam("url") String url, @RequestParam("method") String method);
 
     class UserFeignConfig {

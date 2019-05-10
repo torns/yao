@@ -14,7 +14,7 @@ export function login(username, password) {
     })
     return request({
 
-        url: '/auth/oauth/token',
+        url: '/token/oauth/token',
         method: 'post',
         data: param
     })
@@ -45,13 +45,10 @@ export function mobileLogin(mobile, code) {
     })
 }
 
-export function getInfo(token) {
+export function getUserInfo() {
     return request({
-        url: '/upms/user/info',
+        url: '/auth/user',
         method: 'get',
-        params: {
-            'access_token': token
-        }
     })
 }
 

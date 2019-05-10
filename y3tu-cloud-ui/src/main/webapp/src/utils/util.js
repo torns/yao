@@ -25,9 +25,10 @@ export const formatRoutes = (aMenu) => {
             path,
             component,
             name,
+            title,
             icon,
             children
-        } = oMenu
+        } = oMenu;
         if (!validatenull(component)) {
             const oRouter = {
                 path: path,
@@ -44,7 +45,7 @@ export const formatRoutes = (aMenu) => {
                 name: name,
                 meta: {
                     icon: icon,
-                    title: name
+                    title: title
                 },
                 icon: icon,
                 children: validatenull(children) ? [] : formatRoutes(children)

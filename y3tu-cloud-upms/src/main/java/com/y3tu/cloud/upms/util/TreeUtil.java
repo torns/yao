@@ -22,7 +22,7 @@ public class TreeUtil {
      * @param root
      * @return
      */
-    public static List<ResourceTreeDTO> list2Tree(List<Resource> resources, Integer root) {
+    public static List<ResourceTreeDTO> list2Tree(List<Resource> resources, String root) {
         // 普通对象转树节点
         List<ResourceTreeDTO> resourceList = buildTree(resources);
         List<ResourceTreeDTO> trees = new ArrayList<>();

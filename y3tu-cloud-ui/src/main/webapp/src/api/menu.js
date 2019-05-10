@@ -1,9 +1,14 @@
 import request from '@/utils/request'
 
-export function GetMenu() {
+/**
+ *  根据用户id查询用户能访问的菜单
+ * @param userId
+ * @constructor
+ */
+export function GetMenu(userId) {
     return request({
-        url: '/admin/resource/menu/tree',
-        method: 'get'
+        url: '/upms/resource/menu/tree/'+userId,
+        method: 'get',
     })
 }
 

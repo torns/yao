@@ -22,9 +22,11 @@ router.beforeEach((to, from, next) => {
             })
             NProgress.done() // if current page is dashboard will not trigger	afterEach hook, so manually handle it
         } else {
-            if (store.getters.roles.length === 0) { // 判断当前用户是否已拉取完user_info信息
-                store.dispatch('GetInfo').then(res => { // 拉取user_info
-                    store.dispatch('GetMenu').then(data => {
+            // 判断当前用户是否已拉取完user_info信息
+            if (store.getters.roles.length === 0) {
+                // 拉取user_info
+                store.dispatch('GetUserInfo').then(res => {
+                    store.dispatch('GetMenu',res.id).then(data => {
                         initMenu(router, data)
                     })
                     next()
