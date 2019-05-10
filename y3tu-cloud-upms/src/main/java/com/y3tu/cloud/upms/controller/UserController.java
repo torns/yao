@@ -2,6 +2,8 @@ package com.y3tu.cloud.upms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.y3tu.cloud.common.enums.UserStatusEnum;
+import com.y3tu.cloud.common.util.UserUtil;
+import com.y3tu.cloud.common.vo.RoleVO;
 import com.y3tu.cloud.common.vo.UserVO;
 import com.y3tu.cloud.upms.model.dto.UserDTO;
 import com.y3tu.cloud.upms.model.entity.*;
@@ -20,11 +22,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -53,12 +57,18 @@ public class UserController extends BaseController<UserService, User> {
     private DepartmentService departmentService;
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private HttpServletRequest request;
 
-
+    /**
+     * 根据传入的token解析获取用户
+     * @return
+     */
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ApiOperation(value = "获取当前登录用户接口")
-    public R getUserInfo(@RequestBody UserDTO userDTO) {
-        return R.success(userService.getById(userDTO.getId()));
+    public R getUserInfo() {
+        String userId = UserUtil.getUserId(request);
+        return R.success(userService.findUserById(userId));
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

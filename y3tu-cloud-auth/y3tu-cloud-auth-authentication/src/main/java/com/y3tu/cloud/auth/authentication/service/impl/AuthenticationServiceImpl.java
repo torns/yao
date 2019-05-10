@@ -76,12 +76,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
             Set<ResourceVO> urls = new HashSet<>();
             for (SimpleGrantedAuthority authority : grantedAuthorityList) {
-                if (!StrUtil.equals(authority.getAuthority(), "ROLE_USER")) {
-                    // TODO 角色与菜单权限的关联关系需要缓存提高访问效率
-                    Set<ResourceVO> resourceVOS = resourceService.listResourceByRole(authority.getAuthority());
-                    if (IterUtil.isNotEmpty((resourceVOS))) {
-                        CollectionUtil.addAll(urls, resourceVOS, null);
-                    }
+                //如果是管理员角色ROLE_ADMIN 则具有此系统的所有权限 直接放行
+                if(StrUtil.equals(authority.getAuthority(),"ROLE_ADMIN")){
+                    hasPermission = true;
+                    break;
+                }
+
+                // TODO 角色与菜单权限的关联关系需要缓存提高访问效率
+                Set<ResourceVO> resourceVOS = resourceService.listResourceByRole(authority.getAuthority());
+                if (IterUtil.isNotEmpty((resourceVOS))) {
+                    CollectionUtil.addAll(urls, resourceVOS, null);
                 }
             }
 

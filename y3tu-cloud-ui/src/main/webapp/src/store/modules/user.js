@@ -1,9 +1,4 @@
-import {
-    login,
-    logout,
-    getInfo,
-    mobileLogin
-} from '@/api/login'
+import {login, logout, getInfo, mobileLogin} from '@/api/login'
 import {
     getToken,
     setToken,
@@ -73,9 +68,7 @@ const user = {
 
     actions: {
         // 登录
-        Login({
-                  commit
-              }, userInfo) {
+        Login({commit}, userInfo) {
             const username = userInfo.username.trim()
             return new Promise((resolve, reject) => {
                 login(username, userInfo.password).then(response => {
@@ -90,9 +83,7 @@ const user = {
         },
 
         // 验证码登录
-        LoginByPhone({
-                         commit
-                     }, userInfo) {
+        LoginByPhone({commit}, userInfo) {
             const mobile = userInfo.mobile.trim()
             const code = userInfo.code.trim()
             return new Promise((resolve, reject) => {
@@ -110,10 +101,7 @@ const user = {
             })
         },
         // 获取用户信息
-        GetInfo({
-                    commit,
-                    state
-                }) {
+        GetInfo({commit, state}) {
             return new Promise((resolve, reject) => {
                 getInfo(state.token).then(response => {
                     const data = response.data

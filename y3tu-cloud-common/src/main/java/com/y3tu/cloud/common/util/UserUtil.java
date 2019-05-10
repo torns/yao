@@ -57,19 +57,19 @@ public class UserUtil {
      * @param request
      * @return userId
      */
-    public static Integer getUserId(HttpServletRequest request) {
+    public static String getUserId(HttpServletRequest request) {
         String token = getToken(request);
         if (token == null) {
             return null;
         }
         Claims claims = getClaims(token);
-        Integer userId = (Integer) claims.get(UserConstants.USER_ID);
+        String userId = (String) claims.get(UserConstants.USER_ID);
         log.info("获取userId成功，值为", userId);
         return userId;
     }
 
     /**
-     * 获取请求中的userId
+     * 获取请求中的username
      *
      * @param request
      * @return userId

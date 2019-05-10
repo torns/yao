@@ -65,6 +65,12 @@
             <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
         <!--接口文档-->
         <dependency>
             <groupId>io.springfox</groupId>

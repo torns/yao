@@ -1,6 +1,5 @@
 package com.y3tu.cloud.auth.authorization;
 
-import com.y3tu.cloud.auth.authorization.annotation.EnableAuthJwtTokenStore;
 import com.y3tu.tool.web.annotation.EnableDefaultExceptionAdvice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +16,6 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableDefaultExceptionAdvice
-@EnableAuthJwtTokenStore
 @ComponentScan(basePackages = {"com.y3tu.cloud.auth.authorization", "com.y3tu.cloud.common"})
 public class AuthorizationServerApplication {
 

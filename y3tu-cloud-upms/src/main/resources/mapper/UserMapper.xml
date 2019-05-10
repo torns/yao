@@ -103,6 +103,10 @@
         from t_user
     </select>
 
+    <select id="selectUserVoById" resultMap="userVoResultMap">
+        <include refid="selectUserVo"/>
+        WHERE `user`.id = #{userId}
+    </select>
 
     <select id="selectUserVoByUsername" resultMap="userVoResultMap">
         <include refid="selectUserVo"/>

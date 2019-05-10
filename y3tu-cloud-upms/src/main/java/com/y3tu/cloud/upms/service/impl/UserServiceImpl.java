@@ -98,6 +98,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
         return userMapper.selectUserVoByUsername(username);
     }
 
+    @Override
+    public UserVO findUserById(String userId) {
+        return userMapper.selectUserVoById(userId);
+    }
+
     /**
      * 通过手机号查询用户信息
      *

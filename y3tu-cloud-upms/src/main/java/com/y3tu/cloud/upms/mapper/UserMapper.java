@@ -19,6 +19,14 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> selectAll();
 
     /**
+     * 通过用户id查询用户信息（含有角色信息）
+     *
+     * @param userId 用户名
+     * @return userVo
+     */
+    UserVO selectUserVoById(String userId);
+
+    /**
      * 通过用户名查询用户信息（含有角色信息）
      *
      * @param username 用户名
