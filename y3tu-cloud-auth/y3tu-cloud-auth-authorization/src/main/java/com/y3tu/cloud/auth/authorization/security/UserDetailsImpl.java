@@ -33,7 +33,7 @@ public class UserDetailsImpl implements UserDetails {
         this.username = userVo.getUsername();
         this.password = userVo.getPassword();
         this.status = userVo.getDelFlag() + "";
-        this.roleVos = userVo.getRoleList();
+        this.roleVos = userVo.getRoles();
     }
 
     @Override
