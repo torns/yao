@@ -3,6 +3,7 @@ package com.y3tu.cloud.upms.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.y3tu.cloud.common.enums.UserStatusEnum;
 import com.y3tu.cloud.common.util.UserUtil;
+import com.y3tu.cloud.common.vo.ResourceVO;
 import com.y3tu.cloud.common.vo.RoleVO;
 import com.y3tu.cloud.common.vo.UserVO;
 import com.y3tu.cloud.upms.model.dto.UserDTO;
@@ -29,9 +30,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -54,6 +54,8 @@ public class UserController extends BaseController<UserService, User> {
     @Autowired
     private UserRoleService userRoleService;
     @Autowired
+    private ResourceService resourceService;
+    @Autowired
     private DepartmentService departmentService;
     @Autowired
     private RedisTemplate redisTemplate;
@@ -62,6 +64,7 @@ public class UserController extends BaseController<UserService, User> {
 
     /**
      * 根据传入的token解析获取用户
+     *
      * @return
      */
     @RequestMapping(value = "/info", method = RequestMethod.GET)
@@ -139,25 +142,26 @@ public class UserController extends BaseController<UserService, User> {
     public R getByPage(@RequestParam Map<String, Object> params) {
 
         PageInfo<User> pageInfo = userService.queryPage(PageInfo.mapToPageInfo(params), params);
-        List<UserDTO> userDTOList = new ArrayList<>();
+        List<UserVO> userVOS = new ArrayList<>();
         for (User user : pageInfo.getList()) {
-            // 关联部门
-            if (StrUtil.isNotBlank(user.getDepartmentId())) {
-                Department department = departmentService.getById(user.getDepartmentId());
-                user.setDepartmentName(department.getName());
-            }
+            UserVO userVO = new UserVO();
+            List<RoleVO> roleVOS = new ArrayList<>();
+            Set<ResourceVO> resourceVOS = new HashSet<>();
             // 关联角色
-            List<Role> list = userRoleService.findByUserId(user.getId());
-            UserDTO userDTO = new UserDTO();
-            BeanUtil.copyProperties(user, userDTO);
-            userDTO.setRoles(list);
-            userDTO.setPassword(null);
-            userDTOList.add(userDTO);
+            List<Role> roles = userRoleService.findByUserId(user.getId());
+            BeanUtils.copyProperties(roles, roleVOS);
+            userVO.setRoles(roleVOS);
+            //关联资源权限
+            if (roles.size() > 0) {
+                Set<Resource> resources = resourceService.getResourceRoleCodes(roles.stream().map(role -> role.getRoleCode()).collect(Collectors.toList()));
+                BeanUtils.copyProperties(resources, resourceVOS);
+                userVO.setResources(resourceVOS);
+            }
+            userVOS.add(userVO);
         }
-
         PageInfo pageInfoCopy = new PageInfo();
         BeanUtil.copyProperties(pageInfo, pageInfoCopy);
-        pageInfoCopy.setList(userDTOList);
+        pageInfoCopy.setList(userVOS);
         return R.success(pageInfoCopy);
     }
 
@@ -270,7 +274,7 @@ public class UserController extends BaseController<UserService, User> {
 
 
     /**
-     * 通过用户名查询用户及其角色信息
+     * 通过用户名查询用户及其角色信息和权限
      *
      * @param username 用户名
      * @return UseVo 对象
@@ -278,7 +282,16 @@ public class UserController extends BaseController<UserService, User> {
     @GetMapping("/findUserByUsername/{username}")
     public UserVO findUserByUsername(@PathVariable String username) {
 
-        return userService.findUserByUsername(username);
+        UserVO userVO = userService.findUserByUsername(username);
+        if (userVO != null && userVO.getRoles().size() > 0) {
+            List<String> roleCodes = userVO.getRoles().stream().map(role -> role.getRoleCode()).collect(Collectors.toList());
+            //获取资源权限
+            Set<Resource> resources = resourceService.getResourceRoleCodes(roleCodes);
+            Set<ResourceVO> resourceVOS = new HashSet<>();
+            BeanUtils.copyProperties(resources, resourceVOS);
+            userVO.setResources(resourceVOS);
+        }
+        return userVO;
     }
 
     /**

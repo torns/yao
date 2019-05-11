@@ -1,13 +1,6 @@
 import {login, logout, getUserInfo, mobileLogin} from '@/api/login'
-import {
-    getToken,
-    setToken,
-    removeToken
-} from '@/utils/auth'
-import {
-    setStore,
-    getStore
-} from '@/utils/store'
+import {getToken, setToken, removeToken} from '@/utils/auth'
+import {setStore, getStore} from '@/utils/store'
 
 const user = {
     state: {
@@ -19,9 +12,7 @@ const user = {
             name: 'avatar'
         }) || '',
         roles: [],
-        permissions: getStore({
-            name: 'permissions'
-        }) || {}
+        permissions: getStore({name: 'permissions'}) || {}
     },
 
     mutations: {
@@ -112,7 +103,8 @@ const user = {
                     }
                     commit('SET_NAME', data.username)
                     commit('SET_AVATAR', data.avatar)
-                   // commit('SET_PERMISSIONS', data.permissions)
+                    let permissions = data.resources.map(resource => resource.permission);
+                    commit('SET_PERMISSIONS', permissions);
                     resolve(response.data)
                 }).catch(error => {
                     reject(error)
@@ -121,10 +113,7 @@ const user = {
         },
 
         // 登出
-        LogOut({
-                   commit,
-                   state
-               }) {
+        LogOut({commit, state}) {
             return new Promise((resolve, reject) => {
                 logout({access_token: state.token}).then(() => {
                     commit('SET_TOKEN', '')
@@ -145,9 +134,7 @@ const user = {
         },
 
         // 前端 登出
-        FedLogOut({
-                      commit
-                  }) {
+        FedLogOut({commit}) {
             return new Promise(resolve => {
                 commit('SET_TOKEN', '')
                 commit('SET_PERMISSIONS', {})

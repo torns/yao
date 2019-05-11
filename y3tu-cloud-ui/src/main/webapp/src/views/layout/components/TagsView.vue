@@ -71,7 +71,7 @@
                 const tags = this.$refs.tag
                 console.log(tags)
                 this.$nextTick(() => {
-                    for (const tag of tags) {
+                    for (const tag in tags) {
                         if (tag.to.path === this.$route.path) {
                             this.$refs.scrollPane.moveToTarget(tag.$el)
                             break

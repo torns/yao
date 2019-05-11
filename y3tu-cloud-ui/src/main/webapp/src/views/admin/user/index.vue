@@ -10,7 +10,7 @@
             <el-button class="search-btn" :autofocus="true" icon="el-icon-refresh" @click="refreshHandle">刷新</el-button>
         </div>
         <el-table :key='tableKey' :data="list" v-loading="listLoading" border fit highlight-current-row>
-            <el-table-column align="center" prop="userId" label="id" width="80">
+            <el-table-column align="center" prop="id" label="id" width="80">
             </el-table-column>
             <el-table-column align="center" prop="username" label="用户名" width="180">
             </el-table-column>
@@ -18,7 +18,7 @@
             </el-table-column>
             <el-table-column align="center" label="角色">
                 <template slot-scope="scope">
-                    <span v-for="role in scope.row.sysRoleVoList" :key="role.roleCode">{{role.roleName}} </span>
+                    <span v-for="role in scope.row.roles" :key="role.roleCode">{{role.name}} </span>
                 </template>
             </el-table-column>
 
@@ -109,8 +109,8 @@
                 listLoading: false,
                 list: [],
                 listQuery: {
-                    current: 1,
-                    size: 10,
+                    page: 1,
+                    pageSize: 10,
                     username: ''
                 },
                 total: 0,
@@ -215,15 +215,15 @@
             }
         },
         computed: {
-            ...mapGetters(['resources'])
+            ...mapGetters(['permissions'])
         },
 
         mounted() {
             this.getList()
-            this.sys_user_add = this.resources['/admin/user:add']
-            this.sys_user_update = this.resources['/admin/user:update']
-            this.sys_user_delete = this.resources['/admin/user:delete']
-            this.sys_user_select = this.resources['/admin/user:select']
+            this.sys_user_add = this.permissions['/admin/user:add']
+            this.sys_user_update = this.permissions['/admin/user:update']
+            this.sys_user_delete = this.permissions['/admin/user:delete']
+            this.sys_user_select = this.permissions['/admin/user:select']
         },
 
         methods: {
@@ -231,8 +231,8 @@
                 this.listLoading = true
                 this.listQuery.isAsc = false
                 fetchList(this.listQuery).then(response => {
-                    this.list = response.data.records
-                    this.total = response.data.total
+                    this.list = response.data.page.records;
+                    this.total = response.data.page.total;
                     this.listLoading = false
                 })
             },

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -91,6 +92,11 @@ public class UserVO {
     /**
      * 角色列表
      */
-    private List<RoleVO> roleList;
+    private List<RoleVO> roles;
+
+    /**
+     * 资源权限列表
+     */
+    private Set<ResourceVO> resources;
 
 }
