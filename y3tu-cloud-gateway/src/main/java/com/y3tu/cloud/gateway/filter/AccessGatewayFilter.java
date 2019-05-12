@@ -1,8 +1,11 @@
 package com.y3tu.cloud.gateway.filter;
 
 import com.y3tu.cloud.common.config.FilterIgnorePropertiesConfig;
+import com.y3tu.cloud.common.constants.ServiceNameConstants;
+import com.y3tu.cloud.common.exception.AuthExceptionEnum;
 import com.y3tu.cloud.gateway.exception.NoPermissionException;
 import com.y3tu.cloud.gateway.feign.AuthenticationService;
+import com.y3tu.tool.core.exception.ServerCallException;
 import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -49,9 +52,17 @@ public class AccessGatewayFilter implements GlobalFilter {
         if (this.ignoreAuthentication(url)) {
             return chain.filter(exchange);
         }
-        //调用签权服务看用户是否有权限，若有权限进入下一个filter
-        R r = authenticationService.hasPermission(authentication, url, method);
-        if (r.getStatus() == R.Status.SUCCESS && r.getData().equals(true)) {
+        boolean hasPermission = false;
+        try {
+            //调用签权服务看用户是否有权限，若有权限进入下一个filter
+            hasPermission = authenticationService.hasPermission(authentication, url, method);
+
+        } catch (Exception e) {
+            String serverName = ServiceNameConstants.AUTHENTICATION_SERVER;
+            String str = StrUtil.format("服务:{}调用{}异常,参数：authentication:{},url{},method{}", serverName, "hasPermission", authentication, url, method);
+            throw new ServerCallException(str, e);
+        }
+        if (hasPermission) {
             ServerHttpRequest.Builder builder = request.mutate();
             //TODO 转发的请求都加上服务间认证token
             //builder.header(X_CLIENT_TOKEN, "TODO zhoutaoo添加服务间简单认证");
@@ -59,7 +70,7 @@ public class AccessGatewayFilter implements GlobalFilter {
             //builder.header(X_CLIENT_TOKEN_USER, authService.getJwt(authentication).getClaims());
             return chain.filter(exchange.mutate().request(builder.build()).build());
         } else {
-            throw new NoPermissionException("没有权限");
+            throw new NoPermissionException(AuthExceptionEnum.UNAUTHORIZED);
         }
     }
 

@@ -14,7 +14,7 @@ export function GetMenu(userId) {
 
 export function getAllReource() {
     return request({
-        url: '/admin/resource/tree',
+        url: '/upms/resource/menu/getAllMenuTree',
         method: 'get'
     })
 }

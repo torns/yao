@@ -34,6 +34,9 @@ service.interceptors.response.use(
         if (response.data.status == "ERROR") {
             console.error('error:' + response.data.message);
             const code = response.data.code;
+            if(code.toString().startsWith("SYS")){
+                errorCode[code]=response.data.message;
+            }
             Message({
                 message: errorCode[code] || errorCode['default'],
                 type: 'error'
@@ -46,6 +49,9 @@ service.interceptors.response.use(
         if (error.response.data.status == "ERROR") {
             console.error('error:' + error.response.data.message);
             const code = error.response.data.code;
+            if(code.toString().startsWith("SYS")){
+                errorCode[code]=error.response.data.message;
+            }
             Message({
                 message: errorCode[code] || errorCode['default'],
                 type: 'error'

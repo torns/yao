@@ -1,6 +1,7 @@
 package com.y3tu.cloud.gateway.exception;
 
 import com.y3tu.tool.core.exception.ErrorEnum;
+import com.y3tu.tool.core.exception.ServerCallException;
 import com.y3tu.tool.core.pojo.R;
 import io.netty.channel.ConnectTimeoutException;
 import lombok.extern.slf4j.Slf4j;
@@ -21,34 +22,41 @@ public class GateWayExceptionHandlerAdvice {
     @ExceptionHandler(value = {ResponseStatusException.class})
     public R handle(ResponseStatusException ex) {
         log.error("response status exception:{}", ex.getMessage());
-        return R.error(ErrorEnum.GATEWAY_ERROR);
+        return R.error("GATEWAY-ERROR-001", ex.getMessage());
     }
 
     @ExceptionHandler(value = {ConnectTimeoutException.class})
     public R handle(ConnectTimeoutException ex) {
         log.error("connect timeout exception:{}", ex.getMessage());
-        return R.error(ErrorEnum.GATEWAY_CONNECT_TIME_OUT);
+        return R.error("GATEWAY-ERROR-002", "连接超时");
     }
 
     @ExceptionHandler(value = {NotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public R handle(NotFoundException ex) {
         log.error("not found exception:{}", ex.getMessage());
-        return R.error(ErrorEnum.GATEWAY_ERROR);
+        return R.error("GATEWAY-ERROR-003", ex.getMessage());
     }
 
     @ExceptionHandler(value = {RuntimeException.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public R handle(RuntimeException ex) {
         log.error("runtime exception:{}", ex.getMessage());
-        return R.error(ex.getMessage());
+        return R.error("GATEWAY-ERROR-004", ex.getMessage());
     }
 
     @ExceptionHandler(value = {NoPermissionException.class})
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public R handle(NoPermissionException ex) {
         log.error("NoPermissionException exception:{}", ex.getMessage());
-        return R.error(ex.getMessage());
+        return R.error("GATEWAY-ERROR-005", ex.getMessage());
+    }
+
+    @ExceptionHandler(value = {ServerCallException.class})
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public R handle(ServerCallException ex) {
+        log.error("ServerCallException exception:{}", ex.getMessage());
+        return R.error(ex.getMessage(), ErrorEnum.SERVICE_CALL_ERROR);
     }
 
     @ExceptionHandler(value = {Exception.class})
@@ -68,6 +76,10 @@ public class GateWayExceptionHandlerAdvice {
             result = handle((ConnectTimeoutException) throwable);
         } else if (throwable instanceof NotFoundException) {
             result = handle((NotFoundException) throwable);
+        } else if (throwable instanceof NoPermissionException) {
+            result = handle((NoPermissionException) throwable);
+        } else if (throwable instanceof ServerCallException) {
+            result = handle((ServerCallException) throwable);
         } else if (throwable instanceof RuntimeException) {
             result = handle((RuntimeException) throwable);
         } else if (throwable instanceof Exception) {

@@ -39,7 +39,7 @@ export const deleteRoleInfoById = (id) => {
 
 export const listRoleInfo = () => {
     return request({
-        url: '/admin/role',
+        url: '/upms/role/getAll',
         method: 'get'
     })
 }

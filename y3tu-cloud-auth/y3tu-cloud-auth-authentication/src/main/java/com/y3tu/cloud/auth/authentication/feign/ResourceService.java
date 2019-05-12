@@ -1,7 +1,5 @@
 package com.y3tu.cloud.auth.authentication.feign;
 
-
-import com.y3tu.cloud.auth.authentication.feign.fallback.ResourceServiceFallbackImpl;
 import com.y3tu.cloud.common.constants.ServiceNameConstants;
 import com.y3tu.cloud.common.vo.ResourceVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -13,7 +11,7 @@ import java.util.Set;
 /**
  * @author y3tu
  */
-@FeignClient(name = ServiceNameConstants.UPMS_SERVER, fallback = ResourceServiceFallbackImpl.class)
+@FeignClient(name = ServiceNameConstants.UPMS_SERVER)
 public interface ResourceService {
     /**
      * 通过角色名查询菜单

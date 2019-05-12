@@ -2,8 +2,10 @@ package com.y3tu.cloud.auth.authentication.controller;
 
 import com.y3tu.cloud.auth.authentication.feign.UserService;
 import com.y3tu.cloud.auth.authentication.service.AuthenticationService;
+import com.y3tu.cloud.common.constants.ServiceNameConstants;
 import com.y3tu.cloud.common.exception.AuthExceptionEnum;
 import com.y3tu.cloud.common.vo.UserVO;
+import com.y3tu.tool.core.exception.ErrorEnum;
 import com.y3tu.tool.core.pojo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,18 @@ public class AuthenticationController {
     @Autowired
     HttpServletRequest request;
 
+    /**
+     * 判断用户是否有访问此url的权限 内部调用 直接返回true or false
+     *
+     * @param url
+     * @param method
+     * @param request
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/hasPermission")
-    public R hasPermission(@RequestParam String url, @RequestParam String method, HttpServletRequest request) {
+    public boolean hasPermission(@RequestParam String url, @RequestParam String method, HttpServletRequest request) {
         boolean hasPermission = authenticationService.decide(new HttpServletRequestAuthWrapper(request, url, method));
-        return R.success(hasPermission);
+        return hasPermission;
     }
 
     @GetMapping("/user")
@@ -34,8 +44,12 @@ public class AuthenticationController {
         //获取用户认证信息
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication.getPrincipal() != null) {
-            UserVO userVO = userService.loadUserByUsername(String.valueOf(authentication.getPrincipal()));
-            return R.success(userVO);
+            try {
+                UserVO userVO = userService.loadUserByUsername(String.valueOf(authentication.getPrincipal()));
+                return R.success(userVO);
+            } catch (Exception e) {
+                return R.error("服务[" + ServiceNameConstants.UPMS_SERVER + "]调用异常！", ErrorEnum.SERVICE_CALL_ERROR);
+            }
         }
         return R.error(AuthExceptionEnum.ACCESS_DENIED);
     }

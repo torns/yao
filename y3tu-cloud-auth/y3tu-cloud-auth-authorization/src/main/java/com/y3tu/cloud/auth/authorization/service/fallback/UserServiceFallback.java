@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
  * <p>
  * 用户表 服务实现类
  * </p>
- *
  */
 @Slf4j
 @Service
@@ -18,7 +17,7 @@ public class UserServiceFallback implements UserService {
     @Override
     public UserVO loadUserByUsername(String username) {
         log.error("调用loadUserByUsername方法异常，参数：{}", username);
-       return null;
+        throw new RuntimeException();
     }
 
     @Override

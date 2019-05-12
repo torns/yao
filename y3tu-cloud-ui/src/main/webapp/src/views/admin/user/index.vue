@@ -10,7 +10,7 @@
             <el-button class="search-btn" :autofocus="true" icon="el-icon-refresh" @click="refreshHandle">刷新</el-button>
         </div>
         <el-table :key='tableKey' :data="list" v-loading="listLoading" border fit highlight-current-row>
-            <el-table-column align="center" prop="id" label="id" width="80">
+            <el-table-column align="center" prop="id" label="id" width="200">
             </el-table-column>
             <el-table-column align="center" prop="username" label="用户名" width="180">
             </el-table-column>
@@ -69,9 +69,9 @@
 
                 <el-form-item label="角色" prop="role">
                     <el-select class="filter-item w347" v-model="role" placeholder="请选择" multiple>
-                        <el-option v-for="item in rolesOptions" :key="item.roleId" :label="item.roleName"
-                                   :value="item.roleId" :disabled="isDisabled[item.delFlag]">
-                            <span style="float: left">{{ item.roleName }}</span>
+                        <el-option v-for="item in rolesOptions" :key="item.id" :label="item.name"
+                                   :value="item.id" :disabled="isDisabled[item.delFlag]">
+                            <span style="float: left">{{ item.name }}</span>
                             <span style="float: right; color: #8492a6; font-size: 13px">{{ item.roleCode }}</span>
                         </el-option>
                     </el-select>
@@ -84,7 +84,8 @@
                 <el-form-item label="状态" v-if="dialogStatus == 'update' && sys_user_delete " prop="delFlag">
                     <el-select class="filter-item w347" v-model="form.delFlag" placeholder="请选择">
                         <el-option v-for="item in statusOptions" :key="item" :label="item | statusFilter"
-                                   :value="item"></el-option>
+                                   :value="item">
+                        </el-option>
                     </el-select>
                 </el-form-item>
             </el-form>
@@ -147,9 +148,9 @@
                             trigger: 'blur'
                         },
                         {
-                            min: 6,
+                            min: 5,
                             max: 20,
-                            message: '密码长度在 6 到 20 个字符',
+                            message: '密码长度在 5 到 20 个字符',
                             trigger: 'blur'
                         }
                     ],
@@ -192,7 +193,7 @@
                     0: false,
                     1: true
                 },
-                statusOptions: ['0', '1'],
+                statusOptions: [0, 1],
                 dialogDeptVisible: false,
                 treeDeptData: [],
                 checkedKeys: [],
@@ -231,8 +232,8 @@
                 this.listLoading = true
                 this.listQuery.isAsc = false
                 fetchList(this.listQuery).then(response => {
-                    this.list = response.data.page.records;
-                    this.total = response.data.page.total;
+                    this.list = response.data.list;
+                    this.total = response.data.totalCount;
                     this.listLoading = false
                 })
             },
@@ -257,7 +258,7 @@
                         type: 'warning'
                     }
                 ).then(() => {
-                    delObj(row.userId)
+                    delObj(row.id)
                         .then(() => {
                             this.getList()
                             this.$notify({
@@ -267,7 +268,7 @@
                                 duration: 2000
                             })
                         })
-                        .cache(() => {
+                        .catch(() => {
                             this.$notify({
                                 title: '失败',
                                 message: '删除失败',
@@ -280,13 +281,13 @@
             handleEdit(row) {
                 this.dialogStatus = 'update'
                 this.getRoleList()
-                getObj(row.userId).then(response => {
+                getObj(row.id).then(response => {
                     this.form = response.data
                     this.dialogFormVisible = true
                     this.dialogStatus = 'update'
                     this.role = []
-                    for (var i = 0; i < row.sysRoleVoList.length; i++) {
-                        this.role[i] = row.sysRoleVoList[i].roleId
+                    for (let i = 0; i < row.roles.length; i++) {
+                        this.role[i] = row.roles[i].id
                     }
                     this.dialogFormVisible = true
                 })
@@ -308,15 +309,18 @@
                 this.bindRoleInfo()
                 set[formName].validate(valid => {
                     if (valid) {
-                        addObj(this.form).then(() => {
+                        addObj(this.form).then((data) => {
                             this.dialogFormVisible = false
-                            this.getList()
-                            this.$notify({
-                                title: '成功',
-                                message: '创建成功',
-                                type: 'success',
-                                duration: 2000
-                            })
+                            if(data.status=="SUCCESS"){
+                                this.getList();
+                                this.$notify({
+                                    title: '成功',
+                                    message: '创建成功',
+                                    type: 'success',
+                                    duration: 2000
+                                })
+                            }
+
                         })
                     } else {
                         return false
@@ -350,18 +354,18 @@
                 })
             },
             async getRoleList() {
-                const res = await listRoleInfo()
+                const res = await listRoleInfo();
                 this.rolesOptions = res.data
             },
             bindRoleInfo() {
                 this.form.role = []
                 this.role.forEach(roleId => {
                     const roleInfo = {
-                        roleId: roleId
+                        id: roleId
                     }
                     this.form.role.push(roleInfo)
                 })
-                this.form.sysRoleVoList = this.form.role
+                this.form.roles = this.form.role
             }
         }
     }

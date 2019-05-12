@@ -23,7 +23,7 @@ public class SysLogController {
     @Autowired
     private SysLogService sysLogService;
 
-    @SysLog(serviceId = ServiceNameConstants.LOG_SERVICE, moduleName = MODULE_NAME, actionName = "日志信息分页查询")
+    @SysLog(serviceId = ServiceNameConstants.LOG_SERVER, moduleName = MODULE_NAME, actionName = "日志信息分页查询")
     @ApiOperation(value = "日志信息分页查询", notes = "日志信息分页查询", httpMethod = "GET")
     @ApiImplicitParam(name = "sysLogQuery", value = "日志信息查询类", required = false, dataType = "SysLogQuery")
     @GetMapping("/page")

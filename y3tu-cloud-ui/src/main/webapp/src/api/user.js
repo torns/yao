@@ -10,21 +10,21 @@ export function fetchList(query) {
 
 export function delObj(id) {
     return request({
-        url: '/admin/user/id/' + id,
+        url: '/upms/user/delByIds/' + id,
         method: 'delete'
     })
 }
 
 export function getObj(id) {
     return request({
-        url: '/admin/user/id/' + id,
+        url: '/upms/user/get/' + id,
         method: 'get'
     })
 }
 
 export function putObj(obj) {
     return request({
-        url: '/admin/user',
+        url: '/upms/user/edit',
         method: 'put',
         data: obj
     })
@@ -32,7 +32,7 @@ export function putObj(obj) {
 
 export function addObj(obj) {
     return request({
-        url: '/admin/user',
+        url: '/upms/user/save',
         method: 'post',
         data: obj
     })

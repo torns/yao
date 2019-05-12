@@ -64,6 +64,19 @@ public class ResourceController extends BaseController<ResourceService, Resource
     }
 
     /**
+     * 获取所有的菜单树
+     *
+     * @return
+     */
+    @SysLog(serviceId = ServiceNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "获取所有的菜单树")
+    @ApiOperation(value = "获取当前用户的菜单树", notes = "获取所有的菜单树", httpMethod = "GET")
+    @GetMapping("/menu/getAllMenuTree")
+    public R<List<ResourceTreeDTO>> getAllMenuTree() {
+        List<ResourceTreeDTO> list = resourceService.getAllResourceTree();
+        return R.success(list);
+    }
+
+    /**
      * 添加权限
      *
      * @param resource

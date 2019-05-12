@@ -99,6 +99,7 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
         endpoints.tokenStore(tokenStore())
                 .authorizationCodeServices(authorizationCodeServices())
                 .approvalStore(approvalStore())
+                // 添加认证异常处理器
                 .exceptionTranslator(customExceptionTranslator())
                 .tokenEnhancer(tokenEnhancerChain())
                 .authenticationManager(authenticationManager)

@@ -20,7 +20,7 @@ public class ResourceVO implements Serializable {
     /**
      * 菜单ID
      */
-    private Integer id;
+    private String id;
     /**
      * 菜单名称
      */
@@ -89,7 +89,7 @@ public class ResourceVO implements Serializable {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof ResourceVO) {
-            Integer targetMenuId = ((ResourceVO) obj).getId();
+            String targetMenuId = ((ResourceVO) obj).getId();
             return id.equals(targetMenuId);
         }
         return super.equals(obj);

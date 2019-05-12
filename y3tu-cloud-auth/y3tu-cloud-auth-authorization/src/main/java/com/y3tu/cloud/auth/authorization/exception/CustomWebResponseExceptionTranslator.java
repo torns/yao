@@ -1,5 +1,8 @@
 package com.y3tu.cloud.auth.authorization.exception;
 
+import com.y3tu.cloud.common.exception.AuthExceptionEnum;
+import com.y3tu.tool.core.exception.ErrorEnum;
+import com.y3tu.tool.core.pojo.R;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
@@ -10,11 +13,17 @@ import org.springframework.security.oauth2.provider.error.WebResponseExceptionTr
 public class CustomWebResponseExceptionTranslator implements WebResponseExceptionTranslator {
 
     @Override
-    public ResponseEntity<OAuth2Exception> translate(Exception e) {
-
-        OAuth2Exception oAuth2Exception = (OAuth2Exception) e;
-        return ResponseEntity
-                .status(oAuth2Exception.getHttpErrorCode())
-                .body(new CustomOauthException(oAuth2Exception));
+    public ResponseEntity<R> translate(Exception e) {
+        if (e instanceof OAuth2Exception) {
+            OAuth2Exception oAuth2Exception = (OAuth2Exception) e;
+            AuthExceptionEnum exceptionEnum = AuthExceptionEnum.valueOf(oAuth2Exception.getOAuth2ErrorCode().toUpperCase());
+            return ResponseEntity
+                    .status(500)
+                    .body(R.error(exceptionEnum));
+        } else {
+            return ResponseEntity
+                    .status(500)
+                    .body(R.error(e.getMessage(), ErrorEnum.SERVICE_CALL_ERROR));
+        }
     }
 }

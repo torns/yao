@@ -51,7 +51,7 @@
         <result column="udel_flag" property="delFlag"/>
         <result column="department_id" property="departmentId"/>
         <result column="departmentName" property="departmentName"/>
-        <collection property="roleList" ofType="com.y3tu.cloud.common.vo.RoleVO">
+        <collection property="roles" ofType="com.y3tu.cloud.common.vo.RoleVO">
             <id column="id" property="id"/>
             <result column="name" property="name"/>
             <result column="role_code" property="roleCode"/>

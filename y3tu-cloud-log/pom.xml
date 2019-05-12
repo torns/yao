@@ -53,6 +53,13 @@
             <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
         </dependency>
 
+        <!--消息队列-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!--mysql -->
         <dependency>
             <groupId>mysql</groupId>

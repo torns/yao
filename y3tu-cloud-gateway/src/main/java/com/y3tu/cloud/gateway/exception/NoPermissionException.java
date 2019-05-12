@@ -2,6 +2,7 @@ package com.y3tu.cloud.gateway.exception;
 
 import com.y3tu.tool.core.exception.BaseException;
 import com.y3tu.tool.core.exception.ErrorEnum;
+import com.y3tu.tool.core.exception.IError;
 
 /**
  * 没有权限异常
@@ -30,7 +31,7 @@ public class NoPermissionException extends BaseException {
         super(throwable, messageTemplate, params);
     }
 
-    public NoPermissionException(ErrorEnum error) {
+    public NoPermissionException(IError error) {
         super(error);
     }
 

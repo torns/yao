@@ -205,19 +205,19 @@
                     return '添加失败'
                 }
             },
-            ...mapGetters(['resources'])
+            ...mapGetters(['permissions'])
         },
         mounted() {
             this.getData()
 
-            this.sys_resource_add = this.resources['/admin/menu:add']
-            this.sys_resource_delete = this.resources['/admin/menu:delete']
-            this.sys_resource_select = this.resources['/admin/menu:select']
-            this.sys_resource_update = this.resources['/admin/menu:update']
+            this.sys_resource_add = this.permissions['/admin/menu:add']
+            this.sys_resource_delete = this.permissions['/admin/menu:delete']
+            this.sys_resource_select = this.permissions['/admin/menu:select']
+            this.sys_resource_update = this.permissions['/admin/menu:update']
         },
         methods: {
             async getData() {
-                const response = await getAllReource()
+                const response = await getAllReource();
                 this.data = response.data
             },
             async openEditDialog(id) {

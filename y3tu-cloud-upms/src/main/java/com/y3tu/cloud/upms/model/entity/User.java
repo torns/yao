@@ -1,6 +1,8 @@
 package com.y3tu.cloud.upms.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.y3tu.tool.web.base.entity.BaseEntity;
@@ -32,7 +34,8 @@ public class User extends BaseEntity {
     /**
      * 主键
      */
-    private String id;
+    @TableId(type = IdType.INPUT)
+    protected String id;
     /**
      * 创建人
      */
