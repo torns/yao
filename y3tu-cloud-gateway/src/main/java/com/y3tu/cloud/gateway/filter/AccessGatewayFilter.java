@@ -6,7 +6,6 @@ import com.y3tu.cloud.common.exception.AuthExceptionEnum;
 import com.y3tu.cloud.gateway.exception.NoPermissionException;
 import com.y3tu.cloud.gateway.feign.AuthenticationService;
 import com.y3tu.tool.core.exception.ServerCallException;
-import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
