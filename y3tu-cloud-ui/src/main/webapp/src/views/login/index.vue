@@ -1,113 +1,95 @@
 <template>
-
-    <!--背景图-->
-    <div
-            class="note"
-            :style="note"
-    >
-        <!--login框，表单+tab标签页的组合-->
-        <div
-                class="loginFrame emo-ruleForm login-container"
-                style="background: #f0f0f0;"
-        >
-            <!--表单组件放在外面，标签栏在里面-->
-
-            <el-tabs v-model="activeName">
-                <el-tab-pane
-                        label="用户名密码登录"
-                        name="user"
-                >
-                    <user></user>
-                </el-tab-pane>
-                <el-tab-pane
-                        label="手机验证码登录"
-                        name="second"
-                >
-                    <mobile-code></mobile-code>
-                </el-tab-pane>
-            </el-tabs>
-        </div>
+    <div class="login">
+        <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-position="left" label-width="0px"
+                 class="login-form">
+            <h3 class="title">el-admin 后台管理系统</h3>
+            <el-form-item prop="username">
+                <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号">
+                    <svg-icon slot="prefix" icon-class="user" class="el-input__icon"
+                              style="height: 39px;width: 13px;margin-left: 2px;"/>
+                </el-input>
+            </el-form-item>
+            <el-form-item prop="password">
+                <el-input v-model="loginForm.password" type="password" auto-complete="off" placeholder="密码"
+                          @keyup.enter.native="handleLogin">
+                    <svg-icon slot="prefix" icon-class="password" class="el-input__icon"
+                              style="height: 39px;width: 13px;margin-left: 2px;"/>
+                </el-input>
+            </el-form-item>
+            <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
+            <el-form-item style="width:100%;">
+                <el-button :loading="loading" size="medium" type="primary" style="width:100%;"
+                           @click.native.prevent="handleLogin">
+                    <span v-if="!loading">登 录</span>
+                    <span v-else>登 录 中...</span>
+                </el-button>
+            </el-form-item>
+            <p class="login-tip">系统默认用户名：admin，密码：admin</p>
+        </el-form>
     </div>
 </template>
 
 <script>
-    import {
-        isvalidUsername
-    } from '@/utils/validate'
-    import user from './user'
-    import mobileCode from './code'
+    import Config from '@/config'
+    import Cookies from 'js-cookie'
 
     export default {
-        name: 'login',
-        components: {
-            user,
-            mobileCode
-        },
+        name: 'Login',
         data() {
-            const validateUsername = (rule, value, callback) => {
-                if (!isvalidUsername(value)) {
-                    callback()
-                } else {
-                    callback(new Error('请输入正确的用户名'))
-                }
-            }
-            const validatePass = (rule, value, callback) => {
-                if (value.length < 5) {
-                    callback(new Error('密码不能小于5位'))
-                } else {
-                    callback()
-                }
-            }
             return {
-                activeName: 'user',
                 loginForm: {
-                    username: 'yxy',
-                    password: 'admin'
+                    username: 'admin',
+                    password: 'admin',
+                    rememberMe: false
                 },
                 loginRules: {
-                    username: [{
-                        required: true,
-                        trigger: 'blur',
-                        validator: validateUsername
-                    }],
-                    password: [{
-                        required: true,
-                        trigger: 'blur',
-                        validator: validatePass
-                    }]
+                    username: [{required: true, trigger: 'blur', message: '用户名不能为空'}],
+                    password: [{required: true, trigger: 'blur', message: '密码不能为空'}]
                 },
                 loading: false,
-                pwdType: 'password',
-                note: {
-                    position: 'absolute',
-                    top: '0px',
-                    left: '0px',
-                    width: '100%',
-                    height: '100%',
-                    backgroundImage: 'url(' + require('../../assets/bg.png') + ')',
-                    backgroundSize: '100% 100%',
-                    backgroundRepeat: 'no-repeat'
-
-                }
+                redirect: undefined
             }
         },
+        watch: {
+            $route: {
+                handler: function (route) {
+                    this.redirect = route.query && route.query.redirect
+                },
+                immediate: true
+            }
+        },
+        created() {
+            this.getCookie()
+        },
         methods: {
-            showPwd() {
-                if (this.pwdType === 'password') {
-                    this.pwdType = ''
-                } else {
-                    this.pwdType = 'password'
+            getCookie() {
+                const username = Cookies.get('username')
+                let password = Cookies.get('password')
+                const rememberMe = Cookies.get('rememberMe')
+                password = password === undefined ? this.loginForm.password : password
+                this.loginForm = {
+                    username: username === undefined ? this.loginForm.username : username,
+                    password: password,
+                    rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
                 }
             },
             handleLogin() {
                 this.$refs.loginForm.validate(valid => {
+                    const user = this.loginForm
                     if (valid) {
                         this.loading = true
-                        this.$store.dispatch('Login', this.loginForm).then(() => {
+                        if (user.rememberMe) {
+                            Cookies.set('username', user.username, {expires: Config.passCookieExpires})
+                            Cookies.set('password', user.password, {expires: Config.passCookieExpires})
+                            Cookies.set('rememberMe', user.rememberMe, {expires: Config.passCookieExpires})
+                        } else {
+                            Cookies.remove('username')
+                            Cookies.remove('password')
+                            Cookies.remove('rememberMe')
+                        }
+                        this.$store.dispatch('Login', user).then(() => {
                             this.loading = false
-                            this.$router.push({
-                                path: '/'
-                            })
+                            this.$router.push({path: this.redirect || '/'})
                         }).catch(() => {
                             this.loading = false
                         })
@@ -119,63 +101,42 @@
             }
         }
     }
-
 </script>
 
-<style>
-
-
-    .login-container {
-        -webkit-border-radius: 5px;
-        border-radius: 15px;
-        -moz-border-radius: 5px;
-        background-clip: padding-box;
-        margin: 0 auto;
-        width: 100%;
-        padding: 35px 35px 15px 35px;
-        background: rgba(255, 255, 255, 0.7);
-        border: 1px solid #eaeaea;
-        box-shadow: 0 0 25px #cac6c6;
-        position: absolute;
-        top: 120px;
-        right: 50px;
-        left: 100px;
+<style rel="stylesheet/scss" lang="scss">
+    .login {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        background-image: url(https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/1547428971990.jpg);
+        background-size: cover;
     }
 
-    label {
-        width: 70px;
-        text-align: left;
-    }
-
-    .form-control {
-        width: 270px;
-        flex: 1;
-        -webkit-flex: 1;
-        -ms-flex: 1;
-    }
-
-    .remember {
-        width: 250px;
-        text-align: left;
-    }
-
-    .forget {
-        width: 500px;
-        text-align: right;
-        font-size: 14px;
-        font-family: PingFang SC;
-    }
-
-    .remFor {
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-    }
-
-    .tabsUser {
-        display: inline-block;
-        margin-left: 0px;
-        margin-right: 0px;
+    .title {
+        margin: 0px auto 30px auto;
         text-align: center;
-        font-size: 25px;
+        color: #707070;
+    }
+
+    .login-form {
+        border-radius: 6px;
+        background: #ffffff;
+        width: 365px;
+        padding: 25px 25px 5px 25px;
+
+        .el-input {
+            height: 38px;
+
+            input {
+                height: 38px;
+            }
+        }
+    }
+
+    .login-tip {
+        font-size: 13px;
+        text-align: center;
+        color: #bfbfbf;
     }
 </style>

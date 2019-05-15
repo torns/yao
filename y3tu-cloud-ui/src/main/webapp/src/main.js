@@ -1,3 +1,5 @@
+//polyfill 浏览器兼容性
+import '@babel/polyfill'
 import Vue from 'vue'
 
 import 'normalize.css/normalize.css'// A modern alternative to CSS resets
@@ -15,17 +17,19 @@ import store from './store'
 import '@/icons' // icon
 import '@/permission' // permission control
 
-Vue.use(ElementUI, {locale})
+Vue.use(ElementUI, {locale});
+
 import * as filters from './filters'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
-})
+});
 
 new Vue({
     el: '#app',
     router,
     store,
     render: h => h(App)
-})
+});

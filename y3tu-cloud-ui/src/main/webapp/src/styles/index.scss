@@ -12,6 +12,12 @@ body {
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
 
+.el-dialog__body {
+  padding: 20px 20px;
+  color: #606266;
+  font-size: 14px;
+}
+
 label {
   font-weight: 700;
 }
@@ -21,9 +27,8 @@ html {
   box-sizing: border-box;
 }
 
-#app {
+#app{
   height: 100%;
-  overflow: hidden;
 }
 
 *,
@@ -41,7 +46,7 @@ a:hover {
   text-decoration: none;
 }
 
-div:focus {
+div:focus{
   outline: none;
 }
 
@@ -69,32 +74,64 @@ a:hover {
   }
 }
 
+.warn-content{
+  background: rgba(66,185,131,.1);
+  border-radius: 2px;
+  padding: 11px;
+  word-spacing: .05rem;
+  a{
+    color: #42b983;
+    font-weight: 400;
+  }
+}
+
 //main-container全局样式
-.app-main {
-  min-height: 100%
+.app-main{
+  height: 100%;
 }
 
 .app-container {
   padding: 20px;
 }
 
-// search-container全局样式
-.search-container {
-  padding: 10px 10px 20px 0;
+.head-container {
+  padding-bottom: 10px;
+  .filter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+  }
+  input {
+    height: 30.5px;
+    line-height: 30.5px;
+  }
+  .el-input__icon {
+    line-height: 31px;
+  }
 }
 
-.search-container .search-inp-container {
-  padding-right: 10px;
-  float: left;
-}
-
-.router {
-  margin-bottom: 100px;
-  padding: 15px 8px 0 8px;
-  background: #fff;
-  min-height: 100%;
-  height: auto;
+.el-avatar {
+  display: inline-block;
+  text-align: center;
+  background: #ccc;
+  color: #fff;
+  white-space: nowrap;
+  position: relative;
   overflow: hidden;
-  border-radius: 5px;
-  box-sizing: border-box;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 16px;
+}
+
+.logo-con{
+  height: 60px;
+  padding: 13px 0px 0px;
+  img{
+    height: 32px;
+    width: 135px;
+    display: block;
+    //margin: 0 auto;
+  }
 }

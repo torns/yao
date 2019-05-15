@@ -1,7 +1,5 @@
 import axios from 'axios'
-import {
-    Message
-} from 'element-ui'
+import {Message} from 'element-ui'
 import store from '../store'
 import errorCode from '@/const/errorCode'
 
@@ -34,8 +32,8 @@ service.interceptors.response.use(
         if (response.data.status == "ERROR") {
             console.error('error:' + response.data.message);
             const code = response.data.code;
-            if(code.toString().startsWith("SYS")){
-                errorCode[code]=response.data.message;
+            if (code.toString().startsWith("SYS")) {
+                errorCode[code] = response.data.message;
             }
             Message({
                 message: errorCode[code] || errorCode['default'],
@@ -49,8 +47,8 @@ service.interceptors.response.use(
         if (error.response.data.status == "ERROR") {
             console.error('error:' + error.response.data.message);
             const code = error.response.data.code;
-            if(code.toString().startsWith("SYS")){
-                errorCode[code]=error.response.data.message;
+            if (code.toString().startsWith("SYS")) {
+                errorCode[code] = error.response.data.message;
             }
             Message({
                 message: errorCode[code] || errorCode['default'],

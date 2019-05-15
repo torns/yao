@@ -5,12 +5,7 @@ import {setStore, getStore} from '@/utils/store'
 const user = {
     state: {
         token: getToken(),
-        name: getStore({
-            name: 'name'
-        }) || '',
-        avatar: getStore({
-            name: 'avatar'
-        }) || '',
+        user: {},
         roles: [],
         permissions: getStore({name: 'permissions'}) || {}
     },
@@ -18,27 +13,9 @@ const user = {
     mutations: {
         SET_TOKEN: (state, token) => {
             state.token = token
-            setStore({
-                name: 'token',
-                content: state.token,
-                type: 'session'
-            })
         },
-        SET_NAME: (state, name) => {
-            state.name = name
-            setStore({
-                name: 'name',
-                content: state.name,
-                type: 'session'
-            })
-        },
-        SET_AVATAR: (state, avatar) => {
-            state.avatar = avatar
-            setStore({
-                name: 'avatar',
-                content: state.avatar,
-                type: 'session'
-            })
+        SET_USER: (state, user) => {
+            state.user = user
         },
         SET_ROLES: (state, roles) => {
             state.roles = roles
@@ -60,12 +37,13 @@ const user = {
     actions: {
         // 登录
         Login({commit}, userInfo) {
-            const username = userInfo.username.trim()
+            const username = userInfo.username;
+            const password = userInfo.password;
+            const rememberMe = userInfo.rememberMe;
             return new Promise((resolve, reject) => {
-                login(username, userInfo.password).then(response => {
-                    const data = response
-                    setToken(data.access_token)
-                    commit('SET_TOKEN', data.access_token)
+                login(username, password).then(res => {
+                    setToken(res.data.access_token, rememberMe);
+                    commit('SET_TOKEN', res.data.access_token);
                     resolve()
                 }).catch(error => {
                     reject(error)
@@ -73,7 +51,7 @@ const user = {
             })
         },
 
-        // 验证码登录
+        //手机号验证码登录
         LoginByPhone({commit}, userInfo) {
             const mobile = userInfo.mobile.trim()
             const code = userInfo.code.trim()
@@ -96,7 +74,7 @@ const user = {
             return new Promise((resolve, reject) => {
                 getUserInfo().then(response => {
                     const data = response.data
-                    if (data.roles&& data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+                    if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
                         commit('SET_ROLES', data.roles)
                     } else {
                         reject('getInfo: roles must be a non-null array !')
@@ -143,6 +121,16 @@ const user = {
             })
         }
     }
+};
+
+export const setUserRole = (res, commit) => {
+    // 如果没有任何权限，则赋予一个默认的权限，避免请求死循环
+    if (res.roles.length === 0) {
+        commit('SET_ROLES', ['ROLE_SYSTEM_DEFAULT'])
+    } else {
+        commit('SET_ROLES', res.roles)
+    }
+    commit('SET_USER', res)
 }
 
 export default user

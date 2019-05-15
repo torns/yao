@@ -1,43 +1,49 @@
 <template>
-    <section class="main">
-        <transition name="fade-transform" mode="out-in">
-            <keep-alive :include="cachedViews">
-                <router-view class="router" :key="key"></router-view>
-            </keep-alive>
-        </transition>
-    </section>
+  <section class="app-main">
+    <transition name="fade-transform" mode="out-in">
+      <keep-alive :include="cachedViews">
+        <router-view :key="key"/>
+      </keep-alive>
+    </transition>
+  </section>
 </template>
 
 <script>
-    export default {
-        name: 'AppMain',
-        computed: {
-            // key() {
-            //   return this.$route.name !== undefined ? this.$route.name + +new Date() : this.$route + +new Date()
-            // }
-            cachedViews() {
-                return this.$store.state.tagsView.cachedViews
-            },
-            key() {
-                return this.$route.fullPath
-            }
-        }
+export default {
+  name: 'AppMain',
+  computed: {
+    cachedViews() {
+      return this.$store.state.tagsView.cachedViews
+    },
+    key() {
+      return this.$route.fullPath
     }
+  }
+}
 </script>
 
-<style scoped>
-    .app-main {
-        /*84 = navbar + tags-view = 50 +34 */
-        min-height: calc(100vh - 84px);
-        position: relative;
-        overflow: hidden;
-    }
+<style lang="scss" scoped>
+  .app-main {
+    z-index: 88;
+    /*84 = navbar + tags-view = 50 +34 */
+    min-height: calc(100vh - 84px);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
 
-    .main {
-        height: 100%;
-        background: #f1f4f5;
-        padding: 15px;
-        box-sizing: border-box;
-        overflow-y: scroll;
-    }
+  .fixed-header+.app-main {
+    padding-top: 50px;
+  }
+
+  .hasTagsView {
+  .app-main {
+    min-height: calc(100vh - 84px);
+  }
+
+  .fixed-header+.app-main {
+    padding-top: 84px;
+  }
+  }
 </style>
+
