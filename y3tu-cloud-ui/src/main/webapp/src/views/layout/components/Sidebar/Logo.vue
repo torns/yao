@@ -2,10 +2,8 @@
     <el-menu-item v-if="sidebarLogo" :class="{'submenu-title-noDropdown':isCollapse}" index="0"
                   style="pointer-events: none;">
         <!-- 缩小时显示的logo，可以自定义，这里直接使用图标库中的 -->
-        <!--<svg-icon v-if="isCollapse" icon-class="run"/>-->
-        <div v-if="isCollapse">
-            <img :src="logoMin">
-        </div>
+        <i v-if="isCollapse" class="el-icon-star-on"/>
+
         <!--正常状态下显示的，可以使用本地的logoImg-->
         <div class="logo-con">
             <img :src="logo">
@@ -15,7 +13,7 @@
 
 <script>
     import logo from '@/assets/logo/logo.png'
-    import logoMin from '@/assets/logo/logo-min.png'
+    import logoMin from '@/assets/logo/logomin.png'
     import {mapState} from 'vuex'
 
     export default {
@@ -28,7 +26,8 @@
         },
         data() {
             return {
-                // logoImg: logoImg
+                logo: logo,
+                logoMin: logoMin
             }
         },
         computed: {

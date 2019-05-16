@@ -7,7 +7,8 @@ const user = {
         token: getToken(),
         user: {},
         roles: [],
-        permissions: getStore({name: 'permissions'}) || {}
+        // 第一次加载菜单时用到
+        loadMenus: false
     },
 
     mutations: {
@@ -20,17 +21,8 @@ const user = {
         SET_ROLES: (state, roles) => {
             state.roles = roles
         },
-        SET_PERMISSIONS: (state, permissions) => {
-            const list = {}
-            for (let i = 0; i < permissions.length; i++) {
-                list[permissions[i]] = true
-            }
-            state.permissions = list
-            setStore({
-                name: 'permissions',
-                content: state.permissions,
-                type: 'session'
-            })
+        SET_LOAD_MENUS: (state, loadMenus) => {
+            state.loadMenus = loadMenus
         }
     },
 
@@ -42,8 +34,9 @@ const user = {
             const rememberMe = userInfo.rememberMe;
             return new Promise((resolve, reject) => {
                 login(username, password).then(res => {
-                    setToken(res.data.access_token, rememberMe);
-                    commit('SET_TOKEN', res.data.access_token);
+                    setToken(res.access_token, rememberMe);
+                    commit('SET_TOKEN', res.access_token);
+                    commit('SET_LOAD_MENUS', true)
                     resolve()
                 }).catch(error => {
                     reject(error)
@@ -74,15 +67,7 @@ const user = {
             return new Promise((resolve, reject) => {
                 getUserInfo().then(response => {
                     const data = response.data
-                    if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-                        commit('SET_ROLES', data.roles)
-                    } else {
-                        reject('getInfo: roles must be a non-null array !')
-                    }
-                    commit('SET_NAME', data.username)
-                    commit('SET_AVATAR', data.avatar)
-                    let permissions = data.resources.map(resource => resource.permission);
-                    commit('SET_PERMISSIONS', permissions);
+                    setUserInfo(data, commit);
                     resolve(response.data)
                 }).catch(error => {
                     reject(error)
@@ -97,12 +82,6 @@ const user = {
                     commit('SET_TOKEN', '')
                     commit('SET_ROLES', [])
 
-                    commit('SET_NAME', [])
-
-                    commit('SET_AVATAR', [])
-
-                    commit('SET_PERMISSIONS', {})
-
                     removeToken()
                     resolve()
                 }).catch(error => {
@@ -115,22 +94,27 @@ const user = {
         FedLogOut({commit}) {
             return new Promise(resolve => {
                 commit('SET_TOKEN', '')
-                commit('SET_PERMISSIONS', {})
+                commit('SET_ROLES', [])
                 removeToken()
                 resolve()
+            })
+        },
+        updateLoadMenus({commit}) {
+            return new Promise((resolve, reject) => {
+                commit('SET_LOAD_MENUS', false)
             })
         }
     }
 };
 
-export const setUserRole = (res, commit) => {
+export const setUserInfo = (user, commit) => {
     // 如果没有任何权限，则赋予一个默认的权限，避免请求死循环
-    if (res.roles.length === 0) {
+    if (user.roles.length === 0) {
         commit('SET_ROLES', ['ROLE_SYSTEM_DEFAULT'])
     } else {
-        commit('SET_ROLES', res.roles)
+        commit('SET_ROLES', user.roles)
     }
-    commit('SET_USER', res)
+    commit('SET_USER', user)
 }
 
 export default user

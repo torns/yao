@@ -1,6 +1,5 @@
-import {constantRouterMap} from '@/router'
+import {constantRouterMap} from '@/router/routers'
 import {validatenull, validateURL} from '@/utils/validate'
-
 import {GetMenu} from '@/api/menu'
 
 const permission = {
@@ -50,5 +49,6 @@ const permission = {
         }
     }
 }
+
 
 export default permission

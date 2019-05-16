@@ -1,6 +1,4 @@
-import {
-    validatenull
-} from './validate'
+import {validatenull} from './validate'
 import store from '../store'
 
 export const initMenu = (router, menu) => {

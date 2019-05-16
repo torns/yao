@@ -11,9 +11,8 @@ export function login(username, password) {
         client_id: clientId,
         client_secret: clientSecret,
         grant_type: grantType
-    })
+    });
     return request({
-
         url: '/token/oauth/token',
         method: 'post',
         data: param

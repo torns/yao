@@ -2,7 +2,7 @@
     <div class="login">
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-position="left" label-width="0px"
                  class="login-form">
-            <h3 class="title">el-admin 后台管理系统</h3>
+            <h3 class="title">Yadmin 后台管理系统</h3>
             <el-form-item prop="username">
                 <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号">
                     <svg-icon slot="prefix" icon-class="user" class="el-input__icon"
@@ -24,7 +24,7 @@
                     <span v-else>登 录 中...</span>
                 </el-button>
             </el-form-item>
-            <p class="login-tip">系统默认用户名：admin，密码：admin</p>
+            <p class="login-tip">系统默认用户名：admin 密码：admin</p>
         </el-form>
     </div>
 </template>
@@ -109,7 +109,7 @@
         justify-content: center;
         align-items: center;
         height: 100%;
-        background-image: url(https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/1547428971990.jpg);
+        background-image: url('../../assets/bg.png');
         background-size: cover;
     }
 
