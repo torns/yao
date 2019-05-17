@@ -78,7 +78,7 @@ export default {
     ])
   },
   created() {
-    store.dispatch('GetInfo').then(() => {})
+    store.dispatch('GetUserInfo').then(() => {})
   },
   methods: {
     parseTime,

@@ -7,7 +7,6 @@ import {getToken} from '@/utils/auth' // getToken from cookie
 import {GetMenu} from '@/api/menu'
 import {filterAsyncRouter} from '@/store/modules/permission'
 import {initMenu} from '@/utils/util'
-import { Notification, MessageBox } from 'element-ui'
 
 
 NProgress.configure({showSpinner: false})// NProgress Configuration
@@ -29,24 +28,15 @@ router.beforeEach((to, from, next) => {
             if (store.getters.roles.length === 0) {
                 // 拉取user_info
                 store.dispatch('GetUserInfo').then(res => {
-                    store.dispatch('GetMenu',res.id).then(data => {
+                    store.dispatch('GetMenu', res.id).then(data => {
                         initMenu(router, data)
-                    })
+                    });
                     next()
                 }).catch((err) => {
-
-                    MessageBox.alert(
-                        '请重新登录',
-                        '系统提示',
-                        {
-                            confirmButtonText: '重新登录',
-                            type: 'warning'
-                        }
-                    ).then(() => {
-                        store.dispatch('FedLogOut').then(() => {
-                            location.reload() // 为了重新实例化vue-router对象 避免bug
-                        })
-                    });
+                    console.log(err);
+                    store.dispatch('FedLogOut').then(() => {
+                        location.reload() // 为了重新实例化vue-router对象 避免bug
+                    })
                 })
             } else {
                 next()

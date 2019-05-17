@@ -4,7 +4,9 @@ import com.y3tu.cloud.common.config.FilterIgnorePropertiesConfig;
 import com.y3tu.cloud.common.constants.ServiceNameConstants;
 import com.y3tu.cloud.common.exception.AuthExceptionEnum;
 import com.y3tu.cloud.gateway.exception.NoPermissionException;
+import com.y3tu.cloud.gateway.exception.UnAuthorizedException;
 import com.y3tu.cloud.gateway.feign.AuthenticationService;
+import com.y3tu.tool.core.exception.ExceptionUtil;
 import com.y3tu.tool.core.exception.ServerCallException;
 import com.y3tu.tool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -57,6 +59,11 @@ public class AccessGatewayFilter implements GlobalFilter {
             hasPermission = authenticationService.hasPermission(authentication, url, method);
 
         } catch (Exception e) {
+            String msg = e.getMessage();
+            //判断是不是token过期失效
+            if (msg.contains("401")) {
+                throw new UnAuthorizedException("未授权或token过期，请重新登录！", e);
+            }
             String serverName = ServiceNameConstants.AUTHENTICATION_SERVER;
             String str = StrUtil.format("服务:{}调用{}异常,参数：authentication:{},url{},method{}", serverName, "hasPermission", authentication, url, method);
             throw new ServerCallException(str, e);

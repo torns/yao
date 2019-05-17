@@ -21,6 +21,7 @@ import org.springframework.security.oauth2.provider.client.JdbcClientDetailsServ
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -64,7 +65,7 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
     /**
      * 刷新令牌失效时间
      */
-    private int refreshTokenValiditySeconds = (int) TimeUnit.HOURS.toSeconds(1);
+    private int refreshTokenValiditySeconds = (int) TimeUnit.MINUTES.toSeconds(24);
 
     /**
      * 是否可以重用刷新令牌
@@ -96,12 +97,21 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         //配置token的数据源、自定义的tokenServices等信息,配置身份认证器，配置认证方式，TokenStore，TokenGranter，OAuth2RequestFactory
-        endpoints.tokenStore(tokenStore())
+
+
+        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setReuseRefreshToken(isReuseRefreshToken);
+        defaultTokenServices.setSupportRefreshToken(isSupportRefreshToken);
+        defaultTokenServices.setAccessTokenValiditySeconds(accessTokenValiditySeconds);
+        defaultTokenServices.setRefreshTokenValiditySeconds(refreshTokenValiditySeconds);
+        defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setTokenEnhancer(tokenEnhancerChain());
+
+        endpoints.tokenServices(defaultTokenServices)
                 .authorizationCodeServices(authorizationCodeServices())
                 .approvalStore(approvalStore())
                 // 添加认证异常处理器
                 .exceptionTranslator(customExceptionTranslator())
-                .tokenEnhancer(tokenEnhancerChain())
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
     }

@@ -2,10 +2,10 @@ import request from '@/utils/request'
 import qs from 'qs'
 
 export function login(username, password) {
-    var grantType = 'password'
-    var clientId = 'cloud'
-    var clientSecret = 'cloud'
-    var param = qs.stringify({
+    let grantType = 'password'
+    let clientId = 'cloud'
+    let clientSecret = 'cloud'
+    let param = qs.stringify({
         username: username,
         password: password,
         client_id: clientId,
@@ -18,6 +18,27 @@ export function login(username, password) {
         data: param
     })
 }
+
+/**
+ * 根据refreshToken刷新token
+ */
+export function refreshToken(refreshToken) {
+    let grantType = 'refresh_token'
+    let clientId = 'cloud'
+    let clientSecret = 'cloud'
+    let param = qs.stringify({
+        refresh_token: refreshToken,
+        client_id: clientId,
+        client_secret: clientSecret,
+        grant_type: grantType
+    });
+    return request({
+        url: '/token/oauth/token',
+        method: 'post',
+        data: param
+    })
+}
+
 
 export function sendMobileCode(mobile) {
     return request({

@@ -1,24 +1,24 @@
 #!/bin/sh
 # kill old container
-if docker ps | grep -i taroco-ui
+if docker ps | grep -i y3tu-cloud-ui
     then
-        docker kill taroco-ui
+        docker kill y3tu-cloud-ui
 fi
 
 # remove old container
-if docker ps -a | grep -i taroco-ui
+if docker ps -a | grep -i y3tu-cloud-ui
     then
-        docker rm taroco-ui
+        docker rm y3tu-cloud-ui
 fi
 
 # remove old images
-if docker images | grep docker_taroco-ui:latest
+if docker images | grep y3tu-cloud-ui:latest
     then
-        docker rmi docker_taroco-ui:latest
+        docker rmi y3tu-cloud-ui:latest
 fi
 
 unzip dist.zip
 
-docker build --rm -t docker_taroco-ui:latest .
+docker build --rm -t y3tu-cloud-ui:latest .
 
-docker run -p 80:80 --name taroco-ui -d docker_taroco-ui:latest
+docker run -p 80:80 --name y3tu-cloud-ui -d y3tu-cloud-ui:latest

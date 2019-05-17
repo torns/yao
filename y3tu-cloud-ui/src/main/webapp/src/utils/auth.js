@@ -16,6 +16,15 @@ export function setToken(token, rememberMe) {
     }
 }
 
+export function setRefreshToken(refreshToken) {
+    return Cookies.set(Config.RefreshTokenKey, refreshToken)
+}
+
+export function getRefreshToken(refreshToken) {
+    return Cookies.get(Config.RefreshTokenKey)
+}
+
 export function removeToken() {
-    return Cookies.remove(TokenKey)
+    Cookies.remove(TokenKey);
+    Cookies.remove(Config.RefreshTokenKey);
 }

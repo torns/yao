@@ -20,6 +20,10 @@ export default {
      * token key
      */
     TokenKey: 'YADMIN-TOKEN-KEY',
+    /**
+     * refreshToken key
+     */
+    RefreshTokenKey:'YADMIN-REFRESH-TOKEN-KEY',
 
     /**
      * 请求超时时间，毫秒（默认2分钟）

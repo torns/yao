@@ -1,5 +1,5 @@
-import {login, logout, getUserInfo, mobileLogin} from '@/api/login'
-import {getToken, setToken, removeToken} from '@/utils/auth'
+import {login, logout, getUserInfo, mobileLogin,refreshToken} from '@/api/login'
+import {getToken, setToken, removeToken, getRefreshToken,setRefreshToken} from '@/utils/auth'
 import {setStore, getStore} from '@/utils/store'
 
 const user = {
@@ -35,8 +35,22 @@ const user = {
             return new Promise((resolve, reject) => {
                 login(username, password).then(res => {
                     setToken(res.access_token, rememberMe);
+                    setRefreshToken(res.refresh_token);
                     commit('SET_TOKEN', res.access_token);
                     commit('SET_LOAD_MENUS', true)
+                    resolve()
+                }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
+
+        RefreshToken({commit}) {
+            return new Promise((resolve, reject) => {
+                refreshToken(getRefreshToken()).then(res => {
+                    commit('SET_TOKEN', res.access_token);
+                    setToken(res.access_token);
+                    setRefreshToken(res.refresh_token);
                     resolve()
                 }).catch(error => {
                     reject(error)

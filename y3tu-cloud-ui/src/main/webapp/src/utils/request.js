@@ -2,7 +2,8 @@ import axios from 'axios'
 import router from '@/router/routers'
 import {Notification, MessageBox} from 'element-ui'
 import store from '@/store'
-import {getToken} from '@/utils/auth'
+import {getToken, getRefreshToken} from '@/utils/auth'
+
 import Config from '@/config'
 import errorCode from '@/const/errorCode'
 
@@ -17,12 +18,17 @@ service.interceptors.request.use(config => {
     if (getToken()) {
         // 让每个请求携带自定义token 请根据实际情况自行修改
         config.headers.common['Authorization'] = 'Bearer ' + getToken()
+        // 处理刷新token后重新请求的自定义变量
+        config['refresh_token'] = false;
     }
     const headers = config.headers
     if (headers['content-type'] === 'application/octet-stream;charset=utf-8') {
         return config.data
     }
+    // 处理刷新token后重新请求的自定义变量
+    config['refresh_token'] = false;
     return config
+
 }, error => {
     console.log(error);
     Promise.reject(error)
@@ -33,14 +39,12 @@ service.interceptors.response.use(
     response => {
 
         if (response.data.status == "ERROR") {
-            console.error('error:' + response.data.message);
-            const code = response.data.code;
-            if (code.toString().startsWith("SYS")) {
-                errorCode[code] = response.data.message;
+            if (code !== undefined) {
+                errorCode[code] = error.response.data.message;
             }
-            Message({
+            Notification.error({
                 message: errorCode[code] || errorCode['default'],
-                type: 'error'
+                duration: 2500
             })
         }
         return response.data
@@ -60,7 +64,6 @@ service.interceptors.response.use(
             })
             return Promise.reject(error)
         }
-        console.log(error.toString())
         if (error.toString().indexOf('503') !== -1) {
             Notification.error({
                 title: '服务暂时不可用，请稍后再试!',
@@ -69,36 +72,43 @@ service.interceptors.response.use(
             return Promise.reject(error)
         }
 
-        let code = 0;
-        code = error.response.data.code
-        if (code === 401) {
-            MessageBox.confirm(
-                '登录状态已过期，您可以继续留在该页面，或者重新登录',
-                '系统提示',
-                {
-                    confirmButtonText: '重新登录',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }
-            ).then(() => {
-                store.dispatch('LogOut').then(() => {
-                    location.reload() // 为了重新实例化vue-router对象 避免bug
+        let code = error.response.data.code;
+        if (code === "401" && !error.response.config.refresh_token) {
+            let config = error.response.config;
+            config['refresh_token'] = true;
+            //如果是token过期，首先用refreshToken去刷新token
+            let response = store.dispatch('RefreshToken').then(() => {
+                config.headers.Authorization = 'Bearer ' + getToken()
+                return service(config)
+            }).catch((error) => {
+                //跳转到登录页面
+                MessageBox.confirm(
+                    '登录状态已过期，您可以继续留在该页面，或者重新登录',
+                    '系统提示',
+                    {
+                        confirmButtonText: '重新登录',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }
+                ).then(() => {
+                    store.dispatch('FedLogOut').then(() => {
+                        location.reload() // 为了重新实例化vue-router对象 避免bug
+                    })
                 })
-            })
-        } else if (code === 403) {
+            });
+
+            return response;
+
+        } else if (code === "403") {
             router.push({path: '/401'})
         } else {
-            const errorMsg = error.response.data.message;
-            console.log('errorMsg:' + errorMsg);
-            if (code.toString().startsWith("SYS")) {
+            if (code !== undefined) {
                 errorCode[code] = error.response.data.message;
             }
-            if (errorMsg !== undefined) {
-                Notification.error({
-                    message: errorCode[code] || errorCode['default'],
-                    duration: 2500
-                })
-            }
+            Notification.error({
+                message: errorCode[code] || errorCode['default'],
+                duration: 2500
+            })
         }
         return Promise.reject(error)
     }
