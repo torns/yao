@@ -1,8 +1,7 @@
 package com.y3tu.cloud.upms.controller;
 
-import com.y3tu.cloud.common.annotation.SysLog;
 import com.y3tu.cloud.common.constants.ServiceNameConstants;
-import com.y3tu.cloud.upms.model.entity.Log;
+import com.y3tu.cloud.log.annotation.Log;
 import com.y3tu.cloud.upms.service.LogService;
 import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.web.annotation.MethodMapping;
@@ -29,7 +28,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/log")
 @Api(description = "日志")
-public class LogController extends BaseController<LogService, Log> {
+public class LogController extends BaseController<LogService, com.y3tu.cloud.upms.model.entity.Log> {
 
     private static final String MODULE_NAME = "UPMS模块";
 
@@ -38,7 +37,7 @@ public class LogController extends BaseController<LogService, Log> {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ApiOperation(value = "测试日志api")
-    @SysLog(serviceId = ServiceNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "测试")
+    @Log(serviceId = ServiceNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "测试")
     public void test() throws Exception {
         logService.test();
     }

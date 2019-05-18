@@ -68,7 +68,7 @@
                `user`.`password`,
                `user`.mobile,
                `user`.avatar,
-               'user'.email,
+               `user`.email,
                `user`.department_id,
                `user`.create_time AS ucreate_time,
                `user`.update_time AS uupdate_time,

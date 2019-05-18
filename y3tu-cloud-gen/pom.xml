@@ -26,6 +26,12 @@
 
         <dependency>
             <groupId>com.y3tu</groupId>
+            <artifactId>y3tu-cloud-log-starter</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.y3tu</groupId>
             <artifactId>y3tu-tool-web</artifactId>
             <version>${y3tu-tool-version}</version>
         </dependency>

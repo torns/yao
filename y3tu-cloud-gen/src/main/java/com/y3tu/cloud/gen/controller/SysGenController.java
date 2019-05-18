@@ -1,11 +1,11 @@
 package com.y3tu.cloud.gen.controller;
 
-import com.y3tu.cloud.common.annotation.SysLog;
 import com.y3tu.cloud.common.constants.ServiceNameConstants;
 import com.y3tu.cloud.gen.model.dto.BuildConfigDTO;
 import com.y3tu.cloud.gen.model.query.TableInfoQuery;
 import com.y3tu.cloud.gen.service.SysGenService;
 import com.y3tu.cloud.gen.service.TableInfoService;
+import com.y3tu.cloud.log.annotation.Log;
 import com.y3tu.tool.core.io.IoUtil;
 import com.y3tu.tool.core.pojo.R;
 import io.swagger.annotations.Api;
@@ -32,7 +32,7 @@ public class SysGenController {
     @Autowired
     private SysGenService sysGenService;
 
-    @SysLog(serviceId = ServiceNameConstants.GEN_SERVER, moduleName = MODULE_NAME, actionName = "分页查询数据库中所有的表信息")
+    @Log(serviceId = ServiceNameConstants.GEN_SERVER, moduleName = MODULE_NAME, actionName = "分页查询数据库中所有的表信息")
     @ApiOperation(value = "分页查询数据库中所有的表信息", notes = "分页查询数据库中所有的表信息", httpMethod = "GET")
     @ApiImplicitParam(name = "query", value = "表信息查询条件", required = false, dataType = "TableInfoQuery")
     @ResponseBody
@@ -42,7 +42,7 @@ public class SysGenController {
     }
 
 
-    @SysLog(serviceId = ServiceNameConstants.GEN_SERVER, moduleName = MODULE_NAME, actionName = "根据表名称生成代码  返回zip包")
+    @Log(serviceId = ServiceNameConstants.GEN_SERVER, moduleName = MODULE_NAME, actionName = "根据表名称生成代码  返回zip包")
     @ApiOperation(value = "根据表名称生成代码", notes = "根据表名称生成代码  返回zip包", httpMethod = "POST")
     @ApiImplicitParam(name = "buildConfigDTO", value = "表配置", required = true, dataType = "BuildConfigDTO")
     @PostMapping("/code/build")
