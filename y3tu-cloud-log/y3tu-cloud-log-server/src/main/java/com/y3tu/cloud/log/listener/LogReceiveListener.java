@@ -35,7 +35,7 @@ public class LogReceiveListener {
      * @param message
      */
     @RabbitHandler
-    @RabbitListener(queues = MqQueueNameConstants.SYS_LOG_QUEUE)
+    @RabbitListener(queues = MqQueueNameConstants.LOG_QUEUE)
     public void handler(LogDTO logDTO, Channel channel, Message message) throws IOException {
         LogReceiveListener.log.info("系统日志消费端成功消费信息：log={}", logDTO);
         // 确认消息接受

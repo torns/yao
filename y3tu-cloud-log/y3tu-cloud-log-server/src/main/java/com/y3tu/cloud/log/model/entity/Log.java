@@ -21,8 +21,8 @@ public class Log implements Serializable {
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "id", type = IdType.INPUT)
+    private String id;
 
     /**
      * 日志类型

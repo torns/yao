@@ -1,4 +1,4 @@
-package com.y3tu.cloud.log.dto;
+package com.y3tu.cloud.log.model.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -17,7 +17,7 @@ public class LogDTO implements Serializable {
     /**
      * 主键
      */
-    private Long id;
+    private String id;
 
     /**
      * 日志类型

@@ -43,7 +43,7 @@ public interface SecurityConstants {
     /**
      * jwt 加密key
      */
-    String SIGN_KEY = "y3tu-cloud";
+    String SIGN_KEY = "123456";
 
     /**
      * sys_oauth_client_details 表的字段，不包括client_id、client_secret

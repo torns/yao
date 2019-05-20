@@ -13,8 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 
 /**
  * <p>
@@ -44,9 +42,8 @@ public class LogController extends BaseController<LogService, com.y3tu.cloud.upm
 
     @Override
     @MethodMapping(method = RequestMethod.POST)
-    public R getByPage(@RequestParam Map<String, Object> params) {
-        PageInfo<Log> pageInfo = logService.queryPage(PageInfo.mapToPageInfo(params), params);
-        return R.success(pageInfo);
+    public R page(@RequestBody PageInfo pageInfo) {
+        return R.success(logService.page(pageInfo));
     }
 
     @RequestMapping(value = "/delByIds/{ids}", method = RequestMethod.DELETE)

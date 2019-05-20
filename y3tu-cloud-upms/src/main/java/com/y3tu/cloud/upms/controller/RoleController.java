@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -44,9 +43,9 @@ public class RoleController extends BaseController<RoleService, Role> {
     @ApiOperation(value = "分页获取角色")
     @Override
     @MethodMapping(method = RequestMethod.POST)
-    public R getByPage(@RequestParam Map<String, Object> params) {
-        PageInfo<Role> pageInfo = service.queryPage(PageInfo.mapToPageInfo(params), params);
-        for (Role role : pageInfo.getList()) {
+    public R page(@RequestBody PageInfo pageInfo) {
+        PageInfo<Role> page = service.page(pageInfo);
+        for (Role role : page.getRecords()) {
             //角色拥有权限
             List<RoleResource> permissions = roleResourceService.list(new QueryWrapper<RoleResource>().eq("role_id", role.getId()));
             //角色所属部门

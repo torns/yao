@@ -10,8 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 /**
  * <p>
  * 前端控制器
@@ -43,14 +41,13 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
     /**
      * 分页查询信息
      *
-     * @param params 分页对象
+     * @param pageInfo 分页对象
      * @return 分页对象
      */
     @GetMapping("/page")
-    public R page(@RequestParam Map<String, Object> params) {
-
-        PageInfo<OauthClientDetails> pageInfo = oauthClientDetailsService.queryPage(PageInfo.mapToPageInfo(params), params);
-        return R.success(pageInfo);
+    @Override
+    public R page(@RequestBody PageInfo pageInfo) {
+        return R.success(oauthClientDetailsService.page(pageInfo));
     }
 
     /**

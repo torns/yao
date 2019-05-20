@@ -36,6 +36,14 @@ spring:
           filters:
             #去掉/auth/前缀
             - StripPrefix=1
+        #日志服务
+        - id: log-server
+          uri: lb://log-server
+          predicates:
+            - Path=/log/**
+          filters:
+            #去掉/auth/前缀
+            - StripPrefix=1
 
 
   profiles:

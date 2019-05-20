@@ -12,8 +12,6 @@ import com.y3tu.tool.web.base.pojo.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 
 /**
  * 字典数据
@@ -32,9 +30,8 @@ public class DictDataController extends BaseController<DictDataService, DictData
 
     @MethodMapping
     @Override
-    public R getByPage(@RequestParam Map<String, Object> params) {
-        PageInfo pageInfo = PageInfo.mapToPageInfo(params);
-        return R.success(dictDataService.queryPage(pageInfo, params));
+    public R page(@RequestBody PageInfo pageInfo) {
+        return R.success(dictDataService.page(pageInfo));
     }
 
     @MethodMapping("/getByCode/{code}")

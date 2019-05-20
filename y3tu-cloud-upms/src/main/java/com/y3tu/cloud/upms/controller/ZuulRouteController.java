@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -39,14 +40,16 @@ public class ZuulRouteController extends BaseController<ZuulRouteService,ZuulRou
     /**
      * 分页查询信息
      *
-     * @param params 分页对象
+     * @param pageInfo 分页对象
      * @return 分页对象
      */
     @GetMapping("/page")
-    public R page(@RequestParam Map<String, Object> params) {
-        params.put(CommonConstants.DEL_FLAG, CommonConstants.STATUS_NORMAL);
-        PageInfo<ZuulRoute> pageInfo = zuulRouteService.queryPage(PageInfo.mapToPageInfo(params), params);
-        return R.success(pageInfo);
+    @Override
+    public R page(@RequestBody PageInfo pageInfo) {
+        Map param = pageInfo.getParams();
+        param.putAll((Map) new HashMap().put(CommonConstants.DEL_FLAG, CommonConstants.STATUS_NORMAL));
+        pageInfo.setParams(param);
+        return R.success(zuulRouteService.page(pageInfo));
     }
 
     /**

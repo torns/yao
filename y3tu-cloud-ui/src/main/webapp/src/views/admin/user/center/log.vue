@@ -2,8 +2,8 @@
     <div>
         <!--表格渲染-->
         <el-table v-loading="loading" :data="data" size="small" style="width: 100%;">
-            <el-table-column prop="description" label="行为"/>
-            <el-table-column prop="requestIp" label="IP"/>
+            <el-table-column prop="actionName" label="行为"/>
+            <el-table-column prop="remoteAddr" label="IP"/>
             <el-table-column prop="time" label="请求耗时" align="center">
                 <template slot-scope="scope">
                     <el-tag v-if="scope.row.time <= 300">{{ scope.row.time }}ms</el-tag>
@@ -30,6 +30,8 @@
 <script>
     import initData from '@/mixins/initData'
     import {parseTime} from '@/utils/index'
+    import { mapGetters } from 'vuex'
+
 
     export default {
         mixins: [initData],
@@ -38,12 +40,18 @@
                 this.init()
             })
         },
+        computed: {
+            ...mapGetters([
+                'user',
+            ])
+        },
+
         methods: {
             parseTime,
             beforeInit() {
-                this.url = 'api/logs/user'
+                this.url = 'log/log/page'
                 const sort = 'id,desc'
-                this.params = {page: this.page, size: this.size, sort: sort}
+                this.params = {page: this.page, size: this.size, sort: sort,createBy:this.user.username}
                 return true
             }
         }

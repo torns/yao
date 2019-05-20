@@ -1,10 +1,10 @@
 package com.y3tu.cloud.log.mapper;
 
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.y3tu.cloud.log.model.entity.Log;
 import com.y3tu.cloud.log.model.query.LogQuery;
+import com.y3tu.tool.web.base.mapper.BaseMapper;
 
 
 public interface LogMapper extends BaseMapper<Log> {

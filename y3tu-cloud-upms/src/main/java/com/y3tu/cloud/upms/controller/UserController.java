@@ -133,17 +133,17 @@ public class UserController extends BaseController<UserService, User> {
     /**
      * 获取用户分页数据
      *
-     * @param params
+     * @param pageInfo
      * @return
      */
     @Override
     @ApiOperation(value = "多条件分页获取用户列表")
     @MethodMapping(method = RequestMethod.POST)
-    public R getByPage(@RequestParam Map<String, Object> params) {
+    public R page(@RequestBody PageInfo pageInfo) {
 
-        PageInfo<User> pageInfo = userService.queryPage(PageInfo.mapToPageInfo(params), params);
+        PageInfo<User> page = userService.page(pageInfo);
         List<UserVO> userVOS = new ArrayList<>();
-        for (User user : pageInfo.getList()) {
+        for (User user : page.getRecords()) {
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(user, userVO);
             // 关联角色
@@ -170,7 +170,7 @@ public class UserController extends BaseController<UserService, User> {
         }
         PageInfo pageInfoCopy = new PageInfo();
         BeanUtil.copyProperties(pageInfo, pageInfoCopy);
-        pageInfoCopy.setList(userVOS);
+        pageInfoCopy.setRecords(userVOS);
         return R.success(pageInfoCopy);
     }
 

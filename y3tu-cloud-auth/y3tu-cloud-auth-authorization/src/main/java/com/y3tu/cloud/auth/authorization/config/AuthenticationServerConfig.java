@@ -1,7 +1,9 @@
 package com.y3tu.cloud.auth.authorization.config;
 
 import com.y3tu.cloud.auth.authorization.exception.CustomWebResponseExceptionTranslator;
+import com.y3tu.cloud.auth.authorization.security.UserDetailsImpl;
 import com.y3tu.cloud.common.constants.SecurityConstants;
+import com.y3tu.cloud.common.constants.UserConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -22,6 +25,7 @@ import org.springframework.security.oauth2.provider.code.AuthorizationCodeServic
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -29,6 +33,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -60,12 +66,12 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
     /**
      * 令牌失效时间
      */
-    private int accessTokenValiditySeconds = (int) TimeUnit.MINUTES.toSeconds(30);
+    private int accessTokenValiditySeconds = (int) TimeUnit.MINUTES.toSeconds(5);
 
     /**
      * 刷新令牌失效时间
      */
-    private int refreshTokenValiditySeconds = (int) TimeUnit.MINUTES.toSeconds(24);
+    private int refreshTokenValiditySeconds = (int) TimeUnit.MINUTES.toSeconds(10);
 
     /**
      * 是否可以重用刷新令牌
@@ -179,8 +185,31 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
     @Bean
     public TokenEnhancerChain tokenEnhancerChain() {
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(new CustomTokenEnhancer(), accessTokenConverter()));
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), accessTokenConverter()));
         return tokenEnhancerChain;
+    }
+
+    /**
+     * jwt 生成token 定制化处理
+     * <p>
+     * 添加一些额外的用户信息到token里面
+     *
+     * @return TokenEnhancer
+     */
+    @Bean
+    public TokenEnhancer tokenEnhancer() {
+        return (accessToken, authentication) -> {
+            final Map<String, Object> additionalInfo = new HashMap<>(2);
+            additionalInfo.put("license", SecurityConstants.LICENSE);
+            UserDetailsImpl user = (UserDetailsImpl) authentication.getUserAuthentication().getPrincipal();
+            if (user != null) {
+                additionalInfo.put(UserConstants.USER_ID, user.getUserId());
+                additionalInfo.put(UserConstants.USER_NAME, user.getUsername());
+            }
+
+            ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
+            return accessToken;
+        };
     }
 
     /**

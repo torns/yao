@@ -4,7 +4,7 @@ import com.y3tu.cloud.common.constants.MqQueueNameConstants;
 import com.y3tu.cloud.common.enums.OperationStatusEnum;
 import com.y3tu.cloud.common.util.UserUtil;
 import com.y3tu.cloud.log.annotation.Log;
-import com.y3tu.cloud.log.dto.LogDTO;
+import com.y3tu.cloud.log.model.dto.LogDTO;
 import com.y3tu.tool.core.exception.ExceptionUtil;
 import com.y3tu.tool.core.util.JsonUtil;
 import com.y3tu.tool.http.IpUtil;
@@ -72,9 +72,13 @@ public class LogAspect {
                     .setRequestUri(request.getRequestURI())
                     .setUserAgent(request.getHeader("user-agent"));
 
-            // 获取当前用户名
-            String username = UserUtil.getUserName(request);
-            logDto.setCreateBy(username);
+            //通过请求解析token获取当前用户名
+            try {
+                String username = UserUtil.getUserName(request);
+                logDto.setCreateBy(username);
+            } catch (Exception e) {
+                log.error("日志记录获取当前用户名失败", e);
+            }
         }
         try {
             result = pjp.proceed();
@@ -91,7 +95,7 @@ public class LogAspect {
 
         // 发送消息到 系统日志队列
         if (targetMethod.isAnnotationPresent(Log.class)) {
-            rabbitTemplate.convertAndSend(MqQueueNameConstants.SYS_LOG_QUEUE, logDto);
+            rabbitTemplate.convertAndSend(MqQueueNameConstants.LOG_QUEUE, logDto);
         }
         return result;
     }
