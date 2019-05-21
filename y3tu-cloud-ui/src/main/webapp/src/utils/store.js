@@ -1,6 +1,4 @@
-import {
-    validatenull
-} from '@/utils/validate'
+import {validatenull} from '@/utils/validate'
 
 /**
  * 存储localStorage
