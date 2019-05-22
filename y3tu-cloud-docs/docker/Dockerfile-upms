@@ -1,0 +1,17 @@
+FROM java:8-jre
+MAINTAINER Y3tu-Cloud y3tu <y3tu.vip@qq.com>
+
+ADD ./jar/y3tu-cloud-upms-*.jar /app/app.jar
+
+EXPOSE 9001
+
+ENV JAVA_OPTS="-Xmx256m -Xms256m"
+ENV CONFIG_PROFILE=dev
+ENV UPMS_PORT = 9001
+
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS \
+-Dfile.encoding=UTF8 -Duser.timezone=GMT+08 \
+-Djava.security.egd=file:/dev/./urandom \
+-jar /app/app.jar \
+--spring.profiles.active=$CONFIG_PROFILE \
+--server.port=$UPMS_PORT"]

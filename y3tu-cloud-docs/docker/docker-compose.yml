@@ -1,0 +1,27 @@
+version: '2'
+services:
+  gateway-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile-gateway
+    restart: always
+    ports:
+      - 2019:2019
+    volumes:
+      - /data/logs/gateway-server/:/logs/gateway-server/
+    networks:
+      - y3tu-cloud
+  upms-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile-upms
+    restart: always
+    ports:
+      - 9001:9001
+    volumes:
+      - /data/logs/upms-server/:/logs/upms-server/
+    networks:
+      - y3tu-cloud
+
+networks:
+  y3tu-cloud:
