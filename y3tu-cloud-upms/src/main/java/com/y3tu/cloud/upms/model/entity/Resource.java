@@ -90,10 +90,6 @@ public class Resource extends BaseEntity {
      */
     private String path;
     /**
-     * 标题
-     */
-    private String title;
-    /**
      * 图标
      */
     private String icon;

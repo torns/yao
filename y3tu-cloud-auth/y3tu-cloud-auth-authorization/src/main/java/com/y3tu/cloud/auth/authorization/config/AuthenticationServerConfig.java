@@ -66,12 +66,12 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
     /**
      * 令牌失效时间
      */
-    private int accessTokenValiditySeconds = (int) TimeUnit.MINUTES.toSeconds(5);
+    private int accessTokenValiditySeconds = (int) TimeUnit.MINUTES.toSeconds(60);
 
     /**
      * 刷新令牌失效时间
      */
-    private int refreshTokenValiditySeconds = (int) TimeUnit.MINUTES.toSeconds(10);
+    private int refreshTokenValiditySeconds = (int) TimeUnit.HOURS.toSeconds(24);
 
     /**
      * 是否可以重用刷新令牌

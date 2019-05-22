@@ -5,7 +5,6 @@
     <resultMap id="resourceResultMap" type="com.y3tu.cloud.upms.model.entity.Resource">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
-        <result column="title" property="title"/>
         <result column="type" property="type"/>
         <result column="path" property="path"/>
         <result column="permission" property="permission"/>
@@ -17,6 +16,7 @@
         <result column="update_time" property="updateTime"/>
         <result column="del_flag" property="delFlag"/>
         <result column="url" property="url"/>
+        <result column="status" property="status"/>
     </resultMap>
 
     <select id="findResourceByRoleCode" resultMap="resourceResultMap">

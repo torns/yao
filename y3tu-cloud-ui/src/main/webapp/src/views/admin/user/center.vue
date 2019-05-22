@@ -20,13 +20,14 @@
               </el-upload>
             </div>
             <ul class="user-info">
-              <li><svg-icon icon-class="user1" /> 用户名称 <div class="user-right">{{ user.username }}</div></li>
-              <li><svg-icon icon-class="phone" /> 手机号码 <div class="user-right">{{ user.mobile }}</div></li>
-              <li><svg-icon icon-class="email" /> 用户邮箱 <div class="user-right">{{ user.email }}</div></li>
-              <li><svg-icon icon-class="dept" /> 所属部门 <div class="user-right"> {{ user.departmentName }}</div></li>
-              <li><svg-icon icon-class="date" /> 创建日期 <div class="user-right">{{ parseTime(user.createTime) }}</div></li>
+              <li><icon name="user" style="margin-right: 8px"/> 用户名称 <div class="user-right">{{ user.username }}</div></li>
+              <li><icon name="phone" style="margin-right: 8px"/> 手机号码 <div class="user-right">{{ user.mobile }}</div></li>
+              <li><icon name="envelope" style="margin-right: 8px"/> 用户邮箱 <div class="user-right">{{ user.email }}</div></li>
+              <li><icon name="users" style="margin-right: 8px"/> 所属部门 <div class="user-right"> {{ user.departmentName }}</div></li>
+              <li><icon name="history" style="margin-right: 8px"/> 创建日期 <div class="user-right">{{ parseTime(user.createTime) }}</div></li>
               <li>
-                <svg-icon icon-class="anq" /> 安全设置
+                <icon name="lock" style="margin-right: 8px"/>
+                 安全设置
                 <div class="user-right">
                   <a @click="$refs.pass.dialog = true">修改密码</a> |
                   <a @click="$refs.email.dialog = true">修改邮箱</a>

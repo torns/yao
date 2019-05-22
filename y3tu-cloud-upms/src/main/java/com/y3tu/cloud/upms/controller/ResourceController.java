@@ -87,7 +87,7 @@ public class ResourceController extends BaseController<ResourceService, Resource
     public R save(@RequestBody Resource resource) {
         // 判断拦截请求的操作权限按钮名是否已存在
         if (CommonConstants.PERMISSION_OPERATION.equals(resource.getType())) {
-            List<Resource> list = resourceService.list(new QueryWrapper<Resource>().eq("title", resource.getTitle()));
+            List<Resource> list = resourceService.list(new QueryWrapper<Resource>().eq("name", resource.getName()));
             if (list != null && list.size() > 0) {
                 return R.warn("名称已存在");
             }
@@ -109,9 +109,9 @@ public class ResourceController extends BaseController<ResourceService, Resource
         if (CommonConstants.PERMISSION_OPERATION.equals(resource.getType())) {
             // 若名称修改
             Resource p = resourceService.getById(resource.getId());
-            if (!p.getTitle().equals(resource.getTitle())) {
+            if (!p.getName().equals(resource.getName())) {
                 List<Resource> list;
-                list = resourceService.list(new QueryWrapper<Resource>().eq("title", resource.getTitle()));
+                list = resourceService.list(new QueryWrapper<Resource>().eq("name", resource.getName()));
                 if (list != null && list.size() > 0) {
                     return R.warn("名称已存在");
                 }

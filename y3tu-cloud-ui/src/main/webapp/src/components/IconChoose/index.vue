@@ -9,13 +9,13 @@
                     :disabled="disabled"
                     :readonly="readonly"
                     :maxlength="maxlength"
-                    :icon="currentValue"
+                    :suffix-icon="currentValue"
             />
             <el-button
                     @click="iconModalVisible=true"
                     :size="size"
                     :disabled="disabled"
-                    :icon="icon"
+                    :suffix-icon="icon"
                     style="margin-left:10px"
             >选择图标
             </el-button>
@@ -23,7 +23,7 @@
 
         <el-dialog
                 title="选择图标"
-                v-model="iconModalVisible"
+                :visible.sync="iconModalVisible"
                 :styles="{top: '30px'}"
                 footer-hide
                 :z-index="1060">
@@ -37,9 +37,9 @@
                         @blur="handleBlur"/>
             </div>
             <div class="icon-block icon-bar">
-                <div class="icon-wrap" v-for="(item, i) in iconData" :key="i" @click="hanleChoose(item)">
+                <div class="icon-wrap" v-for="(item, i) in iconData" :key="i" @click="handleChoose(item)">
                     <div class="icons-item">
-                        <icon :type="item" style="font-size: 32px;"/>
+                        <icon :name="item" style="font-size: 32px;"/>
                         <p>{{item}}</p>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                 }
                 this.currentValue = value;
             },
-            hanleChoose(v) {
+            handleChoose(v) {
                 this.currentValue = v;
                 this.$emit("input", this.currentValue);
                 this.$emit("on-change", this.currentValue);
