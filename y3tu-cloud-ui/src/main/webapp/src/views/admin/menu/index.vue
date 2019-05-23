@@ -162,7 +162,7 @@
 
 <script>
     import Developing from '@/components/Developing'
-    import IconChoose from '@/components/IconChoose'
+    import IconChoose from '@/components/IconSelect'
 
     import {getAllReource} from '@/api/menu'
     import {getDictDataByCode} from '@/api/dict'
@@ -199,7 +199,8 @@
                     component: [{required: true, message: "前端组件不能为空", trigger: "blur"}]
                 },
                 submitLoading: false,
-                dictPermissions: []
+                dictPermissions: [],
+                menuModalVisible:false
             }
         },
         components: {
@@ -240,7 +241,6 @@
             },
             //取消编辑
             cancelEdit() {
-                console.log(this.menuForm);
                 this.$refs['menuForm'].resetFields();
                 this.menuForm.id = "";
                 delete this.menuForm.id;

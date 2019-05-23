@@ -36,7 +36,7 @@ public class RabbitMqConfig {
      */
     @Bean
     public Queue sysLogQueue() {
-        return new Queue("sys_log_queue");
+        return new Queue("log_queue");
     }
 
     /**
