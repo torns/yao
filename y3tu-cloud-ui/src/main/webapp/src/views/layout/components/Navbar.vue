@@ -1,6 +1,27 @@
 <template>
     <div class="navbar">
         <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
+
+        <div style="bottom: 10px; position: relative;">
+            <el-menu v-if="topNav.navList!=null&&topNav.navList.length>0" class="hamburger-container" mode="horizontal"
+                     :default-active="topNav.currNav" @select="handleSelect">
+                <el-menu-item :index="item.id" v-for="(item, i) in topNav.navList.slice(0, 3)" :key="i"
+                              :name="item.name">
+                    {{item.name}}
+                </el-menu-item>
+                <el-submenu name="sub" v-if="topNav.navList.length>3">
+                    <template slot="title">更多</template>
+                    <el-menu-item
+                            v-for="(item, i) in topNav.navList.slice(3, topNav.navList.length)"
+                            :key="i"
+                            :index="item.id"
+                            :name="item.name">
+                        {{item.name}}
+                    </el-menu-item>
+                </el-submenu>
+            </el-menu>
+        </div>
+
         <breadcrumb class="breadcrumb-container"/>
 
         <div class="right-menu">
@@ -55,7 +76,8 @@
             ...mapGetters([
                 'sidebar',
                 'user',
-                'device'
+                'device',
+                'topNav'
             ]),
             show: {
                 get() {
@@ -77,6 +99,9 @@
                 this.$store.dispatch('FedLogOut').then(() => {
                     location.reload() // 为了重新实例化vue-router对象 避免bug
                 })
+            },
+            handleSelect(key, keyPath) {
+                this.$store.dispatch('setTopNavCurrent', key)
             }
         }
     }
@@ -87,6 +112,11 @@
         height: 50px;
         line-height: 50px;
         border-radius: 0px !important;
+
+        .main-nav-menu {
+            bottom: 10px;
+            position: relative;
+        }
 
         .hamburger-container {
             line-height: 58px;

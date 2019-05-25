@@ -6,7 +6,7 @@ const app = {
             opened: !+Cookies.get('sidebarStatus'),
             withoutAnimation: false
         },
-        device: 'desktop'
+        device: 'desktop',
     },
     mutations: {
         TOGGLE_SIDEBAR: state => {
@@ -28,13 +28,13 @@ const app = {
         }
     },
     actions: {
-        ToggleSideBar: ({ commit }) => {
+        ToggleSideBar: ({commit}) => {
             commit('TOGGLE_SIDEBAR')
         },
-        closeSideBar({ commit }, { withoutAnimation }) {
+        closeSideBar({commit}, {withoutAnimation}) {
             commit('CLOSE_SIDEBAR', withoutAnimation)
         },
-        toggleDevice({ commit }, device) {
+        toggleDevice({commit}, device) {
             commit('TOGGLE_DEVICE', device)
         }
     }

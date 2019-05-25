@@ -62,7 +62,6 @@ export const constantRouterMap = [
             }
         ]
     }
-    // { path: '*', redirect: '/404', hidden: true }
 ]
 
 export default new Router({

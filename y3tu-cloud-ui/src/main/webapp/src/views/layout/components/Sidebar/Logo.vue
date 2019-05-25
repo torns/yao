@@ -2,7 +2,7 @@
     <el-menu-item v-if="sidebarLogo" :class="{'submenu-title-noDropdown':isCollapse}" index="0"
                   style="pointer-events: none;">
         <!-- 缩小时显示的logo，可以自定义，这里直接使用图标库中的 -->
-        <icon v-if="isCollapse" name="home"></icon>
+        <icon v-if="isCollapse" name="y-combinator"></icon>
         <!--正常状态下显示的，可以使用本地的logoImg-->
         <div class="logo-con">
             <img :src="logo">

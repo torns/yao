@@ -3,7 +3,8 @@
  */
 export default {
 
-    baseURL: "http://132.232.11.210:2019",
+    //baseURL: "http://132.232.11.210:2019",
+    baseURL:"http://127.0.0.1:2019",
     /**
      * 记住密码状态下的token在Cookie中存储的天数，默认1天
      */

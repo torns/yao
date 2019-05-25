@@ -22,6 +22,7 @@
     "nprogress": "^0.2.0",
     "path-to-regexp": "2.4.0",
     "screenfull": "^4.2.0",
+    "@riophae/vue-treeselect": "0.0.38",
     "v-charts": "^1.19.0",
     "v-distpicker": "^1.2.0",
     "vue": "^2.6.10",

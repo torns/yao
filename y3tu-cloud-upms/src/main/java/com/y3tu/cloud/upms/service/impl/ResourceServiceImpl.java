@@ -38,7 +38,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceMapper, Resourc
         Set<Resource> resources = getResourceRoleCodes(roleCodes);
         // 2、找出类型为菜单类型的 然后排序
         List<Resource> newResources = resources.stream()
-                .filter(resource -> ResourceTypeEnum.MENU.getCode().equals(resource.getType()+""))
+                .filter(resource -> ResourceTypeEnum.MENU.getCode() == resource.getType()||ResourceTypeEnum.TOP_MENU.getCode()==resource.getType())
                 .sorted(Comparator.comparingInt(Resource::getSort))
                 .collect(Collectors.toList());
         // 3、构建树

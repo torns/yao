@@ -1,57 +1,4 @@
 import {validatenull} from './validate'
-import store from '../store'
-
-export const initMenu = (router, menu) => {
-    if (menu.length === 0) {
-        return
-    }
-    const menus = formatRoutes(menu)
-    const unfound = {
-        path: '*',
-        redirect: '/404',
-        hidden: true
-    }
-    menus.push(unfound)
-    router.addRoutes(menus)
-    store.commit('ADD_ROUTERS', menus)
-}
-
-export const formatRoutes = (aMenu) => {
-    const aRouter = []
-    aMenu.forEach(oMenu => {
-        const {
-            path,
-            component,
-            name,
-            icon,
-            children
-        } = oMenu;
-        if (!validatenull(component)) {
-            const oRouter = {
-                path: path,
-                component(resolve) {
-                    let componentPath = ''
-                    if (component === 'Layout') {
-                        require(['../views/layout/Layout'], resolve)
-                        return
-                    } else {
-                        componentPath = component
-                    }
-                    require([`../${componentPath}.vue`], resolve)
-                },
-                name: name,
-                meta: {
-                    icon: icon,
-                    title: name
-                },
-                icon: icon,
-                children: validatenull(children) ? [] : formatRoutes(children)
-            }
-            aRouter.push(oRouter)
-        }
-    })
-    return aRouter
-}
 
 /**
  * 加密处理
@@ -273,4 +220,16 @@ export const randomLenNum = (len, date) => {
     random = Math.ceil(Math.random() * 100000000000000).toString().substr(0, typeof len === 'number' ? len : 4)
     if (date) random = random + Date.now()
     return random
+}
+
+/**
+ * 全部替换
+ * @param str 被操作的值
+ * @param oldStr 被替换的值
+ * @param newStr 新值
+ * @returns {*}
+ */
+export const replaceAll=function(str,oldStr,newStr){
+    let reg=new RegExp(oldStr,"g");
+    return str.replace(reg,newStr);
 }

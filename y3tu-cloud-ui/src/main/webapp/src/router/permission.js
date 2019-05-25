@@ -28,9 +28,7 @@ router.beforeEach((to, from, next) => {
             if (store.getters.roles.length === 0) {
                 // 拉取user_info
                 store.dispatch('GetUserInfo').then(res => {
-                    store.dispatch('GetMenu', res.id).then(data => {
-                        initMenu(router, data)
-                    });
+                    store.dispatch('GetMenu', res.id);
                     next()
                 }).catch((err) => {
                     console.log(err);

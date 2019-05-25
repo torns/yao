@@ -44,3 +44,14 @@ y3tu-cloud-gateway
 ```
 
 * 启动Nacos`sh startup.sh -m standalone`,然后通过浏览器输入`http://127.0.0.1:8848/nacos/`访问Nacos控制台
+
+## 注意事项
+#### 跳过单元测试打包
+```
+mvn clean package -Dmaven.test.skip=true
+
+```
+
+#### docker启动服务
+```
+docker run -p 9001:9001 --name upms-server -v /yxy/logs/upms-server/:/logs/upms-server/ -d y3tu/upms-server

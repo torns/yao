@@ -8,6 +8,7 @@ const getters = {
     user: state => state.user.user,
     loadMenus: state => state.user.loadMenus,
     permission_routers: state => state.permission.routers,
+    topNav: state => state.permission.topNav,
     addRouters: state => state.permission.addRouters,
     socketApi: state => state.api.socketApi,
     imagesUploadApi: state => state.api.imagesUploadApi,
