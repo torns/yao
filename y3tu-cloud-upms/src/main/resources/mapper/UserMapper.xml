@@ -84,7 +84,7 @@
                  LEFT JOIN t_role AS r ON r.id = ur.role_id
     </sql>
 
-    <select id="queryPage" resultType="com.y3tu.cloud.upms.model.entity.User" parameterType="java.util.Map">
+    <select id="page" resultType="com.y3tu.cloud.upms.model.entity.User" parameterType="java.util.Map">
         select t_user.id, t_user.create_by AS createBy, t_user.create_time AS createTime, t_user.update_by AS updateBy,
         t_user.update_time AS updateTime, t_user.address,
         t_user.avatar, t_user.description, t_user.email, t_user.mobile, t_user.nick_name AS nickName,

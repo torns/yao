@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function fetchDeptTree() {
+export function getDepartmentTree() {
     return request({
-        url: '/admin/dept/tree',
+        url: '/upms/department/tree',
         method: 'get'
     })
 }

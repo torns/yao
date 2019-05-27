@@ -2,6 +2,7 @@ package com.y3tu.cloud.upms.service;
 
 import com.y3tu.cloud.upms.model.dto.ResourceTreeDTO;
 import com.y3tu.cloud.upms.model.entity.Resource;
+import com.y3tu.tool.core.pojo.TreeNode;
 import com.y3tu.tool.web.base.service.BaseService;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface ResourceService extends BaseService<Resource> {
      * @param roleCodes
      * @return
      */
-    List<ResourceTreeDTO> getMenuTreeByRoleCodes(List<String> roleCodes);
+    List<TreeNode<Resource>> getMenuTreeByRoleCodes(List<String> roleCodes);
 
     /**
      * 根据角色codes查询菜单列表
@@ -37,7 +38,7 @@ public interface ResourceService extends BaseService<Resource> {
      *
      * @return
      */
-    List<ResourceTreeDTO> getAllResourceTree();
+    List<TreeNode<Resource>> getAllResourceTree();
 
     /**
      * 删除资源以及子资源

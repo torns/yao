@@ -7,7 +7,7 @@
         id, create_by AS createBy, create_time AS createTime, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime, role_id AS roleId, user_id AS userId
     </sql>
 
-    <select id="queryPage" resultType="com.y3tu.cloud.upms.model.entity.UserRole">
+    <select id="page" resultType="com.y3tu.cloud.upms.model.entity.UserRole">
         select
         <include refid="Base_Column_List"/>
         from t_user_role

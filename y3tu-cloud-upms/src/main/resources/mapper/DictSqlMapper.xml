@@ -3,7 +3,7 @@
 
 <mapper namespace="com.y3tu.cloud.upms.mapper.DictSqlMapper">
 
-    <select id="queryPage" resultType="com.y3tu.cloud.upms.model.entity.DictSql">
+    <select id="page" resultType="com.y3tu.cloud.upms.model.entity.DictSql">
         select
             *
         from t_dict_sql

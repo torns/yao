@@ -39,11 +39,21 @@ service.interceptors.response.use(
     response => {
 
         if (response.data.status == "ERROR") {
+            let code = response.data.code;
             if (code !== undefined) {
-                errorCode[code] = error.response.data.message;
+                if (Config.mode === 'DEV') {
+                    errorCode[code] = response.data.message;
+                }
             }
             Notification.error({
                 message: errorCode[code] || errorCode['default'],
+                duration: 2500
+            })
+        }
+
+        if (response.data.status === 'WARN') {
+            Notification.warning({
+                message: response.data.message,
                 duration: 2500
             })
         }
@@ -103,7 +113,9 @@ service.interceptors.response.use(
             router.push({path: '/401'})
         } else {
             if (code !== undefined) {
-                errorCode[code] = error.response.data.message;
+                if (Config.mode === 'DEV') {
+                    errorCode[code] = error.response.data.message;
+                }
             }
             Notification.error({
                 message: errorCode[code] || errorCode['default'],

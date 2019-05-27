@@ -4,12 +4,7 @@ import {validatenull} from './validate'
  * 加密处理
  */
 export const encryption = (params) => {
-    let {
-        data,
-        type,
-        param,
-        key
-    } = params
+    let {data, type, param, key} = params;
     const result = JSON.parse(JSON.stringify(data))
     if (type === 'Base64') {
         param.forEach(ele => {
@@ -229,7 +224,23 @@ export const randomLenNum = (len, date) => {
  * @param newStr 新值
  * @returns {*}
  */
-export const replaceAll=function(str,oldStr,newStr){
-    let reg=new RegExp(oldStr,"g");
-    return str.replace(reg,newStr);
+export const replaceAll = function (str, oldStr, newStr) {
+    let reg = new RegExp(oldStr, "g");
+    return str.replace(reg, newStr);
+}
+
+/**
+ * 深度复制对象
+ * @param obj
+ */
+export const copyObj = function (obj) {
+    // 转换null为""
+    for (let attr in obj) {
+        if (obj[attr] == null) {
+            obj[attr] = "";
+        }
+    }
+    let str = JSON.stringify(obj);
+    let newObj = JSON.parse(str);
+    return newObj
 }

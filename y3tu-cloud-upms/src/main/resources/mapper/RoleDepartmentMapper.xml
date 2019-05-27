@@ -29,7 +29,7 @@
     </sql>
 
 
-    <select id="queryPage" resultType="com.y3tu.cloud.upms.model.entity.RoleDepartment">
+    <select id="page" resultType="com.y3tu.cloud.upms.model.entity.RoleDepartment">
         select
         <include refid="Base_Column_List"/>
         from t_role_department

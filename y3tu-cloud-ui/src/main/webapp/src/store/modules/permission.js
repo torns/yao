@@ -1,6 +1,6 @@
 import {constantRouterMap} from '@/router/routers'
 import {validatenull, validateURL} from '@/utils/validate'
-import {GetMenu} from '@/api/menu'
+import {getMenu} from '@/api/menu'
 import router from '@/router/routers'
 
 
@@ -27,9 +27,13 @@ const permission = {
     },
     actions: {
         // 获取系统菜单
-        GetMenu({commit}, userId) {
+        GetMenu({commit, getter}, userId) {
             return new Promise(resolve => {
-                GetMenu(userId).then((res) => {
+                if (userId === undefined || userId === null) {
+                    userId = this.getters.user.id;
+                    location.reload();
+                }
+                getMenu(userId).then((res) => {
                     const menu = res.data;
                     if (menu.length === 0) {
                         return
@@ -54,7 +58,7 @@ const permission = {
             let menus = state.routersCopy.filter(router => {
                 return router.parentId === currNav
             });
-            this.commit('ADD_ROUTERS',menus);
+            this.commit('ADD_ROUTERS', menus);
         }
     }
 }
@@ -64,11 +68,12 @@ export default permission
 let formatRoutes = (aMenu) => {
     const aRouter = [];
     aMenu.forEach(oMenu => {
-        const {path, component, name, icon, children, type, parentId} = oMenu;
+        const {path, component, name, icon, type, parentId} = oMenu.data;
+        const {children} = oMenu;
         if (type === -1) {
             //顶级菜单
-            if (!validatenull(oMenu.children)) {
-                aRouter.push(formatRoutes(oMenu.children));
+            if (!validatenull(children)) {
+                aRouter.push(formatRoutes(children));
             }
         } else {
             if (!validatenull(component)) {
@@ -103,13 +108,13 @@ let formatTopNav = (aMenu) => {
     const navList = [];
     let currNav = '';
     aMenu.forEach(oMenu => {
-        const {type} = oMenu;
+        const {type,component} = oMenu.data;
         if (type === -1) {
             //顶级菜单
-            if (oMenu.component === 'Layout') {
-                currNav = oMenu.id;
+            if (component === 'Layout') {
+                currNav = oMenu.data.id;
             }
-            navList.push(oMenu);
+            navList.push(oMenu.data);
         }
     });
     return {

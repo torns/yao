@@ -47,7 +47,7 @@
     </sql>
 
 
-    <select id="queryPage" resultType="com.y3tu.cloud.upms.model.entity.Dict">
+    <select id="page" resultType="com.y3tu.cloud.upms.model.entity.Dict">
         select
         <include refid="Base_Column_List"/>
         from t_dict

@@ -1,23 +1,19 @@
 package com.y3tu.cloud.upms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.y3tu.cloud.upms.model.entity.Role;
-import com.y3tu.cloud.upms.model.entity.RoleDepartment;
-import com.y3tu.cloud.upms.model.entity.RoleResource;
-import com.y3tu.cloud.upms.model.entity.UserRole;
-import com.y3tu.cloud.upms.service.RoleDepartmentService;
-import com.y3tu.cloud.upms.service.RoleResourceService;
-import com.y3tu.cloud.upms.service.RoleService;
-import com.y3tu.cloud.upms.service.UserRoleService;
+import com.y3tu.cloud.upms.model.entity.*;
+import com.y3tu.cloud.upms.service.*;
+import com.y3tu.tool.core.date.DateUtil;
 import com.y3tu.tool.core.pojo.R;
-import com.y3tu.tool.web.annotation.MethodMapping;
 import com.y3tu.tool.web.base.controller.BaseController;
 import com.y3tu.tool.web.base.pojo.PageInfo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -25,7 +21,6 @@ import java.util.List;
  * </p>
  *
  * @author y3tu
- * @date 2018-08-05
  */
 @RestController
 @RequestMapping("/role")
@@ -39,19 +34,29 @@ public class RoleController extends BaseController<RoleService, Role> {
     private RoleDepartmentService roleDepartmentService;
     @Autowired
     private UserRoleService userRoleService;
+    @Autowired
+    private ResourceService resourceService;
+    @Autowired
+    private DepartmentService departmentService;
 
     @ApiOperation(value = "分页获取角色")
+    @PostMapping("/page")
     @Override
-    @MethodMapping(method = RequestMethod.POST)
     public R page(@RequestBody PageInfo pageInfo) {
         PageInfo<Role> page = service.page(pageInfo);
         for (Role role : page.getRecords()) {
             //角色拥有权限
-            List<RoleResource> permissions = roleResourceService.list(new QueryWrapper<RoleResource>().eq("role_id", role.getId()));
+            List<RoleResource> roleResources = roleResourceService.list(new QueryWrapper<RoleResource>().eq("role_id", role.getId()));
+            if (roleResources.size() > 0) {
+                Collection<Resource> resources = resourceService.listByIds(roleResources.stream().map(roleResource -> roleResource.getResourceId()).collect(Collectors.toList()));
+                role.setResources((List<Resource>) resources);
+            }
             //角色所属部门
-            List<RoleDepartment> departments = roleDepartmentService.list(new QueryWrapper<RoleDepartment>().eq("role_id", role.getId()));
-            role.setPermissions(permissions);
-            role.setDepartments(departments);
+            List<RoleDepartment> roleDepartments = roleDepartmentService.list(new QueryWrapper<RoleDepartment>().eq("role_id", role.getId()));
+            if (roleDepartments.size() > 0) {
+                Collection<Department> departments = departmentService.listByIds(roleDepartments.stream().map(roleDepartment -> roleDepartment.getDepartmentId()).collect(Collectors.toList()));
+                role.setDepartments((List<Department>) departments);
+            }
         }
         return R.success(pageInfo);
     }
@@ -69,28 +74,60 @@ public class RoleController extends BaseController<RoleService, Role> {
         return R.success("设置成功");
     }
 
-    @RequestMapping(value = "/editRolePerm", method = RequestMethod.POST)
+    /**
+     * 保存数据
+     *
+     * @param role 保存的数据
+     * @return
+     */
+    @ApiOperation(value = "保存", httpMethod = "POST")
+    @PostMapping("/save")
+    @Override
+    public R save(@RequestBody Role role) {
+        role.setCreateTime(DateUtil.date());
+        role.setUpdateTime(DateUtil.date());
+        roleService.save(role);
+        return R.success("保存成功!");
+    }
+
+    /**
+     * 更新数据
+     *
+     * @param role 更新的数据
+     * @return
+     */
+    @ApiOperation(value = "更新", httpMethod = "PUT")
+    @PutMapping("/update")
+    @Override
+    public R update(@RequestBody Role role) {
+        role.setUpdateTime(DateUtil.date());
+        roleService.updateById(role);
+        return R.success("更新成功!");
+    }
+
+
+    @RequestMapping(value = "/editRoleResource", method = RequestMethod.POST)
     @ApiOperation(value = "编辑角色分配菜单权限")
-    public R editRolePerm(@RequestParam String roleId,
-                          @RequestParam(required = false) String[] permIds) {
+    public R editRoleResource(@RequestParam String roleId,
+                              @RequestParam(required = false) String[] resourceIds) {
 
         //删除其关联权限
         roleResourceService.remove(new QueryWrapper<RoleResource>().eq("role_id", roleId));
         //分配新权限
-        for (String permId : permIds) {
+        for (String resourceId : resourceIds) {
             RoleResource roleResource = new RoleResource();
             roleResource.setRoleId(roleId);
-            roleResource.setPermissionId(permId);
+            roleResource.setResourceId(resourceId);
             roleResourceService.save(roleResource);
         }
         return R.success();
     }
 
-    @RequestMapping(value = "/editRoleDep", method = RequestMethod.POST)
+    @RequestMapping(value = "/editRoleDepartment", method = RequestMethod.POST)
     @ApiOperation(value = "编辑角色分配数据权限")
-    public R editRoleDep(@RequestParam String roleId,
-                         @RequestParam Integer dataType,
-                         @RequestParam(required = false) String[] depIds) {
+    public R editRoleDepartment(@RequestParam String roleId,
+                                @RequestParam Integer dataType,
+                                @RequestParam(required = false) String[] departmentIds) {
 
         Role r = roleService.getById(roleId);
         r.setDataType(dataType);
@@ -98,10 +135,10 @@ public class RoleController extends BaseController<RoleService, Role> {
         // 删除其关联数据权限
         roleDepartmentService.remove(new QueryWrapper<RoleDepartment>().eq("role_id", roleId));
         // 分配新数据权限
-        for (String depId : depIds) {
+        for (String departmentId : departmentIds) {
             RoleDepartment roleDepartment = new RoleDepartment();
             roleDepartment.setRoleId(roleId);
-            roleDepartment.setDepartmentId(depId);
+            roleDepartment.setDepartmentId(departmentId);
             roleDepartmentService.save(roleDepartment);
         }
         return R.success();

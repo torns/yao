@@ -7,8 +7,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.y3tu.tool.web.base.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -61,18 +59,12 @@ public class RoleResource extends BaseEntity {
     /**
      * 权限ID
      */
-	@TableField("permission_id")
-	private String permissionId;
+	@TableField("resource_id")
+	private String resourceId;
     /**
      * 角色ID
      */
 	@TableField("role_id")
 	private String roleId;
-
-
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
 
 }

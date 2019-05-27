@@ -2,6 +2,7 @@ package com.y3tu.cloud.upms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.y3tu.cloud.common.constants.CommonConstants;
+import com.y3tu.cloud.common.enums.DataStatusEnum;
 import com.y3tu.cloud.upms.model.entity.Department;
 import com.y3tu.cloud.upms.model.entity.RoleDepartment;
 import com.y3tu.cloud.upms.model.entity.User;
@@ -10,19 +11,21 @@ import com.y3tu.cloud.upms.service.RoleDepartmentService;
 import com.y3tu.cloud.upms.service.UserService;
 import com.y3tu.tool.core.collection.CollectionUtil;
 import com.y3tu.tool.core.pojo.R;
+import com.y3tu.tool.core.pojo.TreeNode;
+import com.y3tu.tool.core.util.TreeUtil;
 import com.y3tu.tool.web.annotation.MethodMapping;
 import com.y3tu.tool.web.base.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
  * 部门Controller
  *
  * @author y3tu
- * @date 2018-11-26 19:47:53
  */
 @RestController
 @RequestMapping("/department")
@@ -34,6 +37,23 @@ public class DepartmentController extends BaseController<DepartmentService, Depa
     private UserService userService;
     @Autowired
     private RoleDepartmentService roleDepartmentService;
+
+
+    /**
+     * 获取部门树
+     *
+     * @return
+     */
+    @GetMapping("/tree")
+    public R getDepartmentTree() {
+        List<Department> list = departmentService.list(new QueryWrapper<Department>().eq("del_flag", DataStatusEnum.NORMAL));
+        List<TreeNode<Department>> treeNodeList = list.stream().map(department -> {
+            TreeNode<Department> treeNode = new TreeNode<>(department.getId(), department.getName(), department.getParentId(), department);
+            return treeNode;
+        }).collect(Collectors.toList());
+        return R.success(TreeUtil.buildList(treeNodeList, "0"));
+    }
+
 
     /**
      * 根据父id获取部门信息

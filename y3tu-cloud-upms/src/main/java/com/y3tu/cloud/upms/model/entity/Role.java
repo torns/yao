@@ -1,5 +1,6 @@
 package com.y3tu.cloud.upms.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -8,10 +9,8 @@ import com.y3tu.cloud.common.constants.CommonConstants;
 import com.y3tu.tool.web.base.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -24,18 +23,15 @@ import java.util.List;
  * @date 2018-08-05
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @TableName("t_role")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
-
     /**
      * 主键
      */
-    @TableId
+    @TableId(value = "id", type = IdType.INPUT)
     private String id;
 
     /**
@@ -92,20 +88,15 @@ public class Role extends BaseEntity {
     private String description;
 
     /**
-     * 拥有权限
+     * 菜单权限
      */
     @TableField(exist = false)
-    private List<RoleResource> permissions;
+    private List<Resource> resources;
 
     /**
-     * 所属部门
+     * 数据权限
      */
     @TableField(exist = false)
-    private List<RoleDepartment> departments;
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
+    private List<Department> departments;
 
 }

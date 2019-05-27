@@ -2,7 +2,7 @@
     <div class="navbar">
         <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
 
-        <div style="bottom: 10px; position: relative;">
+        <div >
             <el-menu v-if="topNav.navList!=null&&topNav.navList.length>0" class="hamburger-container" mode="horizontal"
                      :default-active="topNav.currNav" @select="handleSelect">
                 <el-menu-item :index="item.id" v-for="(item, i) in topNav.navList.slice(0, 3)" :key="i"
@@ -22,7 +22,7 @@
             </el-menu>
         </div>
 
-        <breadcrumb class="breadcrumb-container"/>
+        <!--<breadcrumb class="breadcrumb-container"/>-->
 
         <div class="right-menu">
             <template v-if="device!=='mobile'">
@@ -113,11 +113,6 @@
         line-height: 50px;
         border-radius: 0px !important;
 
-        .main-nav-menu {
-            bottom: 10px;
-            position: relative;
-        }
-
         .hamburger-container {
             line-height: 58px;
             height: 50px;
@@ -185,4 +180,12 @@
             }
         }
     }
+
+    .el-menu--horizontal>.el-menu-item{
+        height: 40px;
+    }
+    .el-menu-item{
+        font-size: 17px;
+    }
+
 </style>

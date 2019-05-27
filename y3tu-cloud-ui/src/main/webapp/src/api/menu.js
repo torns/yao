@@ -5,14 +5,14 @@ import request from '@/utils/request'
  * @param userId
  * @constructor
  */
-export function GetMenu(userId) {
+export function getMenu(userId) {
     return request({
         url: '/upms/resource/menu/tree/'+userId,
         method: 'get',
     })
 }
 
-export function getAllReource() {
+export function getMenuTree() {
     return request({
         url: '/upms/resource/menu/getAllMenuTree',
         method: 'get'
@@ -21,7 +21,7 @@ export function getAllReource() {
 
 export function saveReource(resource) {
     return request({
-        url: '/admin/resource',
+        url: '/upms/resource/save',
         method: 'post',
         data: resource
     })
@@ -29,22 +29,16 @@ export function saveReource(resource) {
 
 export const updateReource = (resource) => {
     return request({
-        url: '/admin/resource',
-        method: 'put',
+        url: '/upms/resource/update',
+        method: 'post',
         data: resource
     })
 }
 
-export const getResourceById = (id) => {
-    return request({
-        url: 'admin/resource/id/' + id,
-        method: 'get'
-    })
-}
 
-export const deleteResourceById = (id) => {
+export const deleteResourceById = (ids) => {
     return request({
-        url: 'admin/resource/id/' + id,
+        url: `upms/resource/delByIds/${ids}`,
         method: 'delete'
     })
 }

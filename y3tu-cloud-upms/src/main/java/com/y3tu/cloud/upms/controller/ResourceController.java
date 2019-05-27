@@ -55,12 +55,11 @@ public class ResourceController extends BaseController<ResourceService, Resource
     @Log(serviceId = ServiceNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "根据token查询当前用户权限的菜单树")
     @ApiOperation(value = "获取当前用户的菜单树", notes = "根据token查询当前用户权限的菜单树", httpMethod = "GET")
     @GetMapping("/menu/tree/{userId}")
-    public R<List<ResourceTreeDTO>> getMenuTree(@PathVariable("userId") String userId) {
+    public R getMenuTree(@PathVariable("userId") String userId) {
 
         List<Role> roleList = userRoleService.findByUserId(userId);
         List<String> roleCodes = roleList.stream().map(role -> role.getRoleCode()).collect(Collectors.toList());
-        List<ResourceTreeDTO> list = resourceService.getMenuTreeByRoleCodes(roleCodes);
-        return R.success(list);
+        return R.success(resourceService.getMenuTreeByRoleCodes(roleCodes));
     }
 
     /**
@@ -71,9 +70,8 @@ public class ResourceController extends BaseController<ResourceService, Resource
     @Log(serviceId = ServiceNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "获取所有的菜单树")
     @ApiOperation(value = "获取当前用户的菜单树", notes = "获取所有的菜单树", httpMethod = "GET")
     @GetMapping("/menu/getAllMenuTree")
-    public R<List<ResourceTreeDTO>> getAllMenuTree() {
-        List<ResourceTreeDTO> list = resourceService.getAllResourceTree();
-        return R.success(list);
+    public R getAllMenuTree() {
+        return R.success(resourceService.getAllResourceTree());
     }
 
     /**
@@ -132,7 +130,7 @@ public class ResourceController extends BaseController<ResourceService, Resource
     @Override
     public R delByIds(@PathVariable String[] ids) {
         for (String id : ids) {
-            List<RoleResource> list = roleResourceService.list(new QueryWrapper<RoleResource>().eq("permission_id", id));
+            List<RoleResource> list = roleResourceService.list(new QueryWrapper<RoleResource>().eq("resource_id", id));
             if (list != null && list.size() > 0) {
                 return R.warn("删除失败，包含正被角色使用关联的菜单或权限");
             }

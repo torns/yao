@@ -3,8 +3,15 @@
  */
 export default {
 
-    //baseURL: "http://132.232.11.210:2019",
-    baseURL:"http://127.0.0.1:2019",
+    /**
+     * 统一请求后端路径
+     */
+    baseURL: "http://132.232.11.210:2019",
+    //baseURL:"http://127.0.0.1:2019",
+    /**
+     * 模式 DEV:开发 PROD:生产
+     */
+    mode: 'PROD',
     /**
      * 记住密码状态下的token在Cookie中存储的天数，默认1天
      */
@@ -24,7 +31,7 @@ export default {
     /**
      * refreshToken key
      */
-    RefreshTokenKey:'YADMIN-REFRESH-TOKEN-KEY',
+    RefreshTokenKey: 'YADMIN-REFRESH-TOKEN-KEY',
 
     /**
      * 请求超时时间，毫秒（默认2分钟）

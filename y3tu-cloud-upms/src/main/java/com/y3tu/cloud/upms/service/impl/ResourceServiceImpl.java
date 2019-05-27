@@ -6,11 +6,11 @@ import com.y3tu.cloud.common.constants.CommonConstants;
 import com.y3tu.cloud.common.enums.DataStatusEnum;
 import com.y3tu.cloud.common.enums.ResourceTypeEnum;
 import com.y3tu.cloud.upms.mapper.ResourceMapper;
-import com.y3tu.cloud.upms.model.dto.ResourceTreeDTO;
 import com.y3tu.cloud.upms.model.entity.Resource;
 import com.y3tu.cloud.upms.service.ResourceService;
-import com.y3tu.cloud.upms.util.TreeUtil;
+import com.y3tu.tool.core.pojo.TreeNode;
 import com.y3tu.tool.core.util.StrUtil;
+import com.y3tu.tool.core.util.TreeUtil;
 import com.y3tu.tool.web.base.service.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,16 +33,20 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceMapper, Resourc
     ResourceMapper resourceMapper;
 
     @Override
-    public List<ResourceTreeDTO> getMenuTreeByRoleCodes(List<String> roleCodes) {
+    public List<TreeNode<Resource>> getMenuTreeByRoleCodes(List<String> roleCodes) {
         // 1、首选获取所有角色的资源集合
         Set<Resource> resources = getResourceRoleCodes(roleCodes);
         // 2、找出类型为菜单类型的 然后排序
         List<Resource> newResources = resources.stream()
-                .filter(resource -> ResourceTypeEnum.MENU.getCode() == resource.getType()||ResourceTypeEnum.TOP_MENU.getCode()==resource.getType())
+                .filter(resource -> ResourceTypeEnum.MENU.getCode() == resource.getType() || ResourceTypeEnum.TOP_MENU.getCode() == resource.getType())
                 .sorted(Comparator.comparingInt(Resource::getSort))
                 .collect(Collectors.toList());
         // 3、构建树
-        return TreeUtil.list2Tree(newResources, CommonConstants.TREE_ROOT);
+        List<TreeNode<Resource>> treeNodeList = newResources.stream().map(resource -> {
+            TreeNode<Resource> treeNode = new TreeNode<>(resource.getId(), resource.getName(), resource.getParentId(), resource);
+            return treeNode;
+        }).collect(Collectors.toList());
+        return TreeUtil.buildList(treeNodeList, CommonConstants.TREE_ROOT);
     }
 
     @Override
@@ -55,11 +59,15 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceMapper, Resourc
     }
 
     @Override
-    public List<ResourceTreeDTO> getAllResourceTree() {
+    public List<TreeNode<Resource>> getAllResourceTree() {
         QueryWrapper<Resource> query = new QueryWrapper();
         query.eq("del_flag", DataStatusEnum.NORMAL.getCode());
-        List<Resource> sysResources = resourceMapper.selectList(query);
-        return TreeUtil.list2Tree(sysResources, CommonConstants.TREE_ROOT);
+        List<Resource> resources = resourceMapper.selectList(query);
+        List<TreeNode<Resource>> treeNodeList = resources.stream().map(resource -> {
+            TreeNode<Resource> treeNode = new TreeNode<>(resource.getId(), resource.getName(), resource.getParentId(), resource);
+            return treeNode;
+        }).collect(Collectors.toList());
+        return TreeUtil.buildList(treeNodeList, CommonConstants.TREE_ROOT);
     }
 
     @Override

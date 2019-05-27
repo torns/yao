@@ -101,6 +101,8 @@
 <script>
 
     import {getDictDataByCode} from '@/api/dict'
+    import {saveReource, updateReource} from '@/api/menu'
+    import {validatenull} from '@/utils/validate'
     import TreeSelect from '@riophae/vue-treeselect'
     import IconSelect from '@/components/IconSelect'
 
@@ -188,6 +190,25 @@
                 this.menuForm.type = type;
             },
             submit() {
+                if (validatenull(this.menuForm.id)) {
+                    saveReource(this.menuForm).then(res => {
+                        this.$store.dispatch("GetMenu").then(
+                            this.$message({
+                                message: '保存成功！',
+                                type: 'success'
+                            })
+                        )
+                    })
+                } else {
+                    updateReource(this.menuForm).then(res => {
+                        this.$store.dispatch("GetMenu").then(
+                            this.$message({
+                                message: '更新成功！',
+                                type: 'success'
+                            })
+                        )
+                    })
+                }
 
             }
 

@@ -14,7 +14,7 @@ import '@/components'
 import pluginError from '@/plugin/error'
 
 import {setStore, getStore, removeStore} from '@/utils/store'
-
+import {copyObj} from '@/utils/util'
 
 
 export default {
@@ -35,6 +35,7 @@ export default {
         Vue.prototype.setStore = setStore;
         Vue.prototype.getStore = getStore;
         Vue.prototype.removeStore = removeStore;
+        Vue.prototype.copyObj = copyObj;
 
     }
 }
