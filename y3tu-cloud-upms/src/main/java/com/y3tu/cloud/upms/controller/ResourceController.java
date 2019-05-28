@@ -3,6 +3,7 @@ package com.y3tu.cloud.upms.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.y3tu.cloud.common.constants.CommonConstants;
 import com.y3tu.cloud.common.constants.ServiceNameConstants;
+import com.y3tu.cloud.common.enums.DataStatusEnum;
 import com.y3tu.cloud.common.vo.ResourceVO;
 import com.y3tu.cloud.log.annotation.Log;
 import com.y3tu.cloud.upms.model.dto.ResourceTreeDTO;
@@ -12,6 +13,7 @@ import com.y3tu.cloud.upms.model.entity.RoleResource;
 import com.y3tu.cloud.upms.service.ResourceService;
 import com.y3tu.cloud.upms.service.RoleResourceService;
 import com.y3tu.cloud.upms.service.UserRoleService;
+import com.y3tu.tool.core.date.DateUtil;
 import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.web.base.controller.BaseController;
 import io.swagger.annotations.ApiImplicitParam;
@@ -90,6 +92,9 @@ public class ResourceController extends BaseController<ResourceService, Resource
                 return R.warn("名称已存在");
             }
         }
+        resource.setCreateTime(DateUtil.date());
+        resource.setUpdateTime(DateUtil.date());
+        resource.setDelFlag(DataStatusEnum.NORMAL.getCode());
         resourceService.save(resource);
         return R.success(resource);
     }
@@ -115,6 +120,7 @@ public class ResourceController extends BaseController<ResourceService, Resource
                 }
             }
         }
+        resource.setUpdateTime(DateUtil.date());
         resourceService.updateById(resource);
         return R.success();
     }

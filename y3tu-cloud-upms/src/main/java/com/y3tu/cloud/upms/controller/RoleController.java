@@ -1,6 +1,7 @@
 package com.y3tu.cloud.upms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.y3tu.cloud.common.enums.DataStatusEnum;
 import com.y3tu.cloud.upms.model.entity.*;
 import com.y3tu.cloud.upms.service.*;
 import com.y3tu.tool.core.date.DateUtil;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -86,6 +88,7 @@ public class RoleController extends BaseController<RoleService, Role> {
     public R save(@RequestBody Role role) {
         role.setCreateTime(DateUtil.date());
         role.setUpdateTime(DateUtil.date());
+        role.setDelFlag(DataStatusEnum.NORMAL.getCode());
         roleService.save(role);
         return R.success("保存成功!");
     }
@@ -108,8 +111,10 @@ public class RoleController extends BaseController<RoleService, Role> {
 
     @RequestMapping(value = "/editRoleResource", method = RequestMethod.POST)
     @ApiOperation(value = "编辑角色分配菜单权限")
-    public R editRoleResource(@RequestParam String roleId,
-                              @RequestParam(required = false) String[] resourceIds) {
+    public R editRoleResource(@RequestBody Map params) {
+
+        String roleId = (String) params.get("roleId");
+        List<String> resourceIds = (List<String>) params.get("resourceIds");
 
         //删除其关联权限
         roleResourceService.remove(new QueryWrapper<RoleResource>().eq("role_id", roleId));
@@ -125,9 +130,11 @@ public class RoleController extends BaseController<RoleService, Role> {
 
     @RequestMapping(value = "/editRoleDepartment", method = RequestMethod.POST)
     @ApiOperation(value = "编辑角色分配数据权限")
-    public R editRoleDepartment(@RequestParam String roleId,
-                                @RequestParam Integer dataType,
-                                @RequestParam(required = false) String[] departmentIds) {
+    public R editRoleDepartment(@RequestBody Map params) {
+
+        String roleId = (String) params.get("roleId");
+        int dataType = (int) params.get("dataType");
+        List<String> departmentIds = (List<String>) params.get("departmentIds");
 
         Role r = roleService.getById(roleId);
         r.setDataType(dataType);

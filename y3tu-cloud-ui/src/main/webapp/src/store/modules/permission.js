@@ -27,7 +27,7 @@ const permission = {
     },
     actions: {
         // 获取系统菜单
-        GetMenu({commit, getter}, userId) {
+        GetMenu({commit,state}, userId) {
             return new Promise(resolve => {
                 if (userId === undefined || userId === null) {
                     userId = this.getters.user.id;
@@ -44,11 +44,22 @@ const permission = {
                         redirect: '/404',
                         hidden: true
                     };
-                    router.addRoutes(...menus);
+
                     router.addRoutes([unFound]);
-                    this.commit('ADD_ROUTERS', ...menus);
-                    this.commit('ADD_ROUTERS_COPY', ...menus);
-                    this.commit('SET_TOP_NAV', formatTopNav(menu));
+                    let menuArr = [];
+                    if(menus!==null &&menus.length>0){
+                        menus.forEach(menu=>{
+                            menuArr.push(...menu)
+                        })
+                    }
+                    router.addRoutes(menuArr);
+                    this.commit('ADD_ROUTERS_COPY', menuArr);
+                    let topNav = formatTopNav(menu);
+                    let routers = state.routersCopy.filter(router => {
+                        return router.parentId === topNav.currNav
+                    });
+                    this.commit('ADD_ROUTERS', routers);
+                    this.commit('SET_TOP_NAV', topNav);
                     resolve(menu)
                 })
             })
@@ -108,17 +119,21 @@ let formatTopNav = (aMenu) => {
     const navList = [];
     let currNav = '';
     aMenu.forEach(oMenu => {
-        const {type,component} = oMenu.data;
+        const {type, component} = oMenu.data;
         if (type === -1) {
             //顶级菜单
-            if (component === 'Layout') {
-                currNav = oMenu.data.id;
-            }
             navList.push(oMenu.data);
         }
     });
+
+    //对navList进行排序
+    navList.sort(function (a, b) {
+        return a.sort-b.sort
+    });
+
+
     return {
-        currNav,
+        currNav:navList[0].id,
         navList
     }
 

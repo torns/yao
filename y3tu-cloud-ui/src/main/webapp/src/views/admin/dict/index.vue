@@ -4,10 +4,9 @@
 
 <script>
     import developing from '@/components/Developing'
-
     export default {
-        name: "department",
-        components: {
+        name: "dict",
+        components:{
             developing
         }
     };

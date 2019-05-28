@@ -2,11 +2,14 @@
     <div class="navbar">
         <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
 
-        <div >
+        <div>
             <el-menu v-if="topNav.navList!=null&&topNav.navList.length>0" class="hamburger-container" mode="horizontal"
                      :default-active="topNav.currNav" @select="handleSelect">
-                <el-menu-item :index="item.id" v-for="(item, i) in topNav.navList.slice(0, 3)" :key="i"
-                              :name="item.name">
+                <el-menu-item
+                        style="border-bottom:none"
+                        :index="item.id" v-for="(item, i) in topNav.navList.slice(0, 3)"
+                        :key="i"
+                        :name="item.name">
                     {{item.name}}
                 </el-menu-item>
                 <el-submenu name="sub" v-if="topNav.navList.length>3">
@@ -36,21 +39,26 @@
                     <i class="el-icon-caret-bottom"/>
                 </div>
                 <el-dropdown-menu slot="dropdown">
-                    <a target="_blank" href="https://docs.auauz.net/">
+                    <a target="_blank" href="https://github.com/y3tu/y3tu-cloud">
                         <el-dropdown-item>
                             项目文档
                         </el-dropdown-item>
                     </a>
                     <span style="display:block;" @click="show = true">
-            <el-dropdown-item>
-              布局设置
-            </el-dropdown-item>
-          </span>
+                        <el-dropdown-item>
+                          布局设置
+                        </el-dropdown-item>
+                    </span>
                     <router-link to="/user/center">
                         <el-dropdown-item>
                             个人中心
                         </el-dropdown-item>
                     </router-link>
+                    <span style="display:block;" @click="refresh">
+                        <el-dropdown-item>
+                          刷新页面
+                        </el-dropdown-item>
+                    </span>
                     <el-dropdown-item divided>
                         <span style="display:block;" @click="logout">退出登录</span>
                     </el-dropdown-item>
@@ -99,6 +107,9 @@
                 this.$store.dispatch('FedLogOut').then(() => {
                     location.reload() // 为了重新实例化vue-router对象 避免bug
                 })
+            },
+            refresh() {
+                location.reload()
             },
             handleSelect(key, keyPath) {
                 this.$store.dispatch('setTopNavCurrent', key)
@@ -181,10 +192,11 @@
         }
     }
 
-    .el-menu--horizontal>.el-menu-item{
+    .el-menu--horizontal > .el-menu-item {
         height: 40px;
     }
-    .el-menu-item{
+
+    .el-menu-item {
         font-size: 17px;
     }
 

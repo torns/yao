@@ -64,7 +64,8 @@
             <el-col :span="10" style="margin-left:10px;">
                 <menu-form ref="menuForm"
                            :treeData="treeData"
-                           :menuForm="menuForm">
+                           :menuForm="menuForm"
+                           @finish="formFinish">
                 </menu-form>
             </el-col>
         </el-row>
@@ -117,10 +118,7 @@
         },
 
         mounted() {
-            // 计算高度
-            let height = document.documentElement.clientHeight;
-            this.maxHeight = Number(height - 287) + "px";
-            this.getMenuList();
+            this.init();
         },
         watch: {
             searchKey(val) {
@@ -129,6 +127,12 @@
         },
         computed: {},
         methods: {
+            init() {
+                // 计算高度
+                let height = document.documentElement.clientHeight;
+                this.maxHeight = Number(height - 287) + "px";
+                this.getMenuList();
+            },
             //获取菜单树
             getMenuList() {
                 const _this = this;
@@ -219,6 +223,10 @@
                 }
 
             },
+            formFinish() {
+                this.init();
+                this.editTitle = "";
+            }
 
         }
     }

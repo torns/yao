@@ -1,5 +1,6 @@
 package com.y3tu.cloud.upms.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -8,26 +9,23 @@ import com.y3tu.tool.web.base.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.util.Date;
 
 
 /**
- * ${comments}
+ * 角色部门关系表
  *
  * @author y3tu
- * @date 2018-11-27 19:16:18
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("t_role_department")
 public class RoleDepartment extends BaseEntity<RoleDepartment> {
-    private static final long serialVersionUID = 1L;
 
     /**
      *
      */
-    @TableId(value = "id")
+    @TableId(value = "id", type = IdType.INPUT)
     private String id;
     /**
      *
@@ -67,11 +65,4 @@ public class RoleDepartment extends BaseEntity<RoleDepartment> {
     @TableField("role_id")
     private String roleId;
 
-    /**
-     * 主键值
-     */
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
 }

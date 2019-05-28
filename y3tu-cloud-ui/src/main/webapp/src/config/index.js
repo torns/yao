@@ -23,7 +23,7 @@ export default {
     /**
      * 此处修改网站名称
      */
-    webName: 'Yadmin',
+    webName: 'YAdmin',
     /**
      * token key
      */

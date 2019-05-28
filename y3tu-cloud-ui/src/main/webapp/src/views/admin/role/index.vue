@@ -92,12 +92,12 @@
                         </el-tooltip>
                         <el-button
                                 :disabled="!showButton"
-                                :loading="menuLoading"
+                                :loading="resourceLoading"
                                 icon="el-icon-check"
                                 size="mini"
                                 style="float: right; padding: 6px 9px"
                                 type="primary"
-                                @click="saveMenu">保存
+                                @click="saveResource">保存
                         </el-button>
                     </div>
                     <el-tree
@@ -116,12 +116,12 @@
                         </el-tooltip>
                         <el-button
                                 :disabled="!showButton"
-                                :loading="permissionLoading"
+                                :loading="departmentLoading"
                                 icon="el-icon-check"
                                 size="mini"
                                 style="float: right; padding: 6px 9px"
                                 type="primary"
-                                @click="savePermission">保存
+                                @click="saveDepartment">保存
                         </el-button>
                     </div>
                     <el-tree
@@ -143,7 +143,7 @@
 </template>
 
 <script>
-    import {page, delRoleByIds} from '@/api/role'
+    import {page, delRoleByIds, editRoleResource, editRoleDepartment} from '@/api/role'
     import {getMenuTree} from "@/api/menu";
     import {getDepartmentTree} from '@/api/department'
     import {parseTime} from '@/utils/index'
@@ -163,8 +163,8 @@
                 queryName: '',
                 loading: false,
                 delLoading: false,
-                menuLoading: false,
-                permissionLoading: false,
+                resourceLoading: false,
+                departmentLoading: false,
                 showButton: false,
                 editForm: {},
                 currentId: '',
@@ -288,11 +288,47 @@
                 this.pageInfo.current = e - 1;
                 this.getRoleList();
             },
-            saveMenu() {
-                this.menuLoading = true
+            saveResource() {
+                const _this = this;
+                this.resourceLoading = true;
+                let resourceIds = []
+                this.$refs.resource.getCheckedKeys().forEach(function (data, index) {
+                    resourceIds.push(data);
+                });
+                editRoleResource(_this.currentId, resourceIds).then(res => {
+                    _this.$message({
+                        type: 'success',
+                        message: '菜单权限保存成功！'
+                    })
+                    this.resourceLoading = false;
+                    _this.resourceIds = []
+                    _this.init();
+                }).catch(err => {
+                    this.resourceLoading = false;
+                })
             },
-            savePermission() {
-
+            saveDepartment() {
+                const _this = this;
+                _this.departmentLoading = true;
+                let departmentIds = []
+                _this.$refs.department.getCheckedKeys().forEach(function (data, index) {
+                    departmentIds.push(data)
+                })
+                let dataType = 0;//全部默认数据权限
+                if (departmentIds.length < 1) {
+                    dataType = 1;//自定义数据权限
+                }
+                editRoleDepartment(_this.currentId, dataType, departmentIds).then(res => {
+                    _this.$message({
+                        type: 'success',
+                        message: '数据权限保存成功！'
+                    })
+                    _this.departmentLoading = false;
+                    _this.departmentIds = []
+                    _this.init();
+                }).catch(err => {
+                    _this.departmentLoading = false;
+                });
             }
         }
     };

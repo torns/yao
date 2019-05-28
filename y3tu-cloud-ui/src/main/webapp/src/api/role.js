@@ -35,7 +35,7 @@ export const editRoleDepartment = (roleId, dataType, departmentIds) => {
     return request({
         url: `/upms/role/editRoleDepartment/`,
         method: 'post',
-        params: {
+        data: {
             roleId: roleId,
             dataType: dataType,
             departmentIds: departmentIds
@@ -44,13 +44,14 @@ export const editRoleDepartment = (roleId, dataType, departmentIds) => {
 }
 
 export const editRoleResource = (roleId, resourceIds) => {
+    let params = {
+        roleId: roleId,
+        resourceIds: resourceIds
+    };
     return request({
         url: `/upms/role/editRoleResource`,
         method: 'post',
-        params: {
-            roleId: roleId,
-            resourceIds: resourceIds
-        }
+        data: params
     })
 }
 

@@ -14,7 +14,7 @@
 # 项目结构说明
 - y3tu-cloud-common 公共模块
 - y3tu-cloud-auth  Oauth2 认证服务器 提供token
-- y3tu-cloud-back 后台管理模块
+- y3tu-cloud-upms 基于角色的通用权限管理模块
 - y3tu-cloud-transcation 基于mq最终一致性实现可靠消息的分布式事务方案
   - y3tu-cloud-transaction-message 独立消息服务微服务
   - y3tu-cloud-transaction-sample 基于支付宝转账的演示
@@ -23,7 +23,6 @@
 - y3tu-cloud-log 日志中心模块
 - y3tu-cloud-file 文件上传服务,这个服务可以暂时不起，因为前端还没有对接
 - y3tu-cloud-gen 代码生成模块
-- y3tu-cloud-starter 自定义封装各种starer 目前封装了日志处理
 - y3tu-cloud-gateway 后端统一入口，提供动态路由，oauth2的资源服务器
 
 ## 项目运行
@@ -33,8 +32,8 @@ git clone https://github.com/y3tu/y3tu-cloud
 启动顺序：最好按顺序启动，不按顺序启动，至少要把网关放到最后启动
 注意：Nacos先修改配置连自己本地数据库，并把nacos的配置数据库导入到自己本地数据库
 导入之后，检查nacos各个微服务相关配置的mysql，redis,rabbitmq配置是否正确
+y3tu-cloud-upms
 y3tu-cloud-auth
-y3tu-cloud-back
 y3tu-cloud-log
 y3tu-cloud-gen
 y3tu-cloud-monitor
