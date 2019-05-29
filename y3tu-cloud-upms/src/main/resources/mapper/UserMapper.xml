@@ -95,6 +95,11 @@
         <if test="params.username!=null and params.username !=''">
             and t_user.username like '%${params.username}%'
         </if>
+
+        <if test="params.departmentId!=null and params.departmentId !=''">
+            and t_user.department_id = #{params.departmentId}
+        </if>
+
     </select>
 
     <select id="selectAll" resultType="com.y3tu.cloud.upms.model.entity.User">

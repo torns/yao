@@ -169,7 +169,7 @@ public class UserController extends BaseController<UserService, User> {
             userVOS.add(userVO);
         }
         PageInfo pageInfoCopy = new PageInfo();
-        BeanUtil.copyProperties(pageInfo, pageInfoCopy);
+        BeanUtils.copyProperties(pageInfo, pageInfoCopy);
         pageInfoCopy.setRecords(userVOS);
         return R.success(pageInfoCopy);
     }

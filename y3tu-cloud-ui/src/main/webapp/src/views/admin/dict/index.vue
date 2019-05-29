@@ -1,16 +1,178 @@
 <template>
-    <developing></developing>
+    <div class="app-container">
+        <el-row :gutter="10">
+            <el-col :xs="24" :sm="24" :md="10" :lg="10" :xl="10">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>字典列表</span>
+                        <el-button
+                                class="filter-item"
+                                size="mini"
+                                style="float: right;padding: 4px 10px"
+                                type="primary"
+                                icon="el-icon-plus"
+                                @click="">新增
+                        </el-button>
+                    </div>
+
+                    <div class="head-container">
+                        <el-form :inline="true">
+                            <el-form-item label="字典名">
+                                <el-input
+                                        v-model="pageInfo.params.name"
+                                        clearable
+                                        style="width: 100px"
+
+                                />
+                            </el-form-item>
+
+                            <el-form-item label="字典编码">
+                                <el-input
+                                        v-model="pageInfo.params.dictCode"
+                                        clearable
+                                        style="width: 100px"
+                                />
+                            </el-form-item>
+
+                            <el-form-item label="状态">
+                                <el-select
+                                        v-model="pageInfo.params.status"
+                                        placeholder="请选择"
+                                        clearable
+                                        style="width: 80px">
+                                    <el-option value="0" label="正常"></el-option>
+                                    <el-option value="-1" label="禁用"></el-option>
+                                </el-select>
+                            </el-form-item>
+
+                            <el-form-item>
+                                <el-button
+                                        size="mini"
+                                        type="success"
+                                        icon="el-icon-search"
+                                        @click="query">
+                                    查询
+                                </el-button>
+                            </el-form-item>
+                        </el-form>
+
+                    </div>
+
+                    <!--表格渲染-->
+                    <el-table v-loading="loading" :data="data" size="small" highlight-current-row style="width: 100%;"
+                              @current-change="handleCurrentChange">
+                        <el-table-column :show-overflow-tooltip="true" prop="name" label="名称"/>
+                        <el-table-column :show-overflow-tooltip="true" prop="remark" label="描述"/>
+                        <el-table-column label="操作" width="130px" align="center">
+                            <template slot-scope="scope">
+                                <el-popover
+                                        :ref="scope.row.id"
+                                        placement="top"
+                                        width="180">
+                                    <p>此操作将删除字典与对应的字典详情，确定要删除吗？</p>
+                                    <div style="text-align: right; margin: 0">
+                                        <el-button size="mini" type="text" @click="$refs[scope.row.id].doClose()">取消
+                                        </el-button>
+                                        <el-button :loading="delLoading" type="primary" size="mini"
+                                                   @click="subDelete(scope.row.id)">确定
+                                        </el-button>
+                                    </div>
+                                    <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"/>
+                                </el-popover>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                    <!--分页组件-->
+                    <el-pagination
+                            :total="pageInfo.total"
+                            style="margin-top: 8px;"
+                            layout="total, prev, pager, next, sizes"
+                            @size-change="sizeChange"
+                            @current-change="pageChange"/>
+                </el-card>
+            </el-col>
+            <el-col :xs="24" :sm="24" :md="14" :lg="14" :xl="14">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>字典详情</span>
+                        <el-button
+                                class="filter-item"
+                                size="mini"
+                                style="float: right;padding: 4px 10px"
+                                type="primary"
+                                icon="el-icon-plus"
+                                @click="">新增
+                        </el-button>
+                    </div>
+                </el-card>
+            </el-col>
+        </el-row>
+    </div>
 </template>
 
 <script>
-    import developing from '@/components/Developing'
+    import {del} from '@/api/dict'
+
     export default {
-        name: "dict",
-        components:{
-            developing
+        components: {},
+        data() {
+            return {
+                delLoading: false,
+                data: [],
+                loading: false,
+                pageInfo: {
+                    records: [],
+                    total: 0,
+                    current: 1,
+                    size: 10,
+                    sort: [],
+                    params: {},
+                }
+
+            }
+        },
+        created() {
+            this.$nextTick(() => {
+            })
+        },
+        methods: {
+            query() {
+
+            },
+            subDelete(id) {
+                this.delLoading = true
+                del(id).then(res => {
+                    this.delLoading = false
+                    this.$refs[id].doClose()
+                    this.$notify({
+                        title: '删除成功',
+                        type: 'success',
+                        duration: 2500
+                    })
+                }).catch(err => {
+                    this.delLoading = false
+                    this.$refs[id].doClose()
+                    console.log(err.response.data.message)
+                })
+            },
+            handleCurrentChange(val) {
+                if (val) {
+                    this.$refs.dictDetail.dictName = val.name
+                    this.$refs.dictDetail.dictId = val.id
+                    this.$refs.dictDetail.init()
+                }
+            },
+            sizeChange() {
+
+            },
+            pageChange() {
+
+            }
+
         }
-    };
+    }
 </script>
 
 <style scoped>
+
 </style>

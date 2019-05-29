@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
-export function fetchList(query) {
+export function page(params) {
     return request({
-        url: '/upms/user/getByPage',
+        url: '/upms/user/page',
         method: 'post',
-        params: query
+        data: params
     })
 }
 

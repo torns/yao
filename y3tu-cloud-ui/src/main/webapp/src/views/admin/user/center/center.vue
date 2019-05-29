@@ -55,9 +55,9 @@
 <script>
 import { mapGetters } from 'vuex'
 import { regEmail } from '@/utils/index'
-import updatePass from './center/updatePass'
-import updateEmail from './center/updateEmail'
-import log from './center/log'
+import updatePass from './updatePass'
+import updateEmail from './updateEmail'
+import log from './log'
 import { getToken } from '@/utils/auth'
 import store from '@/store'
 import { parseTime } from '@/utils/index'

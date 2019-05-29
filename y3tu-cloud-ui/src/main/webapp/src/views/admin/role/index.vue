@@ -7,7 +7,13 @@
                       style="width: 200px;"
                       class="filter-item"
                       @keyup.enter.native="search"/>
-            <el-button class="filter-item" size="mini" type="success" icon="el-icon-search" @click="search">搜索
+            <el-button
+                    class="filter-item"
+                    size="mini"
+                    type="success"
+                    icon="el-icon-search"
+                    style="margin-left: 10px"
+                    @click="search">搜索
             </el-button>
             <!-- 新增 -->
             <div style="display: inline-block;margin: 0px 2px;">
