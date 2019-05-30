@@ -1,7 +1,7 @@
 package com.y3tu.cloud.auth.authorization.security;
 
 import com.y3tu.cloud.auth.authorization.service.UserService;
-import com.y3tu.cloud.common.constants.ServiceNameConstants;
+import com.y3tu.cloud.common.constants.ServerNameConstants;
 import com.y3tu.cloud.common.vo.UserVO;
 import com.y3tu.tool.core.exception.ServerCallException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         try {
             userVO = userService.loadUserByUsername(username);
         } catch (Exception e) {
-            throw new ServerCallException("服务["+ServiceNameConstants.UPMS_SERVER+"]调用异常！",e);
+            throw new ServerCallException("服务["+ ServerNameConstants.UPMS_SERVER+"]调用异常！",e);
         }
         if (userVO == null) {
             throw new UsernameNotFoundException("未查询到此用户");

@@ -2,7 +2,7 @@ package com.y3tu.cloud.auth.authentication.controller;
 
 import com.y3tu.cloud.auth.authentication.feign.UserService;
 import com.y3tu.cloud.auth.authentication.service.AuthenticationService;
-import com.y3tu.cloud.common.constants.ServiceNameConstants;
+import com.y3tu.cloud.common.constants.ServerNameConstants;
 import com.y3tu.cloud.common.exception.AuthExceptionEnum;
 import com.y3tu.cloud.common.vo.UserVO;
 import com.y3tu.tool.core.exception.ErrorEnum;
@@ -48,7 +48,7 @@ public class AuthenticationController {
                 UserVO userVO = userService.loadUserByUsername(String.valueOf(authentication.getPrincipal()));
                 return R.success(userVO);
             } catch (Exception e) {
-                return R.error("服务[" + ServiceNameConstants.UPMS_SERVER + "]调用异常！", ErrorEnum.SERVICE_CALL_ERROR);
+                return R.error("服务[" + ServerNameConstants.UPMS_SERVER + "]调用异常！", ErrorEnum.SERVICE_CALL_ERROR);
             }
         }
         return R.error(AuthExceptionEnum.ACCESS_DENIED);

@@ -1,4 +1,4 @@
-package com.y3tu.cloud.log.config;
+package com.y3tu.cloud.log.server.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.y3tu.cloud.log.mapper")
+@MapperScan("com.y3tu.cloud.log.server.mapper")
 public class MybatisPlusConfig {
 
     /**

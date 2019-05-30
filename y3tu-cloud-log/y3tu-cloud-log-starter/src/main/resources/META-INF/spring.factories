@@ -1,3 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.y3tu.cloud.log.autoconfigure.LogAutoConfiguration,\
-com.y3tu.cloud.log.autoconfigure.RabbitMqConfig
+com.y3tu.cloud.log.starter.autoconfigure.LogAutoConfiguration,\
+com.y3tu.cloud.log.starter.autoconfigure.RabbitMqConfig

@@ -1,4 +1,4 @@
-package com.y3tu.cloud.log.autoconfigure;
+package com.y3tu.cloud.log.starter.autoconfigure;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
  * rabbitmq配置相关
  *
  * @author y3tu
- * @date 2019-05-03
  */
 @Configuration
 public class RabbitMqConfig {
@@ -32,13 +31,24 @@ public class RabbitMqConfig {
     }
 
     /**
-     * 日志记录队列
+     * 数据库日志记录队列
      *
      * @return
      */
     @Bean
-    public Queue sysLogQueue() {
-        return new Queue("log_queue");
+    public Queue dbLogQueue() {
+        return new Queue("db_log_queue");
+    }
+
+
+    /**
+     * elasticsearch日志记录队列
+     *
+     * @return
+     */
+    @Bean
+    public Queue esLogQueue() {
+        return new Queue("es_log_queue");
     }
 
 

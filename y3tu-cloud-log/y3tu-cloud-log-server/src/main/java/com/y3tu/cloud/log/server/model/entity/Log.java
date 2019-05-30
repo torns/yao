@@ -1,9 +1,12 @@
-package com.y3tu.cloud.log.model.dto;
+package com.y3tu.cloud.log.server.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.y3tu.tool.web.base.entity.BaseEntity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Date;
 
 
@@ -12,11 +15,13 @@ import java.util.Date;
  */
 @Data
 @Accessors(chain = true)
-public class LogDTO implements Serializable {
+@TableName("t_log")
+public class Log extends BaseEntity {
 
     /**
      * 主键
      */
+    @TableId(value = "id", type = IdType.INPUT)
     private String id;
 
     /**

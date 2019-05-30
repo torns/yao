@@ -1,6 +1,6 @@
 package com.y3tu.cloud.gateway.feign;
 
-import com.y3tu.cloud.common.constants.ServiceNameConstants;
+import com.y3tu.cloud.common.constants.ServerNameConstants;
 import feign.Logger;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @author y3tu
  * @date 2019-05-09
  */
-@FeignClient(name = ServiceNameConstants.AUTHENTICATION_SERVER, configuration = AuthenticationService.UserFeignConfig.class)
+@FeignClient(name = ServerNameConstants.AUTHENTICATION_SERVER, configuration = AuthenticationService.UserFeignConfig.class)
 public interface AuthenticationService {
 
     /**

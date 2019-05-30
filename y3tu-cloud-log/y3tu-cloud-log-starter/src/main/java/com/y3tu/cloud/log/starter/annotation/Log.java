@@ -1,4 +1,6 @@
-package com.y3tu.cloud.log.annotation;
+package com.y3tu.cloud.log.starter.annotation;
+
+import com.y3tu.cloud.log.starter.constant.SaveModeEnum;
 
 import java.lang.annotation.*;
 
@@ -27,5 +29,10 @@ public @interface Log {
      * @return
      */
     String actionName();
+
+    /**
+     * 保存日志方式 默认保存到数据库
+     */
+    SaveModeEnum saveMode() default SaveModeEnum.DB;
 
 }

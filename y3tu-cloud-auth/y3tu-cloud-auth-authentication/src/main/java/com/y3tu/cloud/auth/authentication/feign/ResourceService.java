@@ -1,6 +1,6 @@
 package com.y3tu.cloud.auth.authentication.feign;
 
-import com.y3tu.cloud.common.constants.ServiceNameConstants;
+import com.y3tu.cloud.common.constants.ServerNameConstants;
 import com.y3tu.cloud.common.vo.ResourceVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * @author y3tu
  */
-@FeignClient(name = ServiceNameConstants.UPMS_SERVER)
+@FeignClient(name = ServerNameConstants.UPMS_SERVER)
 public interface ResourceService {
     /**
      * 通过角色名查询菜单

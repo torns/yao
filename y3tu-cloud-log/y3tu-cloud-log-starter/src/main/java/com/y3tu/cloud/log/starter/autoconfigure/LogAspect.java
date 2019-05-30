@@ -1,10 +1,11 @@
-package com.y3tu.cloud.log.autoconfigure;
+package com.y3tu.cloud.log.starter.autoconfigure;
 
-import com.y3tu.cloud.common.constants.MqQueueNameConstants;
 import com.y3tu.cloud.common.enums.OperationStatusEnum;
 import com.y3tu.cloud.common.util.UserUtil;
-import com.y3tu.cloud.log.annotation.Log;
-import com.y3tu.cloud.log.model.dto.LogDTO;
+import com.y3tu.cloud.log.starter.constant.LogQueueNameConstant;
+import com.y3tu.cloud.log.starter.constant.SaveModeEnum;
+import com.y3tu.cloud.log.starter.model.dto.LogDTO;
+import com.y3tu.cloud.log.starter.annotation.Log;
 import com.y3tu.tool.core.exception.ExceptionUtil;
 import com.y3tu.tool.core.util.JsonUtil;
 import com.y3tu.tool.http.IpUtil;
@@ -27,7 +28,6 @@ import java.lang.reflect.Method;
  * 日志处理Aop
  *
  * @author y3tu
- * @date 2019-05-18
  */
 @Aspect
 @Slf4j
@@ -39,7 +39,7 @@ public class LogAspect {
     /**
      * 配置切入点
      */
-    @Pointcut("@annotation(com.y3tu.cloud.log.annotation.Log)")
+    @Pointcut("@annotation(com.y3tu.cloud.log.starter.annotation.Log)")
     public void logPointcut() {
         // 该方法无方法体,主要为了让同类中其他方法使用此切入点
     }
@@ -94,9 +94,13 @@ public class LogAspect {
 
 
         // 发送消息到 系统日志队列
-        if (targetMethod.isAnnotationPresent(Log.class)) {
-            rabbitTemplate.convertAndSend(MqQueueNameConstants.LOG_QUEUE, logDto);
+        Log logAnnotation = targetMethod.getAnnotation(Log.class);
+        if (logAnnotation.saveMode() == SaveModeEnum.DB) {
+            rabbitTemplate.convertAndSend(LogQueueNameConstant.DB_LOG_QUEUE, logDto);
+        } else if (logAnnotation.saveMode() == SaveModeEnum.ES) {
+            rabbitTemplate.convertAndSend(LogQueueNameConstant.ES_LOG_QUEUE, logDto);
         }
+
         return result;
     }
 }

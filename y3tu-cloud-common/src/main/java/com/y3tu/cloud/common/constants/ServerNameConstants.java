@@ -7,7 +7,7 @@ package com.y3tu.cloud.common.constants;
  * @author y3tu
  * @date 2019-05-03
  */
-public interface ServiceNameConstants {
+public interface ServerNameConstants {
 
     /**
      * 签权服务

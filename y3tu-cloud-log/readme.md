@@ -1,5 +1,6 @@
 #### 使用日志服务
 1.Maven
+在需要记录日志的服务的pom中添加下面的依赖
 ```
 <dependency>
     <groupId>com.y3tu</groupId>
@@ -16,5 +17,6 @@
 * serviceId：服务名
 * moduleName：模块名
 * actionName：操作名
+* saveMode:保存方式 (DB:数据库;ELK:elasticsearch;  默认保存到数据库)
 
 3.目前只支持往消息队列中插入记录日志的消息，日志服务会监听消息然后把日志写到数据库中,所以要使用日志服务需要添加消息队列依赖，并和日志服务配置同一个消息队列。

@@ -2,11 +2,10 @@ package com.y3tu.cloud.upms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.y3tu.cloud.common.constants.CommonConstants;
-import com.y3tu.cloud.common.constants.ServiceNameConstants;
+import com.y3tu.cloud.common.constants.ServerNameConstants;
 import com.y3tu.cloud.common.enums.DataStatusEnum;
 import com.y3tu.cloud.common.vo.ResourceVO;
-import com.y3tu.cloud.log.annotation.Log;
-import com.y3tu.cloud.upms.model.dto.ResourceTreeDTO;
+import com.y3tu.cloud.log.starter.annotation.Log;
 import com.y3tu.cloud.upms.model.entity.Resource;
 import com.y3tu.cloud.upms.model.entity.Role;
 import com.y3tu.cloud.upms.model.entity.RoleResource;
@@ -54,11 +53,10 @@ public class ResourceController extends BaseController<ResourceService, Resource
      *
      * @return
      */
-    @Log(serviceId = ServiceNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "根据token查询当前用户权限的菜单树")
+    @Log(serviceId = ServerNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "根据token查询当前用户权限的菜单树")
     @ApiOperation(value = "获取当前用户的菜单树", notes = "根据token查询当前用户权限的菜单树", httpMethod = "GET")
     @GetMapping("/menu/tree/{userId}")
     public R getMenuTree(@PathVariable("userId") String userId) {
-
         List<Role> roleList = userRoleService.findByUserId(userId);
         List<String> roleCodes = roleList.stream().map(role -> role.getRoleCode()).collect(Collectors.toList());
         return R.success(resourceService.getMenuTreeByRoleCodes(roleCodes));
@@ -69,7 +67,7 @@ public class ResourceController extends BaseController<ResourceService, Resource
      *
      * @return
      */
-    @Log(serviceId = ServiceNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "获取所有的菜单树")
+    @Log(serviceId = ServerNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "获取所有的菜单树")
     @ApiOperation(value = "获取当前用户的菜单树", notes = "获取所有的菜单树", httpMethod = "GET")
     @GetMapping("/menu/getAllMenuTree")
     public R getAllMenuTree() {

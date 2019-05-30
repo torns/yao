@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.y3tu.cloud.log.mapper.LogMapper">
+<mapper namespace="com.y3tu.cloud.log.server.mapper.LogMapper">
 
     <!-- 基本resultMap -->
-    <resultMap type="com.y3tu.cloud.log.model.entity.Log" id="LogMap">
+    <resultMap type="com.y3tu.cloud.log.server.model.entity.Log" id="LogMap">
         <id property="id" column="id"/>
         <result property="type" column="type"/>
         <result property="moduleName" column="module_name"/>
@@ -23,7 +23,7 @@
         <result property="updateTime" column="update_time"/>
         <result property="status" column="status"/>
     </resultMap>
-    <select id="pageByQuery" resultMap="LogMap">
+    <select id="page" resultMap="LogMap">
         select * from t_log
         <where>
             <if test="id != '' and id != null">
