@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--表格渲染-->
-        <el-table v-loading="loading" :data="data" size="small" style="width: 100%;">
+        <el-table v-loading="pageLoading" :data="pageInfo.records" size="small" style="width: 100%;">
             <el-table-column prop="actionName" label="行为"/>
             <el-table-column prop="remoteAddr" label="IP"/>
             <el-table-column prop="time" label="请求耗时" align="center">
@@ -19,7 +19,7 @@
         </el-table>
         <!--分页组件-->
         <el-pagination
-                :total="total"
+                :total="pageInfo.total"
                 style="margin-top: 8px;"
                 layout="total, prev, pager, next, sizes"
                 @size-change="sizeChange"
@@ -28,16 +28,16 @@
 </template>
 
 <script>
-    import initData from '@/mixins/initData'
+    import page from '@/mixins/page'
     import {parseTime} from '@/utils/index'
-    import { mapGetters } from 'vuex'
+    import {mapGetters} from 'vuex'
 
 
     export default {
-        mixins: [initData],
+        mixins: [page],
         created() {
             this.$nextTick(() => {
-                this.init()
+                this.initPage();
             })
         },
         computed: {
@@ -48,10 +48,12 @@
 
         methods: {
             parseTime,
-            beforeInit() {
-                this.url = 'log/log/page'
-                const sort = 'id,desc'
-                this.params = {page: this.page, size: this.size, sort: sort,createBy:this.user.username}
+            beforePageInit() {
+                this.pageUrl = 'log/log/page';
+                this.pageInfo.descs = ['id'];
+                this.pageInfo.params = {
+                    createBy: this.user.username
+                };
                 return true
             }
         }

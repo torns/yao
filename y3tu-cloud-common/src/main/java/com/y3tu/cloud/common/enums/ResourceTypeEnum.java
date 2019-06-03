@@ -1,7 +1,7 @@
 package com.y3tu.cloud.common.enums;
 
 /**
- * @description: 资源类型枚举
+ * 资源类型枚举
  */
 public enum ResourceTypeEnum {
 

@@ -206,8 +206,12 @@
             },
             getRoleList() {
                 const _this = this;
+                _this.loading = true;
                 page(this.pageInfo).then(res => {
                     _this.pageInfo = res.data;
+                    _this.loading = false;
+                }).catch(err => {
+                    _this.loading = false;
                 })
             },
             //获取菜单树

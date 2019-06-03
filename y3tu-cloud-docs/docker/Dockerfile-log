@@ -1,0 +1,16 @@
+FROM java:8-jre
+MAINTAINER Y3tu-Cloud y3tu <y3tu.vip@qq.com>
+
+ADD ./jar/y3tu-cloud-log-*.jar /app/app.jar
+
+EXPOSE 8999
+
+ENV JAVA_OPTS="-Xmx256m -Xms256m"
+ENV CONFIG_PROFILE=dev
+ENV LOG_PORT = 8999
+
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS \
+-Dfile.encoding=UTF8 -Duser.timezone=GMT+08 \
+-jar /app/app.jar \
+--spring.profiles.active=$CONFIG_PROFILE \
+--server.port=LOG_PORT"]
