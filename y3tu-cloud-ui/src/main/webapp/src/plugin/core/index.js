@@ -15,6 +15,7 @@ import pluginError from '@/plugin/error'
 
 import {setStore, getStore, removeStore} from '@/utils/store'
 import {copyObj} from '@/utils/util'
+import {isEmpty, isNotEmpty} from "@/utils/validate";
 
 
 export default {
@@ -36,6 +37,8 @@ export default {
         Vue.prototype.getStore = getStore;
         Vue.prototype.removeStore = removeStore;
         Vue.prototype.copyObj = copyObj;
+        Vue.prototype.isEmpty = isEmpty;
+        Vue.prototype.isNotEmpty = isNotEmpty;
 
     }
 }

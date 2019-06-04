@@ -110,7 +110,10 @@ service.interceptors.response.use(
             return response;
 
         } else if (code === "403") {
-            router.push({path: '/401'})
+            Notification.error({
+                message: errorCode[code] || errorCode['default'],
+                duration: 2500
+            })
         } else {
             if (code !== undefined) {
                 if (Config.mode === 'DEV') {

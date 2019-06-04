@@ -11,7 +11,7 @@ export default {
     /**
      * 模式 DEV:开发 PROD:生产
      */
-    mode: 'PROD',
+    mode: 'DEV',
     /**
      * 记住密码状态下的token在Cookie中存储的天数，默认1天
      */

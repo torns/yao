@@ -1,4 +1,4 @@
-import {validatenull} from './validate'
+import {isEmpty} from './validate'
 
 /**
  * 加密处理
@@ -170,7 +170,7 @@ export const loadStyle = url => {
  */
 export const findByvalue = (dic, value) => {
     let result = ''
-    if (validatenull(dic)) return value
+    if (isEmpty(dic)) return value
     if (typeof (value) === 'string' || typeof (value) === 'number') {
         let index = 0
         index = findArray(dic, value)

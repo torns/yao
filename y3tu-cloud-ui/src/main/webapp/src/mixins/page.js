@@ -21,14 +21,24 @@ export default {
         }
     },
     methods: {
-        async initPage() {
+        /**
+         * 后台查询分页数据
+         */
+        async page() {
             const _this = this;
-            if (!await _this.beforePageInit()) {
+            if (!await _this.pageInit()) {
                 return
             }
             return new Promise((resolve, reject) => {
 
                 _this.pageLoading = true
+
+                //剔除无效参数
+                Object.keys(_this.pageInfo.params).forEach(function (key) {
+                    if (_this.pageInfo.params[key] == null || _this.pageInfo.params[key] === '') {
+                        delete _this.pageInfo.params[key];
+                    }
+                });
 
                 initPageData(_this.pageUrl, _this.pageInfo).then(res => {
                     _this.pageInfo = res.data;
@@ -42,7 +52,11 @@ export default {
                 })
             })
         },
-        beforePageInit() {
+        /**
+         * 查询前的操作，比如说对查询参数赋值或特殊处理
+         *
+         */
+        pageInit() {
             return true
         },
         pageChange(e) {

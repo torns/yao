@@ -102,7 +102,6 @@
 
     import {getDictDataByCode} from '@/api/dict'
     import {saveReource, updateReource} from '@/api/menu'
-    import {validatenull} from '@/utils/validate'
     import TreeSelect from '@riophae/vue-treeselect'
     import IconSelect from '@/components/IconSelect'
 
@@ -192,7 +191,7 @@
             submit() {
                 const _this = this;
                 _this.submitLoading = true;
-                if (validatenull(this.menuForm.id)) {
+                if (_this.isEmpty(this.menuForm.id)) {
                     saveReource(this.menuForm).then(res => {
                         this.$message({
                             message: '保存成功!',

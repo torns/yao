@@ -8,7 +8,6 @@ import com.y3tu.cloud.common.vo.ResourceVO;
 import com.y3tu.cloud.common.vo.RoleVO;
 import com.y3tu.cloud.common.vo.UserVO;
 import com.y3tu.cloud.log.starter.annotation.Log;
-import com.y3tu.cloud.log.starter.constant.SaveModeEnum;
 import com.y3tu.cloud.upms.model.dto.UserDTO;
 import com.y3tu.cloud.upms.model.entity.*;
 import com.y3tu.cloud.upms.service.*;
@@ -141,7 +140,7 @@ public class UserController extends BaseController<UserService, User> {
     @Override
     @ApiOperation(value = "多条件分页获取用户列表")
     @MethodMapping(method = RequestMethod.POST)
-    @Log(serviceId = ServerNameConstants.UPMS_SERVER, moduleName = "User", actionName = "多条件分页获取用户列表", saveMode = SaveModeEnum.ES)
+    @Log(serviceId = ServerNameConstants.UPMS_SERVER, moduleName = "User", actionName = "多条件分页获取用户列表")
     public R page(@RequestBody PageInfo pageInfo) {
 
         PageInfo<User> page = userService.page(pageInfo);

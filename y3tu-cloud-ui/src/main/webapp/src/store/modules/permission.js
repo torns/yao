@@ -1,5 +1,5 @@
 import {constantRouterMap} from '@/router/routers'
-import {validatenull, validateURL} from '@/utils/validate'
+import {isEmpty,validateURL} from '@/utils/validate'
 import {getMenu} from '@/api/menu'
 import router from '@/router/routers'
 
@@ -83,11 +83,11 @@ let formatRoutes = (aMenu) => {
         const {children} = oMenu;
         if (type === -1) {
             //顶级菜单
-            if (!validatenull(children)) {
+            if (!isEmpty(children)) {
                 aRouter.push(formatRoutes(children));
             }
         } else {
-            if (!validatenull(component)) {
+            if (!isEmpty(component)) {
                 const oRouter = {
                     path: path,
                     component: () => {
@@ -106,7 +106,7 @@ let formatRoutes = (aMenu) => {
                     },
                     icon: icon,
                     parentId: parentId,
-                    children: validatenull(children) ? [] : formatRoutes(children)
+                    children: isEmpty(children) ? [] : formatRoutes(children)
                 }
                 aRouter.push(oRouter)
             }

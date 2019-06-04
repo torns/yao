@@ -92,7 +92,7 @@ public class User extends BaseEntity {
      */
     private Integer sex;
     /**
-     * 状态
+     * 状态 0：正常 1 锁定
      */
     private Integer status;
     /**

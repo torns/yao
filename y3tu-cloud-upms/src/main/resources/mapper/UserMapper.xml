@@ -100,6 +100,22 @@
             and t_user.department_id = #{params.departmentId}
         </if>
 
+        <if test="params.status!=null and params.status !=''">
+            and t_user.status = #{params.status}
+        </if>
+
+        <if test="params.mobile!=null and params.mobile !=''">
+            and t_user.mobile = #{params.mobile}
+        </if>
+
+        <if test="params.email!=null and params.email !=''">
+            and t_user.email = #{params.email}
+        </if>
+
+        <if test="params.createTime!=null and params.createTime !=''">
+            and t_user.create_time >= #{params.createTime}
+        </if>
+
     </select>
 
     <select id="selectAll" resultType="com.y3tu.cloud.upms.model.entity.User">

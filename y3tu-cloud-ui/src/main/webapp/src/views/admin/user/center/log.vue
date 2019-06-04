@@ -37,7 +37,7 @@
         mixins: [page],
         created() {
             this.$nextTick(() => {
-                this.initPage();
+                this.page();
             })
         },
         computed: {
@@ -48,7 +48,7 @@
 
         methods: {
             parseTime,
-            beforePageInit() {
+            pageInit() {
                 this.pageUrl = 'log/log/page';
                 this.pageInfo.descs = ['id'];
                 this.pageInfo.params = {

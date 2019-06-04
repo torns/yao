@@ -7,7 +7,7 @@
                         <el-input v-model="pageInfo.params.username"
                                   clearable
                                   placeholder="请输入用户名"
-                                  style="width: 200px"></el-input>
+                                  style="width: 200px"/>
                     </el-form-item>
 
                     <el-form-item label="部门" prop="departmentId">
@@ -46,7 +46,7 @@
                                     clearable
                                     style="width: 200px">
                             <el-option value="0" label="正常"></el-option>
-                            <el-option value="-1" label="禁用"></el-option>
+                            <el-option value="1" label="锁定"></el-option>
                           </el-select>
                         </el-form-item>
 
@@ -143,6 +143,9 @@
                     @size-change="sizeChange"
                     @current-change="pageChange"/>
         </el-row>
+
+        <user-form ref="form" :is-add="true"></user-form>
+
     </div>
 </template>
 
@@ -151,9 +154,10 @@
     import {getDepartmentTree} from '@/api/department'
     import {parseTime} from '@/utils/index'
     import {getDictDataByCode} from '@/api/dict'
+    import userForm from './form'
 
     export default {
-        components: {},
+        components: {userForm},
         data() {
             return {
                 height: document.documentElement.clientHeight - 180 + 'px;',
@@ -172,11 +176,7 @@
                     current: 1,
                     size: 10,
                     sort: [],
-                    params: {
-                        username: '',
-                        departmentId: '',
-                        status: ''
-                    },
+                    params: {},
                 },
                 treeProps: {
                     label: 'name',
@@ -205,7 +205,19 @@
             parseTime,
             //查询用户列表
             query() {
+                const _this = this;
+                if (_this.isNotEmpty(_this.departmentIds)) {
+                    _this.pageInfo.params.departmentId = _this.departmentIds[_this.departmentIds.length - 1]
+                } else {
+                    _this.pageInfo.params.departmentId = []
+                }
                 this.loading = true;
+                //剔除无效参数
+                Object.keys(_this.pageInfo.params).forEach(function (key) {
+                    if (_this.isEmpty(_this.pageInfo.params[key])) {
+                        delete _this.pageInfo.params[key];
+                    }
+                });
 
                 page(this.pageInfo).then(res => {
                     this.pageInfo = res.data;
@@ -248,7 +260,7 @@
                 })
             },
             add() {
-
+                this.$refs.form.dialog = true;
             },
             download() {
 

@@ -1,4 +1,4 @@
-import {validatenull} from '@/utils/validate'
+import {isEmpty} from '@/utils/validate'
 
 /**
  * 存储localStorage
@@ -30,8 +30,8 @@ export const getStore = (params) => {
     let obj = {}
     let content
     obj = window.localStorage.getItem(name)
-    if (validatenull(obj)) obj = window.sessionStorage.getItem(name)
-    if (validatenull(obj)) return
+    if (isEmpty(obj)) obj = window.sessionStorage.getItem(name)
+    if (isEmpty(obj)) return
     obj = JSON.parse(obj)
     if (obj.dataType === 'string') {
         content = obj.content
