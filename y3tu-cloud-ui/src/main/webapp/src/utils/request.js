@@ -13,6 +13,8 @@ const service = axios.create({
     timeout: Config.timeout // 请求超时时间
 });
 
+let flag_401 = true;
+
 // request拦截器
 service.interceptors.request.use(config => {
     if (getToken()) {
@@ -91,20 +93,26 @@ service.interceptors.response.use(
                 config.headers.Authorization = 'Bearer ' + getToken()
                 return service(config)
             }).catch((error) => {
-                //跳转到登录页面
-                MessageBox.confirm(
-                    '登录状态已过期，您可以继续留在该页面，或者重新登录',
-                    '系统提示',
-                    {
-                        confirmButtonText: '重新登录',
-                        cancelButtonText: '取消',
-                        type: 'warning'
-                    }
-                ).then(() => {
-                    store.dispatch('FedLogOut').then(() => {
-                        location.reload() // 为了重新实例化vue-router对象 避免bug
+                if(flag_401) {
+                    flag_401 = false;
+                    //跳转到登录页面
+                    MessageBox.confirm(
+                        '登录状态已过期，您可以继续留在该页面，或者重新登录',
+                        '系统提示',
+                        {
+                            confirmButtonText: '重新登录',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }
+                    ).then(() => {
+                        flag_401 = true;
+                        store.dispatch('FedLogOut').then(() => {
+                            location.reload() // 为了重新实例化vue-router对象 避免bug
+                        })
+                    },()=>{
+                        flag_401 = true;
                     })
-                })
+                }
             });
 
             return response;

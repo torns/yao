@@ -217,7 +217,7 @@ public class UserController extends BaseController<UserService, User> {
     @PostMapping(value = "/save")
     @ApiOperation(value = "添加用户")
     public R save(@RequestBody UserDTO userDTO) {
-        if (StrUtil.isBlank(userDTO.getUsername()) || StrUtil.isBlank(userDTO.getPassword())) {
+        if (StrUtil.isBlank(userDTO.getUsername())) {
             return R.error("缺少必需表单字段");
         }
 
@@ -225,7 +225,13 @@ public class UserController extends BaseController<UserService, User> {
             return R.error("该用户名已被注册");
         }
 
-        String encryptPass = new BCryptPasswordEncoder().encode(userDTO.getPassword());
+        //如果不设置密码 默认密码为123456
+        String encryptPass = "";
+        if(StrUtil.isEmpty(userDTO.getPassword())){
+            encryptPass = new BCryptPasswordEncoder().encode("123456");
+        }else {
+            encryptPass = new BCryptPasswordEncoder().encode(userDTO.getPassword());
+        }
         userDTO.setPassword(encryptPass);
         userDTO.setCreateTime(DateUtil.date());
         userDTO.setDelFlag(0);

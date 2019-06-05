@@ -48,8 +48,7 @@
         methods: {
             cancel() {
                 this.resetForm()
-            }
-            ,
+            },
             doSubmit() {
                 this.$refs['form'].validate((valid) => {
                     if (valid) {
@@ -61,8 +60,7 @@
                         return false
                     }
                 })
-            }
-            ,
+            },
             doAdd() {
                 saveRole(this.form).then(res => {
                     this.resetForm()
@@ -77,8 +75,7 @@
                     this.loading = false
                     console.log(err.response.data.message)
                 })
-            }
-            ,
+            },
             doEdit() {
                 updateRole(this.form).then(res => {
                     this.resetForm()
@@ -93,8 +90,7 @@
                     this.loading = false
                     console.log(err.response.data.message)
                 })
-            }
-            ,
+            },
             resetForm() {
                 this.dialog = false
                 this.form = {name: '', description: '', roleCode: ''};

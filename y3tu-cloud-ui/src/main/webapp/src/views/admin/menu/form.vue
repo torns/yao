@@ -190,31 +190,37 @@
             },
             submit() {
                 const _this = this;
-                _this.submitLoading = true;
-                if (_this.isEmpty(this.menuForm.id)) {
-                    saveReource(this.menuForm).then(res => {
-                        this.$message({
-                            message: '保存成功!',
-                            type: 'success'
-                        })
-                        _this.submitLoading = false
-                        _this.$emit('finish');
-                    }).catch(err => {
-                        _this.submitLoading = false;
-                    })
-                } else {
-                    updateReource(this.menuForm).then(res => {
-                        this.$message({
-                            message: '更新成功！',
-                            type: 'success'
-                        })
-                        _this.submitLoading = false;
-                        _this.$emit('finish');
-                    }).catch(err => {
-                        _this.submitLoading = false;
-                    })
-                }
+                _this.$refs.menuForm.validate(valid => {
+                    if (valid) {
+                        _this.submitLoading = true;
+                        if (_this.isEmpty(this.menuForm.id)) {
+                            saveReource(this.menuForm).then(res => {
+                                this.$message({
+                                    message: '保存成功!',
+                                    type: 'success'
+                                })
+                                _this.submitLoading = false
+                                _this.$emit('finish');
+                            }).catch(err => {
+                                _this.submitLoading = false;
+                            })
+                        } else {
+                            updateReource(this.menuForm).then(res => {
+                                this.$message({
+                                    message: '更新成功！',
+                                    type: 'success'
+                                })
+                                _this.submitLoading = false;
+                                _this.$emit('finish');
+                            }).catch(err => {
+                                _this.submitLoading = false;
+                            })
+                        }
 
+                    } else {
+                        return false
+                    }
+                });
             }
 
         }

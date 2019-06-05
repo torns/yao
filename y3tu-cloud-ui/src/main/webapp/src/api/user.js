@@ -8,21 +8,21 @@ export function page(params) {
     })
 }
 
-export function delObj(id) {
+export function del(id) {
     return request({
         url: '/upms/user/delByIds/' + id,
         method: 'delete'
     })
 }
 
-export function getObj(id) {
+export function get(id) {
     return request({
         url: '/upms/user/get/' + id,
         method: 'get'
     })
 }
 
-export function putObj(obj) {
+export function eidt(obj) {
     return request({
         url: '/upms/user/edit',
         method: 'put',
@@ -30,7 +30,7 @@ export function putObj(obj) {
     })
 }
 
-export function addObj(obj) {
+export function save(obj) {
     return request({
         url: '/upms/user/save',
         method: 'post',

@@ -118,6 +118,9 @@
                                  width="125"
                                  align="center">
                     <template slot-scope="scope">
+
+                        <el-button type="primary" icon="el-icon-edit" size="mini" @click="edit(scope.row)"/>
+
                         <el-popover
                                 :ref="scope.row.id"
                                 placement="top"
@@ -144,7 +147,7 @@
                     @current-change="pageChange"/>
         </el-row>
 
-        <user-form ref="form" :is-add="true"></user-form>
+        <user-form ref="form" :is-add="isAdd"></user-form>
 
     </div>
 </template>
@@ -181,12 +184,13 @@
                 treeProps: {
                     label: 'name',
                     value: 'id'
-                }
+                },
+                isAdd: true
             }
         },
         created() {
             this.$nextTick(() => {
-                this.getDepartmentTreeData();
+                this.init();
             })
         },
         mounted: function () {
@@ -194,7 +198,6 @@
             window.onresize = function temp() {
                 that.height = document.documentElement.clientHeight - 180 + 'px;'
             }
-
         },
         watch: {
             departmentName(val) {
@@ -203,6 +206,10 @@
         },
         methods: {
             parseTime,
+            init() {
+                this.getDepartmentTreeData();
+                this.query();
+            },
             //查询用户列表
             query() {
                 const _this = this;
@@ -219,6 +226,7 @@
                     }
                 });
 
+                this.pageInfo.total=0
                 page(this.pageInfo).then(res => {
                     this.pageInfo = res.data;
                     this.loading = false;
@@ -232,7 +240,7 @@
                 this.query();
             },
             pageChange(e) {
-                this.pageInfo.current = e - 1;
+                this.pageInfo.current = e;
                 this.query();
             },
             subDelete(id) {
@@ -260,7 +268,13 @@
                 })
             },
             add() {
+                this.isAdd = true;
                 this.$refs.form.dialog = true;
+            },
+            edit(row) {
+                this.isAdd = false;
+                this.$refs.form.dialog = true;
+                this.$refs.form.form = this.copyObj(row);
             },
             download() {
 

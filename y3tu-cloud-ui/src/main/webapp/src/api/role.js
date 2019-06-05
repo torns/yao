@@ -8,6 +8,16 @@ export const page = (params) => {
     })
 }
 
+/**
+ * 获取全部角色数据
+ */
+export const getAll=()=>{
+    return request({
+        url: '/upms/role/getAll',
+        method: 'get',
+    })
+}
+
 export const saveRole = (role) => {
     return request({
         url: '/upms/role/save',
