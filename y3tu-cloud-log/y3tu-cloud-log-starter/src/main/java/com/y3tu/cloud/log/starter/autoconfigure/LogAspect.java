@@ -8,6 +8,7 @@ import com.y3tu.cloud.log.starter.model.dto.LogDTO;
 import com.y3tu.cloud.log.starter.annotation.Log;
 import com.y3tu.tool.core.exception.ExceptionUtil;
 import com.y3tu.tool.core.util.JsonUtil;
+import com.y3tu.tool.core.util.StrUtil;
 import com.y3tu.tool.http.IpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -35,6 +36,8 @@ public class LogAspect {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
+    @Autowired
+    private LogPropertiesConfig logPropertiesConfig;
 
     /**
      * 配置切入点
@@ -95,12 +98,24 @@ public class LogAspect {
 
         // 发送消息到 系统日志队列
         Log logAnnotation = targetMethod.getAnnotation(Log.class);
+        String logQueue = "";
         if (logAnnotation.saveMode() == SaveModeEnum.DB) {
-            rabbitTemplate.convertAndSend(LogQueueNameConstant.DB_LOG_QUEUE, logDto);
+            logQueue = LogQueueNameConstant.DB_LOG_QUEUE;
         } else if (logAnnotation.saveMode() == SaveModeEnum.ES) {
-            rabbitTemplate.convertAndSend(LogQueueNameConstant.ES_LOG_QUEUE, logDto);
+            logQueue = LogQueueNameConstant.ES_LOG_QUEUE;
+        } else {
+            if (StrUtil.isNotEmpty(logPropertiesConfig.getSaveMode())) {
+                String saveMode = logPropertiesConfig.getSaveMode();
+                if ("ES".equals(saveMode)) {
+                    logQueue = LogQueueNameConstant.ES_LOG_QUEUE;
+                } else {
+                    logQueue = LogQueueNameConstant.DB_LOG_QUEUE;
+                }
+            } else {
+                logQueue = LogQueueNameConstant.DB_LOG_QUEUE;
+            }
         }
-
+        rabbitTemplate.convertAndSend(logQueue, logDto);
         return result;
     }
 }

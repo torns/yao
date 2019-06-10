@@ -26,6 +26,7 @@
 - y3tu-cloud-file 文件上传服务,这个服务可以暂时不起，因为前端还没有对接
 - y3tu-cloud-gen 代码生成模块
 - y3tu-cloud-gateway 后端统一入口，提供动态路由，oauth2的资源服务器
+- y3tu-cloud-ui 基于Vue ElementUI的后台管理界面，可打包进jar包，也可单独部署
 
 ## 默认端口
 ```

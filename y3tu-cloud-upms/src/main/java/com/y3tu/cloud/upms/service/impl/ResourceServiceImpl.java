@@ -62,6 +62,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceMapper, Resourc
     public List<TreeNode<Resource>> getAllResourceTree() {
         QueryWrapper<Resource> query = new QueryWrapper();
         query.eq("del_flag", DataStatusEnum.NORMAL.getCode());
+        query.orderByAsc("sort");
         List<Resource> resources = resourceMapper.selectList(query);
         List<TreeNode<Resource>> treeNodeList = resources.stream().map(resource -> {
             TreeNode<Resource> treeNode = new TreeNode<>(resource.getId(), resource.getName(), resource.getParentId(), resource);

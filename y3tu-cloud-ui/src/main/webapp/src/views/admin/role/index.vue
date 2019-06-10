@@ -201,6 +201,7 @@
                 this.getDepartmentTree();
             },
             search() {
+                this.pageInfo.current = 1;
                 this.pageInfo.params = {name: this.queryName}
                 this.getRoleList();
             },

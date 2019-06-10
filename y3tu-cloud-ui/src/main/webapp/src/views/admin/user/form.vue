@@ -1,10 +1,10 @@
 <template>
-    <el-dialog :visible.sync="dialog" :title="isAdd ? '新增用户' : '编辑用户'" append-to-body width="550px">
+    <el-dialog :visible.sync="dialog" :title="isAdd ? '新增用户' : '编辑用户'" append-to-body width="550px" @close="cancel">
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="66px">
             <el-form-item label="用户名" prop="username">
                 <el-input v-model="form.username" clearable/>
             </el-form-item>
-            <el-form-item label="密码" prop="password">
+            <el-form-item  v-if="isAdd" label="密码" prop="password">
                 <el-tooltip placement="right" content="如果不填初始密码默认123456">
                     <el-input v-model="form.password"
                               placeholder="请输入密码"
@@ -16,7 +16,7 @@
                 <el-switch
                         v-model="form.status"
                         inactive-text="锁定"
-                        active-text="启用"
+                        active-text="正常"
                         :active-value="0"
                         :inactive-value="1">
                 </el-switch>
@@ -201,7 +201,27 @@
 
             },
             doEdit() {
-
+                const _this = this;
+                if (_this.isNotEmpty(_this.roleIds)) {
+                    let roleArr = [];
+                    _this.roleIds.forEach(roleId => {
+                        roleArr.push({
+                            id: roleId
+                        })
+                    });
+                    _this.form.roles = roleArr;
+                }
+                edit(_this.form).then(res => {
+                    this.$message({
+                        message: '修改成功！',
+                        type: 'success'
+                    })
+                    _this.resetForm();
+                    _this.$parent.init();
+                    _this.submitLoading = false;
+                }).catch(err => {
+                    _this.submitLoading = false;
+                })
             },
             resetForm() {
                 this.dialog = false;

@@ -60,13 +60,13 @@ export default {
             return true
         },
         pageChange(e) {
-            this.pageInfo.current = e - 1
-            this.initPage()
+            this.pageInfo.current = e
+            this.page()
         },
         sizeChange(e) {
             this.pageInfo.current = 0
             this.pageInfo.size = e
-            this.initPage()
+            this.page()
         }
     }
 }

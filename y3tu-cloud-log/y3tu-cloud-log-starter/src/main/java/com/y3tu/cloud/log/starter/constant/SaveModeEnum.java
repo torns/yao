@@ -6,6 +6,18 @@ package com.y3tu.cloud.log.starter.constant;
  * @author y3tu
  */
 public enum SaveModeEnum {
-    DB,
-    ES
+    NONE(""),
+    DB("db"),
+    ES("es");
+
+    private String value;
+
+    SaveModeEnum(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
 }

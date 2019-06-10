@@ -22,7 +22,7 @@ export function get(id) {
     })
 }
 
-export function eidt(obj) {
+export function edit(obj) {
     return request({
         url: '/upms/user/edit',
         method: 'put',

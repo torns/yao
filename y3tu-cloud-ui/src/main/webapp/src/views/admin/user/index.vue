@@ -65,7 +65,7 @@
                                 size="mini"
                                 type="success"
                                 icon="el-icon-search"
-                                @click="query">
+                                @click="doQuery">
                             查询
                         </el-button>
 
@@ -108,6 +108,9 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="状态" align="center" prop="status">
+                    <template slot-scope="scope">
+                        <span>{{ scope.row.status==0?'正常':'禁用' }}</span>
+                    </template>
                 </el-table-column>
                 <el-table-column :show-overflow-tooltip="true" prop="createTime" label="创建日期">
                     <template slot-scope="scope">
@@ -153,7 +156,7 @@
 </template>
 
 <script>
-    import {page} from '@/api/user'
+    import {page,del} from '@/api/user'
     import {getDepartmentTree} from '@/api/department'
     import {parseTime} from '@/utils/index'
     import {getDictDataByCode} from '@/api/dict'
@@ -210,6 +213,10 @@
                 this.getDepartmentTreeData();
                 this.query();
             },
+            doQuery() {
+                this.pageInfo.current = 1;
+                this.query();
+            },
             //查询用户列表
             query() {
                 const _this = this;
@@ -226,7 +233,6 @@
                     }
                 });
 
-                this.pageInfo.total=0
                 page(this.pageInfo).then(res => {
                     this.pageInfo = res.data;
                     this.loading = false;
@@ -275,6 +281,10 @@
                 this.isAdd = false;
                 this.$refs.form.dialog = true;
                 this.$refs.form.form = this.copyObj(row);
+                this.$refs.form.roleIds = [];
+                this.$refs.form.form.roles.forEach(value => {
+                    this.$refs.form.roleIds.push(value.id)
+                })
             },
             download() {
 

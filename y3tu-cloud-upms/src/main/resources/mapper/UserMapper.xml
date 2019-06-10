@@ -88,7 +88,7 @@
         select t_user.id, t_user.create_by AS createBy, t_user.create_time AS createTime, t_user.update_by AS updateBy,
         t_user.update_time AS updateTime, t_user.address,
         t_user.avatar, t_user.description, t_user.email, t_user.mobile, t_user.nick_name AS nickName,
-        t_user.password, t_user.sex, t_user.status, t_user.type, t_user.username, t_user.del_flag AS delFlag,
+        t_user.sex, t_user.status, t_user.type, t_user.username, t_user.del_flag AS delFlag,
         t_user.department_id as departmentId,t_department.name as departmentName
         from t_user left join t_department on t_user.department_id = t_department.id
         where 1=1

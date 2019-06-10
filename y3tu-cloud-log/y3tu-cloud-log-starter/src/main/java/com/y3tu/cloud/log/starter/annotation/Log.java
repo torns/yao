@@ -33,6 +33,6 @@ public @interface Log {
     /**
      * 保存日志方式 默认保存到数据库
      */
-    SaveModeEnum saveMode() default SaveModeEnum.DB;
+    SaveModeEnum saveMode() default SaveModeEnum.NONE;
 
 }
