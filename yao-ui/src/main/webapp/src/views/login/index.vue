@@ -2,16 +2,16 @@
     <div class="login">
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-position="left" label-width="0px"
                  class="login-form">
-            <h3 class="title">YAdmin 快速开发平台  </h3>
+            <h3 class="title">Yao 快速开发平台 </h3>
             <el-form-item prop="username">
                 <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号">
-                    <icon slot="prefix" name="user"  style="height: 39px;width: 13px;margin-left: 2px;"></icon>
+                    <icon slot="prefix" name="user" style="height: 39px;width: 13px;margin-left: 2px;"></icon>
                 </el-input>
             </el-form-item>
             <el-form-item prop="password">
                 <el-input v-model="loginForm.password" type="password" auto-complete="off" placeholder="密码"
                           @keyup.enter.native="handleLogin">
-                    <icon slot="prefix" name="lock"  style="height: 39px;width: 13px;margin-left: 2px;"></icon>
+                    <icon slot="prefix" name="lock" style="height: 39px;width: 13px;margin-left: 2px;"></icon>
                 </el-input>
             </el-form-item>
             <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>

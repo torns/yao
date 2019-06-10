@@ -13,6 +13,15 @@
                                 icon="el-icon-plus"
                                 @click="">新增
                         </el-button>
+
+                        <el-button
+                                size="mini"
+                                type="success"
+                                style="float: right;padding: 4px 10px"
+                                icon="el-icon-search"
+                                @click="query">
+                            查询
+                        </el-button>
                     </div>
 
                     <div class="head-container">
@@ -22,47 +31,40 @@
                                         v-model="pageInfo.params.name"
                                         clearable
                                         style="width: 100px"
-
                                 />
                             </el-form-item>
 
                             <el-form-item label="字典编码">
                                 <el-input
-                                        v-model="pageInfo.params.dictCode"
+                                        v-model="pageInfo.params.code"
                                         clearable
                                         style="width: 100px"
                                 />
                             </el-form-item>
 
-                            <el-form-item label="状态">
+                            <el-form-item label="类型">
                                 <el-select
-                                        v-model="pageInfo.params.status"
+                                        v-model="pageInfo.params.type"
                                         placeholder="请选择"
                                         clearable
-                                        style="width: 80px">
-                                    <el-option value="0" label="正常"></el-option>
-                                    <el-option value="-1" label="禁用"></el-option>
+                                        style="width: 110px">
+                                    <el-option value="0" label="普通字典"></el-option>
+                                    <el-option value="-1" label="SQL字典"></el-option>
                                 </el-select>
                             </el-form-item>
 
-                            <el-form-item>
-                                <el-button
-                                        size="mini"
-                                        type="success"
-                                        icon="el-icon-search"
-                                        @click="query">
-                                    查询
-                                </el-button>
-                            </el-form-item>
                         </el-form>
 
                     </div>
 
                     <!--表格渲染-->
-                    <el-table v-loading="loading" :data="data" size="small" highlight-current-row style="width: 100%;"
+                    <el-table v-loading="pageLoading" :data="pageInfo.records" size="small" highlight-current-row
+                              style="width: 100%;"
                               @current-change="handleCurrentChange">
                         <el-table-column :show-overflow-tooltip="true" prop="name" label="名称"/>
-                        <el-table-column :show-overflow-tooltip="true" prop="remark" label="描述"/>
+                        <el-table-column :show-overflow-tooltip="true" prop="code" label="编码"/>
+                        <el-table-column :show-overflow-tooltip="true" prop="type" label="类型"/>
+                        <el-table-column :show-overflow-tooltip="true" prop="description" label="描述"/>
                         <el-table-column label="操作" width="130px" align="center">
                             <template slot-scope="scope">
                                 <el-popover
@@ -112,32 +114,28 @@
 
 <script>
     import {del} from '@/api/dict'
+    import page from '@/mixins/page'
 
     export default {
         components: {},
+        mixins: [page],
         data() {
             return {
                 delLoading: false,
-                data: [],
-                loading: false,
-                pageInfo: {
-                    records: [],
-                    total: 0,
-                    current: 1,
-                    size: 10,
-                    sort: [],
-                    params: {},
-                }
-
             }
         },
         created() {
             this.$nextTick(() => {
+                this.query();
             })
         },
         methods: {
             query() {
-
+                this.page();
+            },
+            pageInit() {
+                this.pageUrl = '/upms/dict/page'
+                return true;
             },
             subDelete(id) {
                 this.delLoading = true
@@ -162,12 +160,6 @@
                     this.$refs.dictDetail.init()
                 }
             },
-            sizeChange() {
-
-            },
-            pageChange() {
-
-            }
 
         }
     }

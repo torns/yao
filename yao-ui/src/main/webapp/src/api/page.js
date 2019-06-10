@@ -4,6 +4,6 @@ export function initPageData(url, params) {
     return request({
         url: url,
         method: 'post',
-        params
+        data: params
     })
 }

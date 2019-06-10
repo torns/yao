@@ -14,7 +14,7 @@
                             <el-row class-name="made-child-con-middle" type="flex" align="middle">
                                 <div>
                                     <b class="card-user-infor-name">{{ user.username }}</b>
-                                    <p>YAdmin 欢迎您的使用</p>
+                                    <p>欢迎您使用Yao</p>
                                 </div>
                             </el-row>
                         </el-col>

@@ -5,17 +5,16 @@
 
     <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.y3tu.yao.upms.model.entity.Department" id="departmentMap">
-            <result property="id" column="id"/>
-            <result property="createBy" column="create_by"/>
-            <result property="createTime" column="create_time"/>
-            <result property="delFlag" column="del_flag"/>
-            <result property="updateBy" column="update_by"/>
-            <result property="updateTime" column="update_time"/>
-            <result property="parentId" column="parent_id"/>
-            <result property="sortOrder" column="sort_order"/>
-            <result property="status" column="status"/>
-            <result property="name" column="name"/>
-            <result property="isParent" column="is_parent"/>
+        <result property="id" column="id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="sort" column="sort"/>
+        <result property="status" column="status"/>
+        <result property="name" column="name"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -27,10 +26,9 @@
         update_by as updateBy,
         update_time as updateTime,
         parent_id as parentId,
-        sort_order as sortOrder,
+        sort as sort,
         status as status,
         name as name,
-        is_parent as isParent,
     1=1
     </sql>
 

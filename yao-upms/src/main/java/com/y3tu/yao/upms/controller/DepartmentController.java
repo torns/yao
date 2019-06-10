@@ -1,7 +1,6 @@
 package com.y3tu.yao.upms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.y3tu.yao.common.constants.CommonConstants;
 import com.y3tu.yao.common.enums.DataStatusEnum;
 import com.y3tu.yao.upms.model.entity.Department;
 import com.y3tu.yao.upms.model.entity.RoleDepartment;
@@ -9,7 +8,6 @@ import com.y3tu.yao.upms.model.entity.User;
 import com.y3tu.yao.upms.service.DepartmentService;
 import com.y3tu.yao.upms.service.RoleDepartmentService;
 import com.y3tu.yao.upms.service.UserService;
-import com.y3tu.tool.core.collection.CollectionUtil;
 import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.core.pojo.TreeNode;
 import com.y3tu.tool.core.util.TreeUtil;
@@ -38,6 +36,10 @@ public class DepartmentController extends BaseController<DepartmentService, Depa
     @Autowired
     private RoleDepartmentService roleDepartmentService;
 
+    /**
+     * 部门树根节点id
+     */
+    private final static String TREE_ROOT = "0";
 
     /**
      * 获取部门树
@@ -46,30 +48,15 @@ public class DepartmentController extends BaseController<DepartmentService, Depa
      */
     @GetMapping("/tree")
     public R getDepartmentTree() {
-        List<Department> list = departmentService.list(new QueryWrapper<Department>().eq("del_flag", DataStatusEnum.NORMAL));
+        List<Department> list = departmentService.list(
+                new QueryWrapper<Department>().eq("del_flag", DataStatusEnum.NORMAL).orderByAsc("sort"));
         List<TreeNode<Department>> treeNodeList = list.stream().map(department -> {
             TreeNode<Department> treeNode = new TreeNode<>(department.getId(), department.getName(), department.getParentId(), department);
             return treeNode;
         }).collect(Collectors.toList());
-        return R.success(TreeUtil.buildList(treeNodeList, "0"));
+        return R.success(TreeUtil.buildList(treeNodeList, TREE_ROOT));
     }
 
-
-    /**
-     * 根据父id获取部门信息
-     *
-     * @param parentId
-     * @param openDataFilter
-     * @return
-     */
-    @GetMapping(value = "/getByParentId/{parentId}")
-    public R getByParentId(@PathVariable String parentId, @RequestParam(required = false, defaultValue = "true") Boolean openDataFilter) {
-        List<Department> list = CollectionUtil.newArrayList();
-
-        list = departmentService.findByParentIdOrderBySortOrder(parentId, true);
-
-        return R.success(polishList(list));
-    }
 
     /**
      * 新增部门
@@ -81,16 +68,22 @@ public class DepartmentController extends BaseController<DepartmentService, Depa
     @Override
     public R save(@RequestBody Department department) {
         departmentService.save(department);
-        //如果不是添加的一级 判断设置上级为父节点标识
-        if (!CommonConstants.PARENT_ID.equals(department.getParentId())) {
-            Department parent = departmentService.getById(department.getParentId());
-            if (parent.getIsParent() == null || !parent.getIsParent()) {
-                parent.setIsParent(true);
-                departmentService.updateById(parent);
-            }
-        }
         return R.success();
     }
+
+    /**
+     * 修改部门
+     *
+     * @param department
+     * @return
+     */
+    @MethodMapping(method = RequestMethod.POST)
+    @Override
+    public R update(@RequestBody Department department) {
+        departmentService.updateById(department);
+        return R.success();
+    }
+
 
     /**
      * 批量删除部门
@@ -115,34 +108,4 @@ public class DepartmentController extends BaseController<DepartmentService, Depa
         return R.success();
     }
 
-    /**
-     * 部门名模糊搜索
-     *
-     * @param title          部门名
-     * @param openDataFilter 是否开始数据权限过滤
-     * @return
-     */
-    @MethodMapping(value = "/search", method = RequestMethod.GET)
-    public R searchByTitle(@RequestParam String title, @RequestParam(required = false, defaultValue = "true") Boolean openDataFilter) {
-        List<Department> list = departmentService.list(new QueryWrapper<Department>().like("title", title).orderByAsc("sort_order"));
-        return R.success(polishList(list));
-    }
-
-    /**
-     * 修改部门父级
-     *
-     * @param list
-     * @return
-     */
-    private List<Department> polishList(List<Department> list) {
-        list.forEach(item -> {
-            if (!CommonConstants.PARENT_ID.equals(item.getParentId())) {
-                Department parent = departmentService.getById(item.getParentId());
-                item.setParentName(parent.getName());
-            } else {
-                item.setParentName("一级部门");
-            }
-        });
-        return list;
-    }
 }

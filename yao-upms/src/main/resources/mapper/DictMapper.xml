@@ -47,9 +47,21 @@
     </sql>
 
 
-    <select id="page" resultType="com.y3tu.yao.upms.model.entity.Dict">
-        select
-        <include refid="Base_Column_List"/>
-        from t_dict
+    <select id="page" resultType="com.y3tu.yao.upms.model.entity.Dict" parameterType="java.util.Map">
+        select *
+        from t_dict t
+        where 1= 1
+
+        <if test="params.name!=null and params.name !=''">
+            and t.name = #{params.name}
+        </if>
+
+        <if test="params.code!=null and params.code !=''">
+            and t.code = #{params.code}
+        </if>
+
+        <if test="params.type!=null and params.type !=''">
+            and t.type = #{params.type}
+        </if>
     </select>
 </mapper>

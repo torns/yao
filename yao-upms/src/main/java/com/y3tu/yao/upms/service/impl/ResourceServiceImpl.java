@@ -32,6 +32,11 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceMapper, Resourc
     @Autowired
     ResourceMapper resourceMapper;
 
+    /**
+     * 资源树根节点id
+     */
+    private final static String TREE_ROOT = "-1";
+
     @Override
     public List<TreeNode<Resource>> getMenuTreeByRoleCodes(List<String> roleCodes) {
         // 1、首选获取所有角色的资源集合
@@ -46,7 +51,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceMapper, Resourc
             TreeNode<Resource> treeNode = new TreeNode<>(resource.getId(), resource.getName(), resource.getParentId(), resource);
             return treeNode;
         }).collect(Collectors.toList());
-        return TreeUtil.buildList(treeNodeList, CommonConstants.TREE_ROOT);
+        return TreeUtil.buildList(treeNodeList, TREE_ROOT);
     }
 
     @Override
@@ -68,7 +73,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceMapper, Resourc
             TreeNode<Resource> treeNode = new TreeNode<>(resource.getId(), resource.getName(), resource.getParentId(), resource);
             return treeNode;
         }).collect(Collectors.toList());
-        return TreeUtil.buildList(treeNodeList, CommonConstants.TREE_ROOT);
+        return TreeUtil.buildList(treeNodeList, TREE_ROOT);
     }
 
     @Override

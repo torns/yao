@@ -1,5 +1,12 @@
 import request from '@/utils/request'
 
+export function page(pageInfo) {
+    return request({
+        url: 'api/dict',
+        method: 'post',
+    })
+}
+
 export function add(data) {
     return request({
         url: 'api/dict',

@@ -7,34 +7,25 @@ export function getDepartmentTree() {
     })
 }
 
-
-export function getDepts(params) {
+export function save(data) {
     return request({
-        url: 'api/dept',
-        method: 'get',
-        params
-    })
-}
-
-export function add(data) {
-    return request({
-        url: 'api/dept',
+        url: '/upms/department/save',
         method: 'post',
         data
     })
 }
 
-export function del(id) {
+export function update(data) {
     return request({
-        url: 'api/dept/' + id,
-        method: 'delete'
+        url: '/upms/department/update',
+        method: 'post',
+        data
     })
 }
 
-export function edit(data) {
+export function del(ids) {
     return request({
-        url: 'api/dept',
-        method: 'put',
-        data
+        url: `/upms/department/delByIds/${ids}`,
+        method: 'delete',
     })
 }

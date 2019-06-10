@@ -1,5 +1,6 @@
 package com.y3tu.yao.upms.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -18,7 +19,6 @@ import java.util.Date;
  * 部门实体
  *
  * @author y3tu
- * @date 2018-11-26 19:47:53
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -29,7 +29,7 @@ public class Department extends BaseEntity<Department> {
     /**
      *
      */
-    @TableId
+    @TableId(value = "id", type = IdType.INPUT)
     private String id;
     /**
      *
@@ -66,8 +66,7 @@ public class Department extends BaseEntity<Department> {
     /**
      *
      */
-    @TableField("sort_order")
-    private BigDecimal sortOrder;
+    private BigDecimal sort;
     /**
      *
      */
@@ -76,17 +75,6 @@ public class Department extends BaseEntity<Department> {
      *
      */
     private String name;
-    /**
-     * 是否为父节点(含子节点) 默认false
-     */
-    @TableField("is_parent")
-    private Boolean isParent;
-
-    /**
-     * 父节点名称
-     */
-    @TableField(exist = false)
-    private String parentName;
 
     /**
      * 主键值

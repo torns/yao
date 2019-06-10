@@ -13,7 +13,6 @@ import java.util.Set;
  * </p>
  *
  * @author y3tu
- * @since 2018-08-05
  */
 public interface ResourceService extends BaseService<Resource> {
     /**

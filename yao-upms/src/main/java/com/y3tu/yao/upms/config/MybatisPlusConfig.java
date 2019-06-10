@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @author y3tu
  */
 @Configuration
-@MapperScan("com.y3tu.cloud.upms.mapper")
+@MapperScan("com.y3tu.yao.upms.mapper")
 public class MybatisPlusConfig {
 
 

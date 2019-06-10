@@ -4,17 +4,13 @@ package com.y3tu.yao.common.constants;
  * 普通常量
  *
  * @author y3tu
- * @date 2019-05-03
  */
 public interface CommonConstants {
     /**
      * token请求头名称
      */
     String TOKEN_HEADER = "Authorization";
-    /**
-     * 树的根节点值
-     */
-    String TREE_ROOT = "-1";
+
 
     String FISHER_REDIS_LIST_LEY = "fisher_client_id_to_access:cloud";
 
@@ -52,7 +48,6 @@ public interface CommonConstants {
      * 菜单
      */
     String MENU = "0";
-
 
     /**
      * 1级菜单

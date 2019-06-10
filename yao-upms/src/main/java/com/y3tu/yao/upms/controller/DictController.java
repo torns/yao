@@ -1,6 +1,7 @@
 package com.y3tu.yao.upms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.y3tu.tool.web.base.pojo.PageInfo;
 import com.y3tu.yao.upms.model.entity.Dict;
 import com.y3tu.yao.upms.model.entity.DictData;
 import com.y3tu.yao.upms.service.DictDataService;
@@ -17,7 +18,6 @@ import java.util.List;
  * 字典Controller
  *
  * @author y3tu
- * @date 2018-12-14 14:43:24
  */
 @RestController
 @RequestMapping("/dict")
@@ -27,6 +27,12 @@ public class DictController extends BaseController<DictService, Dict> {
 
     @Autowired
     private DictDataService dictDataService;
+
+    @PostMapping("/page")
+    @Override
+    public R page(@RequestBody PageInfo pageInfo) {
+        return R.success(dictService.page(pageInfo));
+    }
 
     @PostMapping("/save")
     @Override
