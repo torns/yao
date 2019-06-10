@@ -5,20 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.y3tu</groupId>
-    <artifactId>y3tu-cloud</artifactId>
+    <artifactId>yao</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
-    <description>基于spring cloud alibaba的微服务平台</description>
+    <description>Yao 快速开发平台</description>
     <modules>
-        <module>y3tu-cloud-common</module>
-        <module>y3tu-cloud-auth</module>
-        <module>y3tu-cloud-upms</module>
-        <module>y3tu-cloud-gateway</module>
-        <module>y3tu-cloud-log</module>
-        <module>y3tu-cloud-file</module>
-        <module>y3tu-cloud-gen</module>
-        <module>y3tu-cloud-monitor</module>
-        <module>y3tu-cloud-transaction</module>
+        <module>yao-common</module>
+        <module>yao-upms</module>
+        <module>yao-auth</module>
+        <module>yao-gateway</module>
+        <module>yao-log</module>
+
     </modules>
 
     <parent>
@@ -60,6 +57,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--Spring cloud alibaba-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -68,29 +66,21 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!-- MyBatisPlus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus-starter.version}</version>
             </dependency>
+
             <!-- mysql驱动 -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-jdk8</artifactId>
-                <version>${org.mapstruct.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
-                <version>${org.mapstruct.version}</version>
-                <scope>provided</scope>
-            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

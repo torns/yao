@@ -12,33 +12,24 @@
 - 前端框架：Vue ElementUI
 
 # 项目结构说明
-- y3tu-cloud-common 公共模块
-- y3tu-cloud-auth  Oauth2认证服务 提供token
-  - y3tu-cloud-auth-authentication 签权服务
-  - y3tu-cloud-auth-authorization 授权服务
-- y3tu-cloud-upms 基于角色的通用权限管理模块
-- y3tu-cloud-transcation 基于mq最终一致性实现可靠消息的分布式事务方案
-  - y3tu-cloud-transaction-message 独立消息服务微服务
-  - y3tu-cloud-transaction-sample 基于支付宝转账的演示
-  - y3tu-cloud-transaction-web消息补偿管理后台
-- y3tu-cloud-monitor  Spring boot admin监控以及Skywalking监控
-- y3tu-cloud-log 日志中心模块
-- y3tu-cloud-file 文件上传服务,这个服务可以暂时不起，因为前端还没有对接
-- y3tu-cloud-gen 代码生成模块
-- y3tu-cloud-gateway 后端统一入口，提供动态路由，oauth2的资源服务器
-- y3tu-cloud-ui 基于Vue ElementUI的后台管理界面，可打包进jar包，也可单独部署
+- yao-common 公共模块
+- yao-auth  Oauth2认证服务 提供token
+  - yao-authentication 签权服务
+  - yao-authorization 授权服务
+- yao-upms 基于角色的通用权限管理模块
+- yao-log 日志中心模块
+  - yao-log-sever 日志服务
+  - yao-log-starter 日志starter
+- yao-gateway 后端统一入口，提供动态路由，oauth2的资源服务器
+- yao-ui 基于Vue ElementUI的后台管理界面，可打包进jar包，也可单独部署
 
 ## 默认端口
 ```
-y3tu-cloud-gateway:2019
-y3tu-cloud-upms:9001
-y3tu-cloud-auth-authentication:9002
-y3tu-cloud-auth-authorization:9003
-y3tu-cloud-log:8999
-y3tu-cloud-gen:
-y3tu-cloud-monitor
-y3tu-cloud-transcation
-y3tu-cloud-file 
+yao-gateway:2019
+yao-upms:9001
+yao-authentication:9002
+yao-authorization:9003
+yao-log:8999
 ```
 
 * 启动Nacos`sh startup.sh -m standalone`,然后通过浏览器输入`http://127.0.0.1:8848/nacos/`访问Nacos控制台

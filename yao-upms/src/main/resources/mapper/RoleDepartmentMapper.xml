@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.y3tu.yao.upms.mapper.RoleDepartmentMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.y3tu.yao.upms.model.entity.RoleDepartment" id="roleDepartmentMap">
+            <result property="id" column="id"/>
+            <result property="createBy" column="create_by"/>
+            <result property="createTime" column="create_time"/>
+            <result property="delFlag" column="del_flag"/>
+            <result property="updateBy" column="update_by"/>
+            <result property="updateTime" column="update_time"/>
+            <result property="departmentId" column="department_id"/>
+            <result property="roleId" column="role_id"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id as id,
+        create_by as createBy,
+        create_time as createTime,
+        del_flag as delFlag,
+        update_by as updateBy,
+        update_time as updateTime,
+        department_id as departmentId,
+        role_id as roleId,
+    1=1
+    </sql>
+
+
+    <select id="page" resultType="com.y3tu.yao.upms.model.entity.RoleDepartment">
+        select
+        <include refid="Base_Column_List"/>
+        from t_role_department
+    </select>
+</mapper>

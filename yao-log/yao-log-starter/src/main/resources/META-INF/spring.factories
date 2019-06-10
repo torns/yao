@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.y3tu.yao.log.starter.autoconfigure.LogAutoConfiguration,\
+com.y3tu.yao.log.starter.autoconfigure.RabbitMqConfig
