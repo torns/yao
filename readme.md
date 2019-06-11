@@ -16,7 +16,7 @@
 - yao-auth  Oauth2认证服务 提供token
   - yao-authentication 签权服务
   - yao-authorization 授权服务
-- yao-upms 基于角色的通用权限管理模块
+- yao-back >后台管理模块 包括upms(通用权限管理) oa(流程办公) cms(内容管理) ...
 - yao-log 日志中心模块
   - yao-log-sever 日志服务
   - yao-log-starter 日志starter
@@ -26,7 +26,7 @@
 ## 默认端口
 ```
 yao-gateway:2019
-yao-upms:9001
+yao-back:9001
 yao-authentication:9002
 yao-authorization:9003
 yao-log:8999
@@ -43,4 +43,4 @@ mvn clean package -Dmaven.test.skip=true
 
 * docker启动服务
 ```
-docker run -p 9001:9001 --name upms-server -v /yxy/logs/upms-server/:/logs/upms-server/ -d y3tu/upms-server
+docker run -p 9001:9001 --name back-server -v /yxy/logs/back-server/:/logs/back-server/ -d y3tu/back-server

@@ -1,12 +1,12 @@
 spring:
   application:
-    name: upms-server
+    name: back-server
   cloud:
     nacos:
       config:
         server-addr: 132.232.11.210:8848
         file-extension: yml
-        group: UPMS_GROUP
+        group: BACK_GROUP
   profiles:
     active: dev
   main:
