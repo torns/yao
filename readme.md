@@ -1,5 +1,5 @@
 # Yao 
->基于Spring Cloud Alibaba、Oauth2、Vue的快速开发平台。
+>基于Spring Cloud Alibaba、Oauth2、Vue的快速开发平台，持续开发中...
 
 ## 技术栈
 - 注册中心：Nacos
