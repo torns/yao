@@ -11,7 +11,7 @@
 - 项目部署：Docker
 - 前端框架：Vue ElementUI
 
-# 项目结构说明
+## 项目结构说明
 - yao-common 公共模块
 - yao-auth  Oauth2认证服务 提供token
   - yao-authentication 签权服务
@@ -22,6 +22,16 @@
   - yao-log-starter 日志starter
 - yao-gateway 后端统一入口，提供动态路由，oauth2的资源服务器
 - yao-ui 基于Vue ElementUI的后台管理界面，可打包进jar包，也可单独部署
+
+## 功能模块
+```
+√ 用户管理 
+√ 资源管理(菜单和权限) 
+√ 角色管理 
+√ 部门管理 
+√ 字典管理
+```
+
 
 ## 默认端口
 ```
