@@ -8,8 +8,7 @@ import com.y3tu.tool.web.base.mapper.BaseMapper;
  * 动态路由配置表 Mapper 接口
  * </p>
  *
- * @author liuht
- * @since 2018-05-15
+ * @author y3tu
  */
 public interface ZuulRouteMapper extends BaseMapper<ZuulRoute> {
 

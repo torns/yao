@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -25,12 +24,10 @@ import java.util.Date;
 @Accessors(chain = true)
 public class ZuulRoute extends BaseEntity<ZuulRoute> {
 
-    private static final long serialVersionUID = 1L;
-
     /**
      * router Id
      */
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.INPUT)
     private Integer id;
     /**
      * 路由路径
@@ -78,11 +75,5 @@ public class ZuulRoute extends BaseEntity<ZuulRoute> {
      */
     @TableField("del_flag")
     private String delFlag;
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
 
 }

@@ -21,7 +21,7 @@
 
 3.可以配置默认的日志保存方式
 ```
-y3tu.cloud.log.saveMode = ES 
+yao.log.saveMode = ES 
 
 ES:elasticsearch DB:数据库
 ```

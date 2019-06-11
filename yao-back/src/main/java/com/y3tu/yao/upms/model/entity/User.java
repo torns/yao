@@ -20,7 +20,6 @@ import java.util.Date;
  * </p>
  *
  * @author y3tu
- * @date 2018-08-05
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -28,9 +27,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User extends BaseEntity {
-
-    private static final long serialVersionUID = 1L;
-
     /**
      * 主键
      */
@@ -120,11 +116,5 @@ public class User extends BaseEntity {
      */
     @TableField(exist = false)
     private String departmentName;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
 
 }

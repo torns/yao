@@ -8,8 +8,7 @@ import com.y3tu.tool.web.base.mapper.BaseMapper;
  * Mapper 接口
  * </p>
  *
- * @author liuht
- * @since 2018-05-15
+ * @author y3tu
  */
 public interface OauthClientDetailsMapper extends BaseMapper<OauthClientDetails> {
 

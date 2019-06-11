@@ -6,12 +6,9 @@ import com.y3tu.tool.web.base.mapper.BaseMapper;
 import java.util.List;
 
 /**
- * <p>
-  * 权限表 Mapper 接口
- * </p>
+ * 资源Mapper
  *
  * @author y3tu
- * @date  2018-08-05
  */
 public interface ResourceMapper extends BaseMapper<Resource> {
     /**

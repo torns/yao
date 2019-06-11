@@ -12,7 +12,6 @@ import java.util.List;
  * </p>
  *
  * @author y3tu
- * @date 2018-08-05
  */
 public interface UserMapper extends BaseMapper<User> {
 

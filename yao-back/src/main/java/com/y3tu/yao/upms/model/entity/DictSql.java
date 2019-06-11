@@ -1,5 +1,6 @@
 package com.y3tu.yao.upms.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -7,23 +8,20 @@ import com.y3tu.tool.web.base.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.util.Date;
 
 
 /**
- * SQL配置
+ * 字典SQL配置
  *
  * @author y3tu
- * @date 2018-10-27 17:01:51
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("t_dict_sql")
 public class DictSql extends BaseEntity<DictSql> {
-    private static final long serialVersionUID = 1L;
 
-    @TableId
+    @TableId(value = "id",type = IdType.INPUT)
     private String id;
     /**
      * SQL编码
@@ -89,11 +87,4 @@ public class DictSql extends BaseEntity<DictSql> {
     @TableField("exec_db")
     private String execDb;
 
-    /**
-     * 主键值
-     */
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
 }

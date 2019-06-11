@@ -12,7 +12,6 @@ import java.util.List;
  * </p>
  *
  * @author y3tu
- * @since 2018-08-07
  */
 public interface UserRoleService extends BaseService<UserRole> {
 

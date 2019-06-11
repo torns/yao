@@ -4,10 +4,9 @@ import com.y3tu.yao.upms.model.entity.Dict;
 import com.y3tu.tool.web.base.mapper.BaseMapper;
 
 /**
- * ${comments}
+ * 字典mapper
  *
  * @author y3tu
- * @date 2018-12-14 14:43:24
  */
 public interface DictMapper extends BaseMapper<Dict> {
 

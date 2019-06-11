@@ -17,7 +17,6 @@ import java.util.Date;
  * </p>
  *
  * @author y3tu
- * @date 2018-08-05
  */
 @Data
 @TableName("t_resource")
@@ -100,7 +99,7 @@ public class Resource extends BaseEntity {
     @TableField("button_type")
     private String buttonType;
     /**
-     * 状态
+     * 状态 0:正常 1：禁用
      */
     private Integer status;
     /**

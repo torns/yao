@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author y3tu
- * @date  2018-08-05
  */
 @RestController
 @RequestMapping("/sys/role_resource")

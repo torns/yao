@@ -4,10 +4,8 @@ import com.y3tu.yao.upms.model.entity.DictData;
 import com.y3tu.tool.web.base.service.BaseService;
 
 /**
- *
- *
+ * 字典数据服务
  * @author y3tu
- * @date 2018-12-14 14:50:02
  */
 public interface DictDataService extends BaseService<DictData> {
 }

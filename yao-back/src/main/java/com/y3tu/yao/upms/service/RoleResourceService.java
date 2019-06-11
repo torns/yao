@@ -9,7 +9,6 @@ import com.y3tu.tool.web.base.service.BaseService;
  * </p>
  *
  * @author y3tu
- * @since 2018-08-05
  */
 public interface RoleResourceService extends BaseService<RoleResource> {
 	

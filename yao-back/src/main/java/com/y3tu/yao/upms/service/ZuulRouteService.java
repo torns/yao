@@ -8,8 +8,7 @@ import com.y3tu.tool.web.base.service.BaseService;
  * 动态路由配置表 服务类
  * </p>
  *
- * @author liuht
- * @since 2018-05-15
+ * @author y3tu
  */
 public interface ZuulRouteService extends BaseService<ZuulRoute> {
 

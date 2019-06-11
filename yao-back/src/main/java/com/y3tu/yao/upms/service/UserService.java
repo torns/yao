@@ -13,7 +13,6 @@ import java.util.List;
  * </p>
  *
  * @author y3tu
- * @since 2018-08-05
  */
 public interface UserService extends BaseService<User> {
     /**

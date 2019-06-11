@@ -4,7 +4,7 @@ import com.y3tu.yao.upms.model.entity.DictData;
 import com.y3tu.tool.web.base.mapper.BaseMapper;
 
 /**
- * 字典mapper
+ * 字典数据mapper
  *
  * @author y3tu
  */

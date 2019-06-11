@@ -6,10 +6,8 @@ import com.y3tu.tool.web.base.service.BaseService;
 import java.util.List;
 
 /**
- * ${comments}
- *
+ * 部门服务
  * @author y3tu
- * @date 2018-11-26 19:47:53
  */
 public interface DepartmentService extends BaseService<Department> {
     /**

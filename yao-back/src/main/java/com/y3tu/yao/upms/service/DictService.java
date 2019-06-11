@@ -8,10 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ${comments}
+ * 字典服务
  *
  * @author y3tu
- * @date 2018-12-14 14:43:24
  */
 public interface DictService extends BaseService<Dict> {
     /**

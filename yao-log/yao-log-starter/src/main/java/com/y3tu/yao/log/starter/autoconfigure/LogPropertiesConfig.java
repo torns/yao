@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author y3tu
  */
 @Data
-@ConfigurationProperties(prefix = "y3tu.cloud.log")
+@ConfigurationProperties(prefix = "yao.log")
 @Component
 public class LogPropertiesConfig {
     /**

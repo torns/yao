@@ -12,7 +12,6 @@ import java.util.List;
  * </p>
  *
  * @author y3tu
- * @date 2018-08-07
  */
 public interface UserRoleMapper extends BaseMapper<UserRole> {
     /**

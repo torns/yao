@@ -9,7 +9,6 @@ import com.y3tu.tool.web.base.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -18,15 +17,11 @@ import java.util.Date;
  * </p>
  *
  * @author y3tu
- * @date 2018-08-07
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("t_user_role")
 public class UserRole extends BaseEntity<UserRole> {
-
-    private static final long serialVersionUID = 1L;
-
     /**
      * 主键
      */
@@ -70,8 +65,4 @@ public class UserRole extends BaseEntity<UserRole> {
     @TableField("user_id")
     private String userId;
 
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
 }

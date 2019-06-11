@@ -1,8 +1,8 @@
 package com.y3tu.yao.upms.emums;
 
 /**
+ * 字典类型枚举
  * @author y3tu
- * @date 2018/10/27
  */
 public enum DictType {
     /**
