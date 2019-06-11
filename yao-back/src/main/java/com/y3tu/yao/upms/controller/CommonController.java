@@ -2,7 +2,6 @@ package com.y3tu.yao.upms.controller;
 
 import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.http.IpUtil;
-import org.lionsoul.ip2region.DataBlock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

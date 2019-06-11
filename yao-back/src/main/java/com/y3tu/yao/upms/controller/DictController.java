@@ -39,7 +39,7 @@ public class DictController extends BaseController<DictService, Dict> {
     public R save(@RequestBody Dict dict) {
         List<Dict> list = dictService.list(new QueryWrapper<Dict>().eq("code", dict.getCode()));
         if (list.size() > 0) {
-            return R.warn("字典编码已存在");
+            return R.error("字典编码已存在");
         }
         dictService.save(dict);
         return R.success();
@@ -51,7 +51,7 @@ public class DictController extends BaseController<DictService, Dict> {
         Dict old = dictService.getById(dict.getId());
         // 若type修改判断唯一
         if (!old.getCode().equals(dict.getCode()) && dictService.list(new QueryWrapper<Dict>().eq("code", dict.getCode())).size() > 0) {
-            return R.warn("字典编码已存在");
+            return R.error("字典编码已存在");
         }
         dictService.updateById(dict);
         return R.success();

@@ -7,10 +7,10 @@
         <artifactId>yao</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>yao-upms</artifactId>
+    <artifactId>yao-back</artifactId>
     <version>1.0</version>
-    <name>yao-upms</name>
-    <description>基于角色的通用权限系统</description>
+    <name>yao-back</name>
+    <description>后台管理模块 包括upms(通用权限管理) oa(流程办公) cms(内容管理) ...  </description>
 
     <properties>
         <java.version>1.8</java.version>

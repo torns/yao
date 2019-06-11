@@ -1,4 +1,4 @@
-package com.y3tu.yao.upms;
+package com.y3tu.yao;
 
 import com.y3tu.tool.web.annotation.EnableDefaultExceptionAdvice;
 import com.y3tu.tool.web.annotation.EnableToolWeb;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * 通用用户权限系统
+ * 后台管理
  *
  * @author y3tu
  */
@@ -15,9 +15,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 @EnableDefaultExceptionAdvice
 @EnableToolWeb
-public class UpmsServerApplication {
+public class BackServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UpmsServerApplication.class, args);
+        SpringApplication.run(BackServerApplication.class, args);
     }
 }

@@ -11,11 +11,11 @@
     <description>Yao 快速开发平台</description>
     <modules>
         <module>yao-common</module>
-        <module>yao-upms</module>
+        <module>yao-back</module>
         <module>yao-auth</module>
         <module>yao-gateway</module>
         <module>yao-log</module>
-
+        <module>yao-ui</module>
     </modules>
 
     <parent>

@@ -13,9 +13,9 @@
         <result property="updateTime" column="update_time"/>
         <result property="description" column="description"/>
         <result property="dictId" column="dict_id"/>
-        <result property="sortOrder" column="sort_order"/>
+        <result property="sort" column="sort"/>
         <result property="status" column="status"/>
-        <result property="title" column="title"/>
+        <result property="name" column="name"/>
         <result property="value" column="value"/>
     </resultMap>
 
@@ -46,15 +46,15 @@
         dict_id
         as
         dictId,
-        sort_order
+        sort
         as
-        sortOrder,
+        sort,
         status
         as
         status,
-        title
+        name
         as
-        title,
+        name,
         value
     </sql>
 

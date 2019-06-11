@@ -1,37 +1,53 @@
 import request from '@/utils/request'
 
-export function page(pageInfo) {
+export function saveDict(data) {
     return request({
-        url: 'api/dict',
-        method: 'post',
-    })
-}
-
-export function add(data) {
-    return request({
-        url: 'api/dict',
+        url: '/upms/dict/save',
         method: 'post',
         data
     })
 }
 
-export function del(id) {
+export function editDict(data) {
     return request({
-        url: 'api/dict/' + id,
+        url: '/upms/dict/update',
+        method: 'put',
+        data
+    })
+}
+
+export function delDict(ids) {
+    return request({
+        url: `/upms/dict/delByIds/${ids}`,
+        method: 'delete',
+    })
+}
+
+export function saveDictData(data) {
+    return request({
+        url: '/upms/dictData/save',
+        method: 'post',
+        data
+    })
+}
+
+export function delDictData(id) {
+    return request({
+        url: `/upms/dictData/delById/${id}`,
         method: 'delete'
     })
 }
 
-export function edit(data) {
+export function editDictData(data) {
     return request({
-        url: 'api/dict',
+        url: '/upms/dictData/update',
         method: 'put',
         data
     })
 }
 
 // 通过类型获取字典数据
-export const getDictDataByCode= (code) => {
+export const getDictDataByCode = (code) => {
     return request({
         url: `/upms/dictData/getByCode/${code}`,
         method: 'get',

@@ -49,14 +49,16 @@ service.interceptors.response.use(
             Notification.error({
                 message: errorCode[code] || errorCode['default'],
                 duration: 2500
-            })
+            });
+            throw new Error(response.data.message);
         }
 
         if (response.data.status === 'WARN') {
             Notification.warning({
                 message: response.data.message,
                 duration: 2500
-            })
+            });
+            throw new Error(response.data.message);
         }
         return response.data
     },
@@ -92,7 +94,7 @@ service.interceptors.response.use(
                 config.headers.Authorization = 'Bearer ' + getToken()
                 return service(config)
             }).catch((error) => {
-                if(flag_401) {
+                if (flag_401) {
                     flag_401 = false;
                     //跳转到登录页面
                     MessageBox.confirm(
@@ -108,7 +110,7 @@ service.interceptors.response.use(
                         store.dispatch('FedLogOut').then(() => {
                             location.reload() // 为了重新实例化vue-router对象 避免bug
                         })
-                    },()=>{
+                    }, () => {
                         flag_401 = true;
                     })
                 }
