@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function saveDict(data) {
     return request({
-        url: '/upms/dict/save',
+        url: '/back/dict/save',
         method: 'post',
         data
     })
@@ -10,7 +10,7 @@ export function saveDict(data) {
 
 export function editDict(data) {
     return request({
-        url: '/upms/dict/update',
+        url: '/back/dict/update',
         method: 'put',
         data
     })
@@ -18,14 +18,14 @@ export function editDict(data) {
 
 export function delDict(ids) {
     return request({
-        url: `/upms/dict/delByIds/${ids}`,
+        url: `/back/dict/delByIds/${ids}`,
         method: 'delete',
     })
 }
 
 export function saveDictData(data) {
     return request({
-        url: '/upms/dictData/save',
+        url: '/back/dictData/save',
         method: 'post',
         data
     })
@@ -33,14 +33,14 @@ export function saveDictData(data) {
 
 export function delDictData(id) {
     return request({
-        url: `/upms/dictData/delById/${id}`,
+        url: `/back/dictData/delById/${id}`,
         method: 'delete'
     })
 }
 
 export function editDictData(data) {
     return request({
-        url: '/upms/dictData/update',
+        url: '/back/dictData/update',
         method: 'put',
         data
     })
@@ -49,7 +49,7 @@ export function editDictData(data) {
 // 通过类型获取字典数据
 export const getDictDataByCode = (code) => {
     return request({
-        url: `/upms/dictData/getByCode/${code}`,
+        url: `/back/dictData/getByCode/${code}`,
         method: 'get',
     })
 }

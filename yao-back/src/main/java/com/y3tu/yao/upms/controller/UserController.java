@@ -144,7 +144,7 @@ public class UserController extends BaseController<UserService, User> {
     @Override
     @ApiOperation(value = "多条件分页获取用户列表")
     @MethodMapping(method = RequestMethod.POST)
-    @Log(serviceId = ServerNameConstants.UPMS_SERVER, moduleName = "User", actionName = "多条件分页获取用户列表",saveMode = SaveModeEnum.DB)
+    @Log(serviceId = ServerNameConstants.BACK_SERVER, moduleName = "User", actionName = "多条件分页获取用户列表",saveMode = SaveModeEnum.DB)
     public R page(@RequestBody PageInfo pageInfo) {
 
         PageInfo<User> page = userService.page(pageInfo);

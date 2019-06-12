@@ -1,7 +1,7 @@
 FROM java:8-jre
-MAINTAINER Y3tu-Cloud y3tu <y3tu.vip@qq.com>
+MAINTAINER Yao y3tu <y3tu.vip@qq.com>
 
-ADD ./jar/y3tu-cloud-gateway-*.jar /app/app.jar
+ADD ./jar/yao-gateway*.jar /app/app.jar
 
 EXPOSE 2019
 

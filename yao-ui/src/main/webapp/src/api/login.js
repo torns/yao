@@ -42,7 +42,7 @@ export function refreshToken(refreshToken) {
 
 export function sendMobileCode(mobile) {
     return request({
-        url: '/upms/user/mobile/' + mobile,
+        url: '/back/user/mobile/' + mobile,
         method: 'get'
     })
 }

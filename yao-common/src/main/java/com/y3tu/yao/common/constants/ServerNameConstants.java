@@ -22,9 +22,9 @@ public interface ServerNameConstants {
      */
     String GATEWAY_SERVER = "gateway-server";
     /**
-     * 通用权限服务
+     * 后台服务
      */
-    String UPMS_SERVER = "upms-server";
+    String BACK_SERVER = "back-server";
     /**
      * 日志服务
      */

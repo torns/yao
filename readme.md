@@ -47,12 +47,5 @@ yao-log:8999
 ```
 
 ## 编译部署
-* 启动Nacos`sh startup.sh -m standalone`,然后通过浏览器输入`http://127.0.0.1:8848/nacos/`访问Nacos控制台
-* 跳过单元测试打包
-```
-mvn clean package -Dmaven.test.skip=true
-```
-* docker启动服务
-```
-docker run -p 9001:9001 --name back-server -v /yxy/logs/back-server/:/logs/back-server/ -d y3tu/back-server
-```
+* 启动Nacos`sh startup.sh -m standalone`,然后通过浏览器输入`http://127.0.0.1:8848/nacos/`访问Nacos控制台进行服务配置管理
+* 执行yao-run.sh 编译打包服务并生成docker镜像后运行

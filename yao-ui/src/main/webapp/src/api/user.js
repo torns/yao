@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function page(params) {
     return request({
-        url: '/upms/user/page',
+        url: '/back/user/page',
         method: 'post',
         data: params
     })
@@ -10,21 +10,21 @@ export function page(params) {
 
 export function del(id) {
     return request({
-        url: '/upms/user/delByIds/' + id,
+        url: '/back/user/delByIds/' + id,
         method: 'delete'
     })
 }
 
 export function get(id) {
     return request({
-        url: '/upms/user/get/' + id,
+        url: '/back/user/get/' + id,
         method: 'get'
     })
 }
 
 export function edit(obj) {
     return request({
-        url: '/upms/user/edit',
+        url: '/back/user/edit',
         method: 'put',
         data: obj
     })
@@ -32,7 +32,7 @@ export function edit(obj) {
 
 export function save(obj) {
     return request({
-        url: '/upms/user/save',
+        url: '/back/user/save',
         method: 'post',
         data: obj
     })

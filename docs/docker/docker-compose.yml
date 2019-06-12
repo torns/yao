@@ -1,5 +1,6 @@
 version: '2'
 services:
+  #网关服务
   gateway-server:
     build:
       context: ./
@@ -10,18 +11,55 @@ services:
     volumes:
       - /data/logs/gateway-server/:/logs/gateway-server/
     networks:
-      - y3tu-cloud
-  upms-server:
+      - yao
+  #后台服务
+  back-server:
     build:
       context: ./
-      dockerfile: Dockerfile-upms
+      dockerfile: Dockerfile-back
     restart: always
     ports:
       - 9001:9001
     volumes:
-      - /data/logs/upms-server/:/logs/upms-server/
+      - /data/logs/back-server/:/logs/back-server/
     networks:
-      - y3tu-cloud
+      - yao
+  #日志服务
+  log-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile-log
+    restart: always
+    ports:
+      - 8999:8999
+    volumes:
+      - /data/logs/log-server/:/logs/log-server/
+    networks:
+      - yao
+  #签权服务
+  authentication-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile-authentication
+    restart: always
+    ports:
+      - 9002:9002
+    volumes:
+      - /data/logs/authentication-server/:/logs/authentication-server/
+    networks:
+      - yao
+  #授权服务
+  authorization-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile-authorization
+    restart: always
+    ports:
+      - 9003:9003
+    volumes:
+      - /data/logs/authorization-server/:/logs/authorization-server/
+    networks:
+      - yao
 
 networks:
-  y3tu-cloud:
+  yao:

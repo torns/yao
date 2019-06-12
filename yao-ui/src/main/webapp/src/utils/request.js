@@ -9,6 +9,7 @@ import errorCode from '@/const/errorCode'
 // 创建axios实例
 const service = axios.create({
     baseURL: Config.baseURL,// api的base_url
+    //withCredentials: true, // 跨域请求，允许保存cookie
     timeout: Config.timeout // 请求超时时间
 });
 

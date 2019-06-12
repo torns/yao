@@ -1,16 +1,17 @@
 FROM java:8-jre
 MAINTAINER Yao y3tu <y3tu.vip@qq.com>
 
-ADD ./jar/yao-log-server*.jar /app/app.jar
+ADD ./jar/yao-back*.jar /app/app.jar
 
-EXPOSE 8999
+EXPOSE 9001
 
 ENV JAVA_OPTS="-Xmx256m -Xms256m"
 ENV CONFIG_PROFILE=dev
-ENV LOG_PORT = 8999
+ENV BACK_PORT = 9001
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS \
 -Dfile.encoding=UTF8 -Duser.timezone=GMT+08 \
+-Djava.security.egd=file:/dev/./urandom \
 -jar /app/app.jar \
 --spring.profiles.active=$CONFIG_PROFILE \
---server.port=$LOG_PORT"]
+--server.port=$BACK_PORT"]

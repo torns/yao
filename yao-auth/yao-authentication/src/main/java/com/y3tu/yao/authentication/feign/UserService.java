@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * feign 调用服务
  * </p>
  */
-@FeignClient(name = ServerNameConstants.UPMS_SERVER)
+@FeignClient(name = ServerNameConstants.BACK_SERVER)
 public interface UserService {
 
     /**

@@ -53,7 +53,7 @@ public class ResourceController extends BaseController<ResourceService, Resource
      *
      * @return
      */
-    @Log(serviceId = ServerNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "根据token查询当前用户权限的菜单树")
+    @Log(serviceId = ServerNameConstants.BACK_SERVER, moduleName = MODULE_NAME, actionName = "根据token查询当前用户权限的菜单树")
     @ApiOperation(value = "获取当前用户的菜单树", notes = "根据token查询当前用户权限的菜单树", httpMethod = "GET")
     @GetMapping("/menu/tree/{userId}")
     public R getMenuTree(@PathVariable("userId") String userId) {
@@ -67,7 +67,7 @@ public class ResourceController extends BaseController<ResourceService, Resource
      *
      * @return
      */
-    @Log(serviceId = ServerNameConstants.UPMS_SERVER, moduleName = MODULE_NAME, actionName = "获取所有的菜单树")
+    @Log(serviceId = ServerNameConstants.BACK_SERVER, moduleName = MODULE_NAME, actionName = "获取所有的菜单树")
     @ApiOperation(value = "获取当前用户的菜单树", notes = "获取所有的菜单树", httpMethod = "GET")
     @GetMapping("/menu/getAllMenuTree")
     public R getAllMenuTree() {

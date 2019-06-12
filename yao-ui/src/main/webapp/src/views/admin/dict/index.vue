@@ -171,7 +171,7 @@
                 this.page();
             },
             pageInit() {
-                this.pageUrl = '/upms/dict/page'
+                this.pageUrl = '/back/dict/page'
                 return true;
             },
             subDelete(id) {

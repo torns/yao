@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export const page = (params) => {
     return request({
-        url: '/upms/role/page',
+        url: '/back/role/page',
         method: 'post',
         data: params
     })
@@ -13,14 +13,14 @@ export const page = (params) => {
  */
 export const getAll=()=>{
     return request({
-        url: '/upms/role/getAll',
+        url: '/back/role/getAll',
         method: 'get',
     })
 }
 
 export const saveRole = (role) => {
     return request({
-        url: '/upms/role/save',
+        url: '/back/role/save',
         method: 'post',
         data: role
     })
@@ -29,21 +29,21 @@ export const saveRole = (role) => {
 export const updateRole = (role) => {
     const {id, name, roleCode, description} = role
     return request({
-        url: '/upms/role/update',
+        url: '/back/role/update',
         method: 'put',
         data: {id, name, roleCode, description}
     })
 }
 export const delRoleByIds = (id) => {
     return request({
-        url: `/upms/role/delByIds/${id}`,
+        url: `/back/role/delByIds/${id}`,
         method: 'delete'
     })
 }
 
 export const editRoleDepartment = (roleId, dataType, departmentIds) => {
     return request({
-        url: `/upms/role/editRoleDepartment/`,
+        url: `/back/role/editRoleDepartment/`,
         method: 'post',
         data: {
             roleId: roleId,
@@ -59,7 +59,7 @@ export const editRoleResource = (roleId, resourceIds) => {
         resourceIds: resourceIds
     };
     return request({
-        url: `/upms/role/editRoleResource`,
+        url: `/back/role/editRoleResource`,
         method: 'post',
         data: params
     })

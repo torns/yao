@@ -48,7 +48,7 @@ public class AuthenticationController {
                 UserVO userVO = userService.loadUserByUsername(String.valueOf(authentication.getPrincipal()));
                 return R.success(userVO);
             } catch (Exception e) {
-                return R.error("服务[" + ServerNameConstants.UPMS_SERVER + "]调用异常！", ErrorEnum.SERVICE_CALL_ERROR);
+                return R.error("服务[" + ServerNameConstants.BACK_SERVER + "]调用异常！", ErrorEnum.SERVICE_CALL_ERROR);
             }
         }
         return R.error(AuthExceptionEnum.ACCESS_DENIED);

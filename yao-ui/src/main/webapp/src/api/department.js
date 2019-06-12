@@ -2,14 +2,14 @@ import request from '@/utils/request'
 
 export function getDepartmentTree() {
     return request({
-        url: '/upms/department/tree',
+        url: '/back/department/tree',
         method: 'get'
     })
 }
 
 export function save(data) {
     return request({
-        url: '/upms/department/save',
+        url: '/back/department/save',
         method: 'post',
         data
     })
@@ -17,7 +17,7 @@ export function save(data) {
 
 export function update(data) {
     return request({
-        url: '/upms/department/update',
+        url: '/back/department/update',
         method: 'post',
         data
     })
@@ -25,7 +25,7 @@ export function update(data) {
 
 export function del(ids) {
     return request({
-        url: `/upms/department/delByIds/${ids}`,
+        url: `/back/department/delByIds/${ids}`,
         method: 'delete',
     })
 }

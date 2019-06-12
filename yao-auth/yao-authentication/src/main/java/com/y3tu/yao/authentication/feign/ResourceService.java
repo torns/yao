@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * @author y3tu
  */
-@FeignClient(name = ServerNameConstants.UPMS_SERVER)
+@FeignClient(name = ServerNameConstants.BACK_SERVER)
 public interface ResourceService {
     /**
      * 通过角色名查询菜单

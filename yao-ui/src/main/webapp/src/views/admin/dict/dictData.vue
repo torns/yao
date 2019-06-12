@@ -117,7 +117,7 @@
             },
             pageInit() {
                 if (this.isNotEmpty(this.dictId)) {
-                    this.pageUrl = '/upms/dictData/page'
+                    this.pageUrl = '/back/dictData/page'
                     this.pageInfo.params.dictId = this.dictId;
                     return true;
                 }

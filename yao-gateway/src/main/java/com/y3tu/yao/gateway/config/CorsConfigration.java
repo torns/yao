@@ -10,8 +10,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
 /**
  * 跨域配置
  *
- * @author liuht
- * @date 2018/8/9 15:59
+ * @author y3tu
  */
 @Configuration
 public class CorsConfigration {

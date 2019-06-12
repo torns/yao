@@ -6,21 +6,21 @@ import request from '@/utils/request'
  */
 export function getMenu(userId) {
     return request({
-        url: '/upms/resource/menu/tree/' + userId,
+        url: '/back/resource/menu/tree/' + userId,
         method: 'get',
     })
 }
 
 export function getMenuTree() {
     return request({
-        url: '/upms/resource/menu/getAllMenuTree',
+        url: '/back/resource/menu/getAllMenuTree',
         method: 'get'
     })
 }
 
 export function saveReource(resource) {
     return request({
-        url: '/upms/resource/save',
+        url: '/back/resource/save',
         method: 'post',
         data: resource
     })
@@ -28,7 +28,7 @@ export function saveReource(resource) {
 
 export const updateReource = (resource) => {
     return request({
-        url: '/upms/resource/update',
+        url: '/back/resource/update',
         method: 'post',
         data: resource
     })
@@ -37,7 +37,7 @@ export const updateReource = (resource) => {
 
 export const deleteResourceById = (ids) => {
     return request({
-        url: `upms/resource/delByIds/${ids}`,
+        url: `back/resource/delByIds/${ids}`,
         method: 'delete'
     })
 }

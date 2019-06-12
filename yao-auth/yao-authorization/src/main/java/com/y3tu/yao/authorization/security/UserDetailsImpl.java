@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @description: security 用户对象
+ * security 用户对象
  */
 @Data
 public class UserDetailsImpl implements UserDetails {
