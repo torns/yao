@@ -19,7 +19,7 @@
 - yao-auth  Oauth2认证服务 提供token
   >yao-authentication 签权服务   
   >yao-authorization 授权服务
-- yao-back >后台管理模块 
+- yao-back 后台管理模块 
   >包括upms(通用权限管理) oa(流程办公) cms(内容管理) ...
 - yao-log 日志中心模块
   >yao-log-sever 日志服务   
@@ -48,4 +48,4 @@ yao-log:8999
 
 ## 编译部署
 * 启动Nacos`sh startup.sh -m standalone`,然后通过浏览器输入`http://127.0.0.1:8848/nacos/`访问Nacos控制台进行服务配置管理
-* 执行yao-run.sh 编译打包服务并生成docker镜像后运行
+* 执行`yao-run.sh` 编译打包服务并生成docker镜像后运行
