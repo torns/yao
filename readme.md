@@ -24,7 +24,7 @@
 - yao-log 日志中心模块
   >yao-log-sever 日志服务   
   >yao-log-starter 日志starter
-- yao-gateway 后端统一入口，提供动态路由，oauth2的资源服务器
+- yao-gateway 后端统一入口，提供动态路由
 - yao-ui 基于Vue ElementUI的后台管理界面，可打包进jar包，也可单独部署
 
 ## 功能模块
