@@ -17,14 +17,5 @@ codemirror : 代码编辑器
 screenfull : 全屏工具
 ```
 
-#### Build Setup
-``` bash
-# 安装依赖
-npm install
-
-# 启动服务 localhost:8080
-npm run dev
-
-# 构建生产环境
-npm run build
-```
+### 运行
+执行`run.sh`进行编译打包并生产docker镜像

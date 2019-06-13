@@ -82,7 +82,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     break;
                 }
 
-                // TODO 角色与菜单权限的关联关系需要缓存提高访问效率
+                // 角色与菜单权限的关联关系需要缓存提高访问效率
                 Set<ResourceVO> resourceVOS = resourceService.listResourceByRole(authority.getAuthority());
                 if (IterUtil.isNotEmpty((resourceVOS))) {
                     CollectionUtil.addAll(urls, resourceVOS, null);

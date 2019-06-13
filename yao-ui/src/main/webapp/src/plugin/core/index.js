@@ -7,11 +7,13 @@ import 'normalize.css/normalize.css'// A modern alternative to CSS resets
 //引入i18n
 import locale from 'element-ui/lib/locale/lang/zh-CN'
 
-// 组件
+//组件
 import '@/components'
 
-// 功能插件
+//功能插件
 import pluginError from '@/plugin/error'
+//权限判断
+import permission from '@/plugin/permission'
 
 import {setStore, getStore, removeStore} from '@/utils/store'
 import {copyObj} from '@/utils/util'
@@ -25,7 +27,8 @@ export default {
         Vue.use(ElementUI, {locale});
 
         // 插件
-        Vue.use(pluginError)
+        Vue.use(pluginError);
+        Vue.use(permission);
 
         // 设置为 false 以阻止 vue 在启动时生成生产提示。
         // https://cn.vuejs.org/v2/api/#productionTip

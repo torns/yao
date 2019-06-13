@@ -19,6 +19,6 @@ public interface ResourceService {
      * @param roleCode 角色编码
      * @return 菜单列表
      */
-    @GetMapping("/role/{roleCode}")
+    @GetMapping("/role/listResourceByRole/{roleCode}")
     Set<ResourceVO> listResourceByRole(@PathVariable("roleCode") String roleCode);
 }

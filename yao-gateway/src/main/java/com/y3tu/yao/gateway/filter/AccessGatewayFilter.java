@@ -22,7 +22,6 @@ import reactor.core.publisher.Mono;
  * 网关权限过滤器
  *
  * @author y3tu
- * @date 2019-05-08
  */
 @Component
 @Slf4j
@@ -64,15 +63,13 @@ public class AccessGatewayFilter implements GlobalFilter {
                 throw new UnAuthorizedException("未授权或token过期，请重新登录！", e);
             }
             String serverName = ServerNameConstants.AUTHENTICATION_SERVER;
-            String str = StrUtil.format("服务:{}调用{}异常,参数：authentication:{},url{},method{}", serverName, "hasPermission", authentication, url, method);
+            String str = StrUtil.format("{}服务调用{}异常,参数：authentication:{},url{},method{}", serverName, "hasPermission", authentication, url, method);
             throw new ServerCallException(str, e);
         }
         if (hasPermission) {
             ServerHttpRequest.Builder builder = request.mutate();
-            //TODO 转发的请求都加上服务间认证token
-            //builder.header(X_CLIENT_TOKEN, "TODO zhoutaoo添加服务间简单认证");
-            //将jwt token中的用户信息传给服务
-            //builder.header(X_CLIENT_TOKEN_USER, authService.getJwt(authentication).getClaims());
+            //如果每个微服务需要做验证，则转发的请求都加上服务间认证token
+            //如果只在网关做验证则不需要
             return chain.filter(exchange.mutate().request(builder.build()).build());
         } else {
             throw new NoPermissionException(AuthExceptionEnum.UNAUTHORIZED);

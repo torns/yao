@@ -113,6 +113,7 @@
                             :props="defaultProps"
                             accordion
                             show-checkbox
+                            :check-strictly="true"
                             node-key="id"/>
                 </el-card>
                 <el-card v-show="opt === '数据权限'" class="box-card" shadow="never">
@@ -136,6 +137,7 @@
                             :default-checked-keys="departmentIds"
                             :props="defaultProps"
                             show-checkbox
+                            :check-strictly="true"
                             accordion
                             node-key="id"/>
                 </el-card>
@@ -243,19 +245,10 @@
                     // 初始化
                     _this.resourceIds = []
                     _this.departmentIds = []
-                    // 菜单权限需要特殊处理
+                    // 菜单权限
                     if (val.resources !== null && val.resources.length > 0) {
                         val.resources.forEach(function (data, index) {
-                            let add = true
-                            for (let i = 0; i < val.resources.length; i++) {
-                                if (data.id === val.resources[i].parentId) {
-                                    add = false
-                                    break
-                                }
-                            }
-                            if (add) {
-                                _this.resourceIds.push(data.id)
-                            }
+                            _this.resourceIds.push(data.id)
                         })
                     }
                     // 数据权限数据

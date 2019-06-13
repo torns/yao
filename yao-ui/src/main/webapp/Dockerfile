@@ -1,5 +1,5 @@
 FROM nginx:latest
 
-MAINTAINER liuht
+MAINTAINER y3tu
 
 COPY dist/ /usr/share/nginx/html

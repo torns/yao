@@ -15,7 +15,6 @@
         <module>yao-auth</module>
         <module>yao-gateway</module>
         <module>yao-log</module>
-        <module>yao-ui</module>
     </modules>
 
     <parent>
