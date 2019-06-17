@@ -14,11 +14,19 @@ import java.util.Set;
 @FeignClient(name = ServerNameConstants.BACK_SERVER)
 public interface ResourceService {
     /**
-     * 通过角色名查询菜单
+     * 通过角色名查询资源信息
      *
      * @param roleCode 角色编码
      * @return 菜单列表
      */
-    @GetMapping("/role/listResourceByRole/{roleCode}")
+    @GetMapping("/resource/role/{roleCode}")
     Set<ResourceVO> listResourceByRole(@PathVariable("roleCode") String roleCode);
+
+    /**
+     * 获取全部资源信息
+     *
+     * @return
+     */
+    @GetMapping("/resource/listAllResource")
+    Set<ResourceVO> listAllResource();
 }

@@ -27,10 +27,7 @@ router.beforeEach((to, from, next) => {
                     store.dispatch('GetMenu', res.id);
                     next()
                 }).catch((err) => {
-                    console.log(err);
-                    store.dispatch('FedLogOut').then(() => {
-                        location.reload() // 为了重新实例化vue-router对象 避免bug
-                    })
+                    console.log(err)
                 })
             } else {
                 next()

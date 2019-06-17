@@ -52,6 +52,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
      */
     private MacSigner verifier;
 
+    /**
+     * @param authRequest
+     * @return true：有权限 false：无权限
+     */
     @Override
     public boolean decide(HttpServletRequest authRequest) {
         log.debug("正在访问的url是:{}，method:{}", authRequest.getServletPath(), authRequest.getMethod());
@@ -71,24 +75,37 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (principal != null) {
             if (CollectionUtil.isEmpty(grantedAuthorityList)) {
                 log.warn("角色列表为空：{}", authentication.getPrincipal());
-                return hasPermission;
+                return false;
             }
 
             Set<ResourceVO> urls = new HashSet<>();
             for (SimpleGrantedAuthority authority : grantedAuthorityList) {
                 //如果是管理员角色ROLE_ADMIN 则具有此系统的所有权限 直接放行
-                if(StrUtil.equals(authority.getAuthority(),"ROLE_ADMIN")){
+                if (StrUtil.equals(authority.getAuthority(), "ROLE_ADMIN")) {
                     hasPermission = true;
                     break;
                 }
 
-                // 角色与菜单权限的关联关系需要缓存提高访问效率
+                // 角色与菜单权限的关联关系需要缓存提高访问效率,可以考虑把资源数据放在redis中
                 Set<ResourceVO> resourceVOS = resourceService.listResourceByRole(authority.getAuthority());
                 if (IterUtil.isNotEmpty((resourceVOS))) {
                     CollectionUtil.addAll(urls, resourceVOS, null);
                 }
             }
 
+            //如果请求的url不在资源列表之中，那么直接放行
+            Set<ResourceVO> allResourceVOS = resourceService.listAllResource();
+            boolean isNeedPermission = false;
+            for (ResourceVO resourceVO : allResourceVOS) {
+                if (StrUtil.isNotEmpty(resourceVO.getUrl()) && antPathMatcher.match(resourceVO.getUrl(), authRequest.getRequestURI())) {
+                    isNeedPermission = true;
+                }
+            }
+            if(!isNeedPermission){
+                return true;
+            }
+
+            ///如果请求的url在资源列表之中,那么判断用户所属角色是否拥有访问此资源的权限
             for (ResourceVO resourceVO : urls) {
                 if (StrUtil.isNotEmpty(resourceVO.getUrl()) && antPathMatcher.match(resourceVO.getUrl(), authRequest.getRequestURI())
                         && authRequest.getMethod().equalsIgnoreCase(resourceVO.getMethod())) {

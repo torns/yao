@@ -147,7 +147,7 @@ public class ResourceController extends BaseController<ResourceService, Resource
 
     /**
      * 内部服务调用 可以不返回R
-     * 根据角色查询资源信息
+     * 根据角色查询资源信息 可添加缓存设置
      *
      * @param roleCode
      */
@@ -157,12 +157,35 @@ public class ResourceController extends BaseController<ResourceService, Resource
     public Set<ResourceVO> listResourceByRole(@PathVariable("roleCode") String roleCode) {
 
         List<Resource> resources = resourceService.findResourceByRoleCode(roleCode);
+        return buildResourceVO(resources);
+    }
+
+    /**
+     * 内部服务调用 可以不返回R
+     * 查询所有资源信息 可添加缓存设置
+     *
+     * @return
+     */
+    @GetMapping("/listAllResource")
+    public Set<ResourceVO> listAllResource() {
+        List<Resource> resources = resourceService.list(new QueryWrapper<Resource>().eq("del_flag", DataStatusEnum.NORMAL.getCode()));
+        return buildResourceVO(resources);
+    }
+
+    /**
+     * List<Resource>转换为Set<ResourceVO>
+     *
+     * @param resources
+     * @return
+     */
+    private Set<ResourceVO> buildResourceVO(List<Resource> resources) {
         Set<ResourceVO> resourceVOS = new HashSet<>();
-        resources.stream().forEach(sysResource -> {
+        resources.stream().forEach(resource -> {
             ResourceVO resourceVO = new ResourceVO();
-            BeanUtils.copyProperties(resources, resourceVO);
+            BeanUtils.copyProperties(resource, resourceVO);
             resourceVOS.add(resourceVO);
         });
         return resourceVOS;
     }
+
 }

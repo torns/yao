@@ -2,7 +2,6 @@ package com.y3tu.yao.upms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.y3tu.yao.common.enums.DataStatusEnum;
-import com.y3tu.yao.common.vo.ResourceVO;
 import com.y3tu.yao.upms.model.entity.*;
 import com.y3tu.yao.upms.service.*;
 import com.y3tu.tool.core.date.DateUtil;
@@ -10,7 +9,6 @@ import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.web.base.controller.BaseController;
 import com.y3tu.tool.web.base.pojo.PageInfo;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -170,29 +168,6 @@ public class RoleController extends BaseController<RoleService, Role> {
             roleDepartmentService.remove(new QueryWrapper<RoleDepartment>().eq("role_id", id));
         }
         return super.delByIds(ids);
-    }
-
-    /**
-     * 通过角色名查询菜单 内部调用
-     * todo 此处需要做缓存
-     *
-     * @param roleCode 角色编码
-     * @return 菜单列表
-     */
-    @GetMapping("/listResourceByRole/{roleCode}")
-    Set<ResourceVO> listResourceByRole(@PathVariable("roleCode") String roleCode) {
-
-        List<String> roleCodeList = new ArrayList<>();
-        roleCodeList.add(roleCode);
-        //获取资源权限
-        Set<Resource> resources = resourceService.getResourceRoleCodes(roleCodeList);
-        Set<ResourceVO> resourceVOS = resources.stream().map(resource -> {
-                    ResourceVO resourceVO = new ResourceVO();
-                    BeanUtils.copyProperties(resource, resourceVO);
-                    return resourceVO;
-                }
-        ).collect(Collectors.toSet());
-        return resourceVOS;
     }
 
 }
