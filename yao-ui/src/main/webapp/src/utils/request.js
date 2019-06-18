@@ -13,7 +13,7 @@ const service = axios.create({
     timeout: Config.timeout // 请求超时时间
 });
 
-let flag_401 = true;
+let reLogin = true;
 
 // request拦截器
 service.interceptors.request.use(config => {
@@ -68,35 +68,35 @@ service.interceptors.response.use(
             Notification.error({
                 title: '网络请求超时',
                 duration: 2500
-            })
+            });
             return Promise.reject(error)
         }
         if (error.toString().indexOf('Error: Network Error') !== -1) {
             Notification.error({
                 title: '网络请求错误',
                 duration: 2500
-            })
+            });
             return Promise.reject(error)
         }
         if (error.toString().indexOf('503') !== -1) {
             Notification.error({
                 title: '服务暂时不可用，请稍后再试!',
                 duration: 2500
-            })
+            });
             return Promise.reject(error)
         }
 
-        let code = error.response.data.code;
-        if (code === "401" && !error.response.config.refresh_token) {
+        let message = error.response.data.message;
+        if (message.indexOf("未授权或token过期") !== -1 && !error.response.config.refresh_token) {
             let config = error.response.config;
             config['refresh_token'] = true;
             //如果是token过期，首先用refreshToken去刷新token
             let response = store.dispatch('RefreshToken').then(() => {
-                config.headers.Authorization = 'Bearer ' + getToken()
+                config.headers.Authorization = 'Bearer ' + getToken();
                 return service(config)
             }).catch((error) => {
-                if (flag_401) {
-                    flag_401 = false;
+                if (reLogin) {
+                    reLogin = false;
                     //跳转到登录页面
                     MessageBox.confirm(
                         '登录状态已过期，您可以继续留在该页面，或者重新登录',
@@ -107,24 +107,18 @@ service.interceptors.response.use(
                             type: 'warning'
                         }
                     ).then(() => {
-                        flag_401 = true;
+                        reLogin = true;
                         store.dispatch('FedLogOut').then(() => {
                             location.reload() // 为了重新实例化vue-router对象 避免bug
                         })
                     }, () => {
-                        flag_401 = true;
-                    })
+                        reLogin = true;
+                    });
                 }
             });
 
-            return response;
-
-        } else if (code === "403") {
-            Notification.error({
-                message: errorCode[code] || errorCode['default'],
-                duration: 2500
-            })
         } else {
+            let code = error.response.data.code;
             if (code !== undefined) {
                 if (Config.mode === 'DEV') {
                     errorCode[code] = error.response.data.message;

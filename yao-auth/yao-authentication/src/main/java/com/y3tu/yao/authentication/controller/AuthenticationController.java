@@ -3,7 +3,6 @@ package com.y3tu.yao.authentication.controller;
 import com.y3tu.yao.authentication.feign.UserService;
 import com.y3tu.yao.authentication.service.AuthenticationService;
 import com.y3tu.yao.common.constants.ServerNameConstants;
-import com.y3tu.yao.common.exception.AuthExceptionEnum;
 import com.y3tu.yao.common.vo.UserVO;
 import com.y3tu.tool.core.exception.ErrorEnum;
 import com.y3tu.tool.core.pojo.R;
@@ -51,7 +50,7 @@ public class AuthenticationController {
                 return R.error("服务[" + ServerNameConstants.BACK_SERVER + "]调用异常！", ErrorEnum.SERVICE_CALL_ERROR);
             }
         }
-        return R.error(AuthExceptionEnum.ACCESS_DENIED);
+        return R.error();
     }
 
 

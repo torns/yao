@@ -6,7 +6,7 @@ ADD ./jar/yao-gateway*.jar /app/app.jar
 EXPOSE 2019
 
 ENV JAVA_OPTS="-Xmx256m -Xms256m"
-ENV CONFIG_PROFILE=dev
+ENV CONFIG_PROFILE=prod
 ENV GATEWAY_PORT = 2019
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS \

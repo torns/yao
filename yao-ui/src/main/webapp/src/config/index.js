@@ -6,8 +6,8 @@ export default {
     /**
      * 统一请求后端路径
      */
-    baseURL: "http://132.232.11.210:2019",
-    //baseURL:"http://127.0.0.1:2019",
+    //baseURL: "http://132.232.11.210:2019",
+    baseURL:"http://127.0.0.1:2019",
     /**
      * 模式 DEV:开发 PROD:生产
      */

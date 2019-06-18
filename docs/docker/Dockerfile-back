@@ -6,7 +6,7 @@ ADD ./jar/yao-back*.jar /app/app.jar
 EXPOSE 9001
 
 ENV JAVA_OPTS="-Xmx256m -Xms256m"
-ENV CONFIG_PROFILE=dev
+ENV CONFIG_PROFILE=prod
 ENV BACK_PORT = 9001
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS \

@@ -6,7 +6,7 @@ ADD ./jar/yao-authorization*.jar /app/app.jar
 EXPOSE 9003
 
 ENV JAVA_OPTS="-Xmx256m -Xms256m"
-ENV CONFIG_PROFILE=dev
+ENV CONFIG_PROFILE=prod
 ENV AUTHORIZATION_PORT = 9003
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS \

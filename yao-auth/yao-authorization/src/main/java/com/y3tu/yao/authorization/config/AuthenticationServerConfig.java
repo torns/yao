@@ -71,7 +71,7 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
     /**
      * 刷新令牌失效时间
      */
-    private int refreshTokenValiditySeconds = (int) TimeUnit.HOURS.toSeconds(24);
+    private int refreshTokenValiditySeconds = (int) TimeUnit.HOURS.toSeconds(10);
 
     /**
      * 是否可以重用刷新令牌
@@ -201,10 +201,13 @@ public class AuthenticationServerConfig extends AuthorizationServerConfigurerAda
         return (accessToken, authentication) -> {
             final Map<String, Object> additionalInfo = new HashMap<>(2);
             additionalInfo.put("license", SecurityConstants.LICENSE);
-            UserDetailsImpl user = (UserDetailsImpl) authentication.getUserAuthentication().getPrincipal();
-            if (user != null) {
+            Object principal = authentication.getUserAuthentication().getPrincipal();
+            if (principal instanceof UserDetailsImpl) {
+                UserDetailsImpl user = (UserDetailsImpl) principal;
                 additionalInfo.put(UserConstants.USER_ID, user.getUserId());
                 additionalInfo.put(UserConstants.USER_NAME, user.getUsername());
+            } else if (principal instanceof String) {
+                additionalInfo.put(UserConstants.USER_NAME, principal);
             }
 
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);

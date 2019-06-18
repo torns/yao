@@ -2,7 +2,6 @@ package com.y3tu.yao.gateway.filter;
 
 import com.y3tu.yao.common.config.FilterIgnorePropertiesConfig;
 import com.y3tu.yao.common.constants.ServerNameConstants;
-import com.y3tu.yao.common.exception.AuthExceptionEnum;
 import com.y3tu.yao.gateway.exception.NoPermissionException;
 import com.y3tu.yao.gateway.exception.UnAuthorizedException;
 import com.y3tu.yao.gateway.feign.AuthenticationService;
@@ -72,7 +71,7 @@ public class AccessGatewayFilter implements GlobalFilter {
             //如果只在网关做验证则不需要
             return chain.filter(exchange.mutate().request(builder.build()).build());
         } else {
-            throw new NoPermissionException(AuthExceptionEnum.UNAUTHORIZED);
+            throw new NoPermissionException();
         }
     }
 

@@ -78,7 +78,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 return false;
             }
 
-            Set<ResourceVO> urls = new HashSet<>();
+            Set<ResourceVO> paths = new HashSet<>();
             for (SimpleGrantedAuthority authority : grantedAuthorityList) {
                 //如果是管理员角色ROLE_ADMIN 则具有此系统的所有权限 直接放行
                 if (StrUtil.equals(authority.getAuthority(), "ROLE_ADMIN")) {
@@ -89,7 +89,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 // 角色与菜单权限的关联关系需要缓存提高访问效率,可以考虑把资源数据放在redis中
                 Set<ResourceVO> resourceVOS = resourceService.listResourceByRole(authority.getAuthority());
                 if (IterUtil.isNotEmpty((resourceVOS))) {
-                    CollectionUtil.addAll(urls, resourceVOS, null);
+                    CollectionUtil.addAll(paths, resourceVOS, null);
                 }
             }
 
@@ -97,7 +97,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             Set<ResourceVO> allResourceVOS = resourceService.listAllResource();
             boolean isNeedPermission = false;
             for (ResourceVO resourceVO : allResourceVOS) {
-                if (StrUtil.isNotEmpty(resourceVO.getUrl()) && antPathMatcher.match(resourceVO.getUrl(), authRequest.getRequestURI())) {
+                if (StrUtil.isNotEmpty(resourceVO.getPath()) && antPathMatcher.match(resourceVO.getPath(), authRequest.getServletPath())) {
                     isNeedPermission = true;
                 }
             }
@@ -106,8 +106,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             }
 
             ///如果请求的url在资源列表之中,那么判断用户所属角色是否拥有访问此资源的权限
-            for (ResourceVO resourceVO : urls) {
-                if (StrUtil.isNotEmpty(resourceVO.getUrl()) && antPathMatcher.match(resourceVO.getUrl(), authRequest.getRequestURI())
+            for (ResourceVO resourceVO : paths) {
+                if (StrUtil.isNotEmpty(resourceVO.getPath()) && antPathMatcher.match(resourceVO.getPath(), authRequest.getServletPath())
                         && authRequest.getMethod().equalsIgnoreCase(resourceVO.getMethod())) {
                     hasPermission = true;
                     break;

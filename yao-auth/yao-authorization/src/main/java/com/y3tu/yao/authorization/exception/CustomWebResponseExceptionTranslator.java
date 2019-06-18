@@ -1,6 +1,5 @@
 package com.y3tu.yao.authorization.exception;
 
-import com.y3tu.yao.common.exception.AuthExceptionEnum;
 import com.y3tu.tool.core.exception.ErrorEnum;
 import com.y3tu.tool.core.pojo.R;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ public class CustomWebResponseExceptionTranslator implements WebResponseExceptio
             OAuth2Exception oAuth2Exception = (OAuth2Exception) e;
             AuthExceptionEnum exceptionEnum = AuthExceptionEnum.valueOf(oAuth2Exception.getOAuth2ErrorCode().toUpperCase());
             return ResponseEntity
-                    .status(500)
+                    .status(Integer.valueOf(exceptionEnum.getCode()))
                     .body(R.error(exceptionEnum));
         } else {
             return ResponseEntity
