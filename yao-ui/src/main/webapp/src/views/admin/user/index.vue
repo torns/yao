@@ -65,6 +65,7 @@
                                 size="mini"
                                 type="success"
                                 icon="el-icon-search"
+                                v-permission="['user:page']"
                                 @click="doQuery">
                             查询
                         </el-button>

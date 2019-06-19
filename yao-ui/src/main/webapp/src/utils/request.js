@@ -34,7 +34,7 @@ service.interceptors.request.use(config => {
 }, error => {
     console.log(error);
     Promise.reject(error)
-})
+});
 
 // respone拦截器
 service.interceptors.response.use(
@@ -87,7 +87,10 @@ service.interceptors.response.use(
         }
 
         let message = error.response.data.message;
-        if (message.indexOf("未授权或token过期") !== -1 && !error.response.config.refresh_token) {
+        if (message!=null
+            && message!=undefined
+            && message.toString().indexOf("未授权或token过期") !== -1
+            && !error.response.config.refresh_token) {
             let config = error.response.config;
             config['refresh_token'] = true;
             //如果是token过期，首先用refreshToken去刷新token
@@ -116,6 +119,8 @@ service.interceptors.response.use(
                     });
                 }
             });
+
+            return response;
 
         } else {
             let code = error.response.data.code;

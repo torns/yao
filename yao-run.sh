@@ -33,7 +33,11 @@ cp ./yao-back/target/yao-back*.jar ${JAR_DIR}
 cp ./yao-gateway/target/yao-gateway*.jar ${JAR_DIR}
 cp ./yao-log/yao-log-server/target/yao-log-server*.jar ${JAR_DIR}
 
-echo -- -- run docker-compose build -- --
+echo -- -- run docker-compose build 创建镜像-- --
 docker-compose  -f ${COMPOSE_FILE} build
+
+# echo -- -- run docker-compose up 创建镜像生成容器并启动-- --
+# docker-compose -f ${COMPOSE_FILE} up -d --build
+
 
 docker images|grep none|awk '{print $3 }'|xargs docker rmi

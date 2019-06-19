@@ -71,7 +71,7 @@ public class AccessGatewayFilter implements GlobalFilter {
             //如果只在网关做验证则不需要
             return chain.filter(exchange.mutate().request(builder.build()).build());
         } else {
-            throw new NoPermissionException();
+            throw new NoPermissionException("当前操作没有权限");
         }
     }
 
