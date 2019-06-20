@@ -8,7 +8,7 @@ CREATE TABLE `datasource`
   `jdbc_url`      varchar(500)          DEFAULT NULL COMMENT '数据源连接字符串(JDBC)',
   `user`          varchar(50)           DEFAULT NULL COMMENT '数据源登录用户名',
   `password`      varchar(100)          DEFAULT NULL COMMENT '数据源登录密码',
-  `queryer_class` varchar(100)          DEFAULT NULL COMMENT '获取报表引擎查询器类名',
+  `query_class` varchar(100)          DEFAULT NULL COMMENT '获取报表引擎查询器类名',
   `pool_class`    varchar(100)          DEFAULT NULL COMMENT '报表引擎查询器使用的数据源连接池类名',
   `comment`       varchar(100)          DEFAULT NULL COMMENT '说明备注',
   `options`       varchar(1000)         DEFAULT NULL COMMENT '数据源配置选项(JSON格式）',
