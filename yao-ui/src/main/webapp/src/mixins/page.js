@@ -31,7 +31,7 @@ export default {
             }
             return new Promise((resolve, reject) => {
 
-                _this.pageLoading = true
+                _this.pageLoading = true;
 
                 //剔除无效参数
                 Object.keys(_this.pageInfo.params).forEach(function (key) {
@@ -60,12 +60,12 @@ export default {
             return true
         },
         pageChange(e) {
-            this.pageInfo.current = e
+            this.pageInfo.current = e;
             this.page()
         },
         sizeChange(e) {
-            this.pageInfo.current = 0
-            this.pageInfo.size = e
+            this.pageInfo.current = 0;
+            this.pageInfo.size = e;
             this.page()
         }
     }

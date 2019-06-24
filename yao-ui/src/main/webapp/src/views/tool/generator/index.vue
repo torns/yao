@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="head-container">
-            <el-input clearable="true" placeholder="请输入表名" style="width:200px" class="filter-item"
+            <el-input clearable placeholder="请输入表名" style="width:200px" class="filter-item"
                       @keyup.enter.native="toQuery"></el-input>
             <el-button class="filter-item" size="mini" type="success" icon="el-icon-search" @click="toQuery">搜索
             </el-button>
@@ -33,7 +33,7 @@
         </el-table>
         <!--分页组件-->
         <el-pagination
-                :total="total"
+                :total="pageInfo.total"
                 style="margin-top: 8px;"
                 layout="total, prev, pager, next, sizes"
                 @size-change="sizeChange"
@@ -55,9 +55,24 @@
             return {}
 
         },
+        created() {
+            this.$nextTick(() => {
+                this.init();
+            })
+        },
         methods: {
-            toQuery: {},
-            toConfig: {}
+            init(){
+                this.page();
+            },
+            pageInit(){
+                this.pageUrl = '';
+            },
+            toQuery() {
+
+            },
+            toConfig() {
+
+            }
         }
     }
 
