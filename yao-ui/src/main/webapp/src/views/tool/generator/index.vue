@@ -9,7 +9,7 @@
             </el-button>
         </div>
 
-        <el-table v-loading="pageLoading" :data="pageInfo.records" size="small" style="width: 100%;">
+        <el-table v-loading="pageLoading" :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" size="small" style="width: 100%;">
             <el-table-column label="序号" width="80" align="center">
                 <template slot-scope="scope">
                     <div>{{ scope.$index + 1 }}</div>
@@ -33,9 +33,11 @@
         </el-table>
         <!--分页组件-->
         <el-pagination
-                :total="pageInfo.total"
+                :total="tableData.length"
                 style="margin-top: 8px;"
                 layout="total, prev, pager, next, sizes"
+                current-page="currentPage"
+                page-size="pageSize"
                 @size-change="sizeChange"
                 @current-change="pageChange">
         </el-pagination>
@@ -44,15 +46,19 @@
 </template>
 
 <script>
-    import page from '@/mixins/page'
     import Generator from "./generator";
 
     export default {
         components: {Generator},
-        mixins: [page],
         comments: {Generator},
         data() {
-            return {}
+            return {
+                tableData:[],
+                pageLoading:false,
+                currentPage: 1, // 当前页码
+                total: 20, // 总条数
+                pageSize: 1 // 每页的数据条数
+            }
 
         },
         created() {
@@ -62,16 +68,23 @@
         },
         methods: {
             init(){
-                this.page();
+
             },
-            pageInit(){
-                this.pageUrl = '';
-            },
+
             toQuery() {
 
             },
             toConfig() {
 
+            },
+            sizeChange(){
+                console.log(`每页 ${val} 条`);
+                this.currentPage = 1;
+                this.pageSize = val;
+            },
+            pageChange(){
+                console.log(`当前页: ${val}`);
+                this.currentPage = val;
             }
         }
     }
