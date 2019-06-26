@@ -54,6 +54,8 @@
 
 <script>
 
+    import {getTable} from '@/api/generator'
+
     export default {
         name: 'generator',
         props: {
@@ -80,6 +82,10 @@
             },
             initData() {
                 //初始化数据
+                getTable(this.name).then(res=>{
+                    debugger;
+                    this.data = res.data
+                })
             },
             cancel() {
                 this.dialog = false

@@ -3,12 +3,14 @@ package com.y3tu.yao.generator.controller;
 import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.core.util.StrUtil;
 import com.y3tu.tool.db.meta.MetaUtil;
+import com.y3tu.tool.db.meta.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 代码生成器Controller
@@ -23,13 +25,13 @@ public class GeneratorController {
     @Autowired
     DataSource dataSource;
     /**
-     * 查询数据库表的分页数据
+     * 查询数据库所有表的信息
      *
      * @return 表的分页数据
      */
-    @PostMapping("/pageTable")
-    public R pageTable(@RequestBody String dataSourceId) {
-        List<String> tableList = new ArrayList<>();
+    @PostMapping("/getTables")
+    public R getTables(@RequestBody(required = false) String dataSourceId) {
+        List<Map> tableList = new ArrayList<>();
         if(StrUtil.isEmpty(dataSourceId)){
             //如果没有选定数据源 默认查下自身服务所连接的数据源
             tableList = MetaUtil.getTables(dataSource);
@@ -46,10 +48,10 @@ public class GeneratorController {
      * @param tableName
      * @return
      */
-    @GetMapping("/tableColumn/{tableName}")
+    @GetMapping("/getTable/{tableName}")
     public R tableColumn(@PathVariable("tableName") String tableName) {
-        return R.success();
+        Table table = MetaUtil.getTableMeta(dataSource,tableName);
+        return R.success(table);
     }
-
 
 }

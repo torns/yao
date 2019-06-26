@@ -1,9 +1,16 @@
 import request from '@/utils/request'
 
-export function updateGenConfig(data) {
+export function getTables(data) {
     return request({
-        url: 'api/genConfig',
+        url: 'back/generator/getTables',
         data,
-        method: 'put'
+        method: 'post'
+    })
+}
+
+export function getTable(tableName) {
+    return request({
+        url: `back/generator/getTable/${tableName}`,
+        method: 'get'
     })
 }

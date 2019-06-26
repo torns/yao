@@ -9,24 +9,19 @@
             </el-button>
         </div>
 
-        <el-table v-loading="pageLoading" :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" size="small" style="width: 100%;">
+        <el-table v-loading="pageLoading" :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+                  size="small" style="width: 100%;">
             <el-table-column label="序号" width="80" align="center">
                 <template slot-scope="scope">
                     <div>{{ scope.$index + 1 }}</div>
                 </template>
             </el-table-column>
 
-            <el-table-column :show-overflow-tooltip="true" prop="tableName" label="表名"></el-table-column>
-
-            <el-table-column prop="createTime" label="创建日期">
-                <template slot-scope="scope">
-                    <span>{{ parseTime(scope.row.createTime) }}</span>
-                </template>
-            </el-table-column>
+            <el-table-column :show-overflow-tooltip="true" prop="name" label="表名"></el-table-column>
 
             <el-table-column label="操作" width="160px" align="center">
                 <template slot-scope="scope">
-                    <Generator :name="scope.row.tableName"/>
+                    <Generator :name="scope.row.name"/>
                 </template>
             </el-table-column>
 
@@ -36,8 +31,8 @@
                 :total="tableData.length"
                 style="margin-top: 8px;"
                 layout="total, prev, pager, next, sizes"
-                current-page="currentPage"
-                page-size="pageSize"
+                :current-page="currentPage"
+                :page-size="pageSize"
                 @size-change="sizeChange"
                 @current-change="pageChange">
         </el-pagination>
@@ -46,6 +41,7 @@
 </template>
 
 <script>
+    import {getTables} from '@/api/generator'
     import Generator from "./generator";
 
     export default {
@@ -53,11 +49,11 @@
         comments: {Generator},
         data() {
             return {
-                tableData:[],
-                pageLoading:false,
+                tableData: [],
+                pageLoading: false,
                 currentPage: 1, // 当前页码
                 total: 20, // 总条数
-                pageSize: 1 // 每页的数据条数
+                pageSize: 10 // 每页的数据条数
             }
 
         },
@@ -67,23 +63,23 @@
             })
         },
         methods: {
-            init(){
-
+            init() {
+                this.toQuery();
             },
 
             toQuery() {
-
+                getTables().then(res => {
+                    this.tableData = res.data;
+                })
             },
             toConfig() {
 
             },
-            sizeChange(){
-                console.log(`每页 ${val} 条`);
+            sizeChange(val) {
                 this.currentPage = 1;
                 this.pageSize = val;
             },
-            pageChange(){
-                console.log(`当前页: ${val}`);
+            pageChange(val) {
                 this.currentPage = val;
             }
         }
