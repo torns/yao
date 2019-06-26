@@ -2,17 +2,17 @@
     <div>
         <el-button type="primary" size="mini" @click="to">生成代码</el-button>
         <el-dialog :visible.sync="dialog" title="代码生成配置" append-to-body width="800px">
-            <el-table v-loading="loading" data="data" size="small" style="width: 100%;">
+            <el-table v-loading="loading" :data="data" size="small" style="width: 100%;">
                 <el-table-column label="序号" width="80" align="center">
                     <template slot-scope="scope">
                         <div>{{ scope.$index + 1 }}</div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="columnName" label="字段名称"></el-table-column>
-                <el-table-column prop="columnType" label="字段类型"></el-table-column>
-                <el-table-column prop="columnComment" label="字段标题">
+                <el-table-column prop="name" label="字段名称"></el-table-column>
+                <el-table-column prop="typeName" label="字段类型"></el-table-column>
+                <el-table-column prop="comment" label="字段标题">
                     <template slot-scope="scope">
-                        <el-input v-model="data[scope.$index].columnComment" class="edit-input"></el-input>
+                        <el-input v-model="data[scope.$index].comment" class="edit-input"></el-input>
                     </template>
                 </el-table-column>
                 <el-table-column label="查询方式">
@@ -54,7 +54,7 @@
 
 <script>
 
-    import {getTable} from '@/api/generator'
+    import {getTable,build} from '@/api/generator'
 
     export default {
         name: 'generator',
@@ -81,10 +81,14 @@
                 })
             },
             initData() {
+                const _this = this;
                 //初始化数据
+                _this.data=[];
                 getTable(this.name).then(res=>{
-                    debugger;
-                    this.data = res.data
+                    let columns = res.data;
+                    for(let key in columns){
+                       _this.data.push(columns[key])
+                    }
                 })
             },
             cancel() {
@@ -92,7 +96,7 @@
             },
             doSubmit() {
                 this.genLoading = true;
-                generator(this.data, this.name).then(res => {
+                build(this.data, this.name).then(res => {
                     this.$notify({
                         title: '生成成功',
                         type: 'success',

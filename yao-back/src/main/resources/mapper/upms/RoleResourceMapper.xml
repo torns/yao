@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.y3tu.yao.upms.mapper.RoleResourceMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_by AS createBy, create_time AS createTime, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime, resource_id AS resourceId, role_id AS roleId
+    </sql>
+
+    <select id="page" resultType="com.y3tu.yao.upms.model.entity.RoleResource">
+        select
+        <include refid="Base_Column_List"/>
+        from t_role_permission
+    </select>
+</mapper>

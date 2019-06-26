@@ -37,16 +37,17 @@
                 @current-change="pageChange">
         </el-pagination>
 
+        <Form ref="form"></Form>
     </div>
 </template>
 
 <script>
-    import {getTables} from '@/api/generator'
+    import {getTables,getGeneratorConfig} from '@/api/generator'
     import Generator from "./generator";
+    import Form from './form'
 
     export default {
-        components: {Generator},
-        comments: {Generator},
+        components: {Generator,Form},
         data() {
             return {
                 tableData: [],
@@ -73,7 +74,12 @@
                 })
             },
             toConfig() {
-
+                const _this = this.$refs.form;
+                getGeneratorConfig().then(res => {
+                    _this.form = res.data;
+                    _this.form.cover = _this.form.cover.toString()
+                });
+                _this.dialog = true
             },
             sizeChange(val) {
                 this.currentPage = 1;

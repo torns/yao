@@ -29,7 +29,7 @@
 </template>
 
 <script>
-    import {updateGenConfig} from '@/api/generator'
+    import {updateGeneratorConfig} from '@/api/generator'
 
     export default {
         data() {
@@ -74,7 +74,7 @@
                 })
             },
             doUpdate() {
-                updateGenConfig(this.form).then(res => {
+                updateGeneratorConfig(this.form).then(res => {
                     this.resetForm();
                     this.$notify({
                         title: '更新成功',

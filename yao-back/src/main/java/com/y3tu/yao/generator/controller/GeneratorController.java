@@ -1,9 +1,13 @@
 package com.y3tu.yao.generator.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.core.util.StrUtil;
 import com.y3tu.tool.db.meta.MetaUtil;
 import com.y3tu.tool.db.meta.Table;
+import com.y3tu.yao.generator.model.entity.GeneratorConfig;
+import com.y3tu.yao.generator.model.vo.ColumnInfo;
+import com.y3tu.yao.generator.service.GeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +28,9 @@ public class GeneratorController {
 
     @Autowired
     DataSource dataSource;
+
+    @Autowired
+    GeneratorService generatorService;
     /**
      * 查询数据库所有表的信息
      *
@@ -54,4 +61,34 @@ public class GeneratorController {
         return R.success(table);
     }
 
+    /**
+     * 获取代码生成配置信息
+     * @return
+     */
+    @GetMapping("/getGeneratorConfig")
+    public R getGeneratorConfig(){
+       GeneratorConfig generatorConfig =  generatorService.getOne(new QueryWrapper<>());
+        return R.success(generatorConfig);
+    }
+
+    /**
+     * 更新代码生成配置
+     * @param generatorConfig
+     * @return
+     */
+    @PostMapping("updateGeneratorConfig")
+    public R updateGeneratorConfig(@RequestBody GeneratorConfig generatorConfig){
+        generatorService.updateById(generatorConfig);
+        return R.success();
+    }
+
+    /**
+     * 生成代码
+     * @param columnInfos
+     * @return
+     */
+    @PostMapping(value = "/build")
+    public R build(@RequestBody List<ColumnInfo> columnInfos, @RequestParam String tableName){
+        return R.success();
+    }
 }
