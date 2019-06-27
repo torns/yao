@@ -89,6 +89,8 @@ public class GeneratorController {
      */
     @PostMapping(value = "/build")
     public R build(@RequestBody List<ColumnInfo> columnInfos, @RequestParam String tableName){
+
+
         return R.success();
     }
 }
