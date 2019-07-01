@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 @TableName("generator_config")
 @Accessors(chain = true)
 public class GeneratorConfig extends BaseEntity<GeneratorConfig> {
+
     @TableId(value = "id", type = IdType.AUTO)
     private String id;
 

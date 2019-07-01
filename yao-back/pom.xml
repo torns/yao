@@ -11,7 +11,7 @@
     <version>1.0</version>
     <name>yao-back</name>
     <packaging>pom</packaging>
-    <description>后台管理模块 包括upms(通用权限管理) oa(流程办公) cms(内容管理) ...  </description>
+    <description>后台管理模块 包括upms(通用权限管理),代码生成  </description>
 
     <modules>
         <module>yao-upms</module>
@@ -68,7 +68,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <dependency>

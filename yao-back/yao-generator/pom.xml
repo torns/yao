@@ -13,7 +13,15 @@
     <description>代码生成</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <velocity-engine-version>2.0</velocity-engine-version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>${velocity-engine-version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
