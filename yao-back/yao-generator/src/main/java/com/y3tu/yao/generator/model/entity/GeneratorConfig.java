@@ -8,6 +8,9 @@ import com.y3tu.tool.web.base.entity.BaseEntity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+/**
+ * @author y3tu
+ */
 @Data
 @TableName("generator_config")
 @Accessors(chain = true)
@@ -30,13 +33,17 @@ public class GeneratorConfig extends BaseEntity<GeneratorConfig> {
     @TableField("module_name")
     private String moduleName;
     /**
-     * 至于哪个包下
+     * 包路径
      */
     private String pack;
     /**
-     * 前端代码生成路径
+     * 前端文件路径
      */
     private String path;
+    @TableField("api_path")
     private String apiPath;
+    /**
+     * 表前缀
+     */
     private String prefix;
 }

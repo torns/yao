@@ -1,0 +1,62 @@
+import request from '@/router/axios'
+
+/**
+ * 获取全部数据
+ */
+export function getAll() {
+    return request({
+        url: '/${moduleName}/${pathName}/getAll',
+        method: 'get',
+    })
+}
+
+/**
+ * 分页查询
+ * @param params
+ */
+export function page(params) {
+    return request({
+        url: '/${moduleName}/${pathName}/page',
+        method: 'post',
+        data: params
+    })
+}
+
+export function get(id) {
+    return request({
+        url: '/${moduleName}/${pathName}/get/' + id,
+        method: 'get'
+    })
+}
+
+export function save(obj) {
+    return request({
+        url: '/${moduleName}/${pathName}/save',
+        method: 'post',
+        data: obj
+    })
+}
+
+export function update(obj) {
+    return request({
+        url: '/${moduleName}/${pathName}/update',
+        method: 'put',
+        data: obj
+    })
+}
+
+export function delById(id) {
+    return request({
+        url: '/${moduleName}/${pathName}/delById' + id,
+        method: 'delete'
+    })
+}
+
+export function delByIds(ids) {
+    return request({
+        url: '/${moduleName}/${pathName}/delByIds',
+        method: 'delete',
+        data: ids
+    })
+}
+

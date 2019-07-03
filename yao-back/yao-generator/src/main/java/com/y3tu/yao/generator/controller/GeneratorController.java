@@ -1,20 +1,29 @@
 package com.y3tu.yao.generator.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.y3tu.tool.core.io.IoUtil;
 import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.core.util.StrUtil;
 import com.y3tu.tool.db.meta.MetaUtil;
 import com.y3tu.tool.db.meta.Table;
 import com.y3tu.yao.generator.model.entity.GeneratorConfig;
 import com.y3tu.yao.generator.model.vo.ColumnInfo;
+import com.y3tu.yao.generator.model.vo.TableInfo;
 import com.y3tu.yao.generator.service.GeneratorService;
+import com.y3tu.yao.generator.util.GeneratorUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+import java.io.ByteArrayOutputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.zip.ZipOutputStream;
 
 /**
  * 代码生成器Controller
@@ -24,6 +33,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("generator")
+@Slf4j
 public class GeneratorController {
 
     @Autowired
@@ -31,6 +41,7 @@ public class GeneratorController {
 
     @Autowired
     GeneratorService generatorService;
+
     /**
      * 查询数据库所有表的信息
      *
@@ -39,10 +50,10 @@ public class GeneratorController {
     @PostMapping("/getTables")
     public R getTables(@RequestBody(required = false) String dataSourceId) {
         List<Map> tableList = new ArrayList<>();
-        if(StrUtil.isEmpty(dataSourceId)){
+        if (StrUtil.isEmpty(dataSourceId)) {
             //如果没有选定数据源 默认查下自身服务所连接的数据源
             tableList = MetaUtil.getTables(dataSource);
-        }else {
+        } else {
             //如果有选定数据源，则查下选定数据源下的所有表数据
             //todo
         }
@@ -57,40 +68,80 @@ public class GeneratorController {
      */
     @GetMapping("/getTable/{tableName}")
     public R tableColumn(@PathVariable("tableName") String tableName) {
-        Table table = MetaUtil.getTableMeta(dataSource,tableName);
+        Table table = MetaUtil.getTableMeta(dataSource, tableName);
         return R.success(table);
     }
 
     /**
      * 获取代码生成配置信息
+     *
      * @return
      */
     @GetMapping("/getGeneratorConfig")
-    public R getGeneratorConfig(){
-       GeneratorConfig generatorConfig =  generatorService.getOne(new QueryWrapper<>());
+    public R getGeneratorConfig() {
+        GeneratorConfig generatorConfig = generatorService.getOne(new QueryWrapper<>());
         return R.success(generatorConfig);
     }
 
     /**
      * 更新代码生成配置
+     *
      * @param generatorConfig
      * @return
      */
     @PostMapping("updateGeneratorConfig")
-    public R updateGeneratorConfig(@RequestBody GeneratorConfig generatorConfig){
+    public R updateGeneratorConfig(@RequestBody GeneratorConfig generatorConfig) {
         generatorService.updateById(generatorConfig);
         return R.success();
     }
 
     /**
      * 生成代码
+     *
      * @param columnInfos
      * @return
      */
     @PostMapping(value = "/build")
-    public R build(@RequestBody List<ColumnInfo> columnInfos, @RequestParam String tableName){
+    public R build(@RequestBody List<ColumnInfo> columnInfos, @RequestParam String tableName, HttpServletResponse response) {
 
+        Table table = MetaUtil.getTableMeta(dataSource, tableName);
+        TableInfo tableInfo = new TableInfo();
+        tableInfo.setTableName(tableName);
 
+        Set<String> pkNames = table.getPkNames();
+        for (ColumnInfo columnInfo : columnInfos) {
+            for (String pkName : pkNames) {
+                if (columnInfo.getName().equals(pkName)) {
+                    tableInfo.setPk(columnInfo);
+                }
+            }
+        }
+
+        tableInfo.setComments(table.get("remarks").toString());
+        tableInfo.setColumns(columnInfos);
+
+        //文件生成和下载设置
+        try {
+
+            // 配置文件下载
+            response.setHeader("content-type", "application/octet-stream");
+            response.setContentType("application/octet-stream");
+            // 下载文件能正常显示中文
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("code.zip", "UTF-8"));
+
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ZipOutputStream zip = new ZipOutputStream(outputStream);
+            GeneratorUtil.generatorCode(tableInfo, generatorService.getOne(new QueryWrapper<>()), zip);
+            IoUtil.close(zip);
+            byte[] data = outputStream.toByteArray();
+            IoUtil.write(response.getOutputStream(), Boolean.TRUE, data);
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return R.error("代码生成失败");
+        }
         return R.success();
     }
+
+
 }
