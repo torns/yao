@@ -6,6 +6,7 @@ import com.y3tu.tool.core.pojo.R;
 import com.y3tu.tool.core.util.StrUtil;
 import com.y3tu.tool.db.meta.MetaUtil;
 import com.y3tu.tool.db.meta.Table;
+import com.y3tu.yao.generator.exception.GeneratorException;
 import com.y3tu.yao.generator.model.entity.GeneratorConfig;
 import com.y3tu.yao.generator.model.vo.ColumnInfo;
 import com.y3tu.yao.generator.model.vo.TableInfo;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.ByteArrayOutputStream;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -102,7 +102,7 @@ public class GeneratorController {
      * @return
      */
     @PostMapping(value = "/build")
-    public R build(@RequestBody List<ColumnInfo> columnInfos, @RequestParam String tableName, HttpServletResponse response) {
+    public void build(@RequestBody List<ColumnInfo> columnInfos, @RequestParam String tableName, HttpServletResponse response) {
 
         Table table = MetaUtil.getTableMeta(dataSource, tableName);
         TableInfo tableInfo = new TableInfo();
@@ -117,30 +117,31 @@ public class GeneratorController {
             }
         }
 
-        tableInfo.setComments(table.get("remarks").toString());
+        tableInfo.setComments(table.getRemarks());
         tableInfo.setColumns(columnInfos);
+
+        GeneratorConfig generatorConfig = generatorService.getOne(new QueryWrapper<>());
 
         //文件生成和下载设置
         try {
-
-            // 配置文件下载
-            response.setHeader("content-type", "application/octet-stream");
-            response.setContentType("application/octet-stream");
-            // 下载文件能正常显示中文
-            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("code.zip", "UTF-8"));
-
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ZipOutputStream zip = new ZipOutputStream(outputStream);
-            GeneratorUtil.generatorCode(tableInfo, generatorService.getOne(new QueryWrapper<>()), zip);
+            GeneratorUtil.generatorCode(tableInfo, generatorConfig, zip);
             IoUtil.close(zip);
             byte[] data = outputStream.toByteArray();
+
+            response.reset();
+            response.setHeader("Content-Disposition", String.format("attachment; filename=%s.zip", tableName));
+            response.addHeader("Content-Length", "" + data.length);
+            response.setContentType("application/octet-stream; charset=UTF-8");
+
             IoUtil.write(response.getOutputStream(), Boolean.TRUE, data);
 
         } catch (Exception e) {
             log.error(e.getMessage());
-            return R.error("代码生成失败");
+            throw new GeneratorException("代码生成失败!");
         }
-        return R.success();
+
     }
 
 

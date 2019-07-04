@@ -37,12 +37,6 @@ public class GeneratorConfig extends BaseEntity<GeneratorConfig> {
      */
     private String pack;
     /**
-     * 前端文件路径
-     */
-    private String path;
-    @TableField("api_path")
-    private String apiPath;
-    /**
      * 表前缀
      */
     private String prefix;

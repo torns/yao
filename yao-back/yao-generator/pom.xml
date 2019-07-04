@@ -13,15 +13,14 @@
     <description>代码生成</description>
 
     <properties>
-        <velocity-engine-version>2.0</velocity-engine-version>
+        <velocity.version>1.7</velocity.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity-engine-core</artifactId>
-            <version>${velocity-engine-version}</version>
-            <scope>provided</scope>
+            <artifactId>velocity</artifactId>
+            <version>${velocity.version}</version>
         </dependency>
     </dependencies>
 </project>

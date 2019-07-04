@@ -54,7 +54,7 @@
 
 <script>
 
-    import {getTable,build} from '@/api/generator'
+    import {getTable, build} from '@/api/generator'
 
     export default {
         name: 'generator',
@@ -83,11 +83,11 @@
             initData() {
                 const _this = this;
                 //初始化数据
-                _this.data=[];
-                getTable(this.name).then(res=>{
+                _this.data = [];
+                getTable(this.name).then(res => {
                     let columns = res.data;
-                    for(let key in columns){
-                       _this.data.push(columns[key])
+                    for (let key in columns) {
+                        _this.data.push(columns[key])
                     }
                 })
             },

@@ -1,6 +1,5 @@
 package com.y3tu.yao.generator.util;
 
-import com.y3tu.tool.core.exception.ToolException;
 import com.y3tu.tool.core.io.IoUtil;
 import com.y3tu.tool.core.util.CharsetUtil;
 import com.y3tu.tool.core.util.ObjectUtil;
@@ -10,9 +9,11 @@ import com.y3tu.tool.extra.template.Template;
 import com.y3tu.tool.extra.template.TemplateConfig;
 import com.y3tu.tool.extra.template.TemplateEngine;
 import com.y3tu.tool.extra.template.TemplateUtil;
+import com.y3tu.yao.generator.exception.GeneratorException;
 import com.y3tu.yao.generator.model.entity.GeneratorConfig;
 import com.y3tu.yao.generator.model.vo.ColumnInfo;
 import com.y3tu.yao.generator.model.vo.TableInfo;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.StringWriter;
@@ -27,6 +28,7 @@ import java.util.zip.ZipOutputStream;
  * @author y3tu
  * @date 2019-06-27
  */
+@Slf4j
 public class GeneratorUtil {
 
     private static final String ENTITY_JAVA_VM = "Entity.java.vm";
@@ -64,9 +66,9 @@ public class GeneratorUtil {
      */
     public static List<String> getFrontTemplateNames() {
         List<String> templateNames = new ArrayList<>();
-        templateNames.add("api");
-        templateNames.add("index");
-        templateNames.add("form");
+        templateNames.add("api.js");
+        templateNames.add("index.vue");
+        templateNames.add("form.vue");
         return templateNames;
     }
 
@@ -123,12 +125,12 @@ public class GeneratorUtil {
             String caseColumnName = StrUtil.toCamelCase(column.getName());
             String capitalColumnName = StrUtil.toCapitalizeCamelCase(column.getName());
 
-            listMap.put("columnType",attrType);
-            listMap.put("columnName",column.getName());
-            listMap.put("isNullable",column.isNullable());
-            listMap.put("columnShow",column.isColumnShow());
-            listMap.put("caseColumnName",caseColumnName);
-            listMap.put("capitalColumnName",capitalColumnName);
+            listMap.put("columnType", attrType);
+            listMap.put("columnName", column.getName());
+            listMap.put("isNullable", column.isNullable());
+            listMap.put("columnShow", column.isColumnShow());
+            listMap.put("caseColumnName", caseColumnName);
+            listMap.put("capitalColumnName", capitalColumnName);
 
             // 判断是否有查询，如有则把查询的字段set进columnQuery
             if (ObjectUtil.isNotNull(column.getColumnQuery())) {
@@ -147,13 +149,13 @@ public class GeneratorUtil {
 
 
         //创建模板引擎
-        TemplateEngine engine = TemplateUtil.createEngine(new TemplateConfig("generator", TemplateConfig.ResourceMode.CLASSPATH));
+        TemplateEngine engine = TemplateUtil.createEngine(new TemplateConfig(null, TemplateConfig.ResourceMode.CLASSPATH));
 
         //生成后端代码
         List<String> templates = getBackTemplateNames();
         for (String templateName : templates) {
             StringWriter sw = new StringWriter();
-            Template template = engine.getTemplate("/back/" + templateName + ".vm");
+            Template template = engine.getTemplate("generator/back/" + templateName + ".vm");
             template.render(map, sw);
             buildZip(getBackFilePath(templateName, genConfig, className), className, sw, zip);
         }
@@ -162,7 +164,7 @@ public class GeneratorUtil {
         templates = getFrontTemplateNames();
         for (String templateName : templates) {
             StringWriter sw = new StringWriter();
-            Template template = engine.getTemplate("/front/" + templateName + ".vm");
+            Template template = engine.getTemplate("generator/front/" + templateName + ".vm");
             template.render(map, sw);
             buildZip(getFrontFilePath(templateName, genConfig, className), className, sw, zip);
         }
@@ -176,7 +178,8 @@ public class GeneratorUtil {
             IoUtil.close(sw);
             zip.closeEntry();
         } catch (Exception e) {
-            throw new ToolException("渲染模板失败，表名：" + className, e);
+            log.error(e.getMessage(), e);
+            throw new GeneratorException("渲染模板失败，表名：" + className, e);
         }
     }
 
@@ -188,34 +191,34 @@ public class GeneratorUtil {
 
         String packagePath = "back" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator;
         if (StrUtil.isNotBlank(genConfig.getPack())) {
-            packagePath += genConfig.getPath().replace(".", File.separator) + File.separator + genConfig.getModuleName() + File.separator;
+            packagePath += genConfig.getPack().replace(".", File.separator) + File.separator + genConfig.getModuleName() + File.separator;
         }
 
-        if (templateName.contains(ENTITY_JAVA_VM)) {
-            return packagePath + "model.entity" + File.separator + className + ".java";
+        if (ENTITY_JAVA_VM.contains(templateName)) {
+            return packagePath + "model" + File.separator + "entity" + File.separator + className + ".java";
         }
 
-        if (templateName.contains(DTO_JAVA_VM)) {
-            return packagePath + "model.dto" + File.separator + className + ".java";
+        if (DTO_JAVA_VM.contains(templateName)) {
+            return packagePath + "model" + File.separator + "dto" + File.separator + className + ".java";
         }
 
-        if (templateName.contains(MAPPER_JAVA_VM)) {
+        if (MAPPER_JAVA_VM.contains(templateName)) {
             return packagePath + "mapper" + File.separator + className + "Mapper.java";
         }
 
-        if (templateName.contains(SERVICE_JAVA_VM)) {
+        if (SERVICE_JAVA_VM.contains(templateName)) {
             return packagePath + "service" + File.separator + className + "Service.java";
         }
 
-        if (templateName.contains(SERVICE_IMPL_JAVA_VM)) {
+        if (SERVICE_IMPL_JAVA_VM.contains(templateName)) {
             return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
         }
 
-        if (templateName.contains(CONTROLLER_JAVA_VM)) {
+        if (CONTROLLER_JAVA_VM.contains(templateName)) {
             return packagePath + "controller" + File.separator + className + "Controller.java";
         }
 
-        if (templateName.contains(MAPPER_XML_VM)) {
+        if (MAPPER_XML_VM.contains(templateName)) {
             return "back" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + genConfig.getModuleName() + File.separator + className + "Mapper.xml";
         }
 
@@ -227,15 +230,15 @@ public class GeneratorUtil {
      */
     public static String getFrontFilePath(String templateName, GeneratorConfig genConfig, String className) {
 
-        if (templateName.contains(INDEX_VUE_VM)) {
+        if (INDEX_VUE_VM.contains(templateName)) {
             return "front" + File.separator + "src" + File.separator + "views" +
                     File.separator + genConfig.getModuleName() + File.separator + className.toLowerCase() + File.separator + "index.vue";
         }
-        if (templateName.contains(FORM_VUE_VM)) {
+        if (FORM_VUE_VM.contains(templateName)) {
             return "front" + File.separator + "src" + File.separator + "views" +
                     File.separator + genConfig.getModuleName() + File.separator + className.toLowerCase() + File.separator + "form.vue";
         }
-        if (templateName.contains(API_JS_VM)) {
+        if (API_JS_VM.contains(templateName)) {
             return "front" + File.separator + "src" + File.separator + "api" + File.separator + className.toLowerCase() + ".js";
         }
         return null;

@@ -53,6 +53,22 @@ export function build(data, tableName) {
     return request({
         url: 'back/generator/build?tableName=' + tableName,
         data,
-        method: 'post'
+        method: 'post',
+        responseType: 'blob'
+    }).then((response) => {
+        // 处理返回的文件流
+        let blob = new Blob([response], { type: 'application/zip' })
+        let filename = tableName + '.zip'
+        if(window.navigator.msSaveOrOpenBlob){// 兼容IE10
+            navigator.msSaveBlob(blob, filename);
+        }else{// 其他非IE内核支持H5的浏览器
+            let url = window.URL.createObjectURL(blob);
+            let link = document.createElement('a');
+            link.style.display = 'none';
+            link.href = url;
+            link.setAttribute('download', filename);
+            document.body.appendChild(link);
+            link.click()
+        }
     })
 }
