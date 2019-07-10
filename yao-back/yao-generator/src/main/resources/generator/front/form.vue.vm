@@ -1,0 +1,97 @@
+<template>
+    <el-dialog :append-to-body="true" :visible.sync="dialog" :title="isAdd ? '新增' : '编辑'" width="500px">
+        <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
+            #foreach($column in $columns)
+                #if($column.caseColumnName!='${pk.caseColumnName}')
+                    <el-form-item label="#if($column.comment!=
+                        '')$column.comment#else$column.caseColumnName#end" prop="$column.caseColumnName">
+                        <el-input v-model="form.${column.caseColumnName}" style="width: 370px;"/>
+                    </el-form-item>#end#end
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button type="text" @click="cancel">取消</el-button>
+            <el-button :loading="loading" type="primary" @click="doSubmit">确认</el-button>
+        </div>
+    </el-dialog>
+</template>
+
+<script>
+    import {save, update} from '@/api/${caseClassName}'
+
+    export default {
+        props: {
+            isAdd: {
+                type: Boolean,
+                required: true
+            }
+        },
+        data() {
+            return {
+                loading: false, dialog: false,
+                form: {
+            #foreach($column in $columns)
+                ${column.caseColumnName}: ''#if($foreach.hasNext),#end
+            #end
+        },
+            rules: {
+                #foreach($column in $columns)${column.caseColumnName}: [{
+                    required: true,
+                    message: 'please enter',
+                    trigger: 'blur'
+                }]#if($foreach.hasNext),#end
+                #end
+            }
+        }
+        },
+        methods: {
+            cancel() {
+                this.resetForm()
+            },
+            doSubmit() {
+                this.loading = true
+                if (this.isAdd) {
+                    this.doAdd()
+                } else this.doEdit()
+            },
+            doAdd() {
+                save(this.form).then(res => {
+                    this.resetForm()
+                    this.$notify({
+                        title: '添加成功',
+                        type: 'success',
+                        duration: 2500
+                    })
+                    this.loading = false
+                    this.$parent.init()
+                }).catch(err => {
+                    this.loading = false
+                    console.log(err.response.data.message)
+                })
+            },
+            doEdit() {
+                update(this.form).then(res => {
+                    this.resetForm()
+                    this.$notify({
+                        title: '修改成功',
+                        type: 'success',
+                        duration: 2500
+                    })
+                    this.loading = false
+                    this.$parent.init()
+                }).catch(err => {
+                    this.loading = false
+                    console.log(err.response.data.message)
+                })
+            },
+            resetForm() {
+                this.dialog = false
+                this.$refs['form'].resetFields();
+                this.form = {#foreach($column in $columns)${column.caseColumnName}: ''#if($foreach.hasNext),#end#end},
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

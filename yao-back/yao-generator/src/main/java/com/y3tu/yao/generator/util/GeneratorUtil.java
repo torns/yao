@@ -44,10 +44,8 @@ public class GeneratorUtil {
 
     /**
      * 获取后端代码模板名称
-     *
-     * @return
      */
-    public static List<String> getBackTemplateNames() {
+    private static List<String> getBackTemplateNames() {
         List<String> templateNames = new ArrayList<>();
         templateNames.add("Entity.java");
         templateNames.add("Dto.java");
@@ -61,10 +59,8 @@ public class GeneratorUtil {
 
     /**
      * 获取前端代码模板名称
-     *
-     * @return
      */
-    public static List<String> getFrontTemplateNames() {
+    private static List<String> getFrontTemplateNames() {
         List<String> templateNames = new ArrayList<>();
         templateNames.add("api.js");
         templateNames.add("index.vue");
@@ -105,7 +101,6 @@ public class GeneratorUtil {
 
         map.put("className", className);
         map.put("caseClassName", caseClassName);
-        map.put("pk", tableInfo.getPk());
 
         List<Map<String, Object>> columns = new ArrayList<>();
         List<Map<String, Object>> queryColumns = new ArrayList<>();
@@ -132,11 +127,16 @@ public class GeneratorUtil {
             listMap.put("caseColumnName", caseColumnName);
             listMap.put("capitalColumnName", capitalColumnName);
 
-            // 判断是否有查询，如有则把查询的字段set进columnQuery
+            //判断是否有查询，如有则把查询的字段set进columnQuery
             if (ObjectUtil.isNotNull(column.getColumnQuery())) {
                 listMap.put("columnQuery", column.getColumnQuery());
                 hasQuery = true;
                 queryColumns.add(listMap);
+            }
+
+            //判断是否为主键
+            if (column.getName().equals(tableInfo.getPk().getName())) {
+                map.put("pk", listMap);
             }
             columns.add(listMap);
         }
@@ -187,7 +187,7 @@ public class GeneratorUtil {
     /**
      * 定义后端文件路径和名称
      */
-    public static String getBackFilePath(String templateName, GeneratorConfig genConfig, String className) {
+    private static String getBackFilePath(String templateName, GeneratorConfig genConfig, String className) {
 
         String packagePath = "back" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator;
         if (StrUtil.isNotBlank(genConfig.getPack())) {
@@ -228,7 +228,7 @@ public class GeneratorUtil {
     /**
      * 定义前端文件路径和名称
      */
-    public static String getFrontFilePath(String templateName, GeneratorConfig genConfig, String className) {
+    private static String getFrontFilePath(String templateName, GeneratorConfig genConfig, String className) {
 
         if (INDEX_VUE_VM.contains(templateName)) {
             return "front" + File.separator + "src" + File.separator + "views" +

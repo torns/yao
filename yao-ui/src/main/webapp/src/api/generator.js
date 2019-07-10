@@ -56,12 +56,12 @@ export function build(data, tableName) {
         method: 'post',
         responseType: 'blob'
     }).then((response) => {
-        // 处理返回的文件流
-        let blob = new Blob([response], { type: 'application/zip' })
+        //处理返回的文件流
+        let blob = new Blob([response], {type: 'application/zip'})
         let filename = tableName + '.zip'
-        if(window.navigator.msSaveOrOpenBlob){// 兼容IE10
+        if (window.navigator.msSaveOrOpenBlob) {// 兼容IE10
             navigator.msSaveBlob(blob, filename);
-        }else{// 其他非IE内核支持H5的浏览器
+        } else {// 其他非IE内核支持H5的浏览器
             let url = window.URL.createObjectURL(blob);
             let link = document.createElement('a');
             link.style.display = 'none';

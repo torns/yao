@@ -22,13 +22,21 @@ export function page(params) {
     })
 }
 
+/**
+ * 获取单条数据
+ * @param id
+ */
 export function get(id) {
     return request({
-        url: '/${moduleName}/${pathName}/get/' + id,
+        url: `/${moduleName}/${pathName}/get/${id}`,
         method: 'get'
     })
 }
 
+/**
+ * 新增保存数据
+ * @param obj
+ */
 export function save(obj) {
     return request({
         url: '/${moduleName}/${pathName}/save',
@@ -37,6 +45,10 @@ export function save(obj) {
     })
 }
 
+/**
+ * 更新数据
+ * @param obj
+ */
 export function update(obj) {
     return request({
         url: '/${moduleName}/${pathName}/update',
@@ -45,18 +57,25 @@ export function update(obj) {
     })
 }
 
+/**
+ * 根据主键删除数据
+ * @param id
+ */
 export function delById(id) {
     return request({
-        url: '/${moduleName}/${pathName}/delById' + id,
+        url: `/${moduleName}/${pathName}/delById/${id}`,
         method: 'delete'
     })
 }
 
+/**
+ * 根据主键批量删除数据
+ * @param ids
+ */
 export function delByIds(ids) {
     return request({
-        url: '/${moduleName}/${pathName}/delByIds',
+        url: `/${moduleName}/${pathName}/delByIds/${ids}`,
         method: 'delete',
-        data: ids
     })
 }
 
