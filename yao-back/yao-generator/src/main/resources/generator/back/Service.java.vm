@@ -4,7 +4,7 @@ import ${package}.${moduleName}.entity.${className};
 import com.y3tu.tool.web.base.service.BaseService;
 
 /**
- * ${comments}
+ * ${comment} service接口
  *
  * @author ${author}
  * @date ${date}

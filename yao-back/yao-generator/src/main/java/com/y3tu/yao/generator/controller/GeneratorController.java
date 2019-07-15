@@ -117,7 +117,7 @@ public class GeneratorController {
             }
         }
 
-        tableInfo.setComments(table.getRemarks());
+        tableInfo.setComment(table.getRemarks());
         tableInfo.setColumns(columnInfos);
 
         GeneratorConfig generatorConfig = generatorService.getOne(new QueryWrapper<>());

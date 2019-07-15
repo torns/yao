@@ -8,6 +8,7 @@
         <version>1.0</version>
     </parent>
     <artifactId>yao-upms</artifactId>
+    <packaging>jar</packaging>
     <version>1.0</version>
     <name>yao-upms</name>
     <description>upms(通用权限管理)</description>

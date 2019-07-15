@@ -9,6 +9,7 @@
     </parent>
     <artifactId>yao-back-boot</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
     <name>yao-back-boot</name>
     <description>后台管理启动项目</description>
 

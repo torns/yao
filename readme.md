@@ -20,7 +20,7 @@
   >yao-authentication 签权服务   
   >yao-authorization 授权服务
 - yao-back 后台管理模块 
-  >包括upms(通用权限管理) oa(流程办公) cms(内容管理) ...
+  >代码生成、upms(通用权限管理)、oa(流程办公 todo)、cms(内容管理 todo) ...
 - yao-log 日志中心模块
   >yao-log-sever 日志服务   
   >yao-log-starter 日志starter
@@ -34,6 +34,7 @@
 √ 角色管理 
 √ 部门管理 
 √ 字典管理
+√ 代码生成
 ```
 
 

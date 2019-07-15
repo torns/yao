@@ -23,7 +23,7 @@ public class TableInfo {
     /**
      * 备注
      */
-    private String comments;
+    private String comment;
     /**
      * 主键
      */

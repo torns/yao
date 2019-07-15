@@ -30,19 +30,9 @@
         <el-table v-loading="loading" :data="data" size="small" style="width: 100%;">
     #foreach($column in $columns)
         #if($column.columnShow=='true'&& $column.columnType !='Date')
-            <el-table-column prop="${column.caseColumnName}"
-                             label="#if($column.comment!='')
-        ${column.comment}
+            <el-table-column prop="${column.caseColumnName}" label="${column.comment}"/>
         #else
-        ${column.caseColumnName}
-        #end"/>
-        #else
-            <el-table-column prop="${column.caseColumnName}"
-                             label="#if($column.comment!='')
-        ${column.comment}
-        #else
-        ${column.caseColumnName}
-        #end">
+            <el-table-column prop="${column.caseColumnName}" label="${column.comment}">
                 <template slot-scope="scope">
                     <span>{{ parseTime(scope.row.${column.caseColumnName}) }}</span>
                 </template>
@@ -59,7 +49,7 @@
                             width="180">
                         <p>确定删除本条数据吗？</p>
                         <div style="text-align: right; margin: 0">
-                            <el-button size="mini" type="text" @click='$refs[scope.row.${pk.caseColumnName}].doClose()'>
+                            <el-button size="mini" type="text" @click=''>
                                 取消
                             </el-button>
                             <el-button :loading="delLoading" type="primary" size="mini" @click="subDelete(scope.row.${pk.caseColumnName})">
@@ -102,13 +92,8 @@ export default {
     #if(${hasQuery})
             queryTypeOptions: [
         #foreach($column in $queryColumns)
-                 {key: '${column.caseColumnName}', display_name: '#if($column.comment != '')
-            ${column.comment}
-            #else
-                ${column.caseColumnName}'}#if($foreach.hasNext),#end
-            #end
-        #end
-    #end]
+             {key: '${column.caseColumnName}', display_name: '${column.comment}'}#if($foreach.hasNext),#end
+            #end#end]
         }
     },
     created() {
@@ -120,13 +105,11 @@ export default {
         #if(${hasDate})
         parseTime,
         #end
-        init()
-        {
+        init(){
             this.pageInfo.current = 1;
             this.page();
         },
-        pageInit()
-        {
+        pageInit(){
             this.pageUrl = '/${moduleName}/${pathName}/page'
             #if($hasQuery)
                 const query = this.query
@@ -138,8 +121,7 @@ export default {
             #end
             return true;
         },
-        subDelete(${pk.caseColumnName})
-        {
+        subDelete(${pk.caseColumnName}){
             this.delLoading = true
             del(${pk.caseColumnName}).then(res => {
                 this.delLoading = false
@@ -157,13 +139,11 @@ export default {
                 console.log(err.response.data.message)
             })
         },
-        add()
-        {
+        add(){
             this.isAdd = true
             this.$refs.form.dialog = true
         },
-        edit(row)
-        {
+        edit(row){
             this.isAdd = false
             const _form = this.$refs.form;
             _form.form = this.copyObj(row);

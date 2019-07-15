@@ -89,6 +89,11 @@ public class GeneratorUtil {
         map.put("author", genConfig.getAuthor());
         map.put("date", LocalDate.now().toString());
         map.put("tableName", tableInfo.getTableName());
+        if(StrUtil.isNotEmpty(tableInfo.getComment())){
+            map.put("comment",tableInfo.getComment());
+        }else {
+            map.put("comment",tableInfo.getTableName());
+        }
 
         String className = StrUtil.toCapitalizeCamelCase(tableInfo.getTableName());
         String caseClassName = StrUtil.toCamelCase(tableInfo.getTableName());
@@ -101,12 +106,18 @@ public class GeneratorUtil {
 
         map.put("className", className);
         map.put("caseClassName", caseClassName);
+        map.put("pathName",caseClassName);
 
         List<Map<String, Object>> columns = new ArrayList<>();
         List<Map<String, Object>> queryColumns = new ArrayList<>();
         for (ColumnInfo column : tableInfo.getColumns()) {
             Map<String, Object> listMap = new HashMap();
-            listMap.put("comment", column.getComment());
+
+            if(StrUtil.isNotEmpty(column.getComment())){
+                listMap.put("comment", column.getComment());
+            }else {
+                listMap.put("comment", column.getName());
+            }
 
             //列的数据类型，转换成Java类型
             String attrType = DataTypeEnum.getJavaType(column.getTypeName());
@@ -199,7 +210,7 @@ public class GeneratorUtil {
         }
 
         if (DTO_JAVA_VM.contains(templateName)) {
-            return packagePath + "model" + File.separator + "dto" + File.separator + className + ".java";
+            return packagePath + "model" + File.separator + "dto" + File.separator + className + "DTO.java";
         }
 
         if (MAPPER_JAVA_VM.contains(templateName)) {

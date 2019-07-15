@@ -9,7 +9,7 @@ import ${package}.${moduleName}.service.${className}Service;
 
 
 /**
- * ${comments}
+ * ${comment} Controller
  * @author ${author}
  * @date ${date}
  */

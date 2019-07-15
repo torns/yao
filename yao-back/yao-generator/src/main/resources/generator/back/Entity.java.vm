@@ -17,7 +17,7 @@ import com.y3tu.tool.web.base.entity.BaseEntity;
 
 
 /**
- * ${comments}
+ * ${comment} 实体对象
  * @author ${author}
  * @date ${date}
  */
@@ -29,13 +29,13 @@ public class ${className} extends BaseEntity<${className}> {
 
 #foreach ($column in $columns)
     /**
-     * $column.comments
+     * $column.comment
      */
     #if($column.columnName == $pk.columnName)
     @TableId(value = "$column.columnName", type = IdType.INPUT)
-    #elseif($column.columnName != $column.lowerAttrName)
+    #elseif($column.columnName != $column.caseColumnName)
     @TableField("$column.columnName")
     #end
-    private $column.attrType $column.lowerAttrName;
+    private $column.columnType $column.caseColumnName;
 #end
 

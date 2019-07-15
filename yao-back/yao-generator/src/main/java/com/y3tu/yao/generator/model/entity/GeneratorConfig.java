@@ -24,10 +24,6 @@ public class GeneratorConfig extends BaseEntity<GeneratorConfig> {
      */
     private String author;
     /**
-     * 是否覆盖
-     */
-    private boolean cover;
-    /**
      * 模块名称
      */
     @TableField("module_name")

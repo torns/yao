@@ -4,16 +4,16 @@
 <mapper namespace="${package}.${moduleName}.mapper.${className}Mapper">
 
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="${package}.${moduleName}.model.entity.${className}" id="${classname}Map">
+    <resultMap type="${package}.${moduleName}.model.entity.${className}" id="${className}Map">
         #foreach($column in $columns)
-            <result property="${column.lowerAttrName}" column="${column.columnName}"/>
+            <result property="${column.caseColumnName}" column="${column.columnName}"/>
         #end
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
     #foreach($column in $columns)
-        ${column.columnName} as ${column.lowerAttrName},
+        ${column.columnName} as ${column.caseColumnName},
     #end
     1=1
     </sql>

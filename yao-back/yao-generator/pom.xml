@@ -11,6 +11,7 @@
     <version>1.0</version>
     <name>yao-generator</name>
     <description>代码生成</description>
+    <packaging>jar</packaging>
 
     <properties>
         <velocity.version>1.7</velocity.version>

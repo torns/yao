@@ -1,12 +1,13 @@
 <template>
     <el-dialog :append-to-body="true" :visible.sync="dialog" :title="isAdd ? '新增' : '编辑'" width="500px">
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
-            #foreach($column in $columns)
-                #if($column.caseColumnName!='${pk.caseColumnName}')
-                    <el-form-item label="#if($column.comment!=
-                        '')$column.comment#else$column.caseColumnName#end" prop="$column.caseColumnName">
-                        <el-input v-model="form.${column.caseColumnName}" style="width: 370px;"/>
-                    </el-form-item>#end#end
+    #foreach($column in $columns)
+        #if($column.caseColumnName!=${pk.caseColumnName})
+            <el-form-item label="${column.comment}" prop="$column.caseColumnName">
+                <el-input v-model="form.${column.caseColumnName}" style="width: 370px;"/>
+            </el-form-item>
+        #end
+    #end
         </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button type="text" @click="cancel">取消</el-button>
@@ -30,18 +31,13 @@
                 loading: false, dialog: false,
                 form: {
             #foreach($column in $columns)
-                ${column.caseColumnName}: ''#if($foreach.hasNext),#end
-            #end
-        },
+                ${column.caseColumnName}: '' #if($foreach.hasNext),#end
+            #end},
             rules: {
-                #foreach($column in $columns)${column.caseColumnName}: [{
-                    required: true,
-                    message: 'please enter',
-                    trigger: 'blur'
-                }]#if($foreach.hasNext),#end
+                #foreach($column in $columns)${column.caseColumnName}: [{required: true, message: 'please enter', trigger: 'blur'}]#if($foreach.hasNext),#end
                 #end
+                }
             }
-        }
         },
         methods: {
             cancel() {

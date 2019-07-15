@@ -29,7 +29,7 @@ rm -rf ${JAR_DIR}/yao-log-server*.jar
 
 cp ./yao-auth/yao-authentication/target/yao-authentication*.jar ${JAR_DIR}
 cp ./yao-auth/yao-authorization/target/yao-authorization*.jar ${JAR_DIR}
-cp ./yao-back/target/yao-back*.jar ${JAR_DIR}
+cp ./yao-back/yao-back-boot/target/yao-back*.jar ${JAR_DIR}
 cp ./yao-gateway/target/yao-gateway*.jar ${JAR_DIR}
 cp ./yao-log/yao-log-server/target/yao-log-server*.jar ${JAR_DIR}
 

@@ -3,7 +3,7 @@
         <div class="head-container">
             <el-input clearable placeholder="请输入表名" style="width:200px" class="filter-item"
                       @keyup.enter.native="toQuery"></el-input>
-            <el-button class="filter-item" size="mini" type="success" icon="el-icon-search" @click="toQuery">搜索
+            <el-button style="margin-left: 10px" class="filter-item" size="mini" type="success" icon="el-icon-search" @click="toQuery">搜索
             </el-button>
             <el-button class="filter-item" size="mini" type="warning" icon="el-icon-setting" @click="toConfig">生成器配置
             </el-button>

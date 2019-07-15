@@ -11,7 +11,6 @@ ENV BACK_PORT = 9001
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS \
 -Dfile.encoding=UTF8 -Duser.timezone=GMT+08 \
--Djava.security.egd=file:/dev/./urandom \
 -jar /app/app.jar \
 --spring.profiles.active=$CONFIG_PROFILE \
 --server.port=$BACK_PORT"]

@@ -4,15 +4,15 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
     #if(${hasBigDecimal})
-import java.math.BigDecimal;
+    import java.math.BigDecimal;
     #end
     #if(${hasDate})
-import java.util.Date;
+    import java.util.Date;
     #end
 import java.io.Serializable;
 
 /**
- * ${comments}
+ * ${comment} Dto对象
  * @author ${author}
  * @date ${date}
  */
@@ -23,8 +23,8 @@ import java.io.Serializable;
 public class ${className}DTO implements Serializable {
 #foreach ($column in $columns)
     /**
-     * $column.comments
+     * $column.comment
      */
-    private $column.attrType $column.lowerAttrName;
+    private $column.columnType $column.caseColumnName;
 #end
 

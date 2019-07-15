@@ -57,8 +57,8 @@ export function build(data, tableName) {
         responseType: 'blob'
     }).then((response) => {
         //处理返回的文件流
-        let blob = new Blob([response], {type: 'application/zip'})
-        let filename = tableName + '.zip'
+        let blob = new Blob([response], {type: 'application/zip'});
+        let filename = tableName + '.zip';
         if (window.navigator.msSaveOrOpenBlob) {// 兼容IE10
             navigator.msSaveBlob(blob, filename);
         } else {// 其他非IE内核支持H5的浏览器
