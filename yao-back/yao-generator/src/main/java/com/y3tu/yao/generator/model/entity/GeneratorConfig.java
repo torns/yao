@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class GeneratorConfig extends BaseEntity<GeneratorConfig> {
 
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id" , type = IdType.AUTO)
     private String id;
 
     /**
@@ -36,4 +36,9 @@ public class GeneratorConfig extends BaseEntity<GeneratorConfig> {
      * 表前缀
      */
     private String prefix;
+    /**
+     * 前端请求路径前缀
+     */
+    @TableField("api_prefix")
+    private String apiPrefix;
 }

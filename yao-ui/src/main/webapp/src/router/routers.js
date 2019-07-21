@@ -49,20 +49,20 @@ export const constantRouterMap = [
         ]
     },
     {
-        path: '/user',
+        path: '/',
         component: Layout,
         hidden: true,
         redirect: 'noredirect',
         children: [
             {
-                path: 'center',
+                path: 'userCenter',
                 component: () => import('@/views/admin/user/center/center'),
                 name: '个人中心',
                 meta: {title: '个人中心', icon: 'user'}
             }
         ]
     }
-]
+];
 
 export default new Router({
     //mode: 'history',

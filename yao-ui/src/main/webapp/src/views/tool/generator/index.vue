@@ -21,7 +21,7 @@
 
             <el-table-column label="操作" width="160px" align="center">
                 <template slot-scope="scope">
-                    <Generator :name="scope.row.name"/>
+                    <Generator :name="scope.row.name" />
                 </template>
             </el-table-column>
 

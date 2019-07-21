@@ -1,14 +1,13 @@
 package ${package}.${moduleName}.model.dto;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-    #if(${hasBigDecimal})
-    import java.math.BigDecimal;
-    #end
-    #if(${hasDate})
-    import java.util.Date;
-    #end
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+#if(${hasDate})
+import java.util.Date;
+#end
 import java.io.Serializable;
 
 /**
@@ -17,14 +16,12 @@ import java.io.Serializable;
  * @date ${date}
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("${tableName}")
 public class ${className}DTO implements Serializable {
-#foreach ($column in $columns)
-    /**
-     * $column.comment
-     */
-    private $column.columnType $column.caseColumnName;
-#end
-
+    #foreach ($column in $columns)
+        /**
+         * $column.comment
+         */
+        private $column.columnType $column.caseColumnName;
+    #end
+}

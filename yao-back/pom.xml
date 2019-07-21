@@ -17,6 +17,7 @@
         <module>yao-back-boot</module>
         <module>yao-upms</module>
         <module>yao-generator</module>
+        <module>yao-report</module>
     </modules>
 
     <properties>

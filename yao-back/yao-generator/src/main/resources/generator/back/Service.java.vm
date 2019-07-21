@@ -1,6 +1,6 @@
 package ${package}.${moduleName}.service;
 
-import ${package}.${moduleName}.entity.${className};
+import ${package}.${moduleName}.model.entity.${className};
 import com.y3tu.tool.web.base.service.BaseService;
 
 /**

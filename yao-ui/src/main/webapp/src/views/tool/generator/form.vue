@@ -13,6 +13,9 @@
             <el-form-item label="表前缀" prop="path">
                 <el-input v-model="form.prefix" style="width: 420px;"></el-input>
             </el-form-item>
+            <el-form-item label="前端请求路径前缀" prop="path">
+                <el-input v-model="form.apiPrefix" style="width: 420px;"></el-input>
+            </el-form-item>
         </el-form>
         <div slot="footer">
             <el-button type="text" @click="cancel">取消</el-button>
@@ -29,7 +32,7 @@
             return {
                 loading: false,
                 dialog: false,
-                form: {author: '', pack: '', moduleName: '', prefix: ''},
+                form: {author: '', pack: '', moduleName: '', prefix: '', apiPrefix: ''},
                 rules: {
                     author: [
                         {required: true, message: '作者不能为空', trigger: 'blur'}

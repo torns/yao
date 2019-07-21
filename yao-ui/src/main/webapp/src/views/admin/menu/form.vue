@@ -5,7 +5,6 @@
              size="medium"
              label-width="100px">
         <el-form-item label="类型" prop="type" style="width: 38%;">
-
             <el-select v-model="menuForm.type">
                 <el-option
                         v-for="item in menuType"
@@ -16,7 +15,14 @@
                     <span style="margin-left: 15px">{{item.label}}</span>
                 </el-option>
             </el-select>
+        </el-form-item>
 
+        <el-form-item v-if="menuForm.type!==-1" label="上级类目" prop="parentId" style="width: 45%;">
+            <tree-select
+                    :options="treeData"
+                    v-model="menuForm.parentId"
+                    :normalizer="treeSelectNormalizer"
+                    placeholder="选择上级类目"/>
         </el-form-item>
 
         <el-form-item label="名称" prop="name">
@@ -35,7 +41,7 @@
             </el-tooltip>
         </el-form-item>
 
-        <el-form-item label="按钮权限类型" prop="buttonType" v-show="menuForm.type===1" style="width: 45%;">
+        <el-form-item label="按钮权限类型" prop="buttonType" v-if="menuForm.type===1" style="width: 45%;">
             <el-select v-model="menuForm.buttonType"
                        clearable
                        placeholder="请选择">
@@ -48,15 +54,15 @@
             </el-select>
         </el-form-item>
 
-        <el-form-item label="图标" prop="icon" v-show="menuForm.type===-1||menuForm.type===0">
+        <el-form-item label="图标" prop="icon" v-if="menuForm.type===-1||menuForm.type===0">
             <icon-select v-model="menuForm.icon"></icon-select>
         </el-form-item>
 
-        <el-form-item label="前端组件" prop="component" v-show="menuForm.type===0">
-            <el-input v-model="menuForm.component"></el-input>
+        <el-form-item label="前端组件" prop="component" v-if="menuForm.type===0">
+            <el-input v-model="menuForm.component" placeholder="一级菜单:Layout;Iframe其他菜单填写组件路径:views/"></el-input>
         </el-form-item>
 
-        <el-form-item label="第三方网页链接" prop="url" v-show="menuForm.type===0">
+        <el-form-item label="第三方网页链接" prop="url" v-if="menuForm.type===0">
             <el-tooltip placement="right" content="前端组件需为 sys/monitor/monitor 时生效">
                 <el-input v-model="menuForm.url" placeholder="http://"></el-input>
             </el-tooltip>
@@ -75,14 +81,6 @@
         <el-form-item label="是否启用" prop="status">
             <el-switch size="large" v-model="menuForm.status" :active-value="0" :inactive-value="-1">
             </el-switch>
-        </el-form-item>
-
-        <el-form-item v-show="menuForm.type!==-1" label="上级类目" prop="parentId" style="width: 45%;">
-            <tree-select
-                    :options="treeData"
-                    v-model="menuForm.parentId"
-                    :normalizer="treeSelectNormalizer"
-                    placeholder="选择上级类目"/>
         </el-form-item>
 
         <el-form-item>

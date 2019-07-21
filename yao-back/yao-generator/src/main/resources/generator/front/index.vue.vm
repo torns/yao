@@ -3,9 +3,11 @@
         <div class="head-container">
             #if(${hasQuery})
                 <!-- 搜索 -->
-                <el-input v-model="query.value" clearable placeholder="输入搜索内容" style="width: 200px;" class="filter-item" @keyup.enter.native="toQuery"/>
+                <el-input v-model="query.value" clearable placeholder="输入搜索内容" style="width: 200px;" class="filter-item" @keyup.enter.native="toQuery">
+                </el-input>
                 <el-select v-model="query.type" clearable placeholder="类型" class="filter-item" style="width: 130px">
-                    <el-option v-for="item in queryTypeOptions" :key="item.key" :label="item.display_name" :value="item.key"/>
+                    <el-option v-for="item in queryTypeOptions" :key="item.key" :label="item.display_name" :value="item.key">
+                    </el-option>
                 </el-select>
                 <el-button class="filter-item" size="mini" type="success" icon="el-icon-search" @click="toQuery">搜索
                 </el-button>
@@ -13,7 +15,7 @@
             <!-- 新增 -->
             <div style="display: inline-block;margin: 0px 2px;">
                 <el-button
-                        v-permission="[${caseClassName}:add]"
+                        v-permission="['${caseClassName}:add']"
                         class="filter-item"
                         size="mini"
                         type="primary"
@@ -27,36 +29,36 @@
         <eForm ref="form" :is-add="isAdd"/>
 
         <!--表格渲染-->
-        <el-table v-loading="loading" :data="data" size="small" style="width: 100%;">
-    #foreach($column in $columns)
-        #if($column.columnShow=='true'&& $column.columnType !='Date')
-            <el-table-column prop="${column.caseColumnName}" label="${column.comment}"/>
-        #else
-            <el-table-column prop="${column.caseColumnName}" label="${column.comment}">
+        <el-table v-loading="pageInfo.loading" :data="pageInfo.records" size="small" style="width: 100%;">
+            #foreach($column in $columns)
+                #if($column.columnShow=='true'&& $column.columnType !='Date')
+                    <el-table-column prop="${column.caseColumnName}" label="${column.comment}"></el-table-column>
+                #elseif($column.columnShow=='true'&& $column.columnType =='Date')
+                    <el-table-column prop="${column.caseColumnName}" label="${column.comment}">
+                        <template slot-scope="scope">
+                            <span>{{ parseTime(scope.row.${column.caseColumnName}) }}</span>
+                        </template>
+                    </el-table-column>
+                #end
+            #end
+            <el-table-column label="操作" width="150px" align="center">
                 <template slot-scope="scope">
-                    <span>{{ parseTime(scope.row.${column.caseColumnName}) }}</span>
-                </template>
-            </el-table-column>
-        #end
-    #end
-            <el-table-column  label="操作" width="150px" align="center">
-                <template slot-scope="scope">
-                    <el-button v-permission="[${caseClassName}:edit]" size="mini" type="primary" icon="el-icon-edit" @click="edit(scope.row)"/>
+                    <el-button v-permission="['${caseClassName}:edit']" size="mini" type="primary" icon="el-icon-edit" @click="edit(scope.row)"/>
                     <el-popover
-                            v-permission="[${caseClassName}:delete]"
+                            v-permission="['${caseClassName}:delete']"
                             :ref="scope.row.${pk.caseColumnName}"
                             placement="top"
                             width="180">
                         <p>确定删除本条数据吗？</p>
                         <div style="text-align: right; margin: 0">
-                            <el-button size="mini" type="text" @click=''>
+                            <el-button size="mini" type="text" @click='cancelDelete(scope.row.${pk.caseColumnName})'>
                                 取消
                             </el-button>
                             <el-button :loading="delLoading" type="primary" size="mini" @click="subDelete(scope.row.${pk.caseColumnName})">
                                 确定
                             </el-button>
                         </div>
-                        <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"/>
+                        <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"></el-button>
                     </el-popover>
                 </template>
             </el-table-column>
@@ -68,89 +70,99 @@
                 :current-page="pageInfo.current"
                 layout="total, prev, pager, next, sizes"
                 @size-change="sizeChange"
-                @current-change="pageChange"/>
+                @current-change="pageChange">
+        </el-pagination>
     </div>
 </template>
 
 <script>
 
-import page from '@/mixins/page'
-import {del} from '@/api/${caseClassName}'
-#if(${hasDate})
-import {parseTime} from '@/utils/index'
-#end
-import eForm from './form'
-
-export default {
-    components: {eForm},
-    mixins: [page],
-    data() {
-        return {
-            delLoading: false,
-            query:{value:'',type:''},
-            isAdd:false,
-    #if(${hasQuery})
-            queryTypeOptions: [
-        #foreach($column in $queryColumns)
-             {key: '${column.caseColumnName}', display_name: '${column.comment}'}#if($foreach.hasNext),#end
-            #end#end]
-        }
-    },
-    created() {
-        this.$nextTick(() => {
-            this.init()
-        })
-    },
-    methods: {
+    import page from '@/mixins/page'
+    import {del} from '@/api/${caseClassName}'
         #if(${hasDate})
-        parseTime,
+        import {parseTime} from '@/utils/index'
         #end
-        init(){
-            this.pageInfo.current = 1;
-            this.page();
+    import eForm from './form'
+
+    export default {
+        components: {eForm},
+        mixins: [page],
+        data() {
+            return {
+                delLoading: false,
+                query: {value: '', type: ''},
+                isAdd: false,
+                #if(${hasQuery})
+                queryTypeOptions: [
+                    #foreach($column in $queryColumns)
+                        {key: '${column.caseColumnName}', display_name: '${column.comment}'}#if($foreach.hasNext),#end
+                    #end#end]
+            }
         },
-        pageInit(){
-            this.pageUrl = '/${moduleName}/${pathName}/page'
-            #if($hasQuery)
-                const query = this.query
-                const type = query.type
-                const value = query.value
-                if (type && value) {
-                    this.pageInfo.params[type] = value
-                }
-            #end
-            return true;
-        },
-        subDelete(${pk.caseColumnName}){
-            this.delLoading = true
-            del(${pk.caseColumnName}).then(res => {
-                this.delLoading = false
-                this.$refs[${pk.caseColumnName}].doClose()
-                this.dleChangePage()
+        created() {
+            this.$nextTick(() => {
                 this.init()
-                this.$notify({
-                    title: '删除成功',
-                    type: 'success',
-                    duration: 2500
-                })
-            }).catch(err => {
-                this.delLoading = false
-                this.$refs[${pk.caseColumnName}].doClose()
-                console.log(err.response.data.message)
             })
         },
-        add(){
-            this.isAdd = true
-            this.$refs.form.dialog = true
-        },
-        edit(row){
-            this.isAdd = false
-            const _form = this.$refs.form;
-            _form.form = this.copyObj(row);
-            _form.dialog = true
+        methods: {
+            #if(${hasDate})
+                parseTime,
+            #end
+            init() {
+                this.pageInfo.current = 1;
+                this.page();
+            },
+            pageInit() {
+                this.pageUrl = '${apiPrefix}/${moduleName}/${pathName}/page'
+                #if($hasQuery)
+                    const query = this.query
+                    const type = query.type
+                    const value = query.value
+                    if (type && value) {
+                        this.pageInfo.params[type] = value
+                    }
+                #end
+                return true;
+            },
+            toQuery(){
+                this.init();
+            },
+            cancelDelete(${pk.caseColumnName}) {
+                let refs = this.$refs;
+                refs[${pk.caseColumnName}].doClose()
+            },
+            subDelete(${pk.caseColumnName}) {
+                this.delLoading = true
+                del(${pk.caseColumnName}).then(res => {
+                    this.delLoading = false
+                    let refs = this.$refs;
+                    refs[${pk.caseColumnName}].doClose()
+                    this.init()
+                    this.$notify({
+                        title: '删除成功',
+                        type: 'success',
+                        duration: 2500
+                    })
+                }).catch(err => {
+                    this.delLoading = false
+                    let refs = this.$refs;
+                    refs[${pk.caseColumnName}].doClose()
+                    console.log(err.response.data.message)
+                })
+            },
+
+            add() {
+                this.isAdd = true
+                this.$refs.form.dialog = true
+            },
+            edit(row) {
+                this.isAdd = false
+                const _form = this.$refs.form;
+                _form.form = this.copyObj(row);
+                _form.dialog = true
+            }
         }
     }
-}
 </script>
 
 <style scoped>

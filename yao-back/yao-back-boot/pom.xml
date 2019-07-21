@@ -31,6 +31,21 @@
             <version>1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.y3tu</groupId>
+            <artifactId>yao-report</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

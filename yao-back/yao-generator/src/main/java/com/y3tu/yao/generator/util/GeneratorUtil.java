@@ -89,6 +89,7 @@ public class GeneratorUtil {
         map.put("author", genConfig.getAuthor());
         map.put("date", LocalDate.now().toString());
         map.put("tableName", tableInfo.getTableName());
+        map.put("apiPrefix",genConfig.getApiPrefix());
         if(StrUtil.isNotEmpty(tableInfo.getComment())){
             map.put("comment",tableInfo.getComment());
         }else {
@@ -177,7 +178,7 @@ public class GeneratorUtil {
             StringWriter sw = new StringWriter();
             Template template = engine.getTemplate("generator/front/" + templateName + ".vm");
             template.render(map, sw);
-            buildZip(getFrontFilePath(templateName, genConfig, className), className, sw, zip);
+            buildZip(getFrontFilePath(templateName, genConfig, caseClassName), className, sw, zip);
         }
     }
 
@@ -243,14 +244,14 @@ public class GeneratorUtil {
 
         if (INDEX_VUE_VM.contains(templateName)) {
             return "front" + File.separator + "src" + File.separator + "views" +
-                    File.separator + genConfig.getModuleName() + File.separator + className.toLowerCase() + File.separator + "index.vue";
+                    File.separator + genConfig.getModuleName() + File.separator + className + File.separator + "index.vue";
         }
         if (FORM_VUE_VM.contains(templateName)) {
             return "front" + File.separator + "src" + File.separator + "views" +
-                    File.separator + genConfig.getModuleName() + File.separator + className.toLowerCase() + File.separator + "form.vue";
+                    File.separator + genConfig.getModuleName() + File.separator + className + File.separator + "form.vue";
         }
         if (API_JS_VM.contains(templateName)) {
-            return "front" + File.separator + "src" + File.separator + "api" + File.separator + className.toLowerCase() + ".js";
+            return "front" + File.separator + "src" + File.separator + "api" + File.separator + className + ".js";
         }
         return null;
     }

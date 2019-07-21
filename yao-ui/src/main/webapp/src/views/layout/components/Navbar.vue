@@ -49,7 +49,7 @@
                           布局设置
                         </el-dropdown-item>
                     </span>
-                    <router-link to="/user/center">
+                    <router-link to="/userCenter">
                         <el-dropdown-item>
                             个人中心
                         </el-dropdown-item>

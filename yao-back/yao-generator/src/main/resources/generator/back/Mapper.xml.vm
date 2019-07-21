@@ -19,7 +19,7 @@
     </sql>
 
 
-    <select id="page" resultType="${package}.${moduleName}.entity.${className}">
+    <select id="page" resultType="${package}.${moduleName}.model.entity.${className}">
         select
         <include refid="Base_Column_List"/>
         from ${tableName}

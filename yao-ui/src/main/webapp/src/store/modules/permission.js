@@ -1,5 +1,5 @@
 import {constantRouterMap} from '@/router/routers'
-import {isEmpty,validateURL} from '@/utils/validate'
+import {isEmpty, validateURL} from '@/utils/validate'
 import {getMenu} from '@/api/menu'
 import router from '@/router/routers'
 
@@ -27,7 +27,7 @@ const permission = {
     },
     actions: {
         // 获取系统菜单
-        GetMenu({commit,state}, userId) {
+        GetMenu({commit, state}, userId) {
             return new Promise(resolve => {
                 if (userId === undefined || userId === null) {
                     userId = this.getters.user.id;
@@ -47,8 +47,8 @@ const permission = {
 
                     router.addRoutes([unFound]);
                     let menuArr = [];
-                    if(menus!==null &&menus.length>0){
-                        menus.forEach(menu=>{
+                    if (menus !== null && menus.length > 0) {
+                        menus.forEach(menu => {
                             menuArr.push(...menu)
                         })
                     }
@@ -79,7 +79,7 @@ export default permission
 let formatRoutes = (aMenu) => {
     const aRouter = [];
     aMenu.forEach(oMenu => {
-        const {path, component, name, icon, type, parentId} = oMenu.data;
+        const {path, component, name, icon, type, parentId, url} = oMenu.data;
         const {children} = oMenu;
         if (type === -1) {
             //顶级菜单
@@ -94,6 +94,8 @@ let formatRoutes = (aMenu) => {
                         let componentPath = ''
                         if (component === 'Layout') {
                             return import('@/views/layout/Layout')
+                        } else if (component === 'Iframe') {
+                            return import('@/views/layout/Iframe')
                         } else {
                             componentPath = component
                         }
@@ -102,18 +104,19 @@ let formatRoutes = (aMenu) => {
                     name: name,
                     meta: {
                         icon: icon,
-                        title: name
+                        title: name,
+                        url: url
                     },
                     icon: icon,
                     parentId: parentId,
                     children: isEmpty(children) ? [] : formatRoutes(children)
-                }
+                };
                 aRouter.push(oRouter)
             }
         }
     })
     return aRouter
-}
+};
 
 let formatTopNav = (aMenu) => {
     const navList = [];
@@ -128,12 +131,12 @@ let formatTopNav = (aMenu) => {
 
     //对navList进行排序
     navList.sort(function (a, b) {
-        return a.sort-b.sort
+        return a.sort - b.sort
     });
 
 
     return {
-        currNav:navList[0].id,
+        currNav: navList[0].id,
         navList
     }
 

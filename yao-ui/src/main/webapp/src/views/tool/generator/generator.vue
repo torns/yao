@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-button type="primary" size="mini" @click="to">生成代码</el-button>
-        <el-dialog :visible.sync="dialog" title="代码生成配置" append-to-body width="800px">
+        <el-dialog :visible.sync="dialog" title="代码生成配置" append-to-body width="60%">
             <el-table v-loading="loading" :data="data" size="small" style="width: 100%;">
                 <el-table-column label="序号" width="80" align="center">
                     <template slot-scope="scope">
@@ -10,10 +10,18 @@
                 </el-table-column>
                 <el-table-column prop="name" label="字段名称"></el-table-column>
                 <el-table-column prop="typeName" label="字段类型"></el-table-column>
-                <el-table-column prop="comment" label="字段标题">
+                <el-table-column prop="comment" label="字段标题" show-overflow-tooltip>
                     <template slot-scope="scope">
-                        <el-input v-model="data[scope.$index].comment" class="edit-input"></el-input>
+                        <el-popover trigger="hover" placement="left">
+                            <p>{{data[scope.$index].comment}}</p>
+                            <div slot="reference" class="name-wrapper">
+                                <el-input v-model="data[scope.$index].comment" class="edit-input"></el-input>
+                            </div>
+                        </el-popover>
                     </template>
+                    <!--<template slot-scope="scope">-->
+                        <!--<el-input v-model="data[scope.$index].comment" class="edit-input"></el-input>-->
+                    <!--</template>-->
                 </el-table-column>
                 <el-table-column label="查询方式">
                     <template slot-scope="scope">

@@ -5,7 +5,7 @@ import request from '@/utils/request'
  */
 export function getAll() {
     return request({
-        url: '${apiPrefix}/${moduleName}/${pathName}/getAll',
+        url: 'back/report/dataSource/getAll',
         method: 'get',
     })
 }
@@ -16,7 +16,7 @@ export function getAll() {
  */
 export function page(params) {
     return request({
-        url: '${apiPrefix}/${moduleName}/${pathName}/page',
+        url: 'back/report/dataSource/page',
         method: 'post',
         data: params
     })
@@ -28,7 +28,7 @@ export function page(params) {
  */
 export function get(id) {
     return request({
-        url: `${apiPrefix}/${moduleName}/${pathName}/get/${id}`,
+        url: `back/report/dataSource/get/${id}`,
         method: 'get'
     })
 }
@@ -39,7 +39,7 @@ export function get(id) {
  */
 export function save(obj) {
     return request({
-        url: '${apiPrefix}/${moduleName}/${pathName}/save',
+        url: 'back/report/dataSource/save',
         method: 'post',
         data: obj
     })
@@ -51,7 +51,7 @@ export function save(obj) {
  */
 export function update(obj) {
     return request({
-        url: '${apiPrefix}/${moduleName}/${pathName}/update',
+        url: 'back/report/dataSource/update',
         method: 'put',
         data: obj
     })
@@ -63,7 +63,7 @@ export function update(obj) {
  */
 export function delById(id) {
     return request({
-        url: `${apiPrefix}/${moduleName}/${pathName}/delById/${id}`,
+        url: `back/report/dataSource/delById/${id}`,
         method: 'delete'
     })
 }
@@ -74,7 +74,7 @@ export function delById(id) {
  */
 export function delByIds(ids) {
     return request({
-        url: `${apiPrefix}/${moduleName}/${pathName}/delByIds/${ids}`,
+        url: `back/report/dataSource/delByIds/${ids}`,
         method: 'delete',
     })
 }
