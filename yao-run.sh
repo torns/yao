@@ -39,5 +39,23 @@ docker-compose  -f ${COMPOSE_FILE} build
 # echo -- -- run docker-compose up 创建镜像生成容器并启动-- --
 # docker-compose -f ${COMPOSE_FILE} up -d --build
 
+docker tag docker_back-server:latest y3tu/back-server:latest
+docker tag docker_authentication-server:latest y3tu/authentication-server:latest
+docker tag docker_authorization-server:latest y3tu/authorization-server:latest
+docker tag docker_gateway-server:latest y3tu/gateway-server:latest
+docker tag docker_log-server:latest y3tu/log-server:latest
 
-docker images|grep none|awk '{print $3 }'|xargs docker rmi
+docker push y3tu/back-server:latest
+docker push y3tu/authentication-server:latest
+docker push y3tu/authorization-server:latest
+docker push y3tu/gateway-server:latest
+docker push y3tu/log-server:latest
+
+docker rmi y3tu/back-server:latest
+docker rmi y3tu/authentication-server:latest
+docker rmi y3tu/authorization-server:latest
+docker rmi y3tu/gateway-server:latest
+docker rmi y3tu/log-server:latest
+
+docker images|grep docker|awk '{print $3 }'|xargs docker rmi
+
